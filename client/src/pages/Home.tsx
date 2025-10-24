@@ -163,16 +163,16 @@ export default function Home() {
             </div>
             <nav className="flex items-center gap-4">
               <Link href="/faq">
-                <a className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold">
+                <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer">
                   FAQ
-                </a>
+                </span>
               </Link>
               {isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
-                    <a className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold">
+                    <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer">
                       Dashboard
-                    </a>
+                    </span>
                   </Link>
                   <Button
                     onClick={() => logout()}
@@ -241,11 +241,11 @@ export default function Home() {
         {/* Link to FAQ for more tools */}
         <div className="text-center mt-12">
           <Link href="/faq">
-            <a className="inline-flex items-center gap-2 px-8 py-4 bg-[#d4af37] text-[#1e3a5f] rounded-xl font-bold text-lg hover:bg-[#B8860B] transition-colors shadow-lg">
+            <span className="inline-flex items-center gap-2 px-8 py-4 bg-[#d4af37] text-[#1e3a5f] rounded-xl font-bold text-lg hover:bg-[#B8860B] transition-colors shadow-lg cursor-pointer">
               <Sparkles className="w-6 h-6" />
               Entre outras poderosas ferramentas para estudos acadêmicos, clique aqui e veja!
               <ArrowRight className="w-6 h-6" />
-            </a>
+            </span>
           </Link>
         </div>
       </section>
@@ -414,9 +414,9 @@ export default function Home() {
               <ul className="space-y-2">
                 <li>
                   <Link href="/faq">
-                    <a className="text-[#B8860B] hover:text-[#d4af37] transition-colors">
+                    <span className="text-[#B8860B] hover:text-[#d4af37] transition-colors cursor-pointer">
                       Perguntas Frequentes
-                    </a>
+                    </span>
                   </Link>
                 </li>
                 <li>

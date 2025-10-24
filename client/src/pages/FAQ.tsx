@@ -217,16 +217,16 @@ export default function FAQ() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link href="/">
-              <a className="flex items-center gap-4 hover:opacity-80 transition-opacity">
+              <span className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
                 <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
                 <h1 className="text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
-              </a>
+              </span>
             </Link>
             <Link href="/">
-              <a className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors">
+              <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
                 <Home className="w-5 h-5" />
                 Voltar ao Início
-              </a>
+              </span>
             </Link>
           </div>
         </div>
@@ -280,9 +280,9 @@ export default function FAQ() {
             Nossa equipe está pronta para ajudar você a aproveitar ao máximo a GNOSIS AI.
           </p>
           <Link href="/">
-            <a className="inline-block px-8 py-4 bg-[#1e3a5f] text-[#d4af37] rounded-lg font-bold text-lg hover:bg-[#2a4a7f] transition-colors shadow-lg">
+            <span className="inline-block px-8 py-4 bg-[#1e3a5f] text-[#d4af37] rounded-lg font-bold text-lg hover:bg-[#2a4a7f] transition-colors shadow-lg cursor-pointer">
               Começar Agora
-            </a>
+            </span>
           </Link>
         </div>
       </main>

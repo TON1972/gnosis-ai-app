@@ -176,20 +176,20 @@ export default function Dashboard() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/">
-              <a className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+              <span className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
                 <img src={APP_LOGO} alt={APP_TITLE} className="h-12 w-12 object-contain" />
                 <h1 className="text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
-              </a>
+              </span>
             </Link>
             <div className="flex items-center gap-4">
               <span className="text-[#d4af37] font-semibold">
                 Olá, {user?.name || "Usuário"}!
               </span>
               <Link href="/">
-                <a className="flex items-center gap-2 px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors">
+                <span className="flex items-center gap-2 px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer">
                   <Home className="w-5 h-5" />
                   Home
-                </a>
+                </span>
               </Link>
               <Button
                 onClick={() => logout()}
