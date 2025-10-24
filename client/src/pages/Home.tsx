@@ -67,6 +67,24 @@ const theologians = [
   "Timothy Keller"
 ];
 
+const allTools = [
+  { name: "Hermenêutica", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Traduções", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Resumos", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Esboços de Pregação", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Estudos Doutrinários", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Análise Teológica Comparada", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Teologia Sistemática", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Contextualização Brasileira", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Exegese Avançada", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Religiões Comparadas", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Referências ABNT/APA", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Linguagem Ministerial", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Redação Acadêmica", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Dados Demográficos", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true }
+];
+
 const plans = [
   {
     name: "FREE",
@@ -75,12 +93,7 @@ const plans = [
     creditsInitial: "500 créditos iniciais",
     creditsDaily: "50 créditos/dia",
     tools: "4 ferramentas básicas",
-    features: [
-      "Hermenêutica",
-      "Traduções",
-      "Resumos",
-      "Esboços de Pregação"
-    ],
+    planKey: "free" as const,
     highlight: false
   },
   {
@@ -91,13 +104,7 @@ const plans = [
     creditsInitial: "1.500 créditos iniciais*",
     creditsDaily: "150 créditos/dia",
     tools: "8 ferramentas",
-    features: [
-      "Todas as ferramentas do FREE",
-      "Estudos Doutrinários",
-      "Análise Teológica Comparada",
-      "Teologia Sistemática",
-      "Contextualização Brasileira"
-    ],
+    planKey: "alianca" as const,
     highlight: false
   },
   {
@@ -108,16 +115,7 @@ const plans = [
     creditsInitial: "3.000 créditos iniciais*",
     creditsDaily: "300 créditos/dia",
     tools: "Todas as 15 ferramentas",
-    features: [
-      "Todas as ferramentas do Aliança",
-      "Exegese Avançada",
-      "Religiões Comparadas",
-      "Referências ABNT/APA",
-      "Linguagem Ministerial",
-      "Redação Acadêmica",
-      "Dados Demográficos",
-      "Transcrição de Mídia"
-    ],
+    planKey: "lumen" as const,
     highlight: true
   },
   {
@@ -128,12 +126,7 @@ const plans = [
     creditsInitial: "8.000 créditos iniciais*",
     creditsDaily: "400 créditos/dia",
     tools: "Todas as 15 ferramentas",
-    features: [
-      "Todas as ferramentas do Lumen",
-      "Máxima quantidade de créditos",
-      "Suporte prioritário",
-      "Acesso antecipado a novos recursos"
-    ],
+    planKey: "premium" as const,
     highlight: false,
     premium: true
   }
@@ -352,19 +345,28 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <ul className="space-y-2 mb-6">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <CheckCircle2 className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                      plan.highlight || plan.premium ? "text-white" : "text-[#d4af37]"
-                    }`} />
-                    <span className={`text-sm ${
-                      plan.highlight || plan.premium ? "text-white" : "text-[#8b6f47]"
-                    }`}>
-                      {feature}
-                    </span>
-                  </li>
-                ))}
+              <ul className="space-y-2 mb-6 max-h-64 overflow-y-auto">
+                {allTools.map((tool, i) => {
+                  const isAvailable = tool[plan.planKey];
+                  return (
+                    <li key={i} className="flex items-start gap-2">
+                      {isAvailable ? (
+                        <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                          plan.highlight || plan.premium ? "text-green-400" : "text-green-600"
+                        }`} />
+                      ) : (
+                        <span className={`w-4 h-4 flex-shrink-0 mt-0.5 text-red-500 font-bold`}>×</span>
+                      )}
+                      <span className={`text-xs ${
+                        plan.highlight || plan.premium 
+                          ? isAvailable ? "text-white" : "text-white/50"
+                          : isAvailable ? "text-[#1e3a5f]" : "text-gray-400"
+                      }`}>
+                        {tool.name}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
               <Button
                 onClick={handleGetStarted}
