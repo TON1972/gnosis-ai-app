@@ -43,39 +43,40 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  /* GNOSIS AI - Parchment & Gold Theme */
+  --primary: 43 74% 53%; /* #d4af37 - Gold */
+  --primary-foreground: 30 56% 25%; /* #1e3a5f - Navy */
+  --sidebar-primary: 43 74% 53%;
+  --sidebar-primary-foreground: 30 56% 25%;
+  --chart-1: 43 74% 70%;
+  --chart-2: 43 74% 53%;
+  --chart-3: 43 74% 40%;
+  --chart-4: 30 56% 35%;
+  --chart-5: 30 56% 25%;
+  --radius: 0.75rem;
+  --background: 54 100% 97%; /* #FFFACD - Cream */
+  --foreground: 30 56% 25%; /* #1e3a5f - Navy */
+  --card: 54 100% 97%;
+  --card-foreground: 30 56% 25%;
+  --popover: 54 100% 97%;
+  --popover-foreground: 30 56% 25%;
+  --secondary: 33 32% 41%; /* #8b6f47 - Brown */
+  --secondary-foreground: 30 56% 25%;
+  --muted: 54 100% 90%;
+  --muted-foreground: 33 32% 41%;
+  --accent: 43 74% 53%;
+  --accent-foreground: 30 56% 25%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 43 74% 53%; /* Gold borders */
+  --input: 43 74% 53%;
+  --ring: 43 74% 53%;
+  --sidebar: 30 56% 25%; /* Navy sidebar */
+  --sidebar-foreground: 43 74% 53%;
+  --sidebar-accent: 43 74% 53%;
+  --sidebar-accent-foreground: 30 56% 25%;
+  --sidebar-border: 43 74% 53%;
+  --sidebar-ring: 43 74% 53%;
 }
 
 .dark {
@@ -119,6 +120,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Crimson Text', serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),

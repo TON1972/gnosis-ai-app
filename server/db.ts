@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, plans, tools, planTools } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,50 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+/**
+ * Get all available plans
+ */
+export async function getAllPlans() {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(plans).where(eq(plans.isActive, true));
+}
+
+/**
+ * Get plan by ID
+ */
+export async function getPlanById(planId: number) {
+  const db = await getDb();
+  if (!db) return null;
+
+  const result = await db.select().from(plans).where(eq(plans.id, planId)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+/**
+ * Get all tools for a specific plan
+ */
+export async function getToolsForPlan(planId: number) {
+  const db = await getDb();
+  if (!db) return [];
+
+  const result = await db
+    .select({ tool: tools })
+    .from(planTools)
+    .innerJoin(tools, eq(planTools.toolId, tools.id))
+    .where(eq(planTools.planId, planId));
+
+  return result.map(r => r.tool);
+}
+
+/**
+ * Get all tools
+ */
+export async function getAllTools() {
+  const db = await getDb();
+  if (!db) return [];
+
+  return await db.select().from(tools).where(eq(tools.isActive, true));
+}
+
