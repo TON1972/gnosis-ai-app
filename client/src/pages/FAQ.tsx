@@ -99,7 +99,7 @@ const faqData: FAQCategory[] = [
     items: [
       {
         question: "Como funciona o sistema de créditos da GNOSIS AI?",
-        answer: "A GNOSIS AI utiliza três tipos de créditos: (1) Créditos Iniciais - cumulativos com validade de 30 dias, recebidos na assinatura e renovação mensal; (2) Créditos Diários - não-cumulativos, renovados diariamente; (3) Créditos Avulsos - permanentes, comprados separadamente e que nunca expiram."
+        answer: "A GNOSIS AI utiliza três tipos de créditos: (1) Créditos Iniciais - cumulativos que são renovados a cada 30 dias, recebidos na assinatura e renovação mensal; (2) Créditos Diários - não-cumulativos, renovados diariamente; (3) Créditos Avulsos - permanentes, comprados separadamente e que nunca expiram."
       },
       {
         question: "Os créditos diários acumulam se eu não usar?",
@@ -107,7 +107,7 @@ const faqData: FAQCategory[] = [
       },
       {
         question: "Por quanto tempo os créditos iniciais são válidos?",
-        answer: "Os créditos iniciais recebidos na assinatura ou renovação de planos pagos (Aliança, Lumen e Premium) têm validade de 30 dias. Após esse período, eles expiram. Para o plano FREE, os 500 créditos iniciais NÃO são renováveis após os 30 dias."
+        answer: "Os créditos iniciais dos planos pagos (Aliança, Lumen e Premium) são renovados a cada 30 dias na renovação da assinatura. Você recebe novamente a quantidade completa de créditos iniciais do seu plano a cada ciclo mensal. Para o plano FREE, os 500 créditos iniciais NÃO são renováveis."
       },
       {
         question: "O que acontece quando meus créditos acabam?",
@@ -141,7 +141,7 @@ const faqData: FAQCategory[] = [
       },
       {
         question: "Como funciona a renovação dos planos?",
-        answer: "Os planos são renovados automaticamente a cada mês. A cada renovação, você recebe novamente os créditos iniciais do seu plano (com validade de 30 dias), além de continuar recebendo os créditos diários. Os créditos avulsos comprados permanecem sempre disponíveis."
+        answer: "Os planos são renovados automaticamente a cada mês. A cada renovação, você recebe novamente os créditos iniciais do seu plano (renovados a cada 30 dias), além de continuar recebendo os créditos diários. Os créditos avulsos comprados permanecem sempre disponíveis."
       }
     ]
   },

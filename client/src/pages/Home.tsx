@@ -254,7 +254,7 @@ export default function Home() {
       <section className="container mx-auto px-4 py-16">
         <div className="bg-white/90 rounded-2xl p-12 shadow-2xl border-4 border-[#d4af37] max-w-5xl mx-auto">
           <h3 className="text-4xl font-bold text-[#1e3a5f] text-center mb-8">
-            Fundamentado nos Grandes Teólogos
+            Fundamentada nos Mais Proeminentes Teólogos da História
           </h3>
           <p className="text-xl text-[#8b6f47] text-center mb-8">
             Nossa IA foi treinada com obras e pensamentos de renomados teólogos cristãos:
@@ -279,7 +279,7 @@ export default function Home() {
           Escolha Seu Plano
         </h3>
         <p className="text-xl text-[#8b6f47] text-center mb-12">
-          * Créditos iniciais dos planos pagos têm validade de 30 dias
+          * Créditos iniciais dos planos pagos são renovados a cada 30 dias
         </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
