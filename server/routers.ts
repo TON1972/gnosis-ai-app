@@ -45,6 +45,50 @@ export const appRouter = router({
     list: publicProcedure.query(async () => {
       return await getAllTools();
     }),
+
+    /**
+     * Generate content using a tool
+     */
+    generate: protectedProcedure
+      .input(z.object({
+        toolId: z.string(),
+        input: z.string(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const { invokeLLM } = await import("./_core/llm");
+        
+        // Tool-specific prompts
+        const toolPrompts: Record<string, string> = {
+          hermeneutica: "Você é um especialista em hermenêutica bíblica. Analise o contexto histórico, cultural e literário da seguinte passagem:",
+          exegese: "Você é um exegeta bíblico. Faça uma análise exegética detalhada, verso por verso, da seguinte passagem:",
+          traducoes: "Você é um especialista em línguas bíblicas (Hebraico, Aramaico e Grego). Analise as palavras originais e suas traduções:",
+          resumos: "Você é um teólogo. Crie um resumo claro e objetivo do seguinte conteúdo bíblico:",
+          esbocos: "Você é um pastor experiente. Crie um esboço de pregação estruturado com introdução, pontos principais e conclusão sobre:",
+          estudos_doutrinarios: "Você é um teólogo sistemático. Faça um estudo doutrinário profundo sobre:",
+          analise_teologica: "Você é um teólogo comparativo. Compare diferentes correntes teológicas sobre:",
+          teologia_sistematica: "Você é um professor de teologia sistemática. Explique de forma organizada o seguinte tema:",
+          religioes_comparadas: "Você é um especialista em religiões comparadas. Compare a visão cristã com outras religiões sobre:",
+          contextualizacao_brasileira: "Você é um teólogo brasileiro. Contextualize as Escrituras para a realidade cultural brasileira:",
+          referencias_abnt_apa: "Você é um especialista em normas acadêmicas. Formate as seguintes referências em ABNT e APA:",
+          linguagem_ministerial: "Você é um analista de retórica ministerial. Analise o seguinte discurso ou sermão:",
+          redacao_academica: "Você é um orientador acadêmico. Ajude na estruturação do seguinte trabalho:",
+          dados_demograficos: "Você é um sociólogo da religião. Forneça dados demográficos e análises sobre:",
+          transcricao: "Você é um transcritor especializado. Transcreva e organize o seguinte conteúdo:"
+        };
+
+        const systemPrompt = toolPrompts[input.toolId] || "Você é um assistente de estudos bíblicos. Ajude com:";
+
+        const response = await invokeLLM({
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: input.input }
+          ]
+        });
+
+        return {
+          content: response.choices[0].message.content || "Erro ao gerar conteúdo."
+        };
+      }),
   }),
 
   credits: router({
