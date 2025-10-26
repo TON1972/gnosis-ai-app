@@ -229,9 +229,6 @@ export default function ToolPage() {
                 {toolInfo.description}
               </p>
               <div className="flex items-center gap-4">
-                <span className="px-4 py-2 bg-[#FFFACD] border-2 border-[#d4af37] rounded-lg text-sm font-semibold text-[#1e3a5f]">
-                  Custo: {toolInfo.creditCost} créditos
-                </span>
                 <span className="text-sm text-[#8b6f47]">
                   Saldo disponível: <strong>{credits?.total || 0}</strong> créditos
                 </span>

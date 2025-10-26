@@ -35,3 +35,9 @@
 
 - [x] Novos usuários não recebem plano FREE automaticamente ao se cadastrar (Dashboard mostra 0 ferramentas) - CORRIGIDO
 
+
+
+## Alteração de Interface
+
+- [x] Remover informação "Custo: X créditos" da página de ferramentas (manter apenas "Saldo disponível")
+
