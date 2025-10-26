@@ -47,3 +47,9 @@
 
 - [x] Adicionar botões "Upgrade de Plano" e "Comprar Créditos Avulsos" no CreditsPanel (abaixo da ordem de uso)
 
+
+
+## Correção
+
+- [x] Botão "Upgrade de Plano" deve abrir o NoCreditsModal (mesmo comportamento do botão "Comprar Créditos Avulsos")
+
