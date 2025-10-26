@@ -13,7 +13,7 @@ const PLANS_DATA = [
     priceMonthly: 0,
     creditsInitial: 500, // cumulative, NOT renewable after 30 days
     creditsDaily: 50, // non-cumulative
-    toolsCount: 4,
+    toolsCount: 6,
     description: "Plano gratuito com ferramentas básicas",
   },
   {
@@ -22,8 +22,8 @@ const PLANS_DATA = [
     priceMonthly: 1898, // R$ 18,98
     creditsInitial: 1500, // cumulative, 30-day validity
     creditsDaily: 150, // non-cumulative
-    toolsCount: 8,
-    description: "Plano intermediário com 8 ferramentas",
+    toolsCount: 10,
+    description: "Plano intermediário com 10 ferramentas",
   },
   {
     name: "lumen",
@@ -153,23 +153,23 @@ const TOOLS_DATA = [
   },
 ];
 
-// Tools excluded from Aliança plan
+// Tools excluded from Aliança plan (now only 5 excluded, 10 included)
 const ALIANCA_EXCLUDED_TOOLS = [
   "exegese",
-  "religioes_comparadas",
   "referencias_abnt_apa",
-  "linguagem_ministerial",
   "redacao_academica",
   "dados_demograficos",
   "transcricao",
 ];
 
-// FREE plan only has 4 basic tools
+// FREE plan now has 6 basic tools
 const FREE_TOOLS = [
   "hermeneutica",
   "traducoes",
   "resumos",
   "esbocos",
+  "estudos_doutrinarios",
+  "analise_teologica",
 ];
 
 async function seedPlansAndTools() {
@@ -217,7 +217,7 @@ async function seedPlansAndTools() {
       }
     }
 
-    // ALIANÇA plan - 8 tools (excluding 7 specific ones)
+    // ALIANÇA plan - 10 tools (excluding 5 specific ones)
     const aliancaPlanId = planMap.get("alianca")!;
     for (const tool of allTools) {
       if (!ALIANCA_EXCLUDED_TOOLS.includes(tool.name)) {
@@ -238,8 +238,8 @@ async function seedPlansAndTools() {
 
     console.log("\n✨ Seeding completed successfully!");
     console.log("\n📊 Summary:");
-    console.log(`  - FREE: 4 tools`);
-    console.log(`  - ALIANÇA: 8 tools (excluding: ${ALIANCA_EXCLUDED_TOOLS.join(", ")})`);
+    console.log(`  - FREE: 6 tools`);
+    console.log(`  - ALIANÇA: 10 tools (excluding: ${ALIANCA_EXCLUDED_TOOLS.join(", ")})`);
     console.log(`  - LUMEN: 15 tools (all)`);
     console.log(`  - PREMIUM: 15 tools (all)`);
 
