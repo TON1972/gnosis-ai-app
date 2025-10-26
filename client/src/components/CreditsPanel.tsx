@@ -1,4 +1,4 @@
-import { Coins, Calendar, Zap, Gift, Info } from "lucide-react";
+import { Coins, Calendar, Zap, Gift, Info, TrendingUp, ShoppingCart } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "./ui/button";
 import { useState } from "react";
@@ -108,21 +108,31 @@ export default function CreditsPanel({ onNeedCredits }: CreditsPanelProps) {
       </div>
 
       {/* Action Buttons */}
-      {isLowCredits && (
-        <div className="space-y-2">
+      <div className="space-y-2">
+        {isLowCredits && (
           <div className="bg-red-100 border-2 border-red-400 rounded-lg p-3 mb-3">
             <p className="text-sm text-red-700 font-semibold text-center">
               ⚠️ Créditos baixos! Considere fazer upgrade ou comprar créditos avulsos.
             </p>
           </div>
-          <Button
-            onClick={onNeedCredits}
-            className="w-full bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B] font-bold"
-          >
-            Obter Mais Créditos
-          </Button>
-        </div>
-      )}
+        )}
+        
+        <Button
+          onClick={() => window.location.href = '/#planos'}
+          className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f] font-bold flex items-center justify-center gap-2"
+        >
+          <TrendingUp className="w-5 h-5" />
+          Upgrade de Plano
+        </Button>
+        
+        <Button
+          onClick={onNeedCredits}
+          className="w-full bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B] font-bold flex items-center justify-center gap-2"
+        >
+          <ShoppingCart className="w-5 h-5" />
+          Comprar Créditos Avulsos
+        </Button>
+      </div>
     </div>
   );
 }

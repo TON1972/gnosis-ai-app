@@ -41,3 +41,9 @@
 
 - [x] Remover informação "Custo: X créditos" da página de ferramentas (manter apenas "Saldo disponível")
 
+
+
+## Nova Funcionalidade
+
+- [x] Adicionar botões "Upgrade de Plano" e "Comprar Créditos Avulsos" no CreditsPanel (abaixo da ordem de uso)
+
