@@ -148,14 +148,34 @@ export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
 
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
+  const planId = activePlan?.plan.id || 1;
   const { data: planTools } = trpc.plans.getTools.useQuery(
-    { planId: activePlan?.plan.id || 1 },
-    { enabled: !!activePlan }
+    { planId },
+    { enabled: true } // Sempre buscar, usar planId 1 (FREE) como fallback
   );
 
   const categories = ["Todos", ...Array.from(new Set(TOOLS_CONFIG.map(t => t.category)))];
 
   const availableToolIds = new Set(planTools?.map(t => t.name) || []);
+  
+  // Mapeamento de IDs do frontend para nomes do banco
+  const toolIdToDbName: Record<string, string> = {
+    'hermeneutica': 'hermeneutica',
+    'exegese': 'exegese',
+    'traducoes': 'traducoes',
+    'resumos': 'resumos',
+    'esbocos': 'esbocos',
+    'estudos_doutrinarios': 'estudos_doutrinarios',
+    'analise_teologica': 'analise_teologica',
+    'teologia_sistematica': 'teologia_sistematica',
+    'religioes_comparadas': 'religioes_comparadas',
+    'contextualizacao_brasileira': 'contextualizacao_brasileira',
+    'referencias_abnt_apa': 'referencias_abnt_apa',
+    'linguagem_ministerial': 'linguagem_ministerial',
+    'redacao_academica': 'redacao_academica',
+    'dados_demograficos': 'dados_demograficos',
+    'transcricao': 'transcricao'
+  };
   
   const filteredTools = TOOLS_CONFIG.filter(tool => 
     selectedCategory === "Todos" || tool.category === selectedCategory
@@ -254,7 +274,8 @@ export default function Dashboard() {
             <div className="grid md:grid-cols-2 gap-6">
               {filteredTools.map((tool) => {
                 const Icon = tool.icon;
-                const isAvailable = availableToolIds.has(tool.id);
+                const dbName = toolIdToDbName[tool.id] || tool.id;
+                const isAvailable = availableToolIds.has(dbName);
                 const isLocked = !isAvailable;
 
                 return (

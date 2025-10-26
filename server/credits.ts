@@ -24,13 +24,29 @@ export async function getUserCredits(userId: number) {
 
   if (credits.length === 0) {
     // Initialize credits for new user
+    // Get user's plan to set initial credits
+    const userPlan = await getUserActivePlan(userId);
+    const initialCredits = userPlan?.plan.creditsInitial || 500; // Default FREE plan
+    const dailyCredits = userPlan?.plan.creditsDaily || 50; // Default FREE plan
+    const expiryDate = new Date(Date.now() + THIRTY_DAYS_MS);
+    
     await db.insert(userCredits).values({
       userId,
-      creditsInitial: 0,
-      creditsDaily: 0,
+      creditsInitial: initialCredits,
+      creditsDaily: dailyCredits,
       creditsBonus: 0,
+      creditsInitialExpiry: expiryDate,
       lastDailyReset: new Date(),
     });
+    
+    // Log initial credit grant
+    await db.insert(creditTransactions).values({
+      userId,
+      amount: initialCredits,
+      type: "initial",
+      description: `Initial credits for new user (${userPlan?.plan.displayName || "FREE"} plan)`,
+    });
+    
     credits = await db.select().from(userCredits).where(eq(userCredits.userId, userId)).limit(1);
   }
 
