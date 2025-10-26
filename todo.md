@@ -12,3 +12,13 @@
 - [x] Query tRPC plans.getTools não retorna dados (RESOLVIDO - problema era IDs inconsistentes)
 - [x] Query tRPC credits.balance não retorna créditos (RESOLVIDO)
 
+
+
+## Correções Solicitadas pelo Usuário
+
+- [x] 1. Corrigir logo em todas as páginas
+- [x] 2. Substituir "Gnose" por "GNOSIS AI" em todas as páginas (Não havia ocorrências)
+- [x] 3. Substituir "Livre" por "FREE" no plano gratuito (Já está correto como FREE)
+- [x] 4. Substituir "peças" por "ferramentas" nos planos Aliança, Lumen e GNOSIS Premium (Já está correto como ferramentas)
+- [x] 5. Adicionar 3 ferramentas na seção "Ferramentas Principais" (total 9): Exegese, Teologia Sistemática, Linguagem Ministerial
+

@@ -51,6 +51,21 @@ const mainTools = [
     icon: <Scale className="w-8 h-8" />,
     name: "Análise Teológica Comparada",
     description: "Comparação entre correntes teológicas"
+  },
+  {
+    icon: <Sparkles className="w-8 h-8" />,
+    name: "Exegese",
+    description: "Interpretação crítica e detalhada das Escrituras"
+  },
+  {
+    icon: <GraduationCap className="w-8 h-8" />,
+    name: "Teologia Sistemática",
+    description: "Estudo organizado de temas teológicos"
+  },
+  {
+    icon: <Mic className="w-8 h-8" />,
+    name: "Linguagem Ministerial",
+    description: "Análise de discursos e retórica ministerial"
   }
 ];
 
