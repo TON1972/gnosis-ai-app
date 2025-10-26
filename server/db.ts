@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, plans, tools, planTools } from "../drizzle/schema";
+import { InsertUser, users, plans, tools, planTools, subscriptions } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -68,9 +68,38 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onDuplicateKeyUpdate({
+    const result = await db.insert(users).values(values).onDuplicateKeyUpdate({
       set: updateSet,
     });
+
+    // Check if this is a new user (insert happened)
+    if (result[0].affectedRows > 0) {
+      // Get the user to find their ID
+      const newUser = await getUserByOpenId(user.openId);
+      if (newUser) {
+        // Check if user already has a subscription
+        const existingSub = await db.select().from(subscriptions)
+          .where(eq(subscriptions.userId, newUser.id))
+          .limit(1);
+        
+        if (existingSub.length === 0) {
+          // Get FREE plan ID
+          const freePlan = await db.select().from(plans)
+            .where(eq(plans.name, "free"))
+            .limit(1);
+          
+          if (freePlan.length > 0) {
+            // Create FREE subscription for new user
+            await db.insert(subscriptions).values({
+              userId: newUser.id,
+              planId: freePlan[0].id,
+              status: "active",
+            });
+            console.log(`[Database] Created FREE subscription for new user ${newUser.id}`);
+          }
+        }
+      }
+    }
   } catch (error) {
     console.error("[Database] Failed to upsert user:", error);
     throw error;
