@@ -16,7 +16,7 @@
 
 ## Correções Solicitadas pelo Usuário
 
-- [x] 1. Corrigir logo em todas as páginas
+- [x] 1. Corrigir logo em todas as páginas (Logo da GNOSIS AI agora aparece corretamente)
 - [x] 2. Substituir "Gnose" por "GNOSIS AI" em todas as páginas (Não havia ocorrências)
 - [x] 3. Substituir "Livre" por "FREE" no plano gratuito (Já está correto como FREE)
 - [x] 4. Substituir "peças" por "ferramentas" nos planos Aliança, Lumen e GNOSIS Premium (Já está correto como ferramentas)
