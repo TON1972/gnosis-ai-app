@@ -118,7 +118,7 @@ export default function CreditsPanel({ onNeedCredits }: CreditsPanelProps) {
         )}
         
         <Button
-          onClick={() => window.location.href = '/#planos'}
+          onClick={onNeedCredits}
           className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f] font-bold flex items-center justify-center gap-2"
         >
           <TrendingUp className="w-5 h-5" />

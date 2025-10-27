@@ -61,3 +61,9 @@
 
 - [x] Corrigir centralização da seção "Contextualização Brasileira Exclusiva" em mobile
 
+
+
+## Bug Mobile
+
+- [x] Botão "Upgrade de Plano" na versão mobile não abre o NoCreditsModal (funciona no desktop) - CORRIGIDO
+
