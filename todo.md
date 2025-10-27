@@ -55,3 +55,9 @@
 - [x] Ajustar centralização de elementos em telas pequenas
 - [x] Garantir que todos os componentes sejam responsivos (Home, Dashboard, FAQ, ToolPage)
 
+
+
+## Correção de Centralização
+
+- [x] Corrigir centralização da seção "Contextualização Brasileira Exclusiva" em mobile
+

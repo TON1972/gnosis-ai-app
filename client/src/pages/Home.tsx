@@ -401,13 +401,13 @@ export default function Home() {
       </section>
 
       {/* Brazilian Context Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="bg-white/90 rounded-2xl p-12 shadow-2xl border-4 border-[#d4af37] max-w-5xl mx-auto text-center">
-          <Globe className="w-16 h-16 text-[#d4af37] mx-auto mb-6" />
-          <h3 className="text-4xl font-bold text-[#1e3a5f] mb-6">
+      <section className="container mx-auto px-4 py-8 md:py-16">
+        <div className="bg-white/90 rounded-2xl p-6 md:p-12 shadow-2xl border-4 border-[#d4af37] max-w-5xl mx-auto text-center">
+          <Globe className="w-12 h-12 md:w-16 md:h-16 text-[#d4af37] mx-auto mb-4 md:mb-6" />
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] mb-4 md:mb-6">
             Contextualização Brasileira Exclusiva
           </h3>
-          <p className="text-xl text-[#8b6f47] leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-[#8b6f47] leading-relaxed">
             Nossa ferramenta de Contextualização Brasileira oferece referências que os melhores 
             softwares estrangeiros não possuem. Desenvolvida especialmente para a realidade 
             brasileira, com corpus exclusivo sobre cultura, sociedade e religiosidade do Brasil.
