@@ -194,15 +194,15 @@ export default function Dashboard() {
       {/* Header */}
       <header className="bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <Link href="/">
-              <span className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer">
-                <img src={APP_LOGO} alt={APP_TITLE} className="h-12 w-12 object-contain" />
-                <h1 className="text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+              <span className="flex items-center gap-2 md:gap-3 hover:opacity-80 transition-opacity cursor-pointer">
+                <img src={APP_LOGO} alt={APP_TITLE} className="h-10 w-10 md:h-12 md:w-12 object-contain" />
+                <h1 className="text-xl md:text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
               </span>
             </Link>
-            <div className="flex items-center gap-4">
-              <span className="text-[#d4af37] font-semibold">
+            <div className="flex items-center gap-2 md:gap-4 flex-wrap">
+              <span className="text-[#d4af37] font-semibold text-sm md:text-base">
                 Olá, {user?.name || "Usuário"}!
               </span>
               <Link href="/">
@@ -226,8 +226,8 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-6 md:py-8">
+        <div className="grid lg:grid-cols-4 gap-6 md:gap-8">
           {/* Sidebar - Credits Panel */}
           <div className="lg:col-span-1">
             <CreditsPanel onNeedCredits={() => setShowNoCreditsModal(true)} />
@@ -236,8 +236,8 @@ export default function Dashboard() {
           {/* Main Content - Tools */}
           <div className="lg:col-span-3">
             {/* Welcome Section */}
-            <div className="bg-white/90 rounded-2xl p-8 shadow-xl border-4 border-[#d4af37] mb-8">
-              <h2 className="text-3xl font-bold text-[#1e3a5f] mb-2">
+            <div className="bg-white/90 rounded-2xl p-6 md:p-8 shadow-xl border-4 border-[#d4af37] mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">
                 Bem-vindo ao Dashboard
               </h2>
               <p className="text-lg text-[#8b6f47]">
@@ -271,7 +271,7 @@ export default function Dashboard() {
             </div>
 
             {/* Tools Grid */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {filteredTools.map((tool) => {
                 const Icon = tool.icon;
                 const dbName = toolIdToDbName[tool.id] || tool.id;

@@ -47,3 +47,11 @@
 
 - [x] Adicionar botões "Upgrade de Plano" e "Comprar Créditos Avulsos" no CreditsPanel (abaixo da ordem de uso)
 
+
+
+## Bug de Responsividade Mobile
+
+- [x] Corrigir informações truncadas e sobrepostas na versão mobile
+- [x] Ajustar centralização de elementos em telas pequenas
+- [x] Garantir que todos os componentes sejam responsivos (Home, Dashboard, FAQ, ToolPage)
+

@@ -163,13 +163,13 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
       <header className="bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
-              <h1 className="text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+        <div className="container mx-auto px-4 py-4 md:py-6">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex items-center gap-2 md:gap-4">
+              <img src={APP_LOGO} alt={APP_TITLE} className="h-12 w-12 md:h-16 md:w-16 object-contain" />
+              <h1 className="text-xl md:text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
             </div>
-            <nav className="flex items-center gap-4">
+            <nav className="flex items-center gap-2 md:gap-4 flex-wrap">
               <Link href="/faq">
                 <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer">
                   FAQ
@@ -204,12 +204,12 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center">
+      <section className="container mx-auto px-4 py-12 md:py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-6xl font-bold text-[#1e3a5f] mb-6">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#1e3a5f] mb-6">
             Estudos Bíblicos Profundos com IA
           </h2>
-          <p className="text-2xl text-[#8b6f47] mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-[#8b6f47] mb-8 leading-relaxed">
             Explore as Escrituras com ferramentas avançadas de inteligência artificial, 
             desenvolvidas especialmente para pastores, teólogos e estudantes de seminário.
           </p>
@@ -225,8 +225,8 @@ export default function Home() {
       </section>
 
       {/* Main Tools Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h3 className="text-4xl font-bold text-[#1e3a5f] text-center mb-12">
+      <section className="container mx-auto px-4 py-8 md:py-16">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] text-center mb-8 md:mb-12">
           Ferramentas Principais
         </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -259,9 +259,9 @@ export default function Home() {
       </section>
 
       {/* Theologians Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="bg-white/90 rounded-2xl p-12 shadow-2xl border-4 border-[#d4af37] max-w-5xl mx-auto">
-          <h3 className="text-4xl font-bold text-[#1e3a5f] text-center mb-8">
+      <section className="container mx-auto px-4 py-8 md:py-16">
+        <div className="bg-white/90 rounded-2xl p-6 md:p-12 shadow-2xl border-4 border-[#d4af37] max-w-5xl mx-auto">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] text-center mb-6 md:mb-8">
             Fundamentada nos Mais Proeminentes Teólogos da História
           </h3>
           <p className="text-xl text-[#8b6f47] text-center mb-8">
@@ -282,14 +282,14 @@ export default function Home() {
       </section>
 
       {/* Plans Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h3 className="text-4xl font-bold text-[#1e3a5f] text-center mb-4">
+      <section id="planos" className="container mx-auto px-4 py-8 md:py-16">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] text-center mb-4">
           Escolha Seu Plano
         </h3>
-        <p className="text-xl text-[#8b6f47] text-center mb-12">
+        <p className="text-base md:text-lg lg:text-xl text-[#8b6f47] text-center mb-8 md:mb-12">
           * Créditos iniciais dos planos pagos são renovados a cada 30 dias
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <div
               key={index}

@@ -26,16 +26,16 @@ export default function CreditsPanel({ onNeedCredits }: CreditsPanelProps) {
   const isLowCredits = totalCredits < 100;
 
   return (
-    <div className="bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] rounded-2xl p-6 shadow-xl border-4 border-[#d4af37]">
+    <div className="bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] rounded-2xl p-4 md:p-6 shadow-xl border-4 border-[#d4af37]">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between mb-4 md:mb-6">
+        <div className="flex items-center gap-2 md:gap-3">
           <div className="p-3 bg-[#1e3a5f] rounded-lg">
             <Coins className="w-6 h-6 text-[#d4af37]" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-[#1e3a5f]">Seus Créditos</h3>
-            <p className="text-sm text-[#8b6f47]">
+            <h3 className="text-lg md:text-xl font-bold text-[#1e3a5f]">Seus Créditos</h3>
+            <p className="text-xs md:text-sm text-[#8b6f47]">
               {activePlan?.plan.displayName || "Plano FREE"}
             </p>
           </div>
@@ -43,10 +43,10 @@ export default function CreditsPanel({ onNeedCredits }: CreditsPanelProps) {
       </div>
 
       {/* Total Credits Display */}
-      <div className="bg-white/80 rounded-xl p-6 mb-4 border-2 border-[#d4af37]">
+      <div className="bg-white/80 rounded-xl p-4 md:p-6 mb-4 border-2 border-[#d4af37]">
         <div className="text-center">
-          <p className="text-sm text-[#8b6f47] mb-2">Saldo Total</p>
-          <p className={`text-5xl font-bold ${isLowCredits ? 'text-red-600' : 'text-[#1e3a5f]'}`}>
+          <p className="text-xs md:text-sm text-[#8b6f47] mb-2">Saldo Total</p>
+          <p className={`text-3xl md:text-5xl font-bold ${isLowCredits ? 'text-red-600' : 'text-[#1e3a5f]'}`}>
             {totalCredits.toLocaleString('pt-BR')}
           </p>
           <p className="text-sm text-[#8b6f47] mt-2">créditos disponíveis</p>
