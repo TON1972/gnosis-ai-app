@@ -127,6 +127,7 @@ export const appRouter = router({
     createSubscriptionCheckout: protectedProcedure
       .input(z.object({
         planId: z.number(),
+        billingPeriod: z.enum(['monthly', 'yearly']).default('monthly'),
       }))
       .mutation(async ({ ctx, input }) => {
         // Get plan details
@@ -137,11 +138,20 @@ export const appRouter = router({
           throw new Error('Plano não encontrado');
         }
 
+        // Calculate price based on billing period
+        const isYearly = input.billingPeriod === 'yearly';
+        const monthlyPrice = plan.priceMonthly;
+        const yearlyPrice = plan.priceYearly || (monthlyPrice * 12 * 0.834); // 16.6% discount
+        const price = isYearly ? yearlyPrice : monthlyPrice;
+        const duration = isYearly ? 12 : 1;
+
         // Create Mercado Pago checkout
         const checkout = await createSubscriptionCheckout({
           planId: plan.id,
           planName: plan.displayName,
-          price: plan.priceMonthly,
+          price: price,
+          duration: duration,
+          billingPeriod: input.billingPeriod,
           userId: ctx.user.id,
           userEmail: ctx.user.email || '',
         });

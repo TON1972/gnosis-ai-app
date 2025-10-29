@@ -103,3 +103,17 @@
 - [ ] Testar responsividade
 - [ ] Teste de carga
 
+
+
+
+## Pagamento Anual com Desconto
+
+- [x] Adicionar campo yearlyPrice no schema de plans
+- [x] Atualizar seed para incluir preços anuais (16,6% desconto)
+- [x] Adicionar toggle Mensal/Anual na Home
+- [x] Adicionar toggle Mensal/Anual no NoCreditsModal
+- [x] Atualizar payment router para suportar billingPeriod
+- [x] Atualizar checkout Mercado Pago para criar assinaturas anuais
+- [x] Atualizar webhook handler para processar pagamentos anuais
+- [x] Testar fluxo completo de pagamento anual
+

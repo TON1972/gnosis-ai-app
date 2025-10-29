@@ -35,6 +35,12 @@ export async function handleMercadoPagoWebhook(req: Request, res: Response) {
       // Atualizar assinatura do usuário
       const userId = metadata.user_id;
       const planId = metadata.plan_id;
+      const duration = metadata.duration || 1; // Duração em meses (1 = mensal, 12 = anual)
+      const billingPeriod = metadata.billing_period || 'monthly';
+
+      // Calcular data de término baseada na duração
+      const daysToAdd = duration * 30; // Aproximadamente 30 dias por mês
+      const endDate = new Date(Date.now() + daysToAdd * 24 * 60 * 60 * 1000);
 
       // Verificar se já existe assinatura ativa
       const existingSubscription = await db
@@ -50,7 +56,7 @@ export async function handleMercadoPagoWebhook(req: Request, res: Response) {
           .set({
             planId: planId,
             status: 'active',
-            endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // +30 dias
+            endDate: endDate,
           })
           .where(eq(subscriptions.userId, userId));
       } else {
@@ -59,11 +65,11 @@ export async function handleMercadoPagoWebhook(req: Request, res: Response) {
           userId: userId,
           planId: planId,
           status: 'active',
-          endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          endDate: endDate,
         });
       }
 
-      console.log(`[Webhook] Assinatura atualizada para usuário ${userId}, plano ${planId}`);
+      console.log(`[Webhook] Assinatura ${billingPeriod} atualizada para usuário ${userId}, plano ${planId}, válida até ${endDate.toISOString()}`);
     } else if (metadata.type === 'credits') {
       // Adicionar créditos avulsos
       const userId = metadata.user_id;

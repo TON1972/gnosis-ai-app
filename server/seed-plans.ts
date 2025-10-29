@@ -6,11 +6,19 @@ import { plans, tools, planTools } from "../drizzle/schema";
  * Run with: pnpm tsx server/seed-plans.ts
  */
 
+// Calcula preço anual com 16,6% desconto
+const calculateYearlyPrice = (monthly: number) => {
+  const yearlyWithoutDiscount = monthly * 12;
+  const discount = yearlyWithoutDiscount * 0.166;
+  return Math.round(yearlyWithoutDiscount - discount);
+};
+
 const PLANS_DATA = [
   {
     name: "free",
     displayName: "Plano FREE",
     priceMonthly: 0,
+    priceYearly: 0,
     creditsInitial: 500, // cumulative, NOT renewable after 30 days
     creditsDaily: 50, // non-cumulative
     toolsCount: 6,
@@ -20,6 +28,7 @@ const PLANS_DATA = [
     name: "alianca",
     displayName: "Plano Aliança",
     priceMonthly: 1898, // R$ 18,98
+    priceYearly: calculateYearlyPrice(1898), // R$ 189,88 com 16,6% desconto
     creditsInitial: 1500, // cumulative, 30-day validity
     creditsDaily: 150, // non-cumulative
     toolsCount: 10,
@@ -29,6 +38,7 @@ const PLANS_DATA = [
     name: "lumen",
     displayName: "Plano Lumen",
     priceMonthly: 3398, // R$ 33,98
+    priceYearly: calculateYearlyPrice(3398), // R$ 339,88 com 16,6% desconto
     creditsInitial: 3000, // cumulative, 30-day validity
     creditsDaily: 300, // non-cumulative
     toolsCount: 15,
@@ -38,6 +48,7 @@ const PLANS_DATA = [
     name: "premium",
     displayName: "Plano GNOSIS Premium",
     priceMonthly: 6298, // R$ 62,98
+    priceYearly: calculateYearlyPrice(6298), // R$ 629,88 com 16,6% desconto
     creditsInitial: 8000, // cumulative, 30-day validity
     creditsDaily: 400, // non-cumulative (UPDATED from 800)
     toolsCount: 15,

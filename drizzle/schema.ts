@@ -26,6 +26,7 @@ export const plans = mysqlTable("plans", {
   name: varchar("name", { length: 50 }).notNull().unique(),
   displayName: varchar("displayName", { length: 100 }).notNull(),
   priceMonthly: int("priceMonthly").notNull(), // in cents (R$ 18,98 = 1898)
+  priceYearly: int("priceYearly").notNull(), // in cents with 16.6% discount
   creditsInitial: int("creditsInitial").notNull(), // cumulative credits with 30-day validity
   creditsDaily: int("creditsDaily").notNull(), // non-cumulative daily credits
   toolsCount: int("toolsCount").notNull(), // number of tools available

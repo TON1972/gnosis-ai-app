@@ -2,6 +2,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
+import { useState } from "react";
 import { 
   BookOpen, 
   Languages, 
@@ -148,8 +149,29 @@ const plans = [
 ];
 
 export default function Home() {
-  const { user, loading, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const [, setLocation] = useLocation();
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+  
+  // Calcula preço anual com 16,6% desconto
+  const getYearlyPrice = (monthly: number) => {
+    const yearly = monthly * 12;
+    const discount = yearly * 0.166;
+    return (yearly - discount).toFixed(2);
+  };
+  
+  const getDisplayPrice = (plan: typeof plans[number]) => {
+    if (plan.priceValue === 0) return plan.price;
+    if (billingPeriod === 'yearly') {
+      return `R$ ${getYearlyPrice(plan.priceValue)}`;
+    }
+    return plan.price;
+  };
+  
+  const getDisplayPeriod = (plan: typeof plans[number]) => {
+    if (plan.priceValue === 0) return '';
+    return billingPeriod === 'yearly' ? '/ano' : '/mês';
+  };
 
   const handleGetStarted = () => {
     if (isAuthenticated) {
@@ -286,6 +308,34 @@ export default function Home() {
         <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] text-center mb-4">
           Escolha Seu Plano
         </h3>
+        
+        {/* Billing Period Toggle */}
+        <div className="flex justify-center items-center gap-4 mb-6">
+          <button
+            onClick={() => setBillingPeriod('monthly')}
+            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+              billingPeriod === 'monthly'
+                ? 'bg-[#1e3a5f] text-[#d4af37] shadow-lg scale-105'
+                : 'bg-white/80 text-[#8b6f47] hover:bg-white'
+            }`}
+          >
+            Mensal
+          </button>
+          <button
+            onClick={() => setBillingPeriod('yearly')}
+            className={`px-6 py-3 rounded-lg font-semibold transition-all relative ${
+              billingPeriod === 'yearly'
+                ? 'bg-[#1e3a5f] text-[#d4af37] shadow-lg scale-105'
+                : 'bg-white/80 text-[#8b6f47] hover:bg-white'
+            }`}
+          >
+            Anual
+            <span className="absolute -top-2 -right-2 bg-[#d4af37] text-[#1e3a5f] text-xs px-2 py-1 rounded-full font-bold">
+              -16,6%
+            </span>
+          </button>
+        </div>
+        
         <p className="text-base md:text-lg lg:text-xl text-[#8b6f47] text-center mb-8 md:mb-12">
           * Créditos iniciais dos planos pagos são renovados a cada 30 dias
         </p>
@@ -321,13 +371,13 @@ export default function Home() {
                 <span className={`text-4xl font-bold ${
                   plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                 }`}>
-                  {plan.price}
+                  {getDisplayPrice(plan)}
                 </span>
-                {plan.period && (
+                {plan.priceValue > 0 && (
                   <span className={`text-lg ${
                     plan.highlight || plan.premium ? "text-white/80" : "text-[#8b6f47]"
                   }`}>
-                    {plan.period}
+                    {getDisplayPeriod(plan)}
                   </span>
                 )}
               </div>

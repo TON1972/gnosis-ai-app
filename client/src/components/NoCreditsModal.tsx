@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "./ui/button";
 import { Coins, Crown, Sparkles, Gift, ArrowRight, CheckCircle2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
+import { useState } from "react";
 
 interface NoCreditsModalProps {
   open: boolean;
@@ -73,6 +74,7 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
   const { data: allPlans } = trpc.plans.list.useQuery();
   const isFreeUser = !activePlan || activePlan.plan.name === "free";
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
   
   const createSubscriptionCheckout = trpc.payments.createSubscriptionCheckout.useMutation();
   const createCreditsCheckout = trpc.payments.createCreditsCheckout.useMutation();
@@ -83,9 +85,30 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
     return plan?.id || 0;
   };
   
+  // Calcula preço anual com 16,6% desconto
+  const getYearlyPrice = (monthly: number) => {
+    const yearly = monthly * 12;
+    const discount = yearly * 0.166;
+    return (yearly - discount).toFixed(2);
+  };
+  
+  const getDisplayPrice = (priceValue: number) => {
+    if (billingPeriod === 'yearly') {
+      return `R$ ${getYearlyPrice(priceValue)}`;
+    }
+    return `R$ ${priceValue.toFixed(2).replace('.', ',')}`;
+  };
+  
+  const getDisplayPeriod = () => {
+    return billingPeriod === 'yearly' ? '/ano' : '/mês';
+  };
+  
   const handleSubscribe = async (planId: number) => {
     try {
-      const result = await createSubscriptionCheckout.mutateAsync({ planId });
+      const result = await createSubscriptionCheckout.mutateAsync({ 
+        planId,
+        billingPeriod 
+      });
       // Redirecionar para checkout do Mercado Pago
       if (result.init_point) {
         window.location.href = result.init_point;
@@ -130,6 +153,33 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                 <Crown className="w-6 h-6 text-[#d4af37]" />
                 Faça Upgrade do Seu Plano
               </h3>
+              
+              {/* Billing Period Toggle */}
+              <div className="flex justify-center items-center gap-3 mb-6">
+                <button
+                  onClick={() => setBillingPeriod('monthly')}
+                  className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
+                    billingPeriod === 'monthly'
+                      ? 'bg-[#1e3a5f] text-[#d4af37] shadow-lg'
+                      : 'bg-white/80 text-[#8b6f47] hover:bg-white'
+                  }`}
+                >
+                  Mensal
+                </button>
+                <button
+                  onClick={() => setBillingPeriod('yearly')}
+                  className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all relative ${
+                    billingPeriod === 'yearly'
+                      ? 'bg-[#1e3a5f] text-[#d4af37] shadow-lg'
+                      : 'bg-white/80 text-[#8b6f47] hover:bg-white'
+                  }`}
+                >
+                  Anual
+                  <span className="absolute -top-1 -right-1 bg-[#d4af37] text-[#1e3a5f] text-xs px-1.5 py-0.5 rounded-full font-bold">
+                    -16,6%
+                  </span>
+                </button>
+              </div>
               <div className="grid md:grid-cols-3 gap-4">
                 {PLAN_UPGRADES.map((plan, index) => (
                   <div
@@ -156,12 +206,12 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                       <span className={`text-3xl font-bold ${
                         plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                       }`}>
-                        {plan.price}
+                        {getDisplayPrice(plan.priceValue)}
                       </span>
                       <span className={`text-sm ${
                         plan.highlight || plan.premium ? "text-white/80" : "text-[#8b6f47]"
                       }`}>
-                        {plan.period}
+                        {getDisplayPeriod()}
                       </span>
                     </div>
                     <div className="space-y-2 mb-4">

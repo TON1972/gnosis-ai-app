@@ -18,10 +18,12 @@ export async function createSubscriptionCheckout(params: {
   planId: number;
   planName: string;
   price: number;
+  duration: number;
+  billingPeriod: 'monthly' | 'yearly';
   userId: number;
   userEmail: string;
 }) {
-  const { planId, planName, price, userId, userEmail } = params;
+  const { planId, planName, price, duration, billingPeriod, userId, userEmail } = params;
 
   try {
     const preferenceData = {
@@ -29,7 +31,7 @@ export async function createSubscriptionCheckout(params: {
         {
           id: `plan-${planId}`,
           title: `Assinatura ${planName} - GNOSIS AI`,
-          description: `Plano ${planName} com renovação mensal automática`,
+          description: `Plano ${planName} ${billingPeriod === 'yearly' ? 'anual' : 'mensal'} com renovação automática`,
           quantity: 1,
           unit_price: price,
           currency_id: 'BRL',
@@ -49,6 +51,8 @@ export async function createSubscriptionCheckout(params: {
         user_id: userId,
         plan_id: planId,
         type: 'subscription',
+        duration: duration,
+        billing_period: billingPeriod,
       },
       statement_descriptor: 'GNOSIS AI',
       external_reference: `sub-${userId}-${planId}-${Date.now()}`,
