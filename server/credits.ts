@@ -63,10 +63,19 @@ export async function getUserCredits(userId: number) {
   const lastReset = new Date(userCredit.lastDailyReset);
   const daysSinceReset = Math.floor((now.getTime() - lastReset.getTime()) / (24 * 60 * 60 * 1000));
 
+  console.log('[Credits Debug]', {
+    userId,
+    now: now.toISOString(),
+    lastReset: lastReset.toISOString(),
+    daysSinceReset,
+    currentDaily: userCredit.creditsDaily,
+  });
+
   let dailyCredits = userCredit.creditsDaily;
   if (daysSinceReset >= 1) {
     // Reset daily credits based on user's plan
     const userSub = await getUserActivePlan(userId);
+    console.log('[Credits Debug] User subscription:', userSub ? { planName: userSub.plan.displayName, dailyCredits: userSub.plan.creditsDaily } : 'null');
     if (userSub) {
       dailyCredits = userSub.plan.creditsDaily;
       await db.update(userCredits)
@@ -75,16 +84,23 @@ export async function getUserCredits(userId: number) {
           lastDailyReset: now,
         })
         .where(eq(userCredits.userId, userId));
+      console.log('[Credits Debug] Daily credits renewed:', dailyCredits);
     } else {
+      console.log('[Credits Debug] No active subscription found, setting daily credits to 0');
       dailyCredits = 0;
     }
   }
 
+  // Convert to numbers to ensure correct types
+  const initial = Number(initialCredits) || 0;
+  const daily = Number(dailyCredits) || 0;
+  const bonus = Number(userCredit.creditsBonus) || 0;
+
   return {
-    initial: initialCredits,
-    daily: dailyCredits,
-    bonus: userCredit.creditsBonus,
-    total: initialCredits + dailyCredits + userCredit.creditsBonus,
+    initial,
+    daily,
+    bonus,
+    total: initial + daily + bonus,
     initialExpiry: userCredit.creditsInitialExpiry,
   };
 }
@@ -96,13 +112,10 @@ export async function getUserActivePlan(userId: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  const result = await db
-    .select({
-      subscription: subscriptions,
-      plan: plans,
-    })
+  // Get active subscription
+  const subs = await db
+    .select()
     .from(subscriptions)
-    .innerJoin(plans, eq(subscriptions.planId, plans.id))
     .where(
       and(
         eq(subscriptions.userId, userId),
@@ -111,7 +124,33 @@ export async function getUserActivePlan(userId: number) {
     )
     .limit(1);
 
-  return result.length > 0 ? result[0] : null;
+  console.log('[getUserActivePlan] Active subscription:', subs);
+
+  if (subs.length === 0) {
+    console.log('[getUserActivePlan] No active subscription found');
+    return null;
+  }
+
+  const subscription = subs[0];
+
+  // Get plan details
+  const planResults = await db
+    .select()
+    .from(plans)
+    .where(eq(plans.id, subscription.planId))
+    .limit(1);
+
+  console.log('[getUserActivePlan] Plan query result:', planResults);
+
+  if (planResults.length === 0) {
+    console.log('[getUserActivePlan] Plan not found for planId:', subscription.planId);
+    return null;
+  }
+
+  return {
+    subscription,
+    plan: planResults[0],
+  };
 }
 
 /**

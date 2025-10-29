@@ -126,13 +126,13 @@ export const appRouter = router({
      */
     createSubscriptionCheckout: protectedProcedure
       .input(z.object({
-        planId: z.number(),
+        planId: z.union([z.number(), z.string()]),
         billingPeriod: z.enum(['monthly', 'yearly']).default('monthly'),
       }))
       .mutation(async ({ ctx, input }) => {
         // Get plan details
         const plans = await getAllPlans();
-        const plan = plans.find(p => p.id === input.planId);
+        const plan = plans.find(p => p.id === Number(input.planId) || p.id === input.planId);
         
         if (!plan) {
           throw new Error('Plano não encontrado');
@@ -140,8 +140,9 @@ export const appRouter = router({
 
         // Calculate price based on billing period
         const isYearly = input.billingPeriod === 'yearly';
-        const monthlyPrice = plan.priceMonthly;
-        const yearlyPrice = plan.priceYearly || (monthlyPrice * 12 * 0.834); // 16.6% discount
+        // Convert from cents to reais (divide by 100)
+        const monthlyPrice = plan.priceMonthly / 100;
+        const yearlyPrice = plan.priceYearly ? plan.priceYearly / 100 : (monthlyPrice * 12 * 0.834); // 16.6% discount
         const price = isYearly ? yearlyPrice : monthlyPrice;
         const duration = isYearly ? 12 : 1;
 

@@ -41,12 +41,11 @@ export async function createSubscriptionCheckout(params: {
         email: userEmail,
       },
       back_urls: {
-        success: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/success`,
-        failure: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/failure`,
-        pending: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/pending`,
+        success: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/success',
+        failure: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/failure',
+        pending: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/pending',
       },
-      auto_return: 'approved' as const,
-      notification_url: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/api/webhooks/mercadopago`,
+      notification_url: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/api/webhooks/mercadopago',
       metadata: {
         user_id: userId,
         plan_id: planId,
@@ -98,12 +97,11 @@ export async function createCreditsCheckout(params: {
         email: userEmail,
       },
       back_urls: {
-        success: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/success`,
-        failure: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/failure`,
-        pending: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/pending`,
+        success: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/success',
+        failure: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/failure',
+        pending: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/pending',
       },
-      auto_return: 'approved' as const,
-      notification_url: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/api/webhooks/mercadopago`,
+      notification_url: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/api/webhooks/mercadopago',
       metadata: {
         user_id: userId,
         credits: credits,

@@ -81,7 +81,9 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   
   // Map plan names to IDs from database
   const getPlanId = (planName: string) => {
-    const plan = allPlans?.find(p => p.displayName === planName);
+    // Add "Plano" prefix to match database displayName
+    const fullName = planName === "GNOSIS Premium" ? `Plano ${planName}` : `Plano ${planName}`;
+    const plan = allPlans?.find(p => p.displayName === fullName);
     return plan?.id || 0;
   };
   

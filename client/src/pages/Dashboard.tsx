@@ -148,7 +148,7 @@ export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
 
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
-  const planId = activePlan?.plan.id || 1;
+  const planId = activePlan?.plan.id || 150001;
   const { data: planTools } = trpc.plans.getTools.useQuery(
     { planId },
     { enabled: true } // Sempre buscar, usar planId 1 (FREE) como fallback
@@ -182,7 +182,8 @@ export default function Dashboard() {
   );
 
   const handleToolClick = (toolId: string) => {
-    if (!availableToolIds.has(toolId)) {
+    const dbName = toolIdToDbName[toolId] || toolId;
+    if (!availableToolIds.has(dbName)) {
       setShowNoCreditsModal(true);
       return;
     }

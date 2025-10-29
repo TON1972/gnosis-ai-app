@@ -115,5 +115,17 @@
 - [x] Atualizar payment router para suportar billingPeriod
 - [x] Atualizar checkout Mercado Pago para criar assinaturas anuais
 - [x] Atualizar webhook handler para processar pagamentos anuais
-- [x] Testar fluxo completo de pagamento anual
+- [x] Testar fluxo completo de pagamento an## Bugs Reportados (29/10/2025 - 01:00)
+
+- [x] BUG: Plano FREE mostrando 0 de 15 ferramentas (deveria ser 6 de 15) - RESOLVIDO
+- [x] BUG: Todas as ferramentas bloqueadas no Dashboard para usuário FREE - RESOLVIDO
+- [ ] BUG: Erro ao processar pagamento no Mercado Pago ("Erro ao processar pagamento. Tente novamente.") - EM PROGRESSO- [ ] BUG: Créditos diários não renovam automaticamente (deveria adicionar 50 créditos/dia para FREE)
+
+
+
+## Novos Bugs Reportados (29/10/2025 - 05:00)
+
+- [ ] BUG: Créditos iniciais (500) e diários (50) do plano FREE sumiram
+- [ ] BUG: Checkout Mercado Pago desconfigurado (valores errados, sem botões, sem PIX)
+- [ ] BUG: Sistema de renovação diária de créditos não funciona automaticamente
 
