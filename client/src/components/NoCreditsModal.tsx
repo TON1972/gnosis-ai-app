@@ -71,7 +71,43 @@ const BONUS_CREDITS = [
 
 export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
+  const { data: allPlans } = trpc.plans.list.useQuery();
   const isFreeUser = !activePlan || activePlan.plan.name === "free";
+  
+  const createSubscriptionCheckout = trpc.payments.createSubscriptionCheckout.useMutation();
+  const createCreditsCheckout = trpc.payments.createCreditsCheckout.useMutation();
+  
+  // Map plan names to IDs from database
+  const getPlanId = (planName: string) => {
+    const plan = allPlans?.find(p => p.displayName === planName);
+    return plan?.id || 0;
+  };
+  
+  const handleSubscribe = async (planId: number) => {
+    try {
+      const result = await createSubscriptionCheckout.mutateAsync({ planId });
+      // Redirecionar para checkout do Mercado Pago
+      if (result.init_point) {
+        window.location.href = result.init_point;
+      }
+    } catch (error) {
+      console.error('Erro ao criar checkout:', error);
+      alert('Erro ao processar pagamento. Tente novamente.');
+    }
+  };
+  
+  const handleBuyCredits = async (credits: number, price: number) => {
+    try {
+      const result = await createCreditsCheckout.mutateAsync({ credits, price });
+      // Redirecionar para checkout do Mercado Pago
+      if (result.init_point) {
+        window.location.href = result.init_point;
+      }
+    } catch (error) {
+      console.error('Erro ao criar checkout:', error);
+      alert('Erro ao processar pagamento. Tente novamente.');
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -160,6 +196,8 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                       ))}
                     </ul>
                     <Button
+                      onClick={() => handleSubscribe(getPlanId(plan.name))}
+                      disabled={createSubscriptionCheckout.isPending}
                       className={`w-full ${
                         plan.highlight
                           ? "bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
@@ -168,7 +206,7 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                           : "bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
                       }`}
                     >
-                      Assinar Agora
+                      {createSubscriptionCheckout.isPending ? 'Processando...' : 'Assinar Agora'}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </div>
@@ -236,13 +274,15 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                     </p>
                   </div>
                   <Button
+                    onClick={() => handleBuyCredits(credit.amount, parseFloat(credit.price.replace('R$ ', '').replace(',', '.')))}
+                    disabled={createCreditsCheckout.isPending}
                     className={`w-full ${
                       credit.bestValue
                         ? "bg-white text-[#1e3a5f] hover:bg-gray-100"
                         : "bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
                     }`}
                   >
-                    Comprar
+                    {createCreditsCheckout.isPending ? 'Processando...' : 'Comprar'}
                   </Button>
                 </div>
               ))}

@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getAllPlans, getToolsForPlan, getAllTools } from "./db";
 import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
+import { createSubscriptionCheckout, createCreditsCheckout } from "./mercadopago";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -116,6 +117,55 @@ export const appRouter = router({
       }))
       .mutation(async ({ ctx, input }) => {
         return await useCredits(ctx.user.id, input.amount, input.toolName);
+      }),
+  }),
+
+  payments: router({
+    /**
+     * Create checkout for subscription
+     */
+    createSubscriptionCheckout: protectedProcedure
+      .input(z.object({
+        planId: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        // Get plan details
+        const plans = await getAllPlans();
+        const plan = plans.find(p => p.id === input.planId);
+        
+        if (!plan) {
+          throw new Error('Plano não encontrado');
+        }
+
+        // Create Mercado Pago checkout
+        const checkout = await createSubscriptionCheckout({
+          planId: plan.id,
+          planName: plan.displayName,
+          price: plan.priceMonthly,
+          userId: ctx.user.id,
+          userEmail: ctx.user.email || '',
+        });
+
+        return checkout;
+      }),
+
+    /**
+     * Create checkout for credits purchase
+     */
+    createCreditsCheckout: protectedProcedure
+      .input(z.object({
+        credits: z.number().positive(),
+        price: z.number().positive(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const checkout = await createCreditsCheckout({
+          credits: input.credits,
+          price: input.price,
+          userId: ctx.user.id,
+          userEmail: ctx.user.email || '',
+        });
+
+        return checkout;
       }),
   }),
 });

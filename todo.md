@@ -67,3 +67,39 @@
 
 - [x] Botão "Upgrade de Plano" na versão mobile não abre o NoCreditsModal (funciona no desktop) - CORRIGIDO
 
+
+
+## Integrações Essenciais para Deploy
+
+### 1. Integração com LLM (ChatGPT)
+- [ ] Verificar se invokeLLM já está funcionando nas ferramentas
+- [ ] Testar geração de conteúdo em todas as 15 ferramentas
+- [ ] Adicionar tratamento de erros e fallbacks
+
+### 2. Gateway de Pagamento
+- [x] Escolher gateway (Stripe ou Mercado Pago) - MERCADO PAGO ESCOLHIDO
+- [x] Implementar checkout de assinaturas
+- [x] Implementar compra de créditos avulsos
+- [x] Webhooks para confirmação de pagamento
+- [ ] Cancelamento e reembolso (implementar depois se necessário)
+
+### 3. Sistema de Emails
+- [ ] Configurar serviço de email (SendGrid/Resend)
+- [ ] Email de boas-vindas
+- [ ] Email de confirmação de pagamento
+- [ ] Email de renovação de assinatura
+- [ ] Email de créditos baixos
+
+### 4. Sistema de Assinaturas
+- [ ] Renovação automática mensal
+- [ ] Atualização de créditos mensais
+- [ ] Expiração de créditos iniciais (30 dias)
+- [ ] Upgrade/downgrade de planos
+
+### 5. Testes Finais
+- [ ] Testar fluxo completo de cadastro
+- [ ] Testar uso de todas as ferramentas
+- [ ] Testar pagamentos (sandbox)
+- [ ] Testar responsividade
+- [ ] Teste de carga
+

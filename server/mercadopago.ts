@@ -1,0 +1,173 @@
+import { MercadoPagoConfig, Preference, Payment } from 'mercadopago';
+
+// Inicializar cliente Mercado Pago
+const client = new MercadoPagoConfig({
+  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || '',
+  options: {
+    timeout: 5000,
+  },
+});
+
+const preference = new Preference(client);
+const payment = new Payment(client);
+
+/**
+ * Criar preferência de pagamento para assinatura
+ */
+export async function createSubscriptionCheckout(params: {
+  planId: number;
+  planName: string;
+  price: number;
+  userId: number;
+  userEmail: string;
+}) {
+  const { planId, planName, price, userId, userEmail } = params;
+
+  try {
+    const preferenceData = {
+      items: [
+        {
+          id: `plan-${planId}`,
+          title: `Assinatura ${planName} - GNOSIS AI`,
+          description: `Plano ${planName} com renovação mensal automática`,
+          quantity: 1,
+          unit_price: price,
+          currency_id: 'BRL',
+        },
+      ],
+      payer: {
+        email: userEmail,
+      },
+      back_urls: {
+        success: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/success`,
+        failure: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/failure`,
+        pending: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/pending`,
+      },
+      auto_return: 'approved' as const,
+      notification_url: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/api/webhooks/mercadopago`,
+      metadata: {
+        user_id: userId,
+        plan_id: planId,
+        type: 'subscription',
+      },
+      statement_descriptor: 'GNOSIS AI',
+      external_reference: `sub-${userId}-${planId}-${Date.now()}`,
+    };
+
+    const response = await preference.create({ body: preferenceData });
+    
+    return {
+      id: response.id,
+      init_point: response.init_point, // URL para checkout
+      sandbox_init_point: response.sandbox_init_point, // URL para testes
+    };
+  } catch (error) {
+    console.error('[MercadoPago] Erro ao criar checkout de assinatura:', error);
+    throw new Error('Falha ao criar checkout de pagamento');
+  }
+}
+
+/**
+ * Criar preferência de pagamento para créditos avulsos
+ */
+export async function createCreditsCheckout(params: {
+  credits: number;
+  price: number;
+  userId: number;
+  userEmail: string;
+}) {
+  const { credits, price, userId, userEmail } = params;
+
+  try {
+    const preferenceData = {
+      items: [
+        {
+          id: `credits-${credits}`,
+          title: `${credits.toLocaleString('pt-BR')} Créditos - GNOSIS AI`,
+          description: `Pacote de ${credits.toLocaleString('pt-BR')} créditos avulsos`,
+          quantity: 1,
+          unit_price: price,
+          currency_id: 'BRL',
+        },
+      ],
+      payer: {
+        email: userEmail,
+      },
+      back_urls: {
+        success: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/success`,
+        failure: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/failure`,
+        pending: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/payment/pending`,
+      },
+      auto_return: 'approved' as const,
+      notification_url: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/api/webhooks/mercadopago`,
+      metadata: {
+        user_id: userId,
+        credits: credits,
+        type: 'credits',
+      },
+      statement_descriptor: 'GNOSIS AI',
+      external_reference: `credits-${userId}-${credits}-${Date.now()}`,
+    };
+
+    const response = await preference.create({ body: preferenceData });
+    
+    return {
+      id: response.id,
+      init_point: response.init_point,
+      sandbox_init_point: response.sandbox_init_point,
+    };
+  } catch (error) {
+    console.error('[MercadoPago] Erro ao criar checkout de créditos:', error);
+    throw new Error('Falha ao criar checkout de pagamento');
+  }
+}
+
+/**
+ * Verificar status de um pagamento
+ */
+export async function getPaymentStatus(paymentId: string) {
+  try {
+    const paymentData = await payment.get({ id: paymentId });
+    
+    return {
+      id: paymentData.id,
+      status: paymentData.status,
+      status_detail: paymentData.status_detail,
+      transaction_amount: paymentData.transaction_amount,
+      metadata: paymentData.metadata,
+      external_reference: paymentData.external_reference,
+    };
+  } catch (error) {
+    console.error('[MercadoPago] Erro ao buscar status do pagamento:', error);
+    throw new Error('Falha ao verificar status do pagamento');
+  }
+}
+
+/**
+ * Processar webhook do Mercado Pago
+ */
+export async function processWebhook(data: any) {
+  try {
+    const { type, data: webhookData } = data;
+
+    // Mercado Pago envia notificações de diferentes tipos
+    if (type === 'payment') {
+      const paymentId = webhookData.id;
+      const paymentInfo = await getPaymentStatus(paymentId);
+
+      return {
+        type: 'payment',
+        paymentId,
+        status: paymentInfo.status,
+        metadata: paymentInfo.metadata,
+        externalReference: paymentInfo.external_reference,
+      };
+    }
+
+    return null;
+  } catch (error) {
+    console.error('[MercadoPago] Erro ao processar webhook:', error);
+    throw error;
+  }
+}
+
