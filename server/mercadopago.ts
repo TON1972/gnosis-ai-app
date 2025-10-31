@@ -55,6 +55,12 @@ export async function createSubscriptionCheckout(params: {
       },
       statement_descriptor: 'GNOSIS AI',
       external_reference: `sub-${userId}-${planId}-${Date.now()}`,
+      payment_methods: {
+        excluded_payment_methods: billingPeriod === 'yearly' ? [{ id: 'pix' }] : [], // PIX apenas para pagamentos mensais
+        excluded_payment_types: [], // Aceitar todos os tipos de pagamento (cartão, débito, boleto, etc)
+        installments: 12, // Permitir parcelamento em até 12x
+        default_installments: 1,
+      },
     };
 
     const response = await preference.create({ body: preferenceData });
@@ -109,6 +115,11 @@ export async function createCreditsCheckout(params: {
       },
       statement_descriptor: 'GNOSIS AI',
       external_reference: `credits-${userId}-${credits}-${Date.now()}`,
+      payment_methods: {
+        excluded_payment_methods: [], // Permitir PIX para créditos avulsos
+        excluded_payment_types: [],
+        installments: 12, // Permitir parcelamento em até 12x
+      },
     };
 
     const response = await preference.create({ body: preferenceData });
@@ -120,6 +131,70 @@ export async function createCreditsCheckout(params: {
     };
   } catch (error) {
     console.error('[MercadoPago] Erro ao criar checkout de créditos:', error);
+    throw new Error('Falha ao criar checkout de pagamento');
+  }
+}
+
+/**
+ * Criar preferência de pagamento manual (pagamento único com PIX)
+ */
+export async function createManualPaymentCheckout(params: {
+  planId: number;
+  planName: string;
+  price: number;
+  duration: number;
+  billingPeriod: 'monthly' | 'yearly';
+  userId: number;
+  userEmail: string;
+}) {
+  const { planId, planName, price, duration, billingPeriod, userId, userEmail } = params;
+
+  try {
+    const preferenceData = {
+      items: [
+        {
+          id: `manual-plan-${planId}`,
+          title: `Pagamento ${planName} ${billingPeriod === 'yearly' ? 'Anual' : 'Mensal'} - GNOSIS AI`,
+          description: `Plano ${planName} ${billingPeriod === 'yearly' ? 'anual' : 'mensal'} - Pagamento único (renovação manual)`,
+          quantity: 1,
+          unit_price: price,
+          currency_id: 'BRL',
+        },
+      ],
+      payer: {
+        email: userEmail,
+      },
+      back_urls: {
+        success: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/success',
+        failure: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/failure',
+        pending: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/payment/pending',
+      },
+      notification_url: 'https://3000-i2i70t6xhbrh798gkh8xs-03459e3f.manusvm.computer/api/webhooks/mercadopago',
+      metadata: {
+        user_id: userId,
+        plan_id: planId,
+        type: 'manual_subscription', // Tipo diferente para identificar no webhook
+        duration: duration,
+        billing_period: billingPeriod,
+      },
+      statement_descriptor: 'GNOSIS AI',
+      external_reference: `manual-sub-${userId}-${planId}-${Date.now()}`,
+      payment_methods: {
+        excluded_payment_methods: [], // Permitir PIX para pagamento manual
+        excluded_payment_types: [],
+        installments: 12, // Permitir parcelamento em até 12x
+      },
+    };
+
+    const response = await preference.create({ body: preferenceData });
+    
+    return {
+      id: response.id,
+      init_point: response.init_point,
+      sandbox_init_point: response.sandbox_init_point,
+    };
+  } catch (error) {
+    console.error('[MercadoPago] Erro ao criar checkout manual:', error);
     throw new Error('Falha ao criar checkout de pagamento');
   }
 }

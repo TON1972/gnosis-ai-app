@@ -4,7 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getAllPlans, getToolsForPlan, getAllTools } from "./db";
 import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
-import { createSubscriptionCheckout, createCreditsCheckout } from "./mercadopago";
+import { createSubscriptionCheckout, createCreditsCheckout, createManualPaymentCheckout } from "./mercadopago";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -148,6 +148,45 @@ export const appRouter = router({
 
         // Create Mercado Pago checkout
         const checkout = await createSubscriptionCheckout({
+          planId: plan.id,
+          planName: plan.displayName,
+          price: price,
+          duration: duration,
+          billingPeriod: input.billingPeriod,
+          userId: ctx.user.id,
+          userEmail: ctx.user.email || '',
+        });
+
+        return checkout;
+      }),
+
+    /**
+     * Create manual payment checkout (with PIX)
+     */
+    createManualPaymentCheckout: protectedProcedure
+      .input(z.object({
+        planId: z.union([z.number(), z.string()]),
+        billingPeriod: z.enum(['monthly', 'yearly']).default('monthly'),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        // Get plan details
+        const plans = await getAllPlans();
+        const plan = plans.find(p => p.id === Number(input.planId) || p.id === input.planId);
+        
+        if (!plan) {
+          throw new Error('Plano não encontrado');
+        }
+
+        // Calculate price based on billing period
+        const isYearly = input.billingPeriod === 'yearly';
+        // Convert from cents to reais (divide by 100)
+        const monthlyPrice = plan.priceMonthly / 100;
+        const yearlyPrice = plan.priceYearly ? plan.priceYearly / 100 : (monthlyPrice * 12 * 0.834); // 16.6% discount
+        const price = isYearly ? yearlyPrice : monthlyPrice;
+        const duration = isYearly ? 12 : 1;
+
+        // Create Mercado Pago manual checkout
+        const checkout = await createManualPaymentCheckout({
           planId: plan.id,
           planName: plan.displayName,
           price: price,

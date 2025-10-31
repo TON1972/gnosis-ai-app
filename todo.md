@@ -129,3 +129,31 @@
 - [ ] BUG: Checkout Mercado Pago desconfigurado (valores errados, sem botões, sem PIX)
 - [ ] BUG: Sistema de renovação diária de créditos não funciona automaticamente
 
+
+
+## Novas Features Solicitadas (29/10/2025 - 06:20)
+
+- [ ] Aceitar cartão de débito virtual de qualquer banco (não apenas CAIXA)
+- [ ] Implementar PIX para pagamentos mensais (não anuais)
+- [ ] Implementar PIX para compra de créditos avulsos
+
+
+
+## Feature: Dois Tipos de Checkout (29/10/2025 - 06:42)
+
+- [ ] Criar função createManualPaymentCheckout (pagamento único com PIX)
+- [ ] Adicionar toggle "Renovação Automática" vs "Pagamento Manual" no NoCreditsModal
+- [ ] Atualizar webhook para processar pagamentos manuais (não criar assinatura recorrente)
+- [ ] Adicionar lógica de expiração após 30 dias para pagamentos manuais
+
+
+
+
+## BUGS CRÍTICOS REPORTADOS (30/10/2025 - 10:30)
+
+- [x] BUG CRÍTICO: Créditos não aparecem no Dashboard (existem no banco mas UI mostra 0) - RESOLVIDO
+- [x] BUG CRÍTICO: Dashboard mostra "0 de 15 ferramentas" para plano FREE (deveria ser "6 de 15 ferramentas") - RESOLVIDO
+- [x] BUG: Sistema de renovação diária de créditos não está funcionando - TESTADO E FUNCIONANDO
+- [ ] TESTE: Validar fluxo completo de pagamento (checkout → webhook → ativação → créditos → ferramentas)
+
+
