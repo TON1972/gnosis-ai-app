@@ -1,0 +1,147 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { trpc } from "@/lib/trpc";
+import { Download, Trash2, Clock, BookText, FileText } from "lucide-react";
+import jsPDF from "jspdf";
+import { toast } from "sonner";
+
+export default function SavedStudiesSection() {
+  const { data: savedStudies, refetch } = trpc.studies.list.useQuery();
+  const deleteStudyMutation = trpc.studies.delete.useMutation();
+  const [expandedStudyId, setExpandedStudyId] = useState<number | null>(null);
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("Tem certeza que deseja excluir este estudo?")) return;
+
+    try {
+      await deleteStudyMutation.mutateAsync({ id });
+      toast.success("Estudo excluído!");
+      refetch();
+    } catch (error) {
+      toast.error("Erro ao excluir");
+      console.error(error);
+    }
+  };
+
+  const handleDownloadTxt = (study: any) => {
+    const blob = new Blob([study.output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${study.toolName.replace(/\s+/g, '_')}_${new Date(study.createdAt).toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success("TXT baixado!");
+  };
+
+  const handleDownloadPdf = (study: any) => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    const maxWidth = pageWidth - 2 * margin;
+    const lineHeight = 7;
+    let y = margin;
+
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "bold");
+    doc.text(study.toolName, margin, y);
+    y += lineHeight * 2;
+
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Data: ${new Date(study.createdAt).toLocaleDateString('pt-BR')}`, margin, y);
+    y += lineHeight * 2;
+
+    doc.setFontSize(11);
+    const lines = doc.splitTextToSize(study.output, maxWidth);
+    
+    for (let i = 0; i < lines.length; i++) {
+      if (y + lineHeight > pageHeight - margin) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(lines[i], margin, y);
+      y += lineHeight;
+    }
+
+    doc.save(`${study.toolName.replace(/\s+/g, '_')}_${new Date(study.createdAt).toISOString().split('T')[0]}.pdf`);
+    toast.success("PDF baixado!");
+  };
+
+  if (!savedStudies || savedStudies.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="bg-white/90 rounded-2xl p-4 shadow-xl border-4 border-[#d4af37]">
+      <div className="flex items-center gap-2 mb-4 pb-3 border-b-2 border-[#d4af37]">
+        <BookText className="w-5 h-5 text-[#1e3a5f]" />
+        <h3 className="text-lg font-bold text-[#1e3a5f]">
+          Meus Estudos
+        </h3>
+      </div>
+
+      <div className="space-y-3 max-h-[500px] overflow-y-auto">
+        {savedStudies.map((study) => (
+          <div
+            key={study.id}
+            className="bg-[#FFFACD] border-2 border-[#d4af37] rounded-lg p-3"
+          >
+            <div className="mb-2">
+              <h4 className="text-sm font-bold text-[#1e3a5f] mb-1">
+                {study.toolName}
+              </h4>
+              <p className="text-xs text-[#8b6f47] line-clamp-2 mb-2">
+                {study.input}
+              </p>
+              <div className="flex items-center gap-2 text-xs text-[#8b6f47]">
+                <Clock className="w-3 h-3" />
+                {new Date(study.createdAt).toLocaleDateString('pt-BR', { 
+                  day: '2-digit', 
+                  month: '2-digit' 
+                })}
+              </div>
+            </div>
+
+            <div className="flex gap-1">
+              <Button
+                onClick={() => handleDownloadTxt(study)}
+                variant="outline"
+                size="sm"
+                className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+              >
+                <FileText className="w-3 h-3 mr-1" />
+                TXT
+              </Button>
+              <Button
+                onClick={() => handleDownloadPdf(study)}
+                variant="outline"
+                size="sm"
+                className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+              >
+                <Download className="w-3 h-3 mr-1" />
+                PDF
+              </Button>
+              <Button
+                onClick={() => handleDelete(study.id)}
+                variant="outline"
+                size="sm"
+                className="h-8 px-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white"
+              >
+                <Trash2 className="w-3 h-3" />
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-center text-xs text-[#8b6f47] mt-3 pt-3 border-t border-[#d4af37]">
+        Total: {savedStudies.length} {savedStudies.length === 1 ? 'estudo' : 'estudos'}
+      </p>
+    </div>
+  );
+}
+

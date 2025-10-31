@@ -16,7 +16,7 @@ const PLAN_UPGRADES = [
     priceValue: 18.98,
     period: "/mês",
     creditsInitial: "1.500 créditos iniciais",
-    creditsDaily: "150 créditos/dia",
+    creditsDaily: "100 créditos/dia",
     tools: "8 ferramentas",
     features: [
       "Hermenêutica, Traduções, Resumos",
@@ -33,7 +33,7 @@ const PLAN_UPGRADES = [
     priceValue: 33.98,
     period: "/mês",
     creditsInitial: "3.000 créditos iniciais",
-    creditsDaily: "300 créditos/dia",
+    creditsDaily: "200 créditos/dia",
     tools: "Todas as 15 ferramentas",
     features: [
       "Todas do Aliança +",
@@ -49,8 +49,8 @@ const PLAN_UPGRADES = [
     price: "R$ 62,98",
     priceValue: 62.98,
     period: "/mês",
-    creditsInitial: "8.000 créditos iniciais",
-    creditsDaily: "400 créditos/dia",
+    creditsInitial: "6.000 créditos iniciais",
+    creditsDaily: "300 créditos/dia",
     tools: "Todas as 15 ferramentas",
     features: [
       "Todas do Lumen +",
@@ -64,10 +64,10 @@ const PLAN_UPGRADES = [
 ];
 
 const BONUS_CREDITS = [
-  { amount: 1000, price: "R$ 9,90", pricePerCredit: "R$ 0,0099" },
-  { amount: 3000, price: "R$ 24,90", pricePerCredit: "R$ 0,0083", popular: true },
-  { amount: 5000, price: "R$ 39,90", pricePerCredit: "R$ 0,0080" },
-  { amount: 10000, price: "R$ 69,90", pricePerCredit: "R$ 0,0070", bestValue: true },
+  { amount: 500, price: "R$ 9,90", pricePerCredit: "R$ 0,0198" },
+  { amount: 1500, price: "R$ 24,90", pricePerCredit: "R$ 0,0166", popular: true },
+  { amount: 2500, price: "R$ 39,90", pricePerCredit: "R$ 0,0160" },
+  { amount: 5000, price: "R$ 69,90", pricePerCredit: "R$ 0,0140", bestValue: true },
 ];
 
 export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {

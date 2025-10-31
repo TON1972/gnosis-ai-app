@@ -52,10 +52,44 @@ export async function getUserCredits(userId: number) {
 
   const userCredit = credits[0];
 
-  // Check if initial credits expired
+  // Check if initial credits expired and renew for paid plans
   let initialCredits = userCredit.creditsInitial;
+  let creditsInitialExpiry = userCredit.creditsInitialExpiry;
+  
   if (userCredit.creditsInitialExpiry && new Date() > userCredit.creditsInitialExpiry) {
-    initialCredits = 0;
+    // Credits expired, check if user has paid plan to renew
+    const userSub = await getUserActivePlan(userId);
+    
+    if (userSub && userSub.plan.name !== 'free') {
+      // Paid plan: renew initial credits for another 30 days
+      initialCredits = userSub.plan.creditsInitial;
+      creditsInitialExpiry = new Date(Date.now() + THIRTY_DAYS_MS);
+      
+      await db.update(userCredits)
+        .set({
+          creditsInitial: initialCredits,
+          creditsInitialExpiry: creditsInitialExpiry,
+        })
+        .where(eq(userCredits.userId, userId));
+      
+      // Log renewal
+      await db.insert(creditTransactions).values({
+        userId,
+        amount: initialCredits,
+        type: "initial",
+        description: `Initial credits renewed for ${userSub.plan.displayName} plan (30-day cycle)`,
+      });
+      
+      console.log('[Credits Debug] Initial credits renewed for paid plan:', {
+        plan: userSub.plan.displayName,
+        amount: initialCredits,
+        newExpiry: creditsInitialExpiry.toISOString()
+      });
+    } else {
+      // FREE plan: credits expired and do NOT renew
+      initialCredits = 0;
+      console.log('[Credits Debug] Initial credits expired for FREE plan (no renewal)');
+    }
   }
 
   // Check if daily credits need reset

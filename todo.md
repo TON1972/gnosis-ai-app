@@ -157,3 +157,103 @@
 - [ ] TESTE: Validar fluxo completo de pagamento (checkout → webhook → ativação → créditos → ferramentas)
 
 
+
+
+
+## Correções na Home (30/10/2025 - 20:30)
+
+- [x] 1. Cabeçalho: "FAQ" → "PERGUNTAS FREQUENTES" e "DASHBOARD" → "PAINEL DE CONTROLE"
+- [x] 2. Adicionar botão "Perguntas Frequentes" ao lado de "Começar Agora"
+- [x] 3. Adicionar botão "Perguntas Frequentes" acima da seção "Contextualização Brasileira"
+- [x] 4. Botão "Começar Agora" deve redirecionar para página de cadastro/login
+- [x] 5. Botão do plano FREE deve redirecionar para página de cadastro/login
+- [ ] 6. Botões "Assinar Agora" dos planos pagos devem redirecionar para checkout de pagamento
+- [x] 7. Link "Perguntas Frequentes" no rodapé deve ir para topo da página FAQ
+- [x] 8. Link "Planos e Preços" no rodapé deve ir para seção de planos na Home
+
+
+
+
+
+## Novas Correções (30/10/2025 - 23:35)
+
+- [x] Corrigir link "Perguntas Frequentes" no rodapé da Home para ir ao TOPO da página FAQ
+- [x] Implementar cabeçalho fixo (sticky header) em TODAS as páginas da GNOSIS AI
+
+
+
+
+
+## Nova Funcionalidade (30/10/2025 - 23:59)
+
+- [x] Adicionar opção de download em PDF nas ferramentas (além do .txt atual)
+
+
+
+
+
+## Nova Funcionalidade - Histórico de Estudos (31/10/2025 - 00:30)
+
+- [x] Criar tabela savedStudies no banco de dados
+- [x] Salvar automaticamente estudos gerados
+- [x] Criar seção "Meus Estudos" no Dashboard
+- [x] Implementar visualização de estudos salvos
+- [x] Adicionar botões de download (TXT/PDF) nos estudos salvos
+- [x] Implementar exclusão de estudos
+- [ ] Adicionar filtros por ferramenta e data (opcional - não implementado)
+
+
+
+
+
+## Correção - Histórico de Estudos (31/10/2025 - 01:25)
+
+- [x] Exibir TODOS os estudos salvos com scroll (não apenas 3)
+- [x] Limitar histórico a 100 estudos mais recentes
+- [x] Remover automaticamente estudos antigos quando ultrapassar 100
+
+
+
+
+
+## Alteração - Créditos Avulsos (31/10/2025 - 01:55)
+
+- [x] Atualizar quantidade de créditos dos pacotes avulsos (reduzir pela metade)
+
+
+
+
+
+## Alteração - Créditos dos Planos (31/10/2025 - 02:00)
+
+- [x] Atualizar créditos dos planos no banco de dados
+- [x] Atualizar exibição dos créditos na Home
+- [x] Atualizar exibição dos créditos no NoCreditsModal
+- [x] Atualizar FAQ com novos valores
+
+
+
+
+
+## Correção - Renovação de Créditos Iniciais (31/10/2025 - 10:15)
+
+- [x] Implementar renovação automática de créditos iniciais para planos pagos a cada 30 dias
+- [x] Garantir que plano FREE NÃO renova créditos iniciais
+
+
+
+
+
+## Nova Funcionalidade - Sistema de Controle de Inadimplência (31/10/2025 - 10:25)
+
+- [ ] Adicionar campos de controle de vencimento na tabela subscriptions
+- [ ] Criar função para verificar status de pagamento (pago/vencido/bloqueado)
+- [ ] Criar componente de banner piscante de aviso de vencimento
+- [ ] Implementar período de graça de 24 horas
+- [ ] Implementar bloqueio de ferramentas após 24h de inadimplência
+- [ ] Criar query tRPC para verificar status de assinatura
+- [ ] Integrar banner em todas as páginas do Dashboard
+- [ ] Implementar desbloqueio automático ao confirmar pagamento
+- [ ] Adicionar lógica para planos mensais e anuais
+
+

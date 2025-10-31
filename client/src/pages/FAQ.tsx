@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp, BookOpen, GraduationCap, Coins, CreditCard, HelpCircle, Home } from "lucide-react";
 import { Link } from "wouter";
 import { APP_LOGO, APP_TITLE } from "@/const";
@@ -129,7 +129,7 @@ const faqData: FAQCategory[] = [
       },
       {
         question: "Qual a diferença entre os planos?",
-        answer: "FREE: 500 créditos iniciais (não-renováveis) + 50/dia, 4 ferramentas básicas. Aliança: 1.500 iniciais + 150/dia, 8 ferramentas. Lumen: 3.000 iniciais + 300/dia, todas as 15 ferramentas. Premium: 8.000 iniciais + 400/dia, todas as 15 ferramentas."
+        answer: "FREE: 500 créditos iniciais (não-renováveis) + 50/dia, 6 ferramentas básicas. Aliança: 1.500 iniciais + 100/dia, 10 ferramentas. Lumen: 3.000 iniciais + 200/dia, todas as 15 ferramentas. Premium: 6.000 iniciais + 300/dia, todas as 15 ferramentas."
       },
       {
         question: "Quais ferramentas NÃO estão disponíveis no plano Aliança?",
@@ -199,6 +199,11 @@ function FAQAccordion({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boole
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
 
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const toggleItem = (categoryIndex: number, itemIndex: number) => {
     const key = `${categoryIndex}-${itemIndex}`;
     const newOpenItems = new Set(openItems);
@@ -213,7 +218,7 @@ export default function FAQ() {
   return (
     <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
-      <header className="bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
+      <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link href="/">

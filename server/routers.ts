@@ -3,6 +3,9 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getAllPlans, getToolsForPlan, getAllTools } from "./db";
+import { savedStudies } from "../drizzle/schema";
+import { getDb } from "./db";
+import { eq, desc } from "drizzle-orm";
 import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
 import { createSubscriptionCheckout, createCreditsCheckout, createManualPaymentCheckout } from "./mercadopago";
 import { z } from "zod";
@@ -89,6 +92,83 @@ export const appRouter = router({
         return {
           content: response.choices[0].message.content || "Erro ao gerar conteúdo."
         };
+      }),
+  }),
+
+  studies: router({ 
+    /**
+     * Save a generated study
+     */
+    save: protectedProcedure
+      .input(z.object({
+        toolName: z.string(),
+        input: z.string(),
+        output: z.string(),
+        creditCost: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+
+        // Insert new study
+        const [study] = await db.insert(savedStudies).values({
+          userId: ctx.user.id,
+          toolName: input.toolName,
+          input: input.input,
+          output: input.output,
+          creditCost: input.creditCost,
+        });
+
+        // Keep only the 100 most recent studies for this user
+        const allStudies = await db
+          .select()
+          .from(savedStudies)
+          .where(eq(savedStudies.userId, ctx.user.id))
+          .orderBy(desc(savedStudies.createdAt));
+
+        if (allStudies.length > 100) {
+          // Get IDs of studies to delete (all beyond the 100 most recent)
+          const studiesToDelete = allStudies.slice(100).map(s => s.id);
+          
+          // Delete old studies
+          for (const id of studiesToDelete) {
+            await db.delete(savedStudies).where(eq(savedStudies.id, id));
+          }
+        }
+
+        return { success: true, id: study.insertId };
+      }),
+
+    /**
+     * Get all saved studies for current user
+     */
+    list: protectedProcedure.query(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) return [];
+
+      const studies = await db
+        .select()
+        .from(savedStudies)
+        .where(eq(savedStudies.userId, ctx.user.id))
+        .orderBy(desc(savedStudies.createdAt));
+
+      return studies;
+    }),
+
+    /**
+     * Delete a saved study
+     */
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+
+        await db
+          .delete(savedStudies)
+          .where(eq(savedStudies.id, input.id));
+
+        return { success: true };
       }),
   }),
 

@@ -118,7 +118,7 @@ const plans = [
     priceValue: 18.98,
     period: "/mês",
     creditsInitial: "1.500 créditos iniciais*",
-    creditsDaily: "150 créditos/dia",
+    creditsDaily: "100 créditos/dia",
     tools: "10 ferramentas",
     planKey: "alianca" as const,
     highlight: false
@@ -129,7 +129,7 @@ const plans = [
     priceValue: 33.98,
     period: "/mês",
     creditsInitial: "3.000 créditos iniciais*",
-    creditsDaily: "300 créditos/dia",
+    creditsDaily: "200 créditos/dia",
     tools: "Todas as 15 ferramentas",
     planKey: "lumen" as const,
     highlight: true
@@ -139,8 +139,8 @@ const plans = [
     price: "R$ 62,98",
     priceValue: 62.98,
     period: "/mês",
-    creditsInitial: "8.000 créditos iniciais*",
-    creditsDaily: "400 créditos/dia",
+    creditsInitial: "6.000 créditos iniciais*",
+    creditsDaily: "300 créditos/dia",
     tools: "Todas as 15 ferramentas",
     planKey: "premium" as const,
     highlight: false,
@@ -184,7 +184,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
-      <header className="bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
+      <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-2 md:gap-4">
@@ -194,14 +194,14 @@ export default function Home() {
             <nav className="flex items-center gap-2 md:gap-4 flex-wrap">
               <Link href="/faq">
                 <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer">
-                  FAQ
+                  PERGUNTAS FREQUENTES
                 </span>
               </Link>
               {isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
                     <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer">
-                      Dashboard
+                      PAINEL DE CONTROLE
                     </span>
                   </Link>
                   <Button
@@ -235,14 +235,25 @@ export default function Home() {
             Explore as Escrituras com ferramentas avançadas de inteligência artificial, 
             desenvolvidas especialmente para pastores, teólogos e estudantes de seminário.
           </p>
-          <Button
-            onClick={handleGetStarted}
-            size="lg"
-            className="bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f] text-xl px-12 py-6 rounded-xl shadow-2xl"
-          >
-            Começar Agora
-            <ArrowRight className="ml-2 w-6 h-6" />
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/faq">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-[#d4af37] text-lg px-8 py-6 rounded-xl shadow-xl"
+              >
+                Perguntas Frequentes
+              </Button>
+            </Link>
+            <Button
+              onClick={() => window.location.href = getLoginUrl()}
+              size="lg"
+              className="bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f] text-xl px-12 py-6 rounded-xl shadow-2xl"
+            >
+              Começar Agora
+              <ArrowRight className="ml-2 w-6 h-6" />
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -434,7 +445,14 @@ export default function Home() {
                 })}
               </ul>
               <Button
-                onClick={handleGetStarted}
+                onClick={() => {
+                  if (plan.priceValue === 0) {
+                    window.location.href = getLoginUrl();
+                  } else {
+                    // Redirecionar para checkout (será implementado)
+                    window.location.href = getLoginUrl();
+                  }
+                }}
                 className={`w-full ${
                   plan.highlight
                     ? "bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
@@ -447,6 +465,20 @@ export default function Home() {
               </Button>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* FAQ Button Section */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <Link href="/faq">
+            <Button
+              size="lg"
+              className="bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B] text-xl px-12 py-6 rounded-xl shadow-2xl"
+            >
+              Perguntas Frequentes
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -487,7 +519,7 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-[#B8860B] hover:text-[#d4af37] transition-colors">
+                  <a href="#planos" className="text-[#B8860B] hover:text-[#d4af37] transition-colors">
                     Planos e Preços
                   </a>
                 </li>

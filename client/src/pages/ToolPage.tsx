@@ -9,6 +9,7 @@ import { ArrowLeft, Send, Loader2, Download, Copy, CheckCircle } from "lucide-re
 import CreditsPanel from "@/components/CreditsPanel";
 import NoCreditsModal from "@/components/NoCreditsModal";
 import { toast } from "sonner";
+import jsPDF from "jspdf";
 
 const TOOLS_INFO: Record<string, { name: string; description: string; placeholder: string; creditCost: number }> = {
   hermeneutica: {
@@ -117,6 +118,7 @@ export default function ToolPage() {
   const { data: credits } = trpc.credits.balance.useQuery();
   const useCreditsMutation = trpc.credits.use.useMutation();
   const generateMutation = trpc.tools.generate.useMutation();
+  const saveStudyMutation = trpc.studies.save.useMutation();
 
   const handleGenerate = async () => {
     if (!input.trim()) {
@@ -147,7 +149,22 @@ export default function ToolPage() {
         input
       });
 
-      setResult(typeof response.content === 'string' ? response.content : JSON.stringify(response.content));
+      const content = typeof response.content === 'string' ? response.content : JSON.stringify(response.content);
+      setResult(content);
+      
+      // Save study automatically
+      try {
+        await saveStudyMutation.mutateAsync({
+          toolName: toolInfo.name,
+          input: input,
+          output: content,
+          creditCost: toolInfo.creditCost,
+        });
+      } catch (saveError) {
+        console.error('Error saving study:', saveError);
+        // Don't show error to user, just log it
+      }
+      
       toast.success(`${toolInfo.name} gerado com sucesso! ${toolInfo.creditCost} créditos usados.`);
     } catch (error) {
       toast.error("Erro ao gerar conteúdo. Tente novamente.");
@@ -162,7 +179,7 @@ export default function ToolPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownload = () => {
+  const handleDownloadTxt = () => {
     const blob = new Blob([result], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -172,7 +189,45 @@ export default function ToolPage() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast.success("Arquivo baixado!");
+    toast.success("Arquivo TXT baixado!");
+  };
+
+  const handleDownloadPdf = () => {
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 20;
+    const maxWidth = pageWidth - 2 * margin;
+    const lineHeight = 7;
+    let y = margin;
+
+    // Título
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "bold");
+    doc.text(toolInfo.name, margin, y);
+    y += lineHeight * 2;
+
+    // Data
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Data: ${new Date().toLocaleDateString('pt-BR')}`, margin, y);
+    y += lineHeight * 2;
+
+    // Conteúdo
+    doc.setFontSize(11);
+    const lines = doc.splitTextToSize(result, maxWidth);
+    
+    for (let i = 0; i < lines.length; i++) {
+      if (y + lineHeight > pageHeight - margin) {
+        doc.addPage();
+        y = margin;
+      }
+      doc.text(lines[i], margin, y);
+      y += lineHeight;
+    }
+
+    doc.save(`${toolInfo.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`);
+    toast.success("Arquivo PDF baixado!");
   };
 
   if (!toolInfo) {
@@ -191,7 +246,7 @@ export default function ToolPage() {
   return (
     <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
-      <header className="bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
+      <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/">
@@ -292,13 +347,22 @@ export default function ToolPage() {
                       )}
                     </Button>
                     <Button
-                      onClick={handleDownload}
+                      onClick={handleDownloadTxt}
                       variant="outline"
                       size="sm"
                       className="border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
                     >
                       <Download className="w-4 h-4 mr-2" />
-                      Baixar
+                      Baixar TXT
+                    </Button>
+                    <Button
+                      onClick={handleDownloadPdf}
+                      variant="outline"
+                      size="sm"
+                      className="border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Baixar PDF
                     </Button>
                   </div>
                 </div>

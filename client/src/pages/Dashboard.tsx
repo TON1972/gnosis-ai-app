@@ -5,6 +5,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import CreditsPanel from "@/components/CreditsPanel";
 import NoCreditsModal from "@/components/NoCreditsModal";
+import SavedStudiesSection from "@/components/SavedStudiesSection";
 import { trpc } from "@/lib/trpc";
 import {
   BookOpen,
@@ -23,8 +24,15 @@ import {
   Home,
   LogOut,
   Lock,
-  Search
+  Search,
+  Download,
+  Trash2,
+  Eye,
+  Clock,
+  BookText
 } from "lucide-react";
+import jsPDF from "jspdf";
+import { toast } from "sonner";
 
 const TOOLS_CONFIG = [
   {
@@ -148,6 +156,8 @@ export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
 
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
+  const { data: savedStudies, refetch: refetchStudies } = trpc.studies.list.useQuery();
+  const deleteStudyMutation = trpc.studies.delete.useMutation();
   const planId = activePlan?.plan.id || 150001;
   const { data: planTools } = trpc.plans.getTools.useQuery(
     { planId },
@@ -193,7 +203,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
-      <header className="bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
+      <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <Link href="/">
@@ -232,12 +242,18 @@ export default function Dashboard() {
           {/* Sidebar - Credits Panel */}
           <div className="lg:col-span-1">
             <CreditsPanel onNeedCredits={() => setShowNoCreditsModal(true)} />
+            
+            {/* Saved Studies Section */}
+            <div className="mt-6">
+              <SavedStudiesSection />
+            </div>
           </div>
 
           {/* Main Content - Tools */}
           <div className="lg:col-span-3">
+
             {/* Welcome Section */}
-            <div className="bg-white/90 rounded-2xl p-6 md:p-8 shadow-xl border-4 border-[#d4af37] mb-6 md:mb-8">
+            <div className="bg-white/90 rounded-2xl p-6 md:p-8 shadow-xl border-4 border-[#d4af37] mb-8">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1e3a5f] mb-2">
                 Bem-vindo ao Dashboard
               </h2>
