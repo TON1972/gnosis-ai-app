@@ -7,6 +7,7 @@ import { savedStudies } from "../drizzle/schema";
 import { getDb } from "./db";
 import { eq, desc } from "drizzle-orm";
 import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
+import { checkSubscriptionStatus, markSubscriptionPaid } from "./subscriptionStatus";
 import { createSubscriptionCheckout, createCreditsCheckout, createManualPaymentCheckout } from "./mercadopago";
 import { z } from "zod";
 
@@ -198,6 +199,23 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await useCredits(ctx.user.id, input.amount, input.toolName);
       }),
+  }),
+
+  subscription: router({
+    /**
+     * Check current subscription status
+     */
+    status: protectedProcedure.query(async ({ ctx }) => {
+      return await checkSubscriptionStatus(ctx.user.id);
+    }),
+
+    /**
+     * Mark subscription as paid (called by webhook or manual confirmation)
+     */
+    markPaid: protectedProcedure.mutation(async ({ ctx }) => {
+      await markSubscriptionPaid(ctx.user.id);
+      return { success: true };
+    }),
   }),
 
   payments: router({

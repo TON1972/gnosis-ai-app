@@ -246,14 +246,32 @@
 
 ## Nova Funcionalidade - Sistema de Controle de Inadimplência (31/10/2025 - 10:25)
 
-- [ ] Adicionar campos de controle de vencimento na tabela subscriptions
-- [ ] Criar função para verificar status de pagamento (pago/vencido/bloqueado)
-- [ ] Criar componente de banner piscante de aviso de vencimento
-- [ ] Implementar período de graça de 24 horas
-- [ ] Implementar bloqueio de ferramentas após 24h de inadimplência
-- [ ] Criar query tRPC para verificar status de assinatura
-- [ ] Integrar banner em todas as páginas do Dashboard
-- [ ] Implementar desbloqueio automático ao confirmar pagamento
-- [ ] Adicionar lógica para planos mensais e anuais
+- [x] Adicionar campos de controle de vencimento na tabela subscriptions
+- [x] Criar função para verificar status de pagamento (pago/vencido/bloqueado)
+- [x] Criar componente de banner piscante de aviso de vencimento
+- [x] Implementar período de graça de 24 horas
+- [x] Implementar bloqueio de ferramentas após 24h de inadimplência
+- [x] Criar query tRPC para verificar status de assinatura
+- [x] Integrar banner em todas as páginas do Dashboard
+- [x] Implementar desbloqueio automático ao confirmar pagamento
+- [x] Adicionar lógica para planos mensais e anuais
+
+
+
+
+
+## Nova Funcionalidade - Painel de Administrador (31/10/2025 - 10:35)
+
+- [ ] Criar rota protegida /admin (apenas para role=admin)
+- [ ] Criar página AdminDashboard.tsx
+- [ ] Implementar estatísticas de usuários (total, FREE, pagos)
+- [ ] Criar calendário financeiro com vencimentos e valores por dia
+- [ ] Implementar lista de inadimplentes com atualização automática
+- [ ] Criar filtro de inadimplentes por período
+- [ ] Implementar botão "Enviar para Todos" (emails)
+- [ ] Implementar botão "Enviar por Data" com seleção de período
+- [ ] Criar template de email de cobrança personalizado
+- [ ] Adicionar queries tRPC para dados administrativos
+- [ ] Implementar envio de emails via backend
 
 

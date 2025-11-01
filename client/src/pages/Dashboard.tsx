@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import CreditsPanel from "@/components/CreditsPanel";
 import NoCreditsModal from "@/components/NoCreditsModal";
 import SavedStudiesSection from "@/components/SavedStudiesSection";
+import SubscriptionWarningBanner from "@/components/SubscriptionWarningBanner";
 import { trpc } from "@/lib/trpc";
 import {
   BookOpen,
@@ -235,6 +236,9 @@ export default function Dashboard() {
           </div>
         </div>
       </header>
+
+      {/* Subscription Warning Banner */}
+      <SubscriptionWarningBanner />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6 md:py-8">

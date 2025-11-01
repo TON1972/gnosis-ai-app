@@ -10,6 +10,7 @@ import CreditsPanel from "@/components/CreditsPanel";
 import NoCreditsModal from "@/components/NoCreditsModal";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
+import SubscriptionWarningBanner from "@/components/SubscriptionWarningBanner";
 
 const TOOLS_INFO: Record<string, { name: string; description: string; placeholder: string; creditCost: number }> = {
   hermeneutica: {
@@ -116,11 +117,18 @@ export default function ToolPage() {
   const [copied, setCopied] = useState(false);
 
   const { data: credits } = trpc.credits.balance.useQuery();
+  const { data: subscriptionStatus } = trpc.subscription.status.useQuery();
   const useCreditsMutation = trpc.credits.use.useMutation();
   const generateMutation = trpc.tools.generate.useMutation();
   const saveStudyMutation = trpc.studies.save.useMutation();
 
   const handleGenerate = async () => {
+    // Check if subscription is blocked
+    if (subscriptionStatus?.isBlocked) {
+      toast.error("Sua conta está bloqueada. Renove sua assinatura para continuar usando as ferramentas.");
+      return;
+    }
+
     if (!input.trim()) {
       toast.error("Por favor, insira um texto para análise");
       return;
@@ -264,6 +272,9 @@ export default function ToolPage() {
           </div>
         </div>
       </header>
+
+      {/* Subscription Warning Banner */}
+      <SubscriptionWarningBanner />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">

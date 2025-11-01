@@ -45,9 +45,13 @@ export const subscriptions = mysqlTable("subscriptions", {
   id: int("id").autoincrement().primaryKey(),
   userId: int("userId").notNull(),
   planId: int("planId").notNull(),
-  status: mysqlEnum("status", ["active", "cancelled", "expired"]).default("active").notNull(),
+  status: mysqlEnum("status", ["active", "cancelled", "expired", "grace_period", "blocked"]).default("active").notNull(),
+  billingPeriod: mysqlEnum("billingPeriod", ["monthly", "yearly"]).default("monthly").notNull(),
   startDate: timestamp("startDate").defaultNow().notNull(),
   endDate: timestamp("endDate"), // for tracking subscription period
+  nextBillingDate: timestamp("nextBillingDate"), // when next payment is due
+  gracePeriodEndsAt: timestamp("gracePeriodEndsAt"), // 24h after payment due
+  lastPaymentDate: timestamp("lastPaymentDate"), // last successful payment
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
