@@ -328,6 +328,77 @@ export const appRouter = router({
       }),
 
     /**
+     * Assign support request to admin (admin only)
+     */
+    assignSupportRequest: protectedProcedure
+      .input(z.object({
+        requestId: z.number(),
+        adminId: z.number().nullable(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) throw new Error('Database not available');
+
+        await db
+          .update(chatbotContacts)
+          .set({ assignedTo: input.adminId })
+          .where(eq(chatbotContacts.id, input.requestId));
+
+        // Notify assigned admin if not null
+        if (input.adminId) {
+          const assignedAdmin = await db
+            .select()
+            .from(users)
+            .where(eq(users.id, input.adminId))
+            .limit(1);
+
+          if (assignedAdmin.length > 0) {
+            const request = await db
+              .select()
+              .from(chatbotContacts)
+              .where(eq(chatbotContacts.id, input.requestId))
+              .limit(1);
+
+            if (request.length > 0) {
+              await notifyOwner({
+                title: '📩 Solicitação de Suporte Atribuída',
+                content: `**Admin:** ${assignedAdmin[0].name}\n**Solicitação:** ${request[0].name} (${request[0].email})\n**Departamento:** ${request[0].department}`,
+              });
+            }
+          }
+        }
+
+        return { success: true };
+      }),
+
+    /**
+     * Get list of all admins (admin only)
+     */
+    listAdminsForAssignment: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+        throw new Error('Acesso negado');
+      }
+
+      const db = await getDb();
+      if (!db) return [];
+
+      const admins = await db
+        .select({
+          id: users.id,
+          name: users.name,
+          email: users.email,
+        })
+        .from(users)
+        .where(sql`${users.role} IN ('admin', 'super_admin')`);
+
+      return admins;
+    }),
+
+    /**
      * List all administrators (super_admin only)
      */
     listAdmins: protectedProcedure.query(async ({ ctx }) => {

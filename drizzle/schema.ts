@@ -150,6 +150,7 @@ export const chatbotContacts = mysqlTable("chatbotContacts", {
   department: mysqlEnum("department", ["tecnico", "financeiro", "comercial", "outros"]).notNull(),
   message: text("message"), // Optional message from user
   status: mysqlEnum("status", ["pending", "contacted", "resolved"]).default("pending").notNull(),
+  assignedTo: int("assignedTo"), // User ID of assigned admin
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

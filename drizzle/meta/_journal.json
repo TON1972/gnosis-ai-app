@@ -57,6 +57,13 @@
       "when": 1762060273499,
       "tag": "0007_wild_forge",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1762061969305,
+      "tag": "0008_nifty_shotgun",
+      "breakpoints": true
     }
   ]
 }

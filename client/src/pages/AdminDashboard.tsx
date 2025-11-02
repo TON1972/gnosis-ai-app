@@ -375,6 +375,8 @@ function SupportRequestsPanel() {
     { refetchInterval: 30000 }
   );
 
+  const { data: admins } = trpc.admin.listAdminsForAssignment.useQuery();
+
   const updateStatusMutation = trpc.admin.updateSupportStatus.useMutation({
     onSuccess: () => {
       toast.success('Status atualizado com sucesso!');
@@ -385,8 +387,28 @@ function SupportRequestsPanel() {
     },
   });
 
+  const assignMutation = trpc.admin.assignSupportRequest.useMutation({
+    onSuccess: () => {
+      toast.success('Solicitação atribuída com sucesso!');
+      refetch();
+    },
+    onError: (error) => {
+      toast.error(`Erro ao atribuir: ${error.message}`);
+    },
+  });
+
   const handleStatusChange = (id: number, newStatus: 'pending' | 'contacted' | 'resolved') => {
     updateStatusMutation.mutate({ id, status: newStatus });
+  };
+
+  const handleAssign = (requestId: number, adminId: number | null) => {
+    assignMutation.mutate({ requestId, adminId });
+  };
+
+  const getAdminName = (adminId: number | null) => {
+    if (!adminId || !admins) return "Não atribuído";
+    const admin = admins.find(a => a.id === adminId);
+    return admin ? admin.name : "Desconhecido";
   };
 
   const deptNames: Record<string, string> = {
@@ -452,6 +474,7 @@ function SupportRequestsPanel() {
                 <th className="text-left py-3 px-4 text-[#1e3a5f] font-bold">E-mail</th>
                 <th className="text-left py-3 px-4 text-[#1e3a5f] font-bold">Departamento</th>
                 <th className="text-left py-3 px-4 text-[#1e3a5f] font-bold">Mensagem</th>
+                <th className="text-left py-3 px-4 text-[#1e3a5f] font-bold">Responsável</th>
                 <th className="text-left py-3 px-4 text-[#1e3a5f] font-bold">Status</th>
                 <th className="text-left py-3 px-4 text-[#1e3a5f] font-bold">Ações</th>
               </tr>
@@ -471,6 +494,20 @@ function SupportRequestsPanel() {
                   </td>
                   <td className="py-3 px-4 text-[#1e3a5f] max-w-xs truncate">
                     {request.message || "Sem mensagem"}
+                  </td>
+                  <td className="py-3 px-4">
+                    <select
+                      value={request.assignedTo || ''}
+                      onChange={(e) => handleAssign(request.id, e.target.value ? Number(e.target.value) : null)}
+                      className="px-2 py-1 border-2 border-[#d4af37] rounded text-sm bg-white text-[#1e3a5f]"
+                    >
+                      <option value="">Não atribuído</option>
+                      {admins?.map(admin => (
+                        <option key={admin.id} value={admin.id}>
+                          {admin.name}
+                        </option>
+                      ))}
+                    </select>
                   </td>
                   <td className="py-3 px-4">
                     <span className={`px-2 py-1 rounded text-sm font-semibold ${statusColors[request.status]}`}>
