@@ -5,7 +5,7 @@ import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getAllPlans, getToolsForPlan, getAllTools } from "./db";
 import { savedStudies, users } from "../drizzle/schema";
 import { getDb } from "./db";
-import { eq, desc, sql } from "drizzle-orm";
+import { eq, desc, sql, and } from "drizzle-orm";
 import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
 import { checkSubscriptionStatus, markSubscriptionPaid } from "./subscriptionStatus";
 import { getUserStats, getFinancialCalendar, getDelinquentUsers } from "./admin";
@@ -247,21 +247,84 @@ export const appRouter = router({
       return await getFinancialCalendar();
     }),
 
-    /**
+     /**
      * Get delinquent users (admin only)
      */
     delinquentUsers: protectedProcedure
       .input(z.object({
-        startDate: z.string().optional(),
-        endDate: z.string().optional(),
-      }).optional())
+        days: z.number().optional(),
+      }))
       .query(async ({ ctx, input }) => {
         if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
           throw new Error('Acesso negado');
         }
-        const startDate = input?.startDate ? new Date(input.startDate) : undefined;
-        const endDate = input?.endDate ? new Date(input.endDate) : undefined;
-        return await getDelinquentUsers(startDate, endDate);
+        return await getDelinquentUsers(input.days);
+      }),
+
+    /**
+     * Get all support requests (admin only)
+     */
+    supportRequests: protectedProcedure
+      .input(z.object({
+        status: z.enum(['pending', 'contacted', 'resolved', 'all']).optional(),
+        department: z.enum(['tecnico', 'financeiro', 'comercial', 'outros', 'all']).optional(),
+      }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) return [];
+
+        // Build query with filters
+        const conditions = [];
+        if (input.status && input.status !== 'all') {
+          conditions.push(eq(chatbotContacts.status, input.status));
+        }
+        if (input.department && input.department !== 'all') {
+          conditions.push(eq(chatbotContacts.department, input.department));
+        }
+
+        let requests;
+        if (conditions.length > 0) {
+          requests = await db
+            .select()
+            .from(chatbotContacts)
+            .where(and(...conditions))
+            .orderBy(desc(chatbotContacts.createdAt));
+        } else {
+          requests = await db
+            .select()
+            .from(chatbotContacts)
+            .orderBy(desc(chatbotContacts.createdAt));
+        }
+
+        return requests;
+      }),
+
+    /**
+     * Update support request status (admin only)
+     */
+    updateSupportStatus: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        status: z.enum(['pending', 'contacted', 'resolved']),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) throw new Error('Database not available');
+
+        await db
+          .update(chatbotContacts)
+          .set({ status: input.status })
+          .where(eq(chatbotContacts.id, input.id));
+
+        return { success: true };
       }),
 
     /**
