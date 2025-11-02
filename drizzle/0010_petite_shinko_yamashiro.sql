@@ -1,1 +1,0 @@
-ALTER TABLE `chatbotContacts` MODIFY COLUMN `status` enum('aberto','em_andamento','resolvido') NOT NULL DEFAULT 'aberto';

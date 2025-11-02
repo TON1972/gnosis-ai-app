@@ -151,6 +151,7 @@ export const chatbotContacts = mysqlTable("chatbotContacts", {
   message: text("message"), // Optional message from user
   status: mysqlEnum("status", ["pending", "contacted", "resolved"]).default("pending").notNull(),
   assignedTo: int("assignedTo"), // User ID of assigned admin
+  archived: boolean("archived").default(false).notNull(), // Hide resolved tickets from main view
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });

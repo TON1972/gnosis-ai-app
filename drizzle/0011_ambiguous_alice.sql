@@ -1,1 +1,0 @@
-ALTER TABLE `chatbotContacts` MODIFY COLUMN `status` enum('pending','contacted','resolved') NOT NULL DEFAULT 'pending';

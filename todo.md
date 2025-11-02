@@ -348,3 +348,14 @@
 - [x] Adicionar dropdown de status no painel AdminTickets
 - [x] Implementar cores diferentes para cada status
 
+
+
+
+## Sistema de Arquivamento de Tickets (02/11/2025)
+
+- [x] Adicionar campo archived (boolean) no schema chatbotContacts
+- [x] Criar rotas tRPC para arquivar e desarquivar tickets
+- [x] Adicionar filtro automático para ocultar tickets arquivados
+- [x] Implementar toggle "Mostrar Arquivados" no painel
+- [x] Adicionar botões de arquivar/desarquivar nos tickets
+

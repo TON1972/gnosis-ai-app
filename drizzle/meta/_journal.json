@@ -71,20 +71,7 @@
       "when": 1762120059577,
       "tag": "0009_steady_machine_man",
       "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "5",
-      "when": 1762123478557,
-      "tag": "0010_petite_shinko_yamashiro",
-      "breakpoints": true
-    },
-    {
-      "idx": 11,
-      "version": "5",
-      "when": 1762123698007,
-      "tag": "0011_ambiguous_alice",
-      "breakpoints": true
     }
   ]
 }
+

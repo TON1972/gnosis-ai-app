@@ -15,6 +15,7 @@ export default function AdminTickets() {
   const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [departmentFilter, setDepartmentFilter] = useState<string>("all");
+  const [showArchived, setShowArchived] = useState<boolean>(false);
 
   // Check access
   useEffect(() => {
@@ -54,10 +55,15 @@ export default function AdminTickets() {
 
   // Filter requests
   const filteredRequests = supportRequests.filter((req) => {
+    // Filter by archived status
+    if (!showArchived && req.archived) return false;
     if (statusFilter !== "all" && req.status !== statusFilter) return false;
     if (departmentFilter !== "all" && req.department !== departmentFilter) return false;
     return true;
   });
+
+  // Count archived tickets
+  const archivedCount = supportRequests.filter(req => req.archived).length;
 
   // Department names
   const deptNames: Record<string, string> = {
@@ -190,6 +196,17 @@ export default function AdminTickets() {
                 <option value="comercial">Comercial</option>
                 <option value="outros">Outros Assuntos</option>
               </select>
+
+              {/* Archived Toggle */}
+              <Button
+                variant={showArchived ? "default" : "outline"}
+                onClick={() => setShowArchived(!showArchived)}
+                className={showArchived 
+                  ? "bg-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37]/90" 
+                  : "border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#1e3a5f]"}
+              >
+                📦 Arquivados ({archivedCount})
+              </Button>
             </div>
           </div>
 
@@ -280,15 +297,23 @@ export default function AdminTickets() {
         </Card>
 
         {/* Ticket Conversation */}
-        {selectedTicket && (
-          <TicketSystem
-            ticketId={selectedTicket}
-            onClose={() => {
-              setSelectedTicket(null);
-              refetch();
-            }}
-          />
-        )}
+        {selectedTicket && (() => {
+          const ticket = supportRequests.find(r => r.id === selectedTicket);
+          return (
+            <TicketSystem
+              ticketId={selectedTicket}
+              ticketStatus={ticket?.status}
+              isArchived={ticket?.archived}
+              onClose={() => {
+                setSelectedTicket(null);
+                refetch();
+              }}
+              onArchiveChange={() => {
+                refetch();
+              }}
+            />
+          );
+        })()}
       </main>
     </div>
   );

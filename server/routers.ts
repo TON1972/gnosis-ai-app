@@ -550,6 +550,48 @@ export const appRouter = router({
       }),
 
     /**
+     * Archive ticket (admin only)
+     */
+    archiveTicket: protectedProcedure
+      .input(z.object({ ticketId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) throw new Error('Database not available');
+
+        await db
+          .update(chatbotContacts)
+          .set({ archived: true })
+          .where(eq(chatbotContacts.id, input.ticketId));
+
+        return { success: true };
+      }),
+
+    /**
+     * Unarchive ticket (admin only)
+     */
+    unarchiveTicket: protectedProcedure
+      .input(z.object({ ticketId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) throw new Error('Database not available');
+
+        await db
+          .update(chatbotContacts)
+          .set({ archived: false })
+          .where(eq(chatbotContacts.id, input.ticketId));
+
+        return { success: true };
+      }),
+
+    /**
      * List all administrators (super_admin only)
      */
     listAdmins: protectedProcedure.query(async ({ ctx }) => {

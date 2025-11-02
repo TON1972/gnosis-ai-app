@@ -8,9 +8,12 @@ import { MessageCircle, Send, X } from "lucide-react";
 interface TicketSystemProps {
   ticketId: number;
   onClose: () => void;
+  ticketStatus?: string;
+  isArchived?: boolean;
+  onArchiveChange?: () => void;
 }
 
-export default function TicketSystem({ ticketId, onClose }: TicketSystemProps) {
+export default function TicketSystem({ ticketId, onClose, ticketStatus, isArchived, onArchiveChange }: TicketSystemProps) {
   const [newMessage, setNewMessage] = useState("");
   const [sendingMessage, setSendingMessage] = useState(false);
 
@@ -39,6 +42,28 @@ export default function TicketSystem({ ticketId, onClose }: TicketSystemProps) {
   // Mark as read mutation
   const markAsReadMutation = trpc.admin.markTicketAsRead.useMutation();
 
+  // Archive/unarchive mutations
+  const archiveMutation = trpc.admin.archiveTicket.useMutation({
+    onSuccess: () => {
+      toast.success("Ticket arquivado com sucesso!");
+      onArchiveChange?.();
+      onClose();
+    },
+    onError: (error) => {
+      toast.error(`Erro ao arquivar: ${error.message}`);
+    },
+  });
+
+  const unarchiveMutation = trpc.admin.unarchiveTicket.useMutation({
+    onSuccess: () => {
+      toast.success("Ticket desarquivado com sucesso!");
+      onArchiveChange?.();
+    },
+    onError: (error) => {
+      toast.error(`Erro ao desarquivar: ${error.message}`);
+    },
+  });
+
   // Mark messages as read when opening ticket
   useEffect(() => {
     markAsReadMutation.mutate({ ticketId });
@@ -63,15 +88,39 @@ export default function TicketSystem({ ticketId, onClose }: TicketSystemProps) {
             Conversa - Ticket #{ticketId}
           </h2>
         </div>
-        <Button
-          onClick={onClose}
-          variant="outline"
-          className="border-[#d4af37] text-[#1e3a5f]"
-          size="sm"
-        >
-          <X className="w-4 h-4 mr-1" />
-          Fechar
-        </Button>
+        <div className="flex gap-2">
+          {/* Archive/Unarchive Button */}
+          {ticketStatus === "resolved" && (
+            isArchived ? (
+              <Button
+                onClick={() => unarchiveMutation.mutate({ ticketId })}
+                variant="outline"
+                className="border-green-500 text-green-700 hover:bg-green-50"
+                size="sm"
+              >
+                📦 Desarquivar
+              </Button>
+            ) : (
+              <Button
+                onClick={() => archiveMutation.mutate({ ticketId })}
+                variant="outline"
+                className="border-gray-500 text-gray-700 hover:bg-gray-50"
+                size="sm"
+              >
+                📦 Arquivar
+              </Button>
+            )
+          )}
+          <Button
+            onClick={onClose}
+            variant="outline"
+            className="border-[#d4af37] text-[#1e3a5f]"
+            size="sm"
+          >
+            <X className="w-4 h-4 mr-1" />
+            Fechar
+          </Button>
+        </div>
       </div>
 
       {/* Messages Display */}
