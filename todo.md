@@ -359,3 +359,13 @@
 - [x] Implementar toggle "Mostrar Arquivados" no painel
 - [x] Adicionar botões de arquivar/desarquivar nos tickets
 
+
+
+
+## BUG - Botão Arquivar Não Aparece (02/11/2025)
+
+- [x] Investigar por que botão "Arquivar" não aparece em tickets resolvidos
+- [x] Corrigir lógica de exibição do botão no TicketSystem
+- [x] Verificar se status está sendo passado corretamente
+- [x] Implementar busca direta do ticket para garantir dados atualizados
+

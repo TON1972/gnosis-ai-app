@@ -17,6 +17,18 @@ export default function TicketSystem({ ticketId, onClose, ticketStatus, isArchiv
   const [newMessage, setNewMessage] = useState("");
   const [sendingMessage, setSendingMessage] = useState(false);
 
+  // Get ticket info directly to ensure we have the latest status
+  const { data: ticketInfo } = trpc.admin.supportRequests.useQuery(
+    { status: "all", department: "all" },
+    {
+      select: (data) => data.find(t => t.id === ticketId),
+    }
+  );
+
+  // Use ticketInfo if available, fallback to props
+  const currentStatus = ticketInfo?.status || ticketStatus;
+  const currentArchived = ticketInfo?.archived ?? isArchived ?? false;
+
   // Query ticket messages
   const { data: ticketMessages = [], refetch } = trpc.admin.getTicketMessages.useQuery(
     { ticketId },
@@ -89,9 +101,9 @@ export default function TicketSystem({ ticketId, onClose, ticketStatus, isArchiv
           </h2>
         </div>
         <div className="flex gap-2">
-          {/* Archive/Unarchive Button */}
-          {ticketStatus === "resolved" && (
-            isArchived ? (
+          {/* Archive/Unarchive Button - Show for resolved tickets only */}
+          {currentStatus === "resolved" && (
+            currentArchived ? (
               <Button
                 onClick={() => unarchiveMutation.mutate({ ticketId })}
                 variant="outline"
