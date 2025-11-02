@@ -213,7 +213,7 @@ export default function Chatbot() {
     const now = new Date();
     const brazilTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
     const hour = brazilTime.getHours();
-    return hour >= 9 && hour < 18;
+    return hour >= 10 && hour < 18;
   };
 
   const handleBotResponse = (action: string) => {
@@ -229,8 +229,8 @@ export default function Chatbot() {
         response = {
           ...response,
           message: inBusinessHours
-            ? "🕒 **Horário de Atendimento: 9h às 18h**\n\nEstamos disponíveis agora! Para que possamos ajudá-lo melhor, por favor forneça seus dados de contato. Nossa equipe entrará em contato em breve!"
-            : "🌙 **Horário de Atendimento: 9h às 18h**\n\nNo momento estamos fora do horário de atendimento.\n\n**Deixe a sua solicitação abaixo, que no primeiro horário amanhã nós retornaremos, Shalom!**",
+            ? "🕒 **Horário de Atendimento: 10h às 18h**\n\nEstamos disponíveis agora! Para que possamos ajudá-lo melhor, por favor forneça seus dados de contato. Nossa equipe entrará em contato em breve!"
+            : "🌙 **Horário de Atendimento: 10h às 18h**\n\nNo momento estamos fora do horário de atendimento.\n\n**Deixe a sua solicitação abaixo, que no primeiro horário amanhã nós retornaremos, Shalom!**",
         };
       }
 
