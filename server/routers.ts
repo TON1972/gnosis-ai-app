@@ -228,7 +228,7 @@ export const appRouter = router({
      * Get user statistics (admin only)
      */
     userStats: protectedProcedure.query(async ({ ctx }) => {
-      if (ctx.user.role !== 'admin') {
+      if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
         throw new Error('Acesso negado');
       }
       return await getUserStats();
@@ -238,7 +238,7 @@ export const appRouter = router({
      * Get financial calendar (admin only)
      */
     financialCalendar: protectedProcedure.query(async ({ ctx }) => {
-      if (ctx.user.role !== 'admin') {
+      if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
         throw new Error('Acesso negado');
       }
       return await getFinancialCalendar();
@@ -253,7 +253,7 @@ export const appRouter = router({
         endDate: z.string().optional(),
       }).optional())
       .query(async ({ ctx, input }) => {
-        if (ctx.user.role !== 'admin') {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
           throw new Error('Acesso negado');
         }
         const startDate = input?.startDate ? new Date(input.startDate) : undefined;

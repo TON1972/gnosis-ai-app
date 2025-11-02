@@ -231,7 +231,10 @@ export default function Dashboard() {
                 </Link>
               )}
               <Button
-                onClick={() => logout()}
+                onClick={() => {
+                  logout();
+                  setLocation("/");
+                }}
                 variant="outline"
                 className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#1e3a5f]"
                 size="sm"

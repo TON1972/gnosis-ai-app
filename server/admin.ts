@@ -35,34 +35,38 @@ export async function getUserStats(): Promise<UserStats> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  // Total users
-  const totalResult = await db.select({ count: sql<number>`count(*)` }).from(users);
-  const totalUsers = Number(totalResult[0]?.count || 0);
+  // Total users - simple count
+  const allUsers = await db.select({ id: users.id }).from(users);
+  const totalUsers = allUsers.length;
 
-  // Free users (users with FREE plan or no active subscription)
-  const freeResult = await db
-    .select({ count: sql<number>`count(DISTINCT ${users.id})` })
-    .from(users)
-    .leftJoin(subscriptions, eq(users.id, subscriptions.userId))
-    .leftJoin(plans, eq(subscriptions.planId, plans.id))
-    .where(
-      sql`${subscriptions.status} = 'active' AND ${plans.name} = 'free' OR ${subscriptions.id} IS NULL`
-    );
-  const freeUsers = Number(freeResult[0]?.count || 0);
-
-  // Paid users
-  const paidResult = await db
-    .select({ count: sql<number>`count(DISTINCT ${users.id})` })
-    .from(users)
-    .innerJoin(subscriptions, eq(users.id, subscriptions.userId))
+  // Get all active subscriptions with plan info
+  const activeSubscriptions = await db
+    .select({
+      userId: subscriptions.userId,
+      planName: plans.name,
+    })
+    .from(subscriptions)
     .innerJoin(plans, eq(subscriptions.planId, plans.id))
-    .where(
-      and(
-        eq(subscriptions.status, "active"),
-        sql`${plans.name} != 'free'`
-      )
-    );
-  const paidUsers = Number(paidResult[0]?.count || 0);
+    .where(eq(subscriptions.status, "active"));
+
+  // Create a map of userId -> planName for active subscriptions
+  const userPlanMap = new Map<number, string>();
+  for (const sub of activeSubscriptions) {
+    userPlanMap.set(sub.userId, sub.planName);
+  }
+
+  // Count free and paid users
+  let freeUsers = 0;
+  let paidUsers = 0;
+
+  for (const user of allUsers) {
+    const planName = userPlanMap.get(user.id);
+    if (!planName || planName.toLowerCase() === "free") {
+      freeUsers++;
+    } else {
+      paidUsers++;
+    }
+  }
 
   return {
     totalUsers,
@@ -97,7 +101,7 @@ export async function getFinancialCalendar(): Promise<FinancialDay[]> {
         eq(subscriptions.status, "active"),
         gte(subscriptions.nextBillingDate, startOfMonth),
         lte(subscriptions.nextBillingDate, endOfMonth),
-        sql`${plans.name} != 'free'`
+        sql`${plans.name} != 'FREE'`
       )
     );
 
@@ -149,7 +153,7 @@ export async function getDelinquentUsers(
   // Build where conditions
   const conditions = [
     sql`${subscriptions.status} IN ('grace_period', 'blocked')`,
-    sql`${plans.name} != 'free'`,
+    sql`${plans.name} != 'FREE'`,
   ];
 
   if (startDate) {
