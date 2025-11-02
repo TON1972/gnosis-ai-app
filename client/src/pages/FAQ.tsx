@@ -285,7 +285,10 @@ export default function FAQ() {
             Nossa equipe está pronta para ajudar você a aproveitar ao máximo a GNOSIS AI.
           </p>
           <Link href="/">
-            <span className="inline-block px-8 py-4 bg-[#1e3a5f] text-[#d4af37] rounded-lg font-bold text-lg hover:bg-[#2a4a7f] transition-colors shadow-lg cursor-pointer">
+            <span 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="inline-block px-8 py-4 bg-[#1e3a5f] text-[#d4af37] rounded-lg font-bold text-lg hover:bg-[#2a4a7f] transition-colors shadow-lg cursor-pointer"
+            >
               Começar Agora
             </span>
           </Link>
