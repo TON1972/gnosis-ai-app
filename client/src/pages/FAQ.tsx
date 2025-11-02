@@ -284,14 +284,21 @@ export default function FAQ() {
           <p className="text-lg text-[#8b6f47] mb-8">
             Nossa equipe está pronta para ajudar você a aproveitar ao máximo a GNOSIS AI.
           </p>
-          <Link href="/">
-            <span 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="inline-block px-8 py-4 bg-[#1e3a5f] text-[#d4af37] rounded-lg font-bold text-lg hover:bg-[#2a4a7f] transition-colors shadow-lg cursor-pointer"
-            >
-              Começar Agora
-            </span>
-          </Link>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link href="/">
+              <span 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="inline-block px-8 py-4 bg-[#1e3a5f] text-[#d4af37] rounded-lg font-bold text-lg hover:bg-[#2a4a7f] transition-colors shadow-lg cursor-pointer"
+              >
+                Começar Agora
+              </span>
+            </Link>
+            <a href="https://help.manus.im" target="_blank" rel="noopener noreferrer">
+              <span className="inline-block px-8 py-4 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-bold text-lg hover:bg-[#B8860B] transition-colors shadow-lg cursor-pointer">
+                Falar com Suporte
+              </span>
+            </a>
+          </div>
         </div>
       </main>
 
