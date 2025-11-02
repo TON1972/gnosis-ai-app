@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send, User, Bot, ExternalLink } from "lucide-react";
+import { MessageCircle, X, Send, User, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,7 @@ interface Message {
 
 const KNOWLEDGE_BASE = {
   greeting: {
-    message: "Olá! 👋 Sou o assistente virtual da GNOSIS AI. Como posso ajudá-lo hoje?",
+    message: "Olá! 👋 Sou a Rebeca, assistente virtual da GNOSIS AI. Como posso ajudá-lo(a) hoje?",
     options: [
       { label: "📋 Informações sobre Planos", action: "planos" },
       { label: "💰 Dúvidas sobre Créditos", action: "creditos" },
@@ -348,11 +348,11 @@ export default function Chatbot() {
           <div className="bg-[#1e3a5f] text-white p-4 rounded-t-xl flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-[#d4af37] rounded-full flex items-center justify-center">
-                <Bot className="w-6 h-6 text-[#1e3a5f]" />
+                <UserCircle className="w-7 h-7 text-[#1e3a5f]" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">Assistente GNOSIS</h3>
-                <p className="text-xs text-[#d4af37]">Online agora</p>
+                <h3 className="font-bold text-lg">Rebeca</h3>
+                <p className="text-xs text-[#d4af37]">Assistente Virtual</p>
               </div>
             </div>
             <button
@@ -370,7 +370,7 @@ export default function Chatbot() {
               <div key={message.id} className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`flex gap-2 max-w-[80%] ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === "user" ? "bg-[#1e3a5f]" : "bg-[#d4af37]"}`}>
-                    {message.type === "user" ? <User className="w-4 h-4 text-white" /> : <Bot className="w-4 h-4 text-[#1e3a5f]" />}
+                    {message.type === "user" ? <User className="w-4 h-4 text-white" /> : <UserCircle className="w-5 h-5 text-[#1e3a5f]" />}
                   </div>
                   <div>
                     <div className={`p-3 rounded-2xl ${message.type === "user" ? "bg-[#1e3a5f] text-white" : "bg-white text-[#1e3a5f] border-2 border-[#d4af37]"}`}>
@@ -454,7 +454,7 @@ export default function Chatbot() {
               <div className="flex justify-start">
                 <div className="flex gap-2">
                   <div className="w-8 h-8 bg-[#d4af37] rounded-full flex items-center justify-center">
-                    <Bot className="w-4 h-4 text-[#1e3a5f]" />
+                    <UserCircle className="w-5 h-5 text-[#1e3a5f]" />
                   </div>
                   <div className="bg-white border-2 border-[#d4af37] p-3 rounded-2xl">
                     <div className="flex gap-1">
