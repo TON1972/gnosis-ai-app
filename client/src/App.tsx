@@ -9,6 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import FAQ from "./pages/FAQ";
 import Dashboard from "./pages/Dashboard";
 import ToolPage from "./pages/ToolPage";
+import Chatbot from "./components/Chatbot";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -41,6 +42,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <Chatbot />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

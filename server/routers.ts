@@ -10,6 +10,7 @@ import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
 import { checkSubscriptionStatus, markSubscriptionPaid } from "./subscriptionStatus";
 import { getUserStats, getFinancialCalendar, getDelinquentUsers } from "./admin";
 import { createSubscriptionCheckout, createCreditsCheckout, createManualPaymentCheckout } from "./mercadopago";
+import { invokeLLM } from "./_core/llm";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -465,6 +466,68 @@ export const appRouter = router({
         });
 
         return checkout;
+      }),
+  }),
+
+  chatbot: router({
+    /**
+     * Get AI-powered response for chatbot
+     */
+    getAIResponse: publicProcedure
+      .input(z.object({
+        message: z.string(),
+        conversationHistory: z.array(z.object({
+          role: z.enum(['user', 'assistant']),
+          content: z.string(),
+        })).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const systemPrompt = `Você é o assistente virtual da GNOSIS AI, uma plataforma de estudos bíblicos profundos com inteligência artificial.
+
+Informações sobre a plataforma:
+
+PLANOS:
+- FREE: Gratuito, 6 ferramentas básicas, 500 créditos iniciais + 50/dia
+- ALIANÇA: R$ 18,98/mês, 8 ferramentas, 1500 créditos iniciais + 100/dia
+- LUMEN: R$ 33,98/mês, 12 ferramentas, 3000 créditos iniciais + 200/dia
+- GNOSIS PREMIUM: R$ 62,98/mês, todas as 15 ferramentas, 6000 créditos iniciais + 300/dia
+
+FERRAMENTAS:
+- Básicas (FREE): Hermenêutica, Traduções, Resumos, Enfoques de Pregação, Estudos Doutrinários, Análise Teológica Comparada
+- Avançadas (pagos): Exegese, Teologia Sistemática, Linguagem Ministerial, e mais
+
+CRÉDITOS:
+- Créditos diários renovam todo dia
+- Créditos iniciais renovam a cada 30 dias
+- Créditos avulsos nunca expiram
+- Pacotes avulsos: 500 (R$ 9,90), 1000 (R$ 18,90), 2500 (R$ 44,90)
+
+REGRAS:
+- Seja simpático, profissional e prestativo
+- Responda de forma clara e objetiva
+- Use emojis moderadamente
+- Se não souber algo, sugira contato com suporte
+- Incentive o usuário a testar a plataforma
+- Mantenha respostas com no máximo 150 palavras`;
+
+          const messages = [
+            { role: 'system' as const, content: systemPrompt },
+            ...(input.conversationHistory || []),
+            { role: 'user' as const, content: input.message },
+          ];
+
+          const response = await invokeLLM({ messages });
+          
+          return {
+            response: response.choices[0]?.message?.content || 'Desculpe, não consegui processar sua pergunta. Por favor, tente novamente ou escolha uma opção do menu.',
+          };
+        } catch (error) {
+          console.error('Chatbot AI error:', error);
+          return {
+            response: 'Desculpe, estou com dificuldades no momento. Por favor, escolha uma opção do menu ou tente novamente mais tarde.',
+          };
+        }
       }),
   }),
 });
