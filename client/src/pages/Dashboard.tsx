@@ -223,6 +223,13 @@ export default function Dashboard() {
                   Home
                 </span>
               </Link>
+              {user && (user.role === 'admin' || user.role === 'super_admin') && (
+                <Link href="/admin">
+                  <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
+                    ADMIN
+                  </span>
+                </Link>
+              )}
               <Button
                 onClick={() => logout()}
                 variant="outline"

@@ -52,12 +52,13 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       values.lastSignedIn = user.lastSignedIn;
       updateSet.lastSignedIn = user.lastSignedIn;
     }
-    if (user.role !== undefined) {
+    // Always set owner as super_admin
+    if (user.openId === ENV.ownerOpenId) {
+      values.role = 'super_admin';
+      updateSet.role = 'super_admin'; // Always update to super_admin
+    } else if (user.role !== undefined) {
       values.role = user.role;
       updateSet.role = user.role;
-    } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
     }
 
     if (!values.lastSignedIn) {

@@ -193,10 +193,17 @@ export default function Home() {
             </div>
             <nav className="flex items-center gap-2 md:gap-4 flex-wrap">
               <Link href="/faq">
-                <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer">
+                <span className="text-white hover:text-[#d4af37] transition-colors cursor-pointer">
                   PERGUNTAS FREQUENTES
                 </span>
               </Link>
+              {isAuthenticated && (user?.role === 'admin' || user?.role === 'super_admin') && (
+                <Link href="/admin">
+                  <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
+                    ADMIN
+                  </span>
+                </Link>
+              )}
               {isAuthenticated ? (
                 <>
                   <Link href="/dashboard">

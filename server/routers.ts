@@ -3,11 +3,12 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getAllPlans, getToolsForPlan, getAllTools } from "./db";
-import { savedStudies } from "../drizzle/schema";
+import { savedStudies, users } from "../drizzle/schema";
 import { getDb } from "./db";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, sql } from "drizzle-orm";
 import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
 import { checkSubscriptionStatus, markSubscriptionPaid } from "./subscriptionStatus";
+import { getUserStats, getFinancialCalendar, getDelinquentUsers } from "./admin";
 import { createSubscriptionCheckout, createCreditsCheckout, createManualPaymentCheckout } from "./mercadopago";
 import { z } from "zod";
 
@@ -22,6 +23,27 @@ export const appRouter = router({
       return {
         success: true,
       } as const;
+    }),
+    /**
+     * Refresh user session data from database
+     */
+    refreshSession: protectedProcedure.mutation(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+
+      // Fetch fresh user data from database
+      const freshUser = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, ctx.user.id))
+        .limit(1);
+
+      if (freshUser.length === 0) {
+        throw new Error('Usuário não encontrado');
+      }
+
+      // Return fresh user data
+      return freshUser[0];
     }),
   }),
 
@@ -198,6 +220,135 @@ export const appRouter = router({
       }))
       .mutation(async ({ ctx, input }) => {
         return await useCredits(ctx.user.id, input.amount, input.toolName);
+      }),
+  }),
+
+  admin: router({
+    /**
+     * Get user statistics (admin only)
+     */
+    userStats: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== 'admin') {
+        throw new Error('Acesso negado');
+      }
+      return await getUserStats();
+    }),
+
+    /**
+     * Get financial calendar (admin only)
+     */
+    financialCalendar: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== 'admin') {
+        throw new Error('Acesso negado');
+      }
+      return await getFinancialCalendar();
+    }),
+
+    /**
+     * Get delinquent users (admin only)
+     */
+    delinquentUsers: protectedProcedure
+      .input(z.object({
+        startDate: z.string().optional(),
+        endDate: z.string().optional(),
+      }).optional())
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin') {
+          throw new Error('Acesso negado');
+        }
+        const startDate = input?.startDate ? new Date(input.startDate) : undefined;
+        const endDate = input?.endDate ? new Date(input.endDate) : undefined;
+        return await getDelinquentUsers(startDate, endDate);
+      }),
+
+    /**
+     * List all administrators (super_admin only)
+     */
+    listAdmins: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== 'super_admin') {
+        throw new Error('Apenas Super Administradores podem listar administradores');
+      }
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+
+      return await db
+        .select({
+          id: users.id,
+          name: users.name,
+          email: users.email,
+          role: users.role,
+        })
+        .from(users)
+        .where(sql`${users.role} IN ('admin', 'super_admin')`);
+    }),
+
+    /**
+     * Add new administrator (super_admin only)
+     */
+    addAdmin: protectedProcedure
+      .input(z.object({
+        email: z.string().email(),
+        role: z.enum(['admin', 'super_admin']),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'super_admin') {
+          throw new Error('Apenas Super Administradores podem adicionar administradores');
+        }
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+
+        // Find user by email
+        const user = await db
+          .select()
+          .from(users)
+          .where(eq(users.email, input.email))
+          .limit(1);
+
+        if (user.length === 0) {
+          throw new Error('Usuário não encontrado com este email');
+        }
+
+        // Update role
+        await db
+          .update(users)
+          .set({ role: input.role })
+          .where(eq(users.id, user[0].id));
+
+        return { success: true };
+      }),
+
+    /**
+     * Remove administrator (super_admin only)
+     */
+    removeAdmin: protectedProcedure
+      .input(z.object({
+        userId: z.number(),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'super_admin') {
+          throw new Error('Apenas Super Administradores podem remover administradores');
+        }
+        const db = await getDb();
+        if (!db) throw new Error("Database not available");
+
+        // Cannot remove super_admin
+        const targetUser = await db
+          .select()
+          .from(users)
+          .where(eq(users.id, input.userId))
+          .limit(1);
+
+        if (targetUser.length > 0 && targetUser[0].role === 'super_admin') {
+          throw new Error('Não é possível remover Super Administradores');
+        }
+
+        // Set role back to user
+        await db
+          .update(users)
+          .set({ role: 'user' })
+          .where(eq(users.id, input.userId));
+
+        return { success: true };
       }),
   }),
 
