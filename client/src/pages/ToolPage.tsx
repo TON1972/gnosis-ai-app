@@ -5,7 +5,7 @@ import { Link, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
-import { ArrowLeft, Send, Loader2, Download, Copy, CheckCircle } from "lucide-react";
+import { ArrowLeft, Send, Loader2, Download, Copy, CheckCircle, Home } from "lucide-react";
 import CreditsPanel from "@/components/CreditsPanel";
 import NoCreditsModal from "@/components/NoCreditsModal";
 import { toast } from "sonner";
@@ -263,10 +263,10 @@ export default function ToolPage() {
                 <h1 className="text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
               </span>
             </Link>
-            <Link href="/dashboard">
-              <span className="flex items-center gap-2 px-4 py-2 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
-                <ArrowLeft className="w-5 h-5" />
-                Voltar ao Dashboard
+            <Link href="/">
+              <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
+                <Home className="w-5 h-5" />
+                Voltar ao Início
               </span>
             </Link>
           </div>

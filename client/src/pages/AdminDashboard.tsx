@@ -134,10 +134,10 @@ export default function AdminDashboard() {
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Atualizar
               </Button>
-              <Link href="/dashboard">
-                <span className="flex items-center gap-2 px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer">
+              <Link href="/">
+                <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
                   <Home className="w-5 h-5" />
-                  Dashboard
+                  Voltar ao Início
                 </span>
               </Link>
               <Button 

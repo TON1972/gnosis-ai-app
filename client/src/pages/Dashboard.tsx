@@ -218,9 +218,9 @@ export default function Dashboard() {
                 Olá, {user?.name || "Usuário"}!
               </span>
               <Link href="/">
-                <span className="flex items-center gap-2 px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer">
+                <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
                   <Home className="w-5 h-5" />
-                  Home
+                  Voltar ao Início
                 </span>
               </Link>
               {user && (user.role === 'admin' || user.role === 'super_admin') && (
