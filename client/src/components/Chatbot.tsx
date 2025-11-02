@@ -328,7 +328,6 @@ export default function Chatbot() {
   const handleDepartmentSelect = (dept: string) => {
     setSelectedDepartment(dept);
     setDepartmentSelectionActive(false);
-    setContactFormActive(true);
     
     const deptNames: Record<string, string> = {
       tecnico: "Suporte Técnico",
@@ -337,7 +336,19 @@ export default function Chatbot() {
       outros: "Outros Assuntos"
     };
     
-    addMessage("bot", `Departamento selecionado: **${deptNames[dept]}**\n\nPor favor, preencha os campos abaixo para que possamos entrar em contato:`);
+    const deptMessages: Record<string, string> = {
+      tecnico: "🔧 **Suporte Técnico**\n\nEntendo que você está com dificuldades técnicas. Nossa equipe de suporte técnico está pronta para ajudar com problemas de login, ferramentas, bugs ou qualquer questão técnica.\n\nPor favor, preencha os campos abaixo para que possamos entrar em contato:",
+      financeiro: "💰 **Financeiro**\n\nVou te conectar com nosso departamento financeiro. Eles podem ajudar com questões sobre pagamentos, faturas, reembolsos, alteração de plano ou qualquer dúvida relacionada a cobranças.\n\nPor favor, preencha os campos abaixo para que possamos entrar em contato:",
+      comercial: "📊 **Comercial**\n\nÓtimo! Nosso time comercial está preparado para apresentar nossos planos, explicar benefícios, fazer upgrades e responder todas as suas dúvidas sobre nossos serviços.\n\nPor favor, preencha os campos abaixo para que possamos entrar em contato:",
+      outros: "📋 **Outros Assuntos**\n\nEntendi! Vou encaminhar sua solicitação para a equipe adequada. Por favor, descreva sua necessidade no formulário abaixo para que possamos direcionar corretamente.\n\nPreencha os campos abaixo:"
+    };
+    
+    addMessage("bot", deptMessages[dept]);
+    
+    // Show contact form after a brief delay
+    setTimeout(() => {
+      setContactFormActive(true);
+    }, 500);
   };
 
   const handleSubmitContact = () => {
