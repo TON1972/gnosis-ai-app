@@ -137,7 +137,7 @@ const faqData: FAQCategory[] = [
       },
       {
         question: "Posso testar antes de assinar?",
-        answer: "Sim! O plano FREE permite testar 4 ferramentas básicas com 500 créditos iniciais e 50 créditos diários. É uma excelente forma de conhecer a plataforma antes de fazer upgrade para um plano pago."
+        answer: "Sim! O plano FREE permite testar 6 ferramentas básicas com 500 créditos iniciais e 50 créditos diários. É uma excelente forma de conhecer a plataforma antes de fazer upgrade para um plano pago."
       },
       {
         question: "Como funciona a renovação dos planos?",
