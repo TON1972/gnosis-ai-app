@@ -269,10 +269,10 @@ export default function Chatbot() {
         }, 1000);
       } else if (action === "encerrar") {
         addMessage("bot", response.message, response.options);
-        // Auto-close chat after 3 seconds
+        // Auto-close chat after 5 seconds
         setTimeout(() => {
           setIsOpen(false);
-        }, 3000);
+        }, 5000);
       } else if (response) {
         addMessage("bot", response.message, response.options);
       } else {
