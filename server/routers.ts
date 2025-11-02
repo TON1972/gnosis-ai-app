@@ -539,6 +539,7 @@ REGRAS:
       .input(z.object({
         name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
         email: z.string().email('Email inválido'),
+        department: z.enum(['tecnico', 'financeiro', 'comercial', 'outros']),
         message: z.string().optional(),
       }))
       .mutation(async ({ input }) => {
@@ -546,18 +547,26 @@ REGRAS:
           const db = await getDb();
           if (!db) throw new Error("Database not available");
 
+          const deptNames: Record<string, string> = {
+            tecnico: "Suporte Técnico",
+            financeiro: "Financeiro",
+            comercial: "Comercial",
+            outros: "Outros Assuntos"
+          };
+
           // Save contact to database
           await db.insert(chatbotContacts).values({
             name: input.name,
             email: input.email,
+            department: input.department,
             message: input.message || null,
             status: 'pending',
           });
 
           // Notify admin
           await notifyOwner({
-            title: '💬 Nova solicitação de suporte via Chatbot',
-            content: `**Nome:** ${input.name}\n**Email:** ${input.email}\n**Mensagem:** ${input.message || 'Não fornecida'}\n\nAcesse o painel administrativo para mais detalhes.`,
+            title: '📩 Nova solicitação de contato - Chatbot',
+            content: `**Nome:** ${input.name}\n**Email:** ${input.email}\n**Departamento:** ${deptNames[input.department]}\n**Mensagem:** ${input.message || 'Nenhuma mensagem'}`,
           });
 
           return { success: true };

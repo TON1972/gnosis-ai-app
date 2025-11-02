@@ -50,6 +50,13 @@
       "when": 1762056752491,
       "tag": "0006_stale_firebird",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1762060273499,
+      "tag": "0007_wild_forge",
+      "breakpoints": true
     }
   ]
 }

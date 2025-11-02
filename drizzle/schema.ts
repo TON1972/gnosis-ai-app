@@ -147,6 +147,7 @@ export const chatbotContacts = mysqlTable("chatbotContacts", {
   id: int("id").autoincrement().primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
   email: varchar("email", { length: 320 }).notNull(),
+  department: mysqlEnum("department", ["tecnico", "financeiro", "comercial", "outros"]).notNull(),
   message: text("message"), // Optional message from user
   status: mysqlEnum("status", ["pending", "contacted", "resolved"]).default("pending").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),

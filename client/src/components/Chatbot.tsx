@@ -171,6 +171,8 @@ export default function Chatbot() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [contactFormActive, setContactFormActive] = useState(false);
+  const [departmentSelectionActive, setDepartmentSelectionActive] = useState(false);
+  const [selectedDepartment, setSelectedDepartment] = useState<string>("");
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
@@ -180,6 +182,8 @@ export default function Chatbot() {
     onSuccess: () => {
       toast.success("Dados enviados com sucesso! Nossa equipe entrará em contato em breve.");
       setContactFormActive(false);
+      setDepartmentSelectionActive(false);
+      setSelectedDepartment("");
       setContactName("");
       setContactEmail("");
       setContactMessage("");
@@ -249,8 +253,11 @@ export default function Chatbot() {
         const greeting = KNOWLEDGE_BASE.greeting;
         addMessage("bot", greeting.message, greeting.options);
       } else if (action === "capture_contact") {
-        setContactFormActive(true);
-        addMessage("bot", "Por favor, preencha os campos abaixo para que possamos entrar em contato:");
+        setDepartmentSelectionActive(true);
+        addMessage("bot", "Por favor, selecione o departamento com o qual deseja falar:");
+      } else if (action === "select_department") {
+        // This action is handled by handleDepartmentSelect function
+        // Keeping this block for consistency but it won't be triggered
       } else if (action === "ver_planos") {
         addMessage("bot", response.message);
         setTimeout(() => {
@@ -318,7 +325,27 @@ export default function Chatbot() {
     }
   };
 
+  const handleDepartmentSelect = (dept: string) => {
+    setSelectedDepartment(dept);
+    setDepartmentSelectionActive(false);
+    setContactFormActive(true);
+    
+    const deptNames: Record<string, string> = {
+      tecnico: "Suporte Técnico",
+      financeiro: "Financeiro",
+      comercial: "Comercial",
+      outros: "Outros Assuntos"
+    };
+    
+    addMessage("bot", `Departamento selecionado: **${deptNames[dept]}**\n\nPor favor, preencha os campos abaixo para que possamos entrar em contato:`);
+  };
+
   const handleSubmitContact = () => {
+    if (!selectedDepartment) {
+      toast.error("Por favor, selecione um departamento");
+      return;
+    }
+    
     if (!contactName.trim() || !contactEmail.trim()) {
       toast.error("Por favor, preencha nome e e-mail");
       return;
@@ -334,6 +361,7 @@ export default function Chatbot() {
     saveContactMutation.mutate({
       name: contactName,
       email: contactEmail,
+      department: selectedDepartment as "tecnico" | "financeiro" | "comercial" | "outros",
       message: contactMessage || undefined,
     });
   };
@@ -410,6 +438,46 @@ export default function Chatbot() {
                 </div>
               </div>
             ))}
+
+            {/* Department Selection */}
+            {departmentSelectionActive && (
+              <div className="bg-white border-2 border-[#d4af37] rounded-2xl p-4 space-y-2">
+                <p className="text-sm font-semibold text-[#1e3a5f] mb-3">Selecione o departamento:</p>
+                <button
+                  onClick={() => handleDepartmentSelect("tecnico")}
+                  className="w-full text-left p-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg hover:bg-[#B8860B] transition-colors font-medium"
+                >
+                  🔧 Suporte Técnico
+                </button>
+                <button
+                  onClick={() => handleDepartmentSelect("financeiro")}
+                  className="w-full text-left p-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg hover:bg-[#B8860B] transition-colors font-medium"
+                >
+                  💰 Financeiro
+                </button>
+                <button
+                  onClick={() => handleDepartmentSelect("comercial")}
+                  className="w-full text-left p-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg hover:bg-[#B8860B] transition-colors font-medium"
+                >
+                  📊 Comercial
+                </button>
+                <button
+                  onClick={() => handleDepartmentSelect("outros")}
+                  className="w-full text-left p-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg hover:bg-[#B8860B] transition-colors font-medium"
+                >
+                  📋 Outros Assuntos
+                </button>
+                <button
+                  onClick={() => {
+                    setDepartmentSelectionActive(false);
+                    addMessage("bot", "Seleção cancelada. Como posso ajudá-lo?", KNOWLEDGE_BASE.greeting.options);
+                  }}
+                  className="w-full text-left p-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-medium mt-2"
+                >
+                  ❌ Cancelar
+                </button>
+              </div>
+            )}
 
             {/* Contact Form */}
             {contactFormActive && (
