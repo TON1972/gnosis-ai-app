@@ -11,6 +11,8 @@ import { checkSubscriptionStatus, markSubscriptionPaid } from "./subscriptionSta
 import { getUserStats, getFinancialCalendar, getDelinquentUsers } from "./admin";
 import { createSubscriptionCheckout, createCreditsCheckout, createManualPaymentCheckout } from "./mercadopago";
 import { invokeLLM } from "./_core/llm";
+import { notifyOwner } from "./_core/notification";
+import { chatbotContacts } from "../drizzle/schema";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -527,6 +529,41 @@ REGRAS:
           return {
             response: 'Desculpe, estou com dificuldades no momento. Por favor, escolha uma opção do menu ou tente novamente mais tarde.',
           };
+        }
+      }),
+
+    /**
+     * Save contact information before transferring to support
+     */
+    saveContact: publicProcedure
+      .input(z.object({
+        name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
+        email: z.string().email('Email inválido'),
+        message: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const db = await getDb();
+          if (!db) throw new Error("Database not available");
+
+          // Save contact to database
+          await db.insert(chatbotContacts).values({
+            name: input.name,
+            email: input.email,
+            message: input.message || null,
+            status: 'pending',
+          });
+
+          // Notify admin
+          await notifyOwner({
+            title: '💬 Nova solicitação de suporte via Chatbot',
+            content: `**Nome:** ${input.name}\n**Email:** ${input.email}\n**Mensagem:** ${input.message || 'Não fornecida'}\n\nAcesse o painel administrativo para mais detalhes.`,
+          });
+
+          return { success: true };
+        } catch (error) {
+          console.error('Error saving chatbot contact:', error);
+          throw new Error('Erro ao salvar contato. Por favor, tente novamente.');
         }
       }),
   }),

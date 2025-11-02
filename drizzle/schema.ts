@@ -140,3 +140,19 @@ export const savedStudies = mysqlTable("savedStudies", {
 export type SavedStudy = typeof savedStudies.$inferSelect;
 export type InsertSavedStudy = typeof savedStudies.$inferInsert;
 
+/**
+ * Chatbot contact requests - stores user contact info before transferring to support
+ */
+export const chatbotContacts = mysqlTable("chatbotContacts", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  message: text("message"), // Optional message from user
+  status: mysqlEnum("status", ["pending", "contacted", "resolved"]).default("pending").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ChatbotContact = typeof chatbotContacts.$inferSelect;
+export type InsertChatbotContact = typeof chatbotContacts.$inferInsert;
+

@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send, User, Bot, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 interface Message {
   id: string;
@@ -135,9 +138,9 @@ const KNOWLEDGE_BASE = {
     ],
   },
   suporte: {
-    message: "Precisa de ajuda adicional?\n\n📧 **Email:** Envie sua dúvida para nossa equipe\n💬 **Portal de Suporte:** Abra um ticket\n📱 **Resposta rápida:** Geralmente em até 24h\n\nNossa equipe está pronta para ajudar!",
+    message: "Precisa de ajuda adicional?\n\nPara que possamos ajudá-lo melhor, por favor forneça seus dados de contato. Nossa equipe entrará em contato em breve!",
     options: [
-      { label: "Abrir portal de suporte", action: "abrir_suporte" },
+      { label: "Fornecer dados de contato", action: "capture_contact" },
       { label: "Voltar ao menu", action: "menu" },
     ],
   },
@@ -149,10 +152,6 @@ const KNOWLEDGE_BASE = {
     message: "Redirecionando você para fazer login...",
     options: [],
   },
-  abrir_suporte: {
-    message: "Abrindo portal de suporte em nova aba...",
-    options: [],
-  },
 };
 
 export default function Chatbot() {
@@ -160,7 +159,30 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [contactFormActive, setContactFormActive] = useState(false);
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const saveContactMutation = trpc.chatbot.saveContact.useMutation({
+    onSuccess: () => {
+      toast.success("Dados enviados com sucesso! Nossa equipe entrará em contato em breve.");
+      setContactFormActive(false);
+      setContactName("");
+      setContactEmail("");
+      setContactMessage("");
+      
+      // Show confirmation message
+      addMessage("bot", "✅ Obrigado! Seus dados foram enviados com sucesso. Nossa equipe entrará em contato em breve.\n\nEnquanto isso, você pode continuar navegando ou acessar nosso portal de suporte:", [
+        { label: "Abrir portal de suporte", action: "abrir_suporte" },
+        { label: "Voltar ao menu", action: "menu" },
+      ]);
+    },
+    onError: (error) => {
+      toast.error(error.message || "Erro ao enviar dados. Por favor, tente novamente.");
+    },
+  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -197,6 +219,9 @@ export default function Chatbot() {
       if (action === "menu") {
         const greeting = KNOWLEDGE_BASE.greeting;
         addMessage("bot", greeting.message, greeting.options);
+      } else if (action === "capture_contact") {
+        setContactFormActive(true);
+        addMessage("bot", "Por favor, preencha os campos abaixo para que possamos entrar em contato:");
       } else if (action === "ver_planos") {
         addMessage("bot", response.message);
         setTimeout(() => {
@@ -209,7 +234,7 @@ export default function Chatbot() {
           window.location.href = loginUrl;
         }, 1000);
       } else if (action === "abrir_suporte") {
-        addMessage("bot", response.message);
+        addMessage("bot", "Abrindo portal de suporte em nova aba...");
         setTimeout(() => {
           window.open("https://help.manus.im", "_blank");
         }, 1000);
@@ -256,6 +281,26 @@ export default function Chatbot() {
         setIsTyping(false);
       }, 800);
     }
+  };
+
+  const handleSubmitContact = () => {
+    if (!contactName.trim() || !contactEmail.trim()) {
+      toast.error("Por favor, preencha nome e e-mail");
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(contactEmail)) {
+      toast.error("Por favor, insira um e-mail válido");
+      return;
+    }
+
+    saveContactMutation.mutate({
+      name: contactName,
+      email: contactEmail,
+      message: contactMessage || undefined,
+    });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -331,6 +376,62 @@ export default function Chatbot() {
               </div>
             ))}
 
+            {/* Contact Form */}
+            {contactFormActive && (
+              <div className="bg-white border-2 border-[#d4af37] rounded-2xl p-4 space-y-3">
+                <div>
+                  <label className="text-sm font-semibold text-[#1e3a5f] block mb-1">Nome *</label>
+                  <Input
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    placeholder="Seu nome completo"
+                    className="border-[#d4af37] focus:border-[#1e3a5f]"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-[#1e3a5f] block mb-1">E-mail *</label>
+                  <Input
+                    type="email"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    placeholder="seu@email.com"
+                    className="border-[#d4af37] focus:border-[#1e3a5f]"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-[#1e3a5f] block mb-1">Mensagem (opcional)</label>
+                  <Textarea
+                    value={contactMessage}
+                    onChange={(e) => setContactMessage(e.target.value)}
+                    placeholder="Descreva brevemente sua dúvida..."
+                    className="border-[#d4af37] focus:border-[#1e3a5f] resize-none"
+                    rows={3}
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Button
+                    onClick={handleSubmitContact}
+                    disabled={saveContactMutation.isPending}
+                    className="flex-1 bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B]"
+                  >
+                    {saveContactMutation.isPending ? "Enviando..." : "Enviar"}
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setContactFormActive(false);
+                      setContactName("");
+                      setContactEmail("");
+                      setContactMessage("");
+                    }}
+                    variant="outline"
+                    className="border-[#d4af37] text-[#1e3a5f]"
+                  >
+                    Cancelar
+                  </Button>
+                </div>
+              </div>
+            )}
+
             {isTyping && (
               <div className="flex justify-start">
                 <div className="flex gap-2">
@@ -352,26 +453,28 @@ export default function Chatbot() {
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t-2 border-[#d4af37] bg-white rounded-b-xl">
-            <div className="flex gap-2">
-              <Textarea
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Digite sua dúvida..."
-                className="flex-1 resize-none border-2 border-[#d4af37] focus:border-[#1e3a5f] rounded-lg text-sm"
-                rows={2}
-              />
-              <Button
-                onClick={handleSendMessage}
-                disabled={!inputValue.trim()}
-                className="bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B] self-end"
-                size="icon"
-              >
-                <Send className="w-4 h-4" />
-              </Button>
+          {!contactFormActive && (
+            <div className="p-4 border-t-2 border-[#d4af37] bg-white rounded-b-xl">
+              <div className="flex gap-2">
+                <Textarea
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Digite sua dúvida..."
+                  className="flex-1 resize-none border-2 border-[#d4af37] focus:border-[#1e3a5f] rounded-lg text-sm"
+                  rows={2}
+                />
+                <Button
+                  onClick={handleSendMessage}
+                  disabled={!inputValue.trim()}
+                  className="bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B] self-end"
+                  size="icon"
+                >
+                  <Send className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </>
