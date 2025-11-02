@@ -138,7 +138,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   suporte: {
-    message: "Precisa de ajuda adicional?\n\nPara que possamos ajudá-lo melhor, por favor forneça seus dados de contato. Nossa equipe entrará em contato em breve!",
+    message: "", // Will be set dynamically based on time
     options: [
       { label: "Fornecer dados de contato", action: "capture_contact" },
       { label: "Voltar ao menu", action: "menu" },
@@ -209,12 +209,30 @@ export default function Chatbot() {
     setMessages((prev) => [...prev, newMessage]);
   };
 
+  const isBusinessHours = () => {
+    const now = new Date();
+    const brazilTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+    const hour = brazilTime.getHours();
+    return hour >= 9 && hour < 18;
+  };
+
   const handleBotResponse = (action: string) => {
     setIsTyping(true);
 
     // Simulate typing delay
     setTimeout(() => {
-      const response = KNOWLEDGE_BASE[action as keyof typeof KNOWLEDGE_BASE];
+      let response = KNOWLEDGE_BASE[action as keyof typeof KNOWLEDGE_BASE];
+      
+      // Handle support action with business hours check
+      if (action === "suporte") {
+        const inBusinessHours = isBusinessHours();
+        response = {
+          ...response,
+          message: inBusinessHours
+            ? "🕒 **Horário de Atendimento: 9h às 18h**\n\nEstamos disponíveis agora! Para que possamos ajudá-lo melhor, por favor forneça seus dados de contato. Nossa equipe entrará em contato em breve!"
+            : "🌙 **Horário de Atendimento: 9h às 18h**\n\nNo momento estamos fora do horário de atendimento.\n\n**Deixe a sua solicitação abaixo, que no primeiro horário amanhã nós retornaremos, Shalom!**",
+        };
+      }
 
       if (action === "menu") {
         const greeting = KNOWLEDGE_BASE.greeting;
