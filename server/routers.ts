@@ -12,7 +12,7 @@ import { getUserStats, getFinancialCalendar, getDelinquentUsers } from "./admin"
 import { createSubscriptionCheckout, createCreditsCheckout, createManualPaymentCheckout } from "./mercadopago";
 import { invokeLLM } from "./_core/llm";
 import { notifyOwner } from "./_core/notification";
-import { chatbotContacts } from "../drizzle/schema";
+import { chatbotContacts, ticketMessages } from "../drizzle/schema";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -397,6 +397,152 @@ export const appRouter = router({
 
       return admins;
     }),
+
+    /**
+     * Get ticket messages (admin only)
+     */
+    getTicketMessages: protectedProcedure
+      .input(z.object({ ticketId: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) return [];
+
+        const messages = await db
+          .select()
+          .from(ticketMessages)
+          .where(eq(ticketMessages.ticketId, input.ticketId))
+          .orderBy(ticketMessages.createdAt);
+
+        return messages;
+      }),
+
+    /**
+     * Send ticket message (admin only)
+     */
+    sendTicketMessage: protectedProcedure
+      .input(z.object({
+        ticketId: z.number(),
+        message: z.string().min(1),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) throw new Error('Database not available');
+
+        // Insert message
+        await db.insert(ticketMessages).values({
+          ticketId: input.ticketId,
+          senderId: ctx.user.id,
+          senderName: ctx.user.name || 'Admin',
+          senderType: 'admin',
+          message: input.message,
+          isRead: 0,
+        });
+
+        // Get ticket info for email
+        const ticket = await db
+          .select()
+          .from(chatbotContacts)
+          .where(eq(chatbotContacts.id, input.ticketId))
+          .limit(1);
+
+        if (ticket.length > 0) {
+          // Send email to client
+          const { sendTicketEmail } = await import('./ticketEmail');
+          await sendTicketEmail({
+            clientEmail: ticket[0].email,
+            clientName: ticket[0].name,
+            ticketId: input.ticketId,
+            adminName: ctx.user.name || 'Equipe GNOSIS AI',
+            message: input.message,
+          });
+        }
+
+        return { success: true };
+      }),
+
+    /**
+     * Get unread message count per ticket (admin only)
+     */
+    getUnreadCounts: protectedProcedure.query(async ({ ctx }) => {
+      if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+        throw new Error('Acesso negado');
+      }
+
+      const db = await getDb();
+      if (!db) return [];
+
+      const unreadCounts = await db
+        .select({
+          ticketId: ticketMessages.ticketId,
+          count: sql<number>`COUNT(*)`
+        })
+        .from(ticketMessages)
+        .where(and(
+          eq(ticketMessages.senderType, 'client'),
+          eq(ticketMessages.isRead, 0)
+        ))
+        .groupBy(ticketMessages.ticketId);
+
+      return unreadCounts;
+    }),
+
+    /**
+     * Send client message to ticket (public route)
+     */
+    sendClientTicketMessage: publicProcedure
+      .input(z.object({
+        ticketId: z.number(),
+        message: z.string().min(1),
+        clientName: z.string().min(1),
+      }))
+      .mutation(async ({ input }) => {
+        const db = await getDb();
+        if (!db) throw new Error('Database not available');
+
+        // Insert client message
+        await db.insert(ticketMessages).values({
+          ticketId: input.ticketId,
+          senderId: 0, // Client has no user ID
+          senderName: input.clientName,
+          senderType: 'client',
+          message: input.message,
+          isRead: 0,
+        });
+
+        return { success: true };
+      }),
+
+    /**
+     * Mark ticket messages as read (admin only)
+     */
+    markTicketAsRead: protectedProcedure
+      .input(z.object({ ticketId: z.number() }))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
+          throw new Error('Acesso negado');
+        }
+
+        const db = await getDb();
+        if (!db) throw new Error('Database not available');
+
+        await db
+          .update(ticketMessages)
+          .set({ isRead: 1 })
+          .where(and(
+            eq(ticketMessages.ticketId, input.ticketId),
+            eq(ticketMessages.senderType, 'client')
+          ));
+
+        return { success: true };
+      }),
 
     /**
      * List all administrators (super_admin only)

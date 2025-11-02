@@ -158,3 +158,20 @@ export const chatbotContacts = mysqlTable("chatbotContacts", {
 export type ChatbotContact = typeof chatbotContacts.$inferSelect;
 export type InsertChatbotContact = typeof chatbotContacts.$inferInsert;
 
+/**
+ * Ticket messages - stores conversation history between admin and client
+ */
+export const ticketMessages = mysqlTable("ticketMessages", {
+  id: int("id").autoincrement().primaryKey(),
+  ticketId: int("ticketId").notNull(), // References chatbotContacts.id
+  senderId: int("senderId"), // User ID if admin, null if client
+  senderName: varchar("senderName", { length: 255 }).notNull(),
+  senderType: mysqlEnum("senderType", ["admin", "client"]).notNull(),
+  message: text("message").notNull(),
+  isRead: int("isRead").default(0).notNull(), // 0 = unread, 1 = read
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type TicketMessage = typeof ticketMessages.$inferSelect;
+export type InsertTicketMessage = typeof ticketMessages.$inferInsert;
+

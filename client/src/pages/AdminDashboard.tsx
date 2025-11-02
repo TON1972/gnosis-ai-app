@@ -134,6 +134,16 @@ export default function AdminDashboard() {
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Atualizar
               </Button>
+              <Link href="/admin/tickets">
+                <Button
+                  variant="outline"
+                  className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#1e3a5f]"
+                  size="sm"
+                >
+                  <Mail className="w-4 h-4 mr-2" />
+                  Sistema de Tickets
+                </Button>
+              </Link>
               <Link href="/">
                 <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
                   <Home className="w-5 h-5" />

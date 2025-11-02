@@ -64,6 +64,13 @@
       "when": 1762061969305,
       "tag": "0008_nifty_shotgun",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1762120059577,
+      "tag": "0009_steady_machine_man",
+      "breakpoints": true
     }
   ]
 }
