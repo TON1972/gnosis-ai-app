@@ -22,6 +22,7 @@ const KNOWLEDGE_BASE = {
       { label: "💰 Dúvidas sobre Créditos", action: "creditos" },
       { label: "🔧 Como usar as Ferramentas", action: "ferramentas" },
       { label: "❓ Outras Dúvidas", action: "outras" },
+      { label: "👋 Encerrar conversa", action: "encerrar" },
     ],
   },
   planos: {
@@ -31,6 +32,7 @@ const KNOWLEDGE_BASE = {
       { label: "Como fazer upgrade", action: "upgrade" },
       { label: "Formas de pagamento", action: "pagamento" },
       { label: "Voltar ao menu", action: "menu" },
+      { label: "👋 Encerrar conversa", action: "encerrar" },
     ],
   },
   creditos: {
@@ -40,6 +42,7 @@ const KNOWLEDGE_BASE = {
       { label: "Créditos expiram?", action: "expiracao_creditos" },
       { label: "Comprar créditos avulsos", action: "creditos_avulsos" },
       { label: "Voltar ao menu", action: "menu" },
+      { label: "👋 Encerrar conversa", action: "encerrar" },
     ],
   },
   ferramentas: {
@@ -49,6 +52,7 @@ const KNOWLEDGE_BASE = {
       { label: "Custo em créditos", action: "custo_ferramentas" },
       { label: "Salvar estudos", action: "salvar_estudos" },
       { label: "Voltar ao menu", action: "menu" },
+      { label: "👋 Encerrar conversa", action: "encerrar" },
     ],
   },
   outras: {
@@ -58,6 +62,7 @@ const KNOWLEDGE_BASE = {
       { label: "Cancelamento", action: "cancelamento" },
       { label: "Falar com suporte", action: "suporte" },
       { label: "Voltar ao menu", action: "menu" },
+      { label: "👋 Encerrar conversa", action: "encerrar" },
     ],
   },
   diferencas_planos: {
@@ -151,6 +156,12 @@ const KNOWLEDGE_BASE = {
   login: {
     message: "Redirecionando você para fazer login...",
     options: [],
+  },
+  encerrar: {
+    message: "✨ Espero ter ajudado! Se precisar de mais alguma coisa, é só chamar. Shalom! ✨",
+    options: [
+      { label: "Voltar ao menu", action: "menu" },
+    ],
   },
 };
 
@@ -256,6 +267,12 @@ export default function Chatbot() {
         setTimeout(() => {
           window.open("https://help.manus.im", "_blank");
         }, 1000);
+      } else if (action === "encerrar") {
+        addMessage("bot", response.message, response.options);
+        // Auto-close chat after 3 seconds
+        setTimeout(() => {
+          setIsOpen(false);
+        }, 3000);
       } else if (response) {
         addMessage("bot", response.message, response.options);
       } else {
