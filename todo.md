@@ -330,3 +330,11 @@
 - [ ] Testar acesso ao painel administrativo (aguardando teste do usuário)
 
 
+
+
+
+## Sistema de Tickets - Filtro por Permissão (02/11/2025)
+
+- [x] Implementar filtro de tickets por permissão (admin vê só seus tickets, super_admin vê todos)
+- [x] Adicionar badge mostrando "Meus Tickets" vs "Todos os Tickets"
+

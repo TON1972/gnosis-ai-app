@@ -102,7 +102,19 @@ export default function AdminTickets() {
                 <img src={APP_LOGO} alt={APP_TITLE} className="h-12 w-12 object-contain" />
                 <div>
                   <h1 className="text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
-                  <p className="text-sm text-[#d4af37]/70">Sistema de Tickets</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm text-[#d4af37]/70">Sistema de Tickets</p>
+                    {user?.role === "admin" && (
+                      <span className="text-xs bg-[#d4af37] text-[#1e3a5f] px-2 py-1 rounded-full font-semibold">
+                        Meus Tickets
+                      </span>
+                    )}
+                    {user?.role === "super_admin" && (
+                      <span className="text-xs bg-green-500 text-white px-2 py-1 rounded-full font-semibold">
+                        Todos os Tickets
+                      </span>
+                    )}
+                  </div>
                 </div>
               </span>
             </Link>

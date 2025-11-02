@@ -285,6 +285,11 @@ export const appRouter = router({
         if (input.department && input.department !== 'all') {
           conditions.push(eq(chatbotContacts.department, input.department));
         }
+        
+        // Filter by assigned admin (only for regular admins, super_admin sees all)
+        if (ctx.user.role === 'admin') {
+          conditions.push(eq(chatbotContacts.assignedTo, ctx.user.id));
+        }
 
         let requests;
         if (conditions.length > 0) {
