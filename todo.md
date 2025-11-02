@@ -338,3 +338,13 @@
 - [x] Implementar filtro de tickets por permissão (admin vê só seus tickets, super_admin vê todos)
 - [x] Adicionar badge mostrando "Meus Tickets" vs "Todos os Tickets"
 
+
+
+
+## Sistema de Status para Tickets (02/11/2025)
+
+- [x] Atualizar labels de status (Aberto, Em Andamento, Resolvido)
+- [x] Rota tRPC para atualizar status já existia
+- [x] Adicionar dropdown de status no painel AdminTickets
+- [x] Implementar cores diferentes para cada status
+

@@ -43,6 +43,9 @@ export default function AdminTickets() {
     refetchInterval: 5000, // Check every 5 seconds
   });
 
+  // Mutation to update status
+  const updateStatusMutation = trpc.admin.updateSupportStatus.useMutation();
+
   // Get unread count for a ticket
   const getUnreadCount = (ticketId: number) => {
     const count = unreadCounts.find((c) => c.ticketId === ticketId);
@@ -66,16 +69,16 @@ export default function AdminTickets() {
 
   // Status names
   const statusNames: Record<string, string> = {
-    pending: "Pendente",
-    contacted: "Contatado",
-    resolved: "Resolvido",
+    pending: "🟢 Aberto",
+    contacted: "🟡 Em Andamento",
+    resolved: "✅ Resolvido",
   };
 
   // Status colors
   const statusColors: Record<string, string> = {
-    pending: "text-yellow-600 bg-yellow-100",
-    contacted: "text-blue-600 bg-blue-100",
-    resolved: "text-green-600 bg-green-100",
+    pending: "text-green-700 bg-green-100", // Aberto - verde
+    contacted: "text-yellow-700 bg-yellow-100", // Em Andamento - amarelo
+    resolved: "text-blue-700 bg-blue-100", // Resolvido - azul
   };
 
   const handleLogout = async () => {
@@ -210,9 +213,27 @@ export default function AdminTickets() {
                           <h3 className="text-lg font-bold text-[#1e3a5f]">
                             Ticket #{request.id}
                           </h3>
-                          <span className={`px-2 py-1 rounded text-xs font-semibold ${statusColors[request.status]}`}>
-                            {statusNames[request.status]}
-                          </span>
+                          <select
+                            value={request.status}
+                            onChange={(e) => {
+                              const newStatus = e.target.value as 'pending' | 'contacted' | 'resolved';
+                              updateStatusMutation.mutate(
+                                { id: request.id, status: newStatus },
+                                {
+                                  onSuccess: () => {
+                                    toast.success('Status atualizado!');
+                                    refetch();
+                                  },
+                                  onError: () => toast.error('Erro ao atualizar status'),
+                                }
+                              );
+                            }}
+                            className={`px-2 py-1 rounded text-xs font-semibold border-0 cursor-pointer ${statusColors[request.status]}`}
+                          >
+                            <option value="pending">🟢 Aberto</option>
+                            <option value="contacted">🟡 Em Andamento</option>
+                            <option value="resolved">✅ Resolvido</option>
+                          </select>
                           <span className="px-2 py-1 bg-[#d4af37]/20 rounded text-xs">
                             {deptNames[request.department]}
                           </span>
