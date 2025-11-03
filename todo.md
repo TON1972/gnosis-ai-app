@@ -427,3 +427,10 @@
 - [x] Lista scrollável dentro de cada card (mesma lógica da Home)
 - [x] Adicionar Patrística e Linha do Tempo Teológica no allTools da Home
 
+
+
+
+## Correção Contador Dashboard (02/11/2025)
+
+- [x] Corrigir "6 de 15" para "6 de 17" na janela de plano atual do Dashboard
+

@@ -294,7 +294,7 @@ export default function Dashboard() {
                 <p className="text-sm text-[#8b6f47]">
                   <strong>Plano Atual:</strong> {activePlan?.plan.displayName || "FREE"}
                   {" • "}
-                  <strong>Ferramentas Disponíveis:</strong> {availableToolIds.size} de 15
+                  <strong>Ferramentas Disponíveis:</strong> {availableToolIds.size} de 17
                 </p>
               </div>
             </div>
