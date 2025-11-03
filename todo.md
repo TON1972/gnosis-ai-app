@@ -385,3 +385,18 @@
 - [x] Atualizar Chatbot com informações das novas ferramentas
 - [x] Testar ambas as ferramentas
 
+
+
+
+## Correção de Inconsistências - Quantidade de Ferramentas (02/11/2025)
+
+- [x] Verificar e corrigir Home.tsx
+- [x] Verificar e corrigir FAQ.tsx
+- [x] Verificar e corrigir Chatbot.tsx (Rebeca)
+- [x] Verificar e corrigir NoCreditsModal.tsx
+- [x] Verificar e corrigir Dashboard.tsx
+- [x] Verificar e corrigir routers.ts (chatbot do servidor)
+- [x] LUMEN e PREMIUM agora mostram "Todas as 17 ferramentas"
+- [x] Total de ferramentas da plataforma: 17
+- [x] ALIANÇA corrigido para 10 ferramentas
+

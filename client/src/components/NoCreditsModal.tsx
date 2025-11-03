@@ -34,7 +34,7 @@ const PLAN_UPGRADES = [
     period: "/mês",
     creditsInitial: "3.000 créditos iniciais",
     creditsDaily: "200 créditos/dia",
-    tools: "Todas as 14 ferramentas",
+    tools: "Todas as 17 ferramentas",
     features: [
       "Todas do Aliança +",
       "Exegese Avançada",

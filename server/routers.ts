@@ -820,9 +820,9 @@ Informações sobre a plataforma:
 
 PLANOS:
 - FREE: Gratuito, 6 ferramentas básicas, 500 créditos iniciais + 50/dia
-- ALIANÇA: R$ 18,98/mês, 8 ferramentas, 1500 créditos iniciais + 100/dia
-- LUMEN: R$ 33,98/mês, 12 ferramentas, 3000 créditos iniciais + 200/dia
-- GNOSIS PREMIUM: R$ 62,98/mês, todas as 15 ferramentas, 6000 créditos iniciais + 300/dia
+- ALIANÇA: R$ 18,98/mês, 10 ferramentas, 1500 créditos iniciais + 100/dia
+- LUMEN: R$ 33,98/mês, todas as 17 ferramentas, 3000 créditos iniciais + 200/dia
+- GNOSIS PREMIUM: R$ 62,98/mês, todas as 17 ferramentas, 6000 créditos iniciais + 300/dia
 
 FERRAMENTAS:
 - Básicas (FREE): Hermenêutica, Traduções, Resumos, Enfoques de Pregação, Estudos Doutrinários, Análise Teológica Comparada
