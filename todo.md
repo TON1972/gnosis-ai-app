@@ -369,3 +369,19 @@
 - [x] Verificar se status está sendo passado corretamente
 - [x] Implementar busca direta do ticket para garantir dados atualizados
 
+
+
+
+## Implementar Novas Ferramentas - Patrística e Linha do Tempo Teológica (02/11/2025)
+
+- [x] Adicionar ferramentas no banco de dados (tools table)
+- [x] Atualizar schema com as novas ferramentas
+- [x] Criar componente ToolPatristica.tsx
+- [x] Criar componente ToolLinhaTempoTeologica.tsx
+- [x] Configurar restrição de acesso (apenas LUMEN e PREMIUM)
+- [x] Atualizar contadores: LUMEN passa de 12 para 14 ferramentas
+- [x] Atualizar contadores: PREMIUM passa de 15 para 17 ferramentas
+- [x] Atualizar FAQ com informações das novas ferramentas
+- [x] Atualizar Chatbot com informações das novas ferramentas
+- [x] Testar ambas as ferramentas
+

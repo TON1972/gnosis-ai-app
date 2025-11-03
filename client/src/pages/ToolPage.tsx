@@ -102,6 +102,18 @@ const TOOLS_INFO: Record<string, { name: string; description: string; placeholde
     description: "Transcrição de áudios e vídeos de sermões e estudos",
     placeholder: "Cole o link do áudio/vídeo ou faça upload do arquivo...\n\n(Funcionalidade de upload será implementada)",
     creditCost: 100
+  },
+  patristica: {
+    name: "Patrística",
+    description: "Explora o pensamento dos Pais da Igreja sobre determinado tema ou texto",
+    placeholder: "Digite o tema ou texto bíblico para análise patrística...\n\nExemplo: O que os Pais da Igreja diziam sobre a Trindade\nou\nAnálise patrística de João 1:1",
+    creditCost: 75
+  },
+  linha_tempo_teologica: {
+    name: "Linha do Tempo Teológica",
+    description: "Gera uma linha do tempo teológica interativa e cronológica sobre qualquer tema ou doutrina",
+    placeholder: "Digite o tema ou doutrina para criar a linha do tempo...\n\nExemplo: Evolução da doutrina da Trindade ao longo da história\nou\nHistoria do pensamento sobre a salvação",
+    creditCost: 75
   }
 };
 

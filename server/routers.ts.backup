@@ -105,7 +105,7 @@ export const appRouter = router({
           dados_demograficos: "Você é um sociólogo da religião. Forneça dados demográficos e análises sobre:",
           transcricao: "Você é um transcritor especializado. Transcreva e organize o seguinte conteúdo:",
           patristica: "Voce e um pesquisador especializado em Patristica e Historia da Igreja. Analise o tema ou texto e estruture: 1) Principais autores patristicos que abordaram o tema (Clemente, Inacio, Irineu, Atanasio, Agostinho); 2) Sintese das interpretacoes com citacoes relevantes; 3) Diferencas entre teologia oriental e ocidental; 4) Influencia na teologia medieval, reforma e pensamento moderno; 5) Conclusao teologica integrando Patristica e pensamento contemporaneo; 6) Notas criticas e contexto historico. Formate de forma academica e bem estruturada. Tema:",
-          linha_tempo_teologica: "Voce e um teologo-historiador especializado em historia do pensamento cristao. Crie uma linha do tempo teologica detalhada incluindo: 1) Periodizacao historica (Igreja Primitiva, Patristica, Medieval, Reforma, Modernidade, Contemporaneidade); 2) Eventos teologicos marcantes (concilios, controversias, cismas); 3) Principais teologos e obras de cada periodo; 4) Evolucao do conceito ao longo dos seculos; 5) Correntes teologicas divergentes; 6) Sintese conclusiva mostrando trajetoria e tendencias contemporaneas. Formate cronologicamente com datas especificas. Seja detalhado e teologicamente rigoroso. Tema:"
+          linha_tempo_teologica: "Voce e um teologo-historiador especializado em historia do pensamento cristao. Crie uma linha do tempo teologica detalhada incluindo: 1) Periodizacao historica (Igreja Primitiva, Patristica, Medieval, Reforma, Modernidade, Contemporaneidade); 2) Eventos teologicos marcantes (concilios, controversias, cismas); 3) Principais teologos e obras de cada periodo; 4) Evolucao do conceito ao longo dos seculos; 5) Correntes teologicas divergentes; 6) Sintese conclusiva mostrando trajetoria e tendencias contemporaneas. Formate cronologicamente com datas especificas. Seja detalhado e teologicamente rigoroso. Tema:"`
         };
 
         const systemPrompt = toolPrompts[input.toolId] || "Você é um assistente de estudos bíblicos. Ajude com:";
@@ -894,8 +894,8 @@ REGRAS:
 
           // Notify admin
           await notifyOwner({
-            title: '📩 Nova solicitação de contato - Chatbot',
-            content: `**Nome:** ${input.name}\n**Email:** ${input.email}\n**Departamento:** ${deptNames[input.department]}\n**Mensagem:** ${input.message || 'Nenhuma mensagem'}`,
+            title: 'Nova solicitacao de contato - Chatbot',
+            content: `Nome: ${input.name}\nEmail: ${input.email}\nDepartamento: ${deptNames[input.department]}\nMensagem: ${input.message || 'Nenhuma mensagem'}`,
           });
 
           return { success: true };
