@@ -457,3 +457,22 @@
 - [x] Verificar se a lista de tickets tem botões de arquivar (não tinha)
 - [x] Adicionar botões de Arquivar/Desarquivar nos cards da lista de tickets
 
+
+
+
+## Verificação Download PDF nas Ferramentas (02/11/2025)
+
+- [ ] Verificar se todas as 17 ferramentas têm botão de download PDF
+- [ ] Adicionar botão PDF nas ferramentas que não têm
+- [ ] Testar download PDF em todas as ferramentas
+
+
+
+
+## Melhorar Descrições das Ferramentas (03/11/2025)
+
+- [x] Criar descrições melhoradas e mais atraentes para as 17 ferramentas
+- [x] Atualizar descrições na Home
+- [x] Atualizar descrições no Dashboard
+- [x] Garantir que as descrições sejam exatamente iguais em ambos os locais
+

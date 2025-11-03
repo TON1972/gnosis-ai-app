@@ -26,47 +26,47 @@ const mainTools = [
   {
     icon: <BookOpen className="w-8 h-8" />,
     name: "Hermenêutica",
-    description: "Análise de contexto histórico, cultural e literário"
+    description: "Análise profunda de contexto histórico, cultural e literário de passagens bíblicas"
   },
   {
     icon: <Languages className="w-8 h-8" />,
     name: "Traduções",
-    description: "Hebraico, Aramaico e Grego"
+    description: "Análise de palavras originais em Hebraico, Aramaico e Grego com nuances linguísticas"
   },
   {
     icon: <FileText className="w-8 h-8" />,
     name: "Resumos",
-    description: "Sínteses personalizadas de passagens"
+    description: "Sínteses personalizadas de passagens, capítulos ou livros inteiros da Bíblia"
   },
   {
     icon: <Presentation className="w-8 h-8" />,
     name: "Esboços de Pregação",
-    description: "Estruturas completas para sermões"
+    description: "Estruturas completas para sermões e mensagens com pontos-chave e aplicações práticas"
   },
   {
     icon: <BookMarked className="w-8 h-8" />,
     name: "Estudos Doutrinários",
-    description: "Análises teológicas profundas"
+    description: "Análises teológicas profundas sobre doutrinas específicas com fundamentação bíblica"
   },
   {
     icon: <Scale className="w-8 h-8" />,
     name: "Análise Teológica Comparada",
-    description: "Comparação entre correntes teológicas"
+    description: "Comparação detalhada entre diferentes correntes teológicas e tradições cristãs"
   },
   {
     icon: <Sparkles className="w-8 h-8" />,
     name: "Exegese",
-    description: "Interpretação crítica e detalhada das Escrituras"
+    description: "Interpretação crítica e detalhada verso por verso com análise exegética completa"
   },
   {
     icon: <GraduationCap className="w-8 h-8" />,
     name: "Teologia Sistemática",
-    description: "Estudo organizado de temas teológicos"
+    description: "Estudo organizado e estruturado de temas teológicos sistemáticos"
   },
   {
     icon: <Mic className="w-8 h-8" />,
     name: "Linguagem Ministerial",
-    description: "Análise de discursos e retórica ministerial"
+    description: "Análise retórica e teológica de discursos, sermões e mensagens ministeriais"
   }
 ];
 

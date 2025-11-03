@@ -39,14 +39,14 @@ const TOOLS_CONFIG = [
   {
     id: "hermeneutica",
     name: "Hermenêutica",
-    description: "Análise de contexto histórico, cultural e literário",
+    description: "Análise profunda de contexto histórico, cultural e literário de passagens bíblicas",
     icon: BookOpen,
     category: "Estudo Bíblico"
   },
   {
     id: "exegese",
     name: "Exegese",
-    description: "Interpretação crítica e detalhada",
+    description: "Interpretação crítica e detalhada verso por verso com análise exegética completa",
     icon: Search,
     category: "Estudo Bíblico",
     premium: true
@@ -54,49 +54,49 @@ const TOOLS_CONFIG = [
   {
     id: "traducoes",
     name: "Traduções",
-    description: "Hebraico, Aramaico e Grego",
+    description: "Análise de palavras originais em Hebraico, Aramaico e Grego com nuances linguísticas",
     icon: Languages,
     category: "Estudo Bíblico"
   },
   {
     id: "resumos",
     name: "Resumos",
-    description: "Sínteses personalizadas",
+    description: "Sínteses personalizadas de passagens, capítulos ou livros inteiros da Bíblia",
     icon: FileText,
     category: "Estudo Bíblico"
   },
   {
     id: "esbocos",
     name: "Esboços de Pregação",
-    description: "Estruturas para sermões",
+    description: "Estruturas completas para sermões e mensagens com pontos-chave e aplicações práticas",
     icon: Presentation,
     category: "Prática"
   },
   {
     id: "estudos_doutrinarios",
     name: "Estudos Doutrinários",
-    description: "Análises teológicas profundas",
+    description: "Análises teológicas profundas sobre doutrinas específicas com fundamentação bíblica",
     icon: BookMarked,
     category: "Teologia"
   },
   {
     id: "analise_teologica",
     name: "Análise Teológica Comparada",
-    description: "Comparação entre correntes",
+    description: "Comparação detalhada entre diferentes correntes teológicas e tradições cristãs",
     icon: Scale,
     category: "Teologia"
   },
   {
     id: "teologia_sistematica",
     name: "Teologia Sistemática",
-    description: "Estudo organizado de temas",
+    description: "Estudo organizado e estruturado de temas teológicos sistemáticos",
     icon: GraduationCap,
     category: "Teologia"
   },
   {
     id: "religioes_comparadas",
     name: "Religiões Comparadas",
-    description: "Estudo comparativo",
+    description: "Estudo comparativo entre cristianismo e outras religiões mundiais",
     icon: Globe,
     category: "Teologia",
     premium: true
@@ -104,14 +104,14 @@ const TOOLS_CONFIG = [
   {
     id: "contextualizacao_brasileira",
     name: "Contextualização Brasileira",
-    description: "Corpus exclusivo brasileiro",
+    description: "Aplicação das Escrituras ao contexto cultural e social brasileiro exclusivo",
     icon: Globe,
     category: "Contexto"
   },
   {
     id: "referencias_abnt_apa",
     name: "Referências ABNT/APA",
-    description: "Formatação acadêmica",
+    description: "Formatação acadêmica de citações e referências em padrões ABNT e APA",
     icon: FileCheck,
     category: "Acadêmico",
     premium: true
@@ -119,7 +119,7 @@ const TOOLS_CONFIG = [
   {
     id: "linguagem_ministerial",
     name: "Linguagem Ministerial",
-    description: "Análise de discursos",
+    description: "Análise retórica e teológica de discursos, sermões e mensagens ministeriais",
     icon: Mic,
     category: "Acadêmico",
     premium: true
@@ -127,7 +127,7 @@ const TOOLS_CONFIG = [
   {
     id: "redacao_academica",
     name: "Redação Acadêmica",
-    description: "Auxílio em trabalhos",
+    description: "Auxílio na estruturação e desenvolvimento de trabalhos acadêmicos teológicos",
     icon: PenTool,
     category: "Acadêmico",
     premium: true
@@ -135,7 +135,7 @@ const TOOLS_CONFIG = [
   {
     id: "dados_demograficos",
     name: "Dados Demográficos",
-    description: "Dados de igrejas",
+    description: "Dados estatísticos sobre igrejas, movimentos religiosos e tendências evangélicas",
     icon: BarChart,
     category: "Dados",
     premium: true
@@ -143,7 +143,7 @@ const TOOLS_CONFIG = [
   {
     id: "transcricao",
     name: "Transcrição de Mídia",
-    description: "Transcrição de áudios/vídeos",
+    description: "Transcrição automática de áudios e vídeos de sermões, estudos e palestras",
     icon: Sparkles,
     category: "Mídia",
     premium: true
@@ -151,7 +151,7 @@ const TOOLS_CONFIG = [
   {
     id: "patristica",
     name: "Patrística",
-    description: "Pensamento dos Pais da Igreja",
+    description: "Explora o pensamento dos Pais da Igreja sobre temas e textos com contexto histórico",
     icon: BookText,
     category: "Teologia",
     premium: true
@@ -159,7 +159,7 @@ const TOOLS_CONFIG = [
   {
     id: "linha_tempo_teologica",
     name: "Linha do Tempo Teológica",
-    description: "Timeline de doutrinas e eventos",
+    description: "Gera linha do tempo teológica interativa e cronológica sobre doutrinas e movimentos",
     icon: Clock,
     category: "Teologia",
     premium: true
