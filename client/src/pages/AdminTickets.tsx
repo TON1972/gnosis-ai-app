@@ -293,13 +293,33 @@ export default function AdminTickets() {
                           </div>
                         </div>
                       </div>
-                      <Button
-                        onClick={() => setSelectedTicket(request.id)}
-                        className="bg-[#d4af37] hover:bg-[#b8941f] text-[#1e3a5f] font-bold"
-                      >
-                        <MessageCircle className="w-4 h-4 mr-2" />
-                        Ver Conversa
-                      </Button>
+                      <div className="flex flex-col gap-2">
+                        <Button
+                          onClick={() => setSelectedTicket(request.id)}
+                          className="bg-[#d4af37] hover:bg-[#b8941f] text-[#1e3a5f] font-bold"
+                        >
+                          <MessageCircle className="w-4 h-4 mr-2" />
+                          Ver Conversa
+                        </Button>
+                        {request.status === 'resolved' && !request.archived && (
+                          <Button
+                            onClick={() => archiveMutation.mutate({ ticketId: request.id })}
+                            size="sm"
+                            className="bg-gray-600 hover:bg-gray-700 text-white"
+                          >
+                            📦 Arquivar
+                          </Button>
+                        )}
+                        {request.archived && (
+                          <Button
+                            onClick={() => unarchiveMutation.mutate({ ticketId: request.id })}
+                            size="sm"
+                            className="bg-orange-600 hover:bg-orange-700 text-white"
+                          >
+                            ↩️ Desarquivar
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </Card>
                 );

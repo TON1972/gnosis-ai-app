@@ -447,3 +447,13 @@
 - [x] Verificar AdminTickets (já tinha os botões via TicketSystem)
 - [x] Verificar TicketSystem (já tinha os botões implementados)
 
+
+
+
+## BUG - Botão Arquivar Não Aparece em /admin/tickets (02/11/2025)
+
+- [x] Investigar por que botão não aparece na página Sistema de Tickets
+- [x] Verificar se TicketSystem está mostrando os botões corretamente (estava OK)
+- [x] Verificar se a lista de tickets tem botões de arquivar (não tinha)
+- [x] Adicionar botões de Arquivar/Desarquivar nos cards da lista de tickets
+
