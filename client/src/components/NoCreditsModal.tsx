@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 import { Button } from "./ui/button";
-import { Coins, Crown, Sparkles, Gift, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Coins, Crown, Sparkles, Gift, ArrowRight, CheckCircle2, X } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { useState } from "react";
 
@@ -8,6 +8,26 @@ interface NoCreditsModalProps {
   open: boolean;
   onClose: () => void;
 }
+
+const ALL_TOOLS = [
+  { name: "Hermenêutica", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Traduções", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Resumos", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Enfoques de Pregação", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Estudos Doutrinários", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Análise Teológica Comparada", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Exegese", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Teologia Sistemática", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Contextualização Brasileira", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Religiões Comparadas", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Referências ABNT/APA", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Linguagem Ministerial", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Redação Acadêmica", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Dados Demográficos", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Patrística", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Linha do Tempo Teológica", free: false, alianca: false, lumen: true, premium: true },
+];
 
 const PLAN_UPGRADES = [
   {
@@ -17,7 +37,7 @@ const PLAN_UPGRADES = [
     period: "/mês",
     creditsInitial: "1.500 créditos iniciais",
     creditsDaily: "100 créditos/dia",
-    tools: "8 ferramentas",
+    tools: "10 ferramentas",
     features: [
       "Hermenêutica, Traduções, Resumos",
       "Esboços de Pregação",
@@ -293,6 +313,45 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                     </Button>
                   </div>
                 ))}
+              </div>
+              
+              {/* Lista Completa de Ferramentas */}
+              <div className="mt-8 bg-white/95 rounded-xl p-6 border-3 border-[#d4af37]">
+                <h4 className="text-lg font-bold text-[#1e3a5f] mb-4 text-center">Comparação Completa de Ferramentas</h4>
+                <div className="grid grid-cols-4 gap-2 text-xs font-semibold text-[#1e3a5f] mb-2 px-2">
+                  <div>Ferramenta</div>
+                  <div className="text-center">Aliança</div>
+                  <div className="text-center">Lumen</div>
+                  <div className="text-center">Premium</div>
+                </div>
+                <div className="max-h-60 overflow-y-auto space-y-1">
+                  {ALL_TOOLS.map((tool, idx) => (
+                    <div key={idx} className="grid grid-cols-4 gap-2 items-center py-2 px-2 hover:bg-[#FFFACD]/30 rounded">
+                      <div className="text-xs text-[#1e3a5f] font-medium">{tool.name}</div>
+                      <div className="flex justify-center">
+                        {tool.alianca ? (
+                          <CheckCircle2 className="w-4 h-4 text-green-600" />
+                        ) : (
+                          <X className="w-4 h-4 text-red-500" />
+                        )}
+                      </div>
+                      <div className="flex justify-center">
+                        {tool.lumen ? (
+                          <CheckCircle2 className="w-4 h-4 text-green-600" />
+                        ) : (
+                          <X className="w-4 h-4 text-red-500" />
+                        )}
+                      </div>
+                      <div className="flex justify-center">
+                        {tool.premium ? (
+                          <CheckCircle2 className="w-4 h-4 text-green-600" />
+                        ) : (
+                          <X className="w-4 h-4 text-red-500" />
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}

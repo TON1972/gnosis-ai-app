@@ -147,6 +147,22 @@ const TOOLS_CONFIG = [
     icon: Sparkles,
     category: "Mídia",
     premium: true
+  },
+  {
+    id: "patristica",
+    name: "Patrística",
+    description: "Pensamento dos Pais da Igreja",
+    icon: BookText,
+    category: "Teologia",
+    premium: true
+  },
+  {
+    id: "linha_tempo_teologica",
+    name: "Linha do Tempo Teológica",
+    description: "Timeline de doutrinas e eventos",
+    icon: Clock,
+    category: "Teologia",
+    premium: true
   }
 ];
 

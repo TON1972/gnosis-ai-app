@@ -400,3 +400,18 @@
 - [x] Total de ferramentas da plataforma: 17
 - [x] ALIANÇA corrigido para 10 ferramentas
 
+
+
+
+## Correção de Erros Críticos Reportados (02/11/2025)
+
+### ERRO 1 - Dashboard
+- [x] Adicionar ferramenta "Patrística" no Dashboard
+- [x] Adicionar ferramenta "Linha do Tempo Teológica" no Dashboard
+- [x] Atualizar contador total de ferramentas de 15 para 17
+
+### ERRO 2 - Janela de Upgrade (NoCreditsModal)
+- [x] Corrigir ALIANÇA de 8 para 10 ferramentas
+- [x] Restaurar lista de ferramentas com ✅ verde (disponíveis) e ❌ vermelho (indisponíveis)
+- [x] Garantir que a lista seja scrollável mostrando todas as 17 ferramentas
+
