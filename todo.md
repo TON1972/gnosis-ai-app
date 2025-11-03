@@ -497,3 +497,14 @@
 - [x] Adicionar assinatura discreta: "Desenvolvido por GNOSIS AI - Estudos Bíblicos Profundos com IA"
 - [x] Adicionar link para home abaixo da assinatura
 
+
+
+
+## Implementar Abertura de Estudos do Histórico (03/11/2025)
+
+- [ ] Adicionar modal/dialog para abrir estudo completo ao clicar no histórico
+- [ ] Mostrar resultado completo com formatação
+- [ ] Adicionar botões: Copiar, Baixar TXT, Baixar PDF, Compartilhar
+- [ ] Garantir que funcione em mobile e desktop
+- [ ] Testar com todos os tipos de ferramentas
+

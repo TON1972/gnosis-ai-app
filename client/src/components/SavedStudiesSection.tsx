@@ -1,14 +1,32 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
-import { Download, Trash2, Clock, BookText, FileText } from "lucide-react";
+import { Download, Trash2, Clock, BookText, FileText, Eye, Copy, CheckCircle, Share2 } from "lucide-react";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import ShareButton from "@/components/ShareButton";
 
 export default function SavedStudiesSection() {
   const { data: savedStudies, refetch } = trpc.studies.list.useQuery();
   const deleteStudyMutation = trpc.studies.delete.useMutation();
   const [expandedStudyId, setExpandedStudyId] = useState<number | null>(null);
+  const [selectedStudy, setSelectedStudy] = useState<any | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    if (!selectedStudy) return;
+    navigator.clipboard.writeText(selectedStudy.output);
+    setCopied(true);
+    toast.success("Conteúdo copiado!");
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleDelete = async (id: number) => {
     if (!confirm("Tem certeza que deseja excluir este estudo?")) return;
@@ -76,72 +94,159 @@ export default function SavedStudiesSection() {
   }
 
   return (
-    <div className="bg-white/90 rounded-2xl p-4 shadow-xl border-4 border-[#d4af37]">
-      <div className="flex items-center gap-2 mb-4 pb-3 border-b-2 border-[#d4af37]">
-        <BookText className="w-5 h-5 text-[#1e3a5f]" />
-        <h3 className="text-lg font-bold text-[#1e3a5f]">
-          Meus Estudos
-        </h3>
-      </div>
+    <>
+      {/* Modal de Visualização */}
+      <Dialog open={!!selectedStudy} onOpenChange={() => setSelectedStudy(null)}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-[#1e3a5f]">
+              {selectedStudy?.toolName}
+            </DialogTitle>
+            <DialogDescription className="text-sm text-[#8b6f47]">
+              {selectedStudy && new Date(selectedStudy.createdAt).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </DialogDescription>
+          </DialogHeader>
 
-      <div className="space-y-3 max-h-[500px] overflow-y-auto">
-        {savedStudies.map((study) => (
-          <div
-            key={study.id}
-            className="bg-[#FFFACD] border-2 border-[#d4af37] rounded-lg p-3"
-          >
-            <div className="mb-2">
-              <h4 className="text-sm font-bold text-[#1e3a5f] mb-1">
-                {study.toolName}
-              </h4>
-              <p className="text-xs text-[#8b6f47] line-clamp-2 mb-2">
-                {study.input}
-              </p>
-              <div className="flex items-center gap-2 text-xs text-[#8b6f47]">
-                <Clock className="w-3 h-3" />
-                {new Date(study.createdAt).toLocaleDateString('pt-BR', { 
-                  day: '2-digit', 
-                  month: '2-digit' 
-                })}
+          {selectedStudy && (
+            <>
+              <div className="bg-[#FFFACD] border-2 border-[#d4af37] rounded-lg p-4 mb-4">
+                <p className="text-sm font-semibold text-[#1e3a5f] mb-2">Entrada:</p>
+                <p className="text-sm text-[#8b6f47] whitespace-pre-wrap">{selectedStudy.input}</p>
+              </div>
+
+              <div className="bg-white border-2 border-[#d4af37] rounded-lg p-6 mb-4">
+                <p className="text-sm font-semibold text-[#1e3a5f] mb-3">Resultado:</p>
+                <div className="prose prose-sm max-w-none text-[#1e3a5f] whitespace-pre-wrap">
+                  {selectedStudy.output}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  onClick={handleCopy}
+                  variant="outline"
+                  className="flex-1 min-w-[120px] border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                >
+                  {copied ? (
+                    <>
+                      <CheckCircle className="w-4 h-4 mr-2" />
+                      Copiado!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4 mr-2" />
+                      Copiar
+                    </>
+                  )}
+                </Button>
+                <Button
+                  onClick={() => handleDownloadTxt(selectedStudy)}
+                  variant="outline"
+                  className="flex-1 min-w-[120px] border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                >
+                  <FileText className="w-4 h-4 mr-2" />
+                  Baixar TXT
+                </Button>
+                <Button
+                  onClick={() => handleDownloadPdf(selectedStudy)}
+                  variant="outline"
+                  className="flex-1 min-w-[120px] border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Baixar PDF
+                </Button>
+                <ShareButton
+                  title={selectedStudy.toolName}
+                  url={window.location.origin}
+                />
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <div className="bg-white/90 rounded-2xl p-4 shadow-xl border-4 border-[#d4af37]">
+        <div className="flex items-center gap-2 mb-4 pb-3 border-b-2 border-[#d4af37]">
+          <BookText className="w-5 h-5 text-[#1e3a5f]" />
+          <h3 className="text-lg font-bold text-[#1e3a5f]">
+            Meus Estudos
+          </h3>
+        </div>
+
+        <div className="space-y-3 max-h-[500px] overflow-y-auto">
+          {savedStudies.map((study) => (
+            <div
+              key={study.id}
+              className="bg-[#FFFACD] border-2 border-[#d4af37] rounded-lg p-3"
+            >
+              <div className="mb-2">
+                <h4 className="text-sm font-bold text-[#1e3a5f] mb-1">
+                  {study.toolName}
+                </h4>
+                <p className="text-xs text-[#8b6f47] line-clamp-2 mb-2">
+                  {study.input}
+                </p>
+                <div className="flex items-center gap-2 text-xs text-[#8b6f47]">
+                  <Clock className="w-3 h-3" />
+                  {new Date(study.createdAt).toLocaleDateString('pt-BR', { 
+                    day: '2-digit', 
+                    month: '2-digit' 
+                  })}
+                </div>
+              </div>
+
+              <div className="flex gap-1">
+                <Button
+                  onClick={() => setSelectedStudy(study)}
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                >
+                  <Eye className="w-3 h-3 mr-1" />
+                  Ver
+                </Button>
+                <Button
+                  onClick={() => handleDownloadTxt(study)}
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                >
+                  <FileText className="w-3 h-3 mr-1" />
+                  TXT
+                </Button>
+                <Button
+                  onClick={() => handleDownloadPdf(study)}
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                >
+                  <Download className="w-3 h-3 mr-1" />
+                  PDF
+                </Button>
+                <Button
+                  onClick={() => handleDelete(study.id)}
+                  variant="outline"
+                  size="sm"
+                  className="h-8 px-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white"
+                >
+                  <Trash2 className="w-3 h-3" />
+                </Button>
               </div>
             </div>
+          ))}
+        </div>
 
-            <div className="flex gap-1">
-              <Button
-                onClick={() => handleDownloadTxt(study)}
-                variant="outline"
-                size="sm"
-                className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
-              >
-                <FileText className="w-3 h-3 mr-1" />
-                TXT
-              </Button>
-              <Button
-                onClick={() => handleDownloadPdf(study)}
-                variant="outline"
-                size="sm"
-                className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
-              >
-                <Download className="w-3 h-3 mr-1" />
-                PDF
-              </Button>
-              <Button
-                onClick={() => handleDelete(study.id)}
-                variant="outline"
-                size="sm"
-                className="h-8 px-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white"
-              >
-                <Trash2 className="w-3 h-3" />
-              </Button>
-            </div>
-          </div>
-        ))}
+        <p className="text-center text-xs text-[#8b6f47] mt-3 pt-3 border-t border-[#d4af37]">
+          Total: {savedStudies.length} {savedStudies.length === 1 ? 'estudo' : 'estudos'}
+        </p>
       </div>
-
-      <p className="text-center text-xs text-[#8b6f47] mt-3 pt-3 border-t border-[#d4af37]">
-        Total: {savedStudies.length} {savedStudies.length === 1 ? 'estudo' : 'estudos'}
-      </p>
-    </div>
+    </>
   );
 }
 
