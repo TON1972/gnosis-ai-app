@@ -379,6 +379,7 @@ export default function AdminDashboard() {
 function SupportRequestsPanel() {
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'contacted' | 'resolved'>('all');
   const [departmentFilter, setDepartmentFilter] = useState<'all' | 'tecnico' | 'financeiro' | 'comercial' | 'outros'>('all');
+  const [showArchived, setShowArchived] = useState(false);
 
   const { data: supportRequests, refetch } = trpc.admin.supportRequests.useQuery(
     { status: statusFilter, department: departmentFilter },
@@ -394,6 +395,27 @@ function SupportRequestsPanel() {
     },
     onError: (error) => {
       toast.error(`Erro ao atualizar status: ${error.message}`);
+    },
+  });
+
+  const archiveMutation = trpc.admin.archiveTicket.useMutation({
+    onSuccess: () => {
+      toast.success('📦 Ticket arquivado com sucesso!');
+      refetch();
+    },
+    onError: (error) => {
+      toast.error(`Erro ao arquivar: ${error.message}`);
+    },
+  });
+
+  const unarchiveMutation = trpc.admin.unarchiveTicket.useMutation({
+    onSuccess: () => {
+      toast.success('↩️ Ticket desarquivado com sucesso!');
+      if (showArchived) setShowArchived(false);
+      refetch();
+    },
+    onError: (error) => {
+      toast.error(`Erro ao desarquivar: ${error.message}`);
     },
   });
 
@@ -421,12 +443,19 @@ function SupportRequestsPanel() {
     return admin ? admin.name : "Desconhecido";
   };
 
-  const deptNames: Record<string, string> = {
-    tecnico: "Suporte Técnico",
-    financeiro: "Financeiro",
-    comercial: "Comercial",
-    outros: "Outros Assuntos"
+  const deptNames = {
+    tecnico: 'Suporte Técnico',
+    financeiro: 'Financeiro',
+    comercial: 'Comercial',
+    outros: 'Outros Assuntos'
   };
+
+  // Filtrar tickets arquivados
+  const filteredRequests = supportRequests?.filter(req => 
+    showArchived ? req.archived : !req.archived
+  ) || [];
+
+  const archivedCount = supportRequests?.filter(req => req.archived).length || 0;
 
   const statusNames: Record<string, string> = {
     pending: "Pendente",
@@ -474,7 +503,18 @@ function SupportRequestsPanel() {
         </div>
       </div>
 
-      {supportRequests && supportRequests.length > 0 ? (
+      {/* Toggle Arquivados */}
+      <div className="mb-4">
+        <Button
+          onClick={() => setShowArchived(!showArchived)}
+          variant="outline"
+          className="border-[#d4af37] text-[#1e3a5f]"
+        >
+          {showArchived ? '✅ Ativos' : '📦 Arquivados'} {showArchived ? '' : `(${archivedCount})`}
+        </Button>
+      </div>
+
+      {filteredRequests && filteredRequests.length > 0 ? (
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -490,7 +530,7 @@ function SupportRequestsPanel() {
               </tr>
             </thead>
             <tbody>
-              {supportRequests.map((request) => (
+              {filteredRequests.map((request) => (
                 <tr key={request.id} className="border-b border-[#d4af37]/30 hover:bg-[#FFFACD]/50">
                   <td className="py-3 px-4 text-[#1e3a5f] text-sm">
                     {new Date(request.createdAt).toLocaleString("pt-BR")}
@@ -551,6 +591,24 @@ function SupportRequestsPanel() {
                       >
                         Responder
                       </Button>
+                      {request.status === 'resolved' && !request.archived && (
+                        <Button
+                          onClick={() => archiveMutation.mutate({ ticketId: request.id })}
+                          size="sm"
+                          className="bg-gray-600 hover:bg-gray-700 text-white"
+                        >
+                          📦 Arquivar
+                        </Button>
+                      )}
+                      {request.archived && (
+                        <Button
+                          onClick={() => unarchiveMutation.mutate({ ticketId: request.id })}
+                          size="sm"
+                          className="bg-orange-600 hover:bg-orange-700 text-white"
+                        >
+                          ↩️ Desarquivar
+                        </Button>
+                      )}
                     </div>
                   </td>
                 </tr>

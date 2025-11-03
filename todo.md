@@ -434,3 +434,16 @@
 
 - [x] Corrigir "6 de 15" para "6 de 17" na janela de plano atual do Dashboard
 
+
+
+
+## BUG - Botões Arquivar/Desarquivar Sumiram (02/11/2025)
+
+- [x] Investigar onde os botões de arquivar/desarquivar sumiram
+- [x] Restaurar botão "Arquivar" para tickets resolvidos no AdminDashboard
+- [x] Restaurar botão "Desarquivar" para tickets arquivados no AdminDashboard
+- [x] Adicionar mutations archiveMutation e unarchiveMutation no AdminDashboard
+- [x] Adicionar toggle de arquivados no AdminDashboard
+- [x] Verificar AdminTickets (já tinha os botões via TicketSystem)
+- [x] Verificar TicketSystem (já tinha os botões implementados)
+

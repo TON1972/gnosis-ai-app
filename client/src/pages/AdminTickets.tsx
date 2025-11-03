@@ -47,6 +47,22 @@ export default function AdminTickets() {
   // Mutation to update status
   const updateStatusMutation = trpc.admin.updateSupportStatus.useMutation();
 
+  // Mutations for archiving
+  const archiveMutation = trpc.admin.archiveTicket.useMutation({
+    onSuccess: () => {
+      toast.success('📦 Ticket arquivado!');
+      refetch();
+    },
+  });
+
+  const unarchiveMutation = trpc.admin.unarchiveTicket.useMutation({
+    onSuccess: () => {
+      toast.success('↩️ Ticket desarquivado!');
+      if (showArchived) setShowArchived(false);
+      refetch();
+    },
+  });
+
   // Get unread count for a ticket
   const getUnreadCount = (ticketId: number) => {
     const count = unreadCounts.find((c) => c.ticketId === ticketId);
