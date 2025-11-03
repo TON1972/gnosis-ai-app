@@ -415,3 +415,15 @@
 - [x] Restaurar lista de ferramentas com ✅ verde (disponíveis) e ❌ vermelho (indisponíveis)
 - [x] Garantir que a lista seja scrollável mostrando todas as 17 ferramentas
 
+
+
+
+## Correção NoCreditsModal - Usar Lógica da Home (02/11/2025)
+
+- [x] Remover tabela duplicada de ferramentas abaixo dos cards
+- [x] Remover lógica "Todas do Aliança +" das features
+- [x] Adicionar lista completa de ferramentas DENTRO de cada card
+- [x] Usar ✅ verde para disponíveis e ❌ vermelho para indisponíveis
+- [x] Lista scrollável dentro de cada card (mesma lógica da Home)
+- [x] Adicionar Patrística e Linha do Tempo Teológica no allTools da Home
+

@@ -9,19 +9,19 @@ interface NoCreditsModalProps {
   onClose: () => void;
 }
 
-const ALL_TOOLS = [
+const allTools = [
   { name: "Hermenêutica", free: true, alianca: true, lumen: true, premium: true },
   { name: "Traduções", free: true, alianca: true, lumen: true, premium: true },
   { name: "Resumos", free: true, alianca: true, lumen: true, premium: true },
-  { name: "Enfoques de Pregação", free: true, alianca: true, lumen: true, premium: true },
+  { name: "Esboços de Pregação", free: true, alianca: true, lumen: true, premium: true },
   { name: "Estudos Doutrinários", free: true, alianca: true, lumen: true, premium: true },
   { name: "Análise Teológica Comparada", free: true, alianca: true, lumen: true, premium: true },
-  { name: "Exegese", free: false, alianca: true, lumen: true, premium: true },
   { name: "Teologia Sistemática", free: false, alianca: true, lumen: true, premium: true },
   { name: "Contextualização Brasileira", free: false, alianca: true, lumen: true, premium: true },
+  { name: "Exegese Avançada", free: false, alianca: false, lumen: true, premium: true },
   { name: "Religiões Comparadas", free: false, alianca: true, lumen: true, premium: true },
   { name: "Referências ABNT/APA", free: false, alianca: false, lumen: true, premium: true },
-  { name: "Linguagem Ministerial", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Linguagem Ministerial", free: false, alianca: true, lumen: true, premium: true },
   { name: "Redação Acadêmica", free: false, alianca: false, lumen: true, premium: true },
   { name: "Dados Demográficos", free: false, alianca: false, lumen: true, premium: true },
   { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true },
@@ -38,13 +38,7 @@ const PLAN_UPGRADES = [
     creditsInitial: "1.500 créditos iniciais",
     creditsDaily: "100 créditos/dia",
     tools: "10 ferramentas",
-    features: [
-      "Hermenêutica, Traduções, Resumos",
-      "Esboços de Pregação",
-      "Estudos Doutrinários",
-      "Análise Teológica",
-      "Contextualização Brasileira"
-    ],
+    planKey: "alianca" as const,
     highlight: false
   },
   {
@@ -55,13 +49,7 @@ const PLAN_UPGRADES = [
     creditsInitial: "3.000 créditos iniciais",
     creditsDaily: "200 créditos/dia",
     tools: "Todas as 17 ferramentas",
-    features: [
-      "Todas do Aliança +",
-      "Exegese Avançada",
-      "Religiões Comparadas",
-      "Referências ABNT/APA",
-      "Transcrição de Mídia"
-    ],
+    planKey: "lumen" as const,
     highlight: true
   },
   {
@@ -72,12 +60,7 @@ const PLAN_UPGRADES = [
     creditsInitial: "6.000 créditos iniciais",
     creditsDaily: "300 créditos/dia",
     tools: "Todas as 17 ferramentas",
-    features: [
-      "Todas do Lumen +",
-      "Máxima quantidade de créditos",
-      "Suporte prioritário",
-      "Acesso antecipado"
-    ],
+    planKey: "premium" as const,
     highlight: false,
     premium: true
   }
@@ -283,19 +266,28 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                         {plan.tools}
                       </p>
                     </div>
-                    <ul className="space-y-1 mb-4">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
-                            plan.highlight || plan.premium ? "text-white" : "text-[#d4af37]"
-                          }`} />
-                          <span className={`text-xs ${
-                            plan.highlight || plan.premium ? "text-white" : "text-[#8b6f47]"
-                          }`}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
+                    <ul className="space-y-2 mb-4 max-h-64 overflow-y-auto">
+                      {allTools.map((tool, i) => {
+                        const isAvailable = tool[plan.planKey];
+                        return (
+                          <li key={i} className="flex items-start gap-2">
+                            {isAvailable ? (
+                              <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
+                                plan.highlight || plan.premium ? "text-green-400" : "text-green-600"
+                              }`} />
+                            ) : (
+                              <span className={`w-4 h-4 flex-shrink-0 mt-0.5 text-red-500 font-bold`}>×</span>
+                            )}
+                            <span className={`text-xs ${
+                              plan.highlight || plan.premium 
+                                ? isAvailable ? "text-white" : "text-white/50"
+                                : isAvailable ? "text-[#1e3a5f]" : "text-gray-400"
+                            }`}>
+                              {tool.name}
+                            </span>
+                          </li>
+                        );
+                      })}
                     </ul>
                     <Button
                       onClick={() => handleSubscribe(getPlanId(plan.name))}
@@ -313,45 +305,6 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                     </Button>
                   </div>
                 ))}
-              </div>
-              
-              {/* Lista Completa de Ferramentas */}
-              <div className="mt-8 bg-white/95 rounded-xl p-6 border-3 border-[#d4af37]">
-                <h4 className="text-lg font-bold text-[#1e3a5f] mb-4 text-center">Comparação Completa de Ferramentas</h4>
-                <div className="grid grid-cols-4 gap-2 text-xs font-semibold text-[#1e3a5f] mb-2 px-2">
-                  <div>Ferramenta</div>
-                  <div className="text-center">Aliança</div>
-                  <div className="text-center">Lumen</div>
-                  <div className="text-center">Premium</div>
-                </div>
-                <div className="max-h-60 overflow-y-auto space-y-1">
-                  {ALL_TOOLS.map((tool, idx) => (
-                    <div key={idx} className="grid grid-cols-4 gap-2 items-center py-2 px-2 hover:bg-[#FFFACD]/30 rounded">
-                      <div className="text-xs text-[#1e3a5f] font-medium">{tool.name}</div>
-                      <div className="flex justify-center">
-                        {tool.alianca ? (
-                          <CheckCircle2 className="w-4 h-4 text-green-600" />
-                        ) : (
-                          <X className="w-4 h-4 text-red-500" />
-                        )}
-                      </div>
-                      <div className="flex justify-center">
-                        {tool.lumen ? (
-                          <CheckCircle2 className="w-4 h-4 text-green-600" />
-                        ) : (
-                          <X className="w-4 h-4 text-red-500" />
-                        )}
-                      </div>
-                      <div className="flex justify-center">
-                        {tool.premium ? (
-                          <CheckCircle2 className="w-4 h-4 text-green-600" />
-                        ) : (
-                          <X className="w-4 h-4 text-red-500" />
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           )}

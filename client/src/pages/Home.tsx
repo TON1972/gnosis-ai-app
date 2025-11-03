@@ -98,7 +98,9 @@ const allTools = [
   { name: "Linguagem Ministerial", free: false, alianca: true, lumen: true, premium: true },
   { name: "Redação Acadêmica", free: false, alianca: false, lumen: true, premium: true },
   { name: "Dados Demográficos", free: false, alianca: false, lumen: true, premium: true },
-  { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true }
+  { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Patrística", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Linha do Tempo Teológica", free: false, alianca: false, lumen: true, premium: true }
 ];
 
 const plans = [
