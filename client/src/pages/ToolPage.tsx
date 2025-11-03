@@ -11,6 +11,7 @@ import NoCreditsModal from "@/components/NoCreditsModal";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import SubscriptionWarningBanner from "@/components/SubscriptionWarningBanner";
+import ShareButton from "@/components/ShareButton";
 
 const TOOLS_INFO: Record<string, { name: string; description: string; placeholder: string; creditCost: number }> = {
   hermeneutica: {
@@ -387,6 +388,7 @@ export default function ToolPage() {
                       <Download className="w-4 h-4 mr-2" />
                       Baixar PDF
                     </Button>
+                    <ShareButton toolName={toolInfo.name} toolId={toolId} />
                   </div>
                 </div>
                 <div className="bg-[#FFFACD] border-2 border-[#d4af37] rounded-lg p-6 whitespace-pre-wrap text-[#1e3a5f]">

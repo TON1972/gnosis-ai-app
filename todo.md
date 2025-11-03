@@ -476,3 +476,14 @@
 - [x] Atualizar descrições no Dashboard
 - [x] Garantir que as descrições sejam exatamente iguais em ambos os locais
 
+
+
+
+## Adicionar Botão Compartilhar nas Ferramentas (03/11/2025)
+
+- [x] Criar componente ShareButton com modal de compartilhamento
+- [x] Adicionar integrações: WhatsApp, Facebook, Twitter/X, LinkedIn
+- [x] Adicionar botão "Compartilhar" no ToolPage ao lado do "Baixar PDF"
+- [x] Testar compartilhamento em todas as 17 ferramentas
+- [x] Garantir que funcione em mobile e desktop
+
