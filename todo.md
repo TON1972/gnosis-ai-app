@@ -487,3 +487,13 @@
 - [x] Testar compartilhamento em todas as 17 ferramentas
 - [x] Garantir que funcione em mobile e desktop
 
+
+
+
+## Melhorias ShareButton - Instagram, TikTok e Assinatura (03/11/2025)
+
+- [x] Adicionar opção de compartilhar no Instagram
+- [x] Adicionar opção de compartilhar no TikTok
+- [x] Adicionar assinatura discreta: "Desenvolvido por GNOSIS AI - Estudos Bíblicos Profundos com IA"
+- [x] Adicionar link para home abaixo da assinatura
+
