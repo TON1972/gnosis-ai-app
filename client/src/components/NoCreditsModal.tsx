@@ -92,16 +92,16 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
     return plan?.id || 0;
   };
   
-  // Calcula preço anual com 16,6% desconto
+  // Calcula preço anual com 16,5% desconto
   const getYearlyPrice = (monthly: number) => {
     const yearly = monthly * 12;
-    const discount = yearly * 0.166;
+    const discount = yearly * 0.165;
     return (yearly - discount).toFixed(2);
   };
   
   const getDisplayPrice = (priceValue: number) => {
     if (billingPeriod === 'yearly') {
-      // Calcula valor mensal COM desconto de 16,6%
+      // Calcula valor mensal COM desconto de 16,5%
       const yearlyTotal = parseFloat(getYearlyPrice(priceValue));
       const monthlyWithDiscount = (yearlyTotal / 12).toFixed(2).replace('.', ',');
       return { main: `R$ ${monthlyWithDiscount}`, multiplier: 'x 12' };
@@ -214,7 +214,7 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                 >
                   Anual
                   <span className="absolute -top-1 -right-1 bg-[#d4af37] text-[#1e3a5f] text-xs px-1.5 py-0.5 rounded-full font-bold">
-                    -16,6%
+                    -16,5%
                   </span>
                 </button>
               </div>

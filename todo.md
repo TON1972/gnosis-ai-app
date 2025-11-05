@@ -573,3 +573,18 @@
 - [x] Corrigir getDisplayPrice no NoCreditsModal
 - [x] Testar valores corretos (Aliança R$ 16,66 x 12, Lumen R$ 30,84 x 12, Premium R$ 57,53 x 12)
 
+
+
+
+
+## Alterar Desconto de 16,6% para 16,5% (04/11/2025)
+
+- [x] Mapear todos os locais onde 16,6% ou 0.166 aparecem
+- [x] Alterar cálculo na Home (getYearlyPrice: 0.166 → 0.165)
+- [x] Alterar cálculo no NoCreditsModal (getYearlyPrice: 0.166 → 0.165)
+- [x] Alterar badge visual "Anual -16,6%" para "Anual -16,5%" na Home
+- [x] Alterar badge visual no NoCreditsModal
+- [x] Verificar comentários no código
+- [x] Recalcular e testar todos os valores
+- [x] Verificar se há outros arquivos com menção a 16,6%
+

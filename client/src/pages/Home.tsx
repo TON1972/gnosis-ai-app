@@ -156,17 +156,17 @@ export default function Home() {
   const [, setLocation] = useLocation();
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
   
-  // Calcula preço anual com 16,6% desconto
+  // Calcula preço anual com 16,5% desconto
   const getYearlyPrice = (monthly: number) => {
     const yearly = monthly * 12;
-    const discount = yearly * 0.166;
+    const discount = yearly * 0.165;
     return (yearly - discount).toFixed(2);
   };
   
   const getDisplayPrice = (plan: typeof plans[number]) => {
     if (plan.priceValue === 0) return { main: plan.price, multiplier: null };
     if (billingPeriod === 'yearly') {
-      // Calcula valor mensal COM desconto de 16,6%
+      // Calcula valor mensal COM desconto de 16,5%
       const yearlyTotal = parseFloat(getYearlyPrice(plan.priceValue));
       const monthlyWithDiscount = (yearlyTotal / 12).toFixed(2).replace('.', ',');
       return { main: `R$ ${monthlyWithDiscount}`, multiplier: 'x 12' };
@@ -369,7 +369,7 @@ export default function Home() {
           >
             Anual
             <span className="absolute -top-2 -right-2 bg-[#d4af37] text-[#1e3a5f] text-xs px-2 py-1 rounded-full font-bold">
-              -16,6%
+              -16,5%
             </span>
           </button>
         </div>
