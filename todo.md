@@ -612,3 +612,17 @@
 - [x] Testar visibilidade para usuário FREE
 - [x] Testar que mensagem piscante funciona corretamente
 
+
+
+
+
+## Remover Opção PIX das Assinaturas de Planos (04/11/2025)
+
+- [x] Mapear onde aparece toggle "Renovação Automática / Pagamento Manual PIX"
+- [x] Remover toggle do NoCreditsModal (seção de upgrade de planos)
+- [x] Remover estado paymentType do NoCreditsModal
+- [x] Ajustar lógica de checkout para usar apenas renovação automática
+- [x] Verificar se há outros locais com opção PIX para assinaturas
+- [x] Testar que assinaturas só aceitam cartão de crédito
+- [x] Confirmar que créditos avulsos ainda têm opção PIX
+

@@ -78,10 +78,10 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   const { data: allPlans } = trpc.plans.list.useQuery();
   const isFreeUser = !activePlan || activePlan.plan.name === "free";
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
-  const [paymentType, setPaymentType] = useState<'auto' | 'manual'>('auto'); // auto = renovação automática, manual = pagamento único com PIX
+  // Removido paymentType - assinaturas agora só aceitam renovação automática (cartão)
   
   const createSubscriptionCheckout = trpc.payments.createSubscriptionCheckout.useMutation();
-  const createManualPaymentCheckout = trpc.payments.createManualPaymentCheckout.useMutation();
+  // Removido createManualPaymentCheckout - assinaturas agora só aceitam renovação automática
   const createCreditsCheckout = trpc.payments.createCreditsCheckout.useMutation();
   
   // Map plan names to IDs from database
@@ -115,10 +115,8 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   
   const handleSubscribe = async (planId: number) => {
     try {
-      // Escolher entre checkout automático ou manual baseado no paymentType
-      const result = paymentType === 'auto' 
-        ? await createSubscriptionCheckout.mutateAsync({ planId, billingPeriod })
-        : await createManualPaymentCheckout.mutateAsync({ planId, billingPeriod });
+      // Assinaturas agora só aceitam renovação automática (cartão de crédito)
+      const result = await createSubscriptionCheckout.mutateAsync({ planId, billingPeriod });
       
       // Redirecionar para checkout do Mercado Pago
       if (result.init_point) {
@@ -165,34 +163,7 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                 Faça Upgrade do Seu Plano
               </h3>
               
-              {/* Billing Period Toggle */}
-              <div className="flex justify-center items-center gap-3 mb-4">
-                <button
-                  onClick={() => setPaymentType('auto')}
-                  className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-                    paymentType === 'auto'
-                      ? 'bg-[#1e3a5f] text-[#d4af37] shadow-lg'
-                      : 'bg-white/80 text-[#8b6f47] hover:bg-white'
-                  }`}
-                >
-                  Renovação Automática
-                </button>
-                <button
-                  onClick={() => setPaymentType('manual')}
-                  className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all relative ${
-                    paymentType === 'manual'
-                      ? 'bg-[#1e3a5f] text-[#d4af37] shadow-lg'
-                      : 'bg-white/80 text-[#8b6f47] hover:bg-white'
-                  }`}
-                >
-                  Pagamento Manual
-                  <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
-                    PIX
-                  </span>
-                </button>
-              </div>
-              
-              {/* Period Toggle */}
+              {/* Period Toggle - Apenas Mensal/Anual (Renovação Automática) */}
               <div className="flex justify-center items-center gap-3 mb-6">
                 <button
                   onClick={() => setBillingPeriod('monthly')}
