@@ -154,7 +154,7 @@ const plans = [
 export default function Home() {
   const { user, isAuthenticated, logout } = useAuth();
   const [, setLocation] = useLocation();
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
   
   // Calcula preço anual com 16,6% desconto
   const getYearlyPrice = (monthly: number) => {

@@ -536,3 +536,15 @@
 - [x] Testar visualmente a nova seção
 - [x] Garantir responsividade mobile
 
+
+
+
+
+## Alterar Prioridade dos Planos para Anual (04/11/2025)
+
+- [x] Verificar estado atual do toggle de planos na Home
+- [x] Alterar valor padrão de billingPeriod de 'monthly' para 'yearly'
+- [x] Testar se planos anuais aparecem por padrão
+- [x] Verificar se toggle Mensal/Anual continua funcionando
+- [x] Garantir que nenhuma outra funcionalidade foi afetada
+
