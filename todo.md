@@ -588,3 +588,13 @@
 - [x] Recalcular e testar todos os valores
 - [x] Verificar se há outros arquivos com menção a 16,6%
 
+
+
+
+
+## CORREÇÃO - Planos Anuais como Padrão no NoCreditsModal (04/11/2025)
+
+- [x] Alterar useState de 'monthly' para 'yearly' no NoCreditsModal
+- [x] Testar modal de upgrade no Dashboard
+- [x] Verificar se planos anuais aparecem por padrão
+

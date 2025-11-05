@@ -77,7 +77,7 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
   const { data: allPlans } = trpc.plans.list.useQuery();
   const isFreeUser = !activePlan || activePlan.plan.name === "free";
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
   const [paymentType, setPaymentType] = useState<'auto' | 'manual'>('auto'); // auto = renovação automática, manual = pagamento único com PIX
   
   const createSubscriptionCheckout = trpc.payments.createSubscriptionCheckout.useMutation();
