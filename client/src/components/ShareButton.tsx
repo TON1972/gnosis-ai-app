@@ -68,8 +68,7 @@ export default function ShareButton({ toolName, toolId }: ShareButtonProps) {
     <>
       <Button
         onClick={() => setIsOpen(true)}
-        variant="outline"
-        className="gap-2"
+        className="flex-1 min-w-[120px] bg-[#1e3a5f] text-white hover:bg-[#d4af37] font-semibold shadow-lg gap-2"
       >
         <Share2 className="w-4 h-4" />
         Compartilhar

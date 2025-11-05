@@ -697,3 +697,13 @@
 - [x] Adicionar font semibold e sombra para destaque
 - [x] Testar visualmente no Dashboard
 
+
+
+
+
+## CORREÇÃO - Ajustar Estilo do Botão Compartilhar (05/11/2025)
+
+- [x] Localizar componente ShareButton
+- [x] Aplicar mesmo estilo dos outros botões (fundo azul escuro, texto branco, semibold, sombra)
+- [x] Testar visualmente no modal
+
