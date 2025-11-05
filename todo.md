@@ -648,3 +648,16 @@
 - [x] Testar navegação do rodapé da Home para Dashboard
 - [x] Verificar que não afeta outras navegações
 
+
+
+
+
+## Adicionar Botão "Voltar ao Topo" em Todas as Páginas (05/11/2025)
+
+- [x] Criar componente ScrollToTopButton reutilizável
+- [x] Adicionar lógica de visibilidade (aparece após scroll ~200px)
+- [x] Estilizar botão (circular, canto inferior direito, ícone seta)
+- [x] Adicionar animação de scroll suave
+- [x] Integrar no App.tsx para aparecer em todas as páginas
+- [x] Testar em Home, Dashboard e FAQ
+
