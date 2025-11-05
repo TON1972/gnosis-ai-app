@@ -562,3 +562,14 @@
 - [x] Testar visualmente em todos os locais
 - [x] Garantir que cálculo de pagamento continua correto
 
+
+
+
+
+## CORREÇÃO URGENTE - Aplicar Desconto nos Preços Anuais (04/11/2025)
+
+- [x] Calcular valor mensal COM desconto de 16,6%
+- [x] Corrigir getDisplayPrice na Home para mostrar valor mensal com desconto
+- [x] Corrigir getDisplayPrice no NoCreditsModal
+- [x] Testar valores corretos (Aliança R$ 16,66 x 12, Lumen R$ 30,84 x 12, Premium R$ 57,53 x 12)
+

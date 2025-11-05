@@ -166,7 +166,10 @@ export default function Home() {
   const getDisplayPrice = (plan: typeof plans[number]) => {
     if (plan.priceValue === 0) return { main: plan.price, multiplier: null };
     if (billingPeriod === 'yearly') {
-      return { main: plan.price.replace('/mês', ''), multiplier: 'x 12' };
+      // Calcula valor mensal COM desconto de 16,6%
+      const yearlyTotal = parseFloat(getYearlyPrice(plan.priceValue));
+      const monthlyWithDiscount = (yearlyTotal / 12).toFixed(2).replace('.', ',');
+      return { main: `R$ ${monthlyWithDiscount}`, multiplier: 'x 12' };
     }
     return { main: plan.price, multiplier: null };
   };

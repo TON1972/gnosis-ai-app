@@ -101,7 +101,10 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   
   const getDisplayPrice = (priceValue: number) => {
     if (billingPeriod === 'yearly') {
-      return { main: `R$ ${priceValue.toFixed(2).replace('.', ',')}`, multiplier: 'x 12' };
+      // Calcula valor mensal COM desconto de 16,6%
+      const yearlyTotal = parseFloat(getYearlyPrice(priceValue));
+      const monthlyWithDiscount = (yearlyTotal / 12).toFixed(2).replace('.', ',');
+      return { main: `R$ ${monthlyWithDiscount}`, multiplier: 'x 12' };
     }
     return { main: `R$ ${priceValue.toFixed(2).replace('.', ',')}`, multiplier: null };
   };
