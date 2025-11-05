@@ -598,3 +598,17 @@
 - [x] Testar modal de upgrade no Dashboard
 - [x] Verificar se planos anuais aparecem por padrão
 
+
+
+
+
+## Adicionar Mensagem Promocional Piscante (04/11/2025)
+
+- [x] Criar animação CSS para efeito piscante
+- [x] Adicionar mensagem promocional na Home
+- [x] Adicionar lógica condicional (só mostrar para visitantes e FREE)
+- [x] Adicionar mensagem no NoCreditsModal
+- [x] Testar visibilidade para visitante (não logado)
+- [x] Testar visibilidade para usuário FREE
+- [x] Testar que mensagem piscante funciona corretamente
+

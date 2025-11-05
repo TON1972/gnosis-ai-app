@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { trpc } from "@/lib/trpc";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
@@ -153,6 +154,7 @@ const plans = [
 
 export default function Home() {
   const { user, isAuthenticated, logout } = useAuth();
+  const { data: activePlan } = trpc.credits.activePlan.useQuery(undefined, { enabled: isAuthenticated });
   const [, setLocation] = useLocation();
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
   
@@ -377,6 +379,25 @@ export default function Home() {
         <p className="text-base md:text-lg lg:text-xl text-[#8b6f47] text-center mb-8 md:mb-12">
           * Créditos iniciais dos planos pagos são renovados a cada 30 dias
         </p>
+        
+        {/* Mensagem promocional - apenas para visitantes e usuários FREE */}
+        {(!isAuthenticated || !activePlan || activePlan.plan.name === 'free') && (
+          <div className="mb-8 text-center">
+            <style>{`
+              @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.3; }
+              }
+              .blink-animation {
+                animation: blink 1.5s ease-in-out infinite;
+              }
+            `}</style>
+            <p className="blink-animation text-xl md:text-2xl font-bold text-red-600 bg-yellow-100 border-4 border-red-500 rounded-lg py-4 px-6 inline-block shadow-lg">
+              🎉 ESSES SÃO VALORES PROMOCIONAIS DE FINAL DE ANO, APROVEITE A OPORTUNIDADE! 🎉
+            </p>
+          </div>
+        )}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <div

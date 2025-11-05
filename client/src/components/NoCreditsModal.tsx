@@ -218,6 +218,25 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                   </span>
                 </button>
               </div>
+              
+              {/* Mensagem promocional - apenas para usuários FREE */}
+              {isFreeUser && (
+                <div className="mb-6 text-center">
+                  <style>{`
+                    @keyframes blink {
+                      0%, 100% { opacity: 1; }
+                      50% { opacity: 0.3; }
+                    }
+                    .blink-animation {
+                      animation: blink 1.5s ease-in-out infinite;
+                    }
+                  `}</style>
+                  <p className="blink-animation text-lg md:text-xl font-bold text-red-600 bg-yellow-100 border-4 border-red-500 rounded-lg py-3 px-4 inline-block shadow-lg">
+                    🎉 ESSES SÃO VALORES PROMOCIONAIS DE FINAL DE ANO, APROVEITE A OPORTUNIDADE! 🎉
+                  </p>
+                </div>
+              )}
+              
               <div className="grid md:grid-cols-3 gap-4">
                 {PLAN_UPGRADES.map((plan, index) => (
                   <div
