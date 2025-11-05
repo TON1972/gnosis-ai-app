@@ -523,3 +523,16 @@
 - [x] Atualizar valores anuais (calculados automaticamente com 16,6% desconto)
 - [x] Testar exibição dos novos valores
 
+
+
+
+
+## Adicionar Seção de Créditos Avulsos na Home (04/11/2025)
+
+- [x] Verificar estrutura da tabela de créditos avulsos no Dashboard
+- [x] Adicionar seção "Acabaram seus créditos?" na Home abaixo dos planos
+- [x] Replicar tabela de pacotes de créditos avulsos do Dashboard
+- [x] Adicionar botão de compra em cada pacote
+- [x] Testar visualmente a nova seção
+- [x] Garantir responsividade mobile
+

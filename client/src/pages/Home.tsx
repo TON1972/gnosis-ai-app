@@ -19,7 +19,8 @@ import {
   Sparkles,
   ArrowRight,
   CheckCircle2,
-  Crown
+  Crown,
+  Gift
 } from "lucide-react";
 
 const mainTools = [
@@ -502,6 +503,146 @@ export default function Home() {
               Perguntas Frequentes
             </Button>
           </Link>
+        </div>
+      </section>
+
+      {/* Bonus Credits Section */}
+      <section className="container mx-auto px-4 py-8 md:py-16">
+        <div className="bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] rounded-2xl p-6 md:p-12 shadow-2xl border-4 border-[#d4af37] max-w-6xl mx-auto">
+          {/* Title */}
+          <div className="text-center mb-8 md:mb-12">
+            <Gift className="w-12 h-12 md:w-16 md:h-16 text-[#d4af37] mx-auto mb-4" />
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] mb-4">
+              Acabaram Seus Créditos?
+            </h3>
+            <p className="text-lg md:text-xl text-[#8b6f47] font-semibold">
+              Faça um Upgrade de Plano ou Compre Créditos Avulso!
+            </p>
+          </div>
+
+          {/* Credits Packages */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {/* Package 1 - 500 credits */}
+            <div className="bg-white/90 rounded-xl p-6 shadow-lg border-3 border-[#d4af37] relative">
+              <div className="text-center mb-4">
+                <Sparkles className="w-8 h-8 mx-auto mb-2 text-[#d4af37]" />
+                <p className="text-3xl font-bold text-[#1e3a5f]">
+                  500
+                </p>
+                <p className="text-sm text-[#8b6f47]">
+                  créditos
+                </p>
+              </div>
+              <div className="text-center mb-4">
+                <p className="text-2xl font-bold text-[#1e3a5f]">
+                  R$ 9,90
+                </p>
+                <p className="text-xs text-[#8b6f47]">
+                  R$ 0,0198/crédito
+                </p>
+              </div>
+              <Button
+                onClick={() => window.location.href = getLoginUrl()}
+                className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
+              >
+                Comprar
+              </Button>
+            </div>
+
+            {/* Package 2 - 1500 credits (POPULAR) */}
+            <div className="bg-white/95 rounded-xl p-6 shadow-lg border-4 border-[#d4af37] relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#1e3a5f] px-3 py-1 rounded-full text-xs font-bold">
+                POPULAR
+              </div>
+              <div className="text-center mb-4">
+                <Sparkles className="w-8 h-8 mx-auto mb-2 text-[#d4af37]" />
+                <p className="text-3xl font-bold text-[#1e3a5f]">
+                  1.500
+                </p>
+                <p className="text-sm text-[#8b6f47]">
+                  créditos
+                </p>
+              </div>
+              <div className="text-center mb-4">
+                <p className="text-2xl font-bold text-[#1e3a5f]">
+                  R$ 24,90
+                </p>
+                <p className="text-xs text-[#8b6f47]">
+                  R$ 0,0166/crédito
+                </p>
+              </div>
+              <Button
+                onClick={() => window.location.href = getLoginUrl()}
+                className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
+              >
+                Comprar
+              </Button>
+            </div>
+
+            {/* Package 3 - 2500 credits */}
+            <div className="bg-white/90 rounded-xl p-6 shadow-lg border-3 border-[#d4af37] relative">
+              <div className="text-center mb-4">
+                <Sparkles className="w-8 h-8 mx-auto mb-2 text-[#d4af37]" />
+                <p className="text-3xl font-bold text-[#1e3a5f]">
+                  2.500
+                </p>
+                <p className="text-sm text-[#8b6f47]">
+                  créditos
+                </p>
+              </div>
+              <div className="text-center mb-4">
+                <p className="text-2xl font-bold text-[#1e3a5f]">
+                  R$ 39,90
+                </p>
+                <p className="text-xs text-[#8b6f47]">
+                  R$ 0,0160/crédito
+                </p>
+              </div>
+              <Button
+                onClick={() => window.location.href = getLoginUrl()}
+                className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
+              >
+                Comprar
+              </Button>
+            </div>
+
+            {/* Package 4 - 5000 credits (MELHOR VALOR) */}
+            <div className="bg-gradient-to-br from-[#d4af37] to-[#B8860B] rounded-xl p-6 shadow-lg border-3 border-[#1e3a5f] relative">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#1e3a5f] text-[#d4af37] px-3 py-1 rounded-full text-xs font-bold">
+                MELHOR VALOR
+              </div>
+              <div className="text-center mb-4">
+                <Sparkles className="w-8 h-8 mx-auto mb-2 text-white" />
+                <p className="text-3xl font-bold text-white">
+                  5.000
+                </p>
+                <p className="text-sm text-white/80">
+                  créditos
+                </p>
+              </div>
+              <div className="text-center mb-4">
+                <p className="text-2xl font-bold text-white">
+                  R$ 69,90
+                </p>
+                <p className="text-xs text-white/70">
+                  R$ 0,0140/crédito
+                </p>
+              </div>
+              <Button
+                onClick={() => window.location.href = getLoginUrl()}
+                className="w-full bg-white text-[#1e3a5f] hover:bg-gray-100"
+              >
+                Comprar
+              </Button>
+            </div>
+          </div>
+
+          {/* Info Text */}
+          <div className="text-center mt-6 md:mt-8">
+            <p className="text-sm md:text-base text-[#8b6f47]">
+              <strong>Créditos avulsos nunca expiram</strong> e podem ser usados em qualquer plano!
+            </p>
+          </div>
         </div>
       </section>
 
