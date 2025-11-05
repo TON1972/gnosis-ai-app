@@ -671,3 +671,17 @@
 - [x] Mover botão Chatbot mais acima (bottom-24 ou bottom-28)
 - [x] Testar visualmente ambos os botões
 
+
+
+
+
+## Alterar Sistema de Alertas de Inadimplência de 24h para 72h (05/11/2025)
+
+- [x] Localizar código do sistema de alertas de inadimplência
+- [x] Alterar período de bloqueio de 24h para 72h
+- [x] Implementar avisos em 24h, 48h e 72h
+- [x] Manter cores e lógica existentes (amarelo → laranja → vermelho)
+- [x] Após 72h: bloqueio total + mensagem vermelha
+- [x] Implementar cores progressivas (amarelo 48-72h, laranja 24-48h, laranja escuro 0-24h)
+- [x] Verificar que nenhuma funcionalidade foi afetada
+

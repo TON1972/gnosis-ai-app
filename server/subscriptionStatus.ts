@@ -6,9 +6,9 @@ import { subscriptions } from "../drizzle/schema";
  * Subscription status management
  * 
  * Status flow:
- * - active: Payment up to date
- * - grace_period: Payment overdue, 24h grace period active
- * - blocked: Grace period expired, tools locked
+  * - active: Payment up to date
+  * - grace_period: Payment overdue, 72h grace period active
+  * - blocked: Grace period expired, tools locked
  * - cancelled: User cancelled subscription
  * - expired: Subscription ended
  */
@@ -53,8 +53,8 @@ export async function checkSubscriptionStatus(userId: number): Promise<Subscript
     // Payment is overdue
     
     if (!subscription.gracePeriodEndsAt) {
-      // Start grace period (24 hours from now)
-      const gracePeriodEndsAt = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+      // Start grace period (72 hours from now)
+      const gracePeriodEndsAt = new Date(now.getTime() + 72 * 60 * 60 * 1000);
       
       await db.update(subscriptions)
         .set({
@@ -68,7 +68,7 @@ export async function checkSubscriptionStatus(userId: number): Promise<Subscript
         isBlocked: false,
         gracePeriodEndsAt,
         nextBillingDate: subscription.nextBillingDate,
-        daysUntilBlock: 1,
+        daysUntilBlock: 3,
       };
     }
 

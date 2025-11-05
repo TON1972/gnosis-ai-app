@@ -50,10 +50,18 @@ export default function SubscriptionWarningBanner() {
     // Grace period active
     const hoursLeft = subscriptionStatus.daysUntilBlock 
       ? Math.ceil(subscriptionStatus.daysUntilBlock * 24) 
-      : 24;
+      : 72;
+
+    // Determine color based on hours left
+    let bgColor = "bg-yellow-500"; // 48-72h
+    if (hoursLeft <= 24) {
+      bgColor = "bg-orange-600"; // 0-24h (mais urgente)
+    } else if (hoursLeft <= 48) {
+      bgColor = "bg-orange-500"; // 24-48h
+    }
 
     return (
-      <div className="bg-yellow-500 text-gray-900 py-4 px-6 shadow-lg sticky top-0 z-50 animate-pulse">
+      <div className={`${bgColor} text-gray-900 py-4 px-6 shadow-lg sticky top-0 z-50 animate-pulse`}>
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-6 h-6 flex-shrink-0" />
