@@ -548,3 +548,17 @@
 - [x] Verificar se toggle Mensal/Anual continua funcionando
 - [x] Garantir que nenhuma outra funcionalidade foi afetada
 
+
+
+
+
+## Alterar Exibição de Preços Anuais (04/11/2025)
+
+- [x] Mapear todos os locais onde preços anuais aparecem
+- [x] Alterar função getYearlyPrice na Home para retornar valor mensal
+- [x] Alterar exibição para mostrar "R$ XX,XX x 12" ao invés de valor total
+- [x] Aplicar mesma lógica no NoCreditsModal
+- [x] Verificar FAQ e Chatbot
+- [x] Testar visualmente em todos os locais
+- [x] Garantir que cálculo de pagamento continua correto
+

@@ -101,9 +101,9 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
   
   const getDisplayPrice = (priceValue: number) => {
     if (billingPeriod === 'yearly') {
-      return `R$ ${getYearlyPrice(priceValue)}`;
+      return { main: `R$ ${priceValue.toFixed(2).replace('.', ',')}`, multiplier: 'x 12' };
     }
-    return `R$ ${priceValue.toFixed(2).replace('.', ',')}`;
+    return { main: `R$ ${priceValue.toFixed(2).replace('.', ',')}`, multiplier: null };
   };
   
   const getDisplayPeriod = () => {
@@ -241,8 +241,15 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
                       <span className={`text-3xl font-bold ${
                         plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                       }`}>
-                        {getDisplayPrice(plan.priceValue)}
+                        {getDisplayPrice(plan.priceValue).main}
                       </span>
+                      {getDisplayPrice(plan.priceValue).multiplier && (
+                        <span className={`text-sm ml-1 ${
+                          plan.highlight || plan.premium ? "text-white/60" : "text-[#8b6f47]/60"
+                        }`}>
+                          {getDisplayPrice(plan.priceValue).multiplier}
+                        </span>
+                      )}
                       <span className={`text-sm ${
                         plan.highlight || plan.premium ? "text-white/80" : "text-[#8b6f47]"
                       }`}>

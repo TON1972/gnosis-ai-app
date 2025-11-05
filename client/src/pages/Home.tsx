@@ -164,11 +164,11 @@ export default function Home() {
   };
   
   const getDisplayPrice = (plan: typeof plans[number]) => {
-    if (plan.priceValue === 0) return plan.price;
+    if (plan.priceValue === 0) return { main: plan.price, multiplier: null };
     if (billingPeriod === 'yearly') {
-      return `R$ ${getYearlyPrice(plan.priceValue)}`;
+      return { main: plan.price.replace('/mês', ''), multiplier: 'x 12' };
     }
-    return plan.price;
+    return { main: plan.price, multiplier: null };
   };
   
   const getDisplayPeriod = (plan: typeof plans[number]) => {
@@ -406,8 +406,15 @@ export default function Home() {
                 <span className={`text-4xl font-bold ${
                   plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                 }`}>
-                  {getDisplayPrice(plan)}
+                  {getDisplayPrice(plan).main}
                 </span>
+                {getDisplayPrice(plan).multiplier && (
+                  <span className={`text-lg ml-1 ${
+                    plan.highlight || plan.premium ? "text-white/60" : "text-[#8b6f47]/60"
+                  }`}>
+                    {getDisplayPrice(plan).multiplier}
+                  </span>
+                )}
                 {plan.priceValue > 0 && (
                   <span className={`text-lg ${
                     plan.highlight || plan.premium ? "text-white/80" : "text-[#8b6f47]"
