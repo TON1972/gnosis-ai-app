@@ -626,3 +626,15 @@
 - [x] Testar que assinaturas só aceitam cartão de crédito
 - [x] Confirmar que créditos avulsos ainda têm opção PIX
 
+
+
+
+
+## Adicionar Mensagem PIX nos Créditos Avulsos (04/11/2025)
+
+- [x] Adicionar mensagem "OPÇÃO DE COMPRA POR PIX" na Home (seção créditos avulsos)
+- [x] Adicionar mensagem no NoCreditsModal (seção créditos avulsos)
+- [x] Estilizar com cores verde/destaque para associar com PIX
+- [x] Testar visualmente em ambos os locais
+- [x] Garantir que não afeta outras partes da plataforma
+

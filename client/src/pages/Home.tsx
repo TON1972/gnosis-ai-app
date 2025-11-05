@@ -549,6 +549,12 @@ export default function Home() {
             <p className="text-lg md:text-xl text-[#8b6f47] font-semibold">
               Faça um Upgrade de Plano ou Compre Créditos Avulso!
             </p>
+            {/* PIX Message */}
+            <div className="mt-6 bg-green-500 text-white px-6 py-3 rounded-lg inline-block shadow-lg">
+              <p className="text-base md:text-lg font-bold">
+                💸 OPÇÃO DE COMPRA DE CRÉDITOS AVULSO POR PIX LIBERADO, MAIS RÁPIDO E PRÁTICO!
+              </p>
+            </div>
           </div>
 
           {/* Credits Packages */}

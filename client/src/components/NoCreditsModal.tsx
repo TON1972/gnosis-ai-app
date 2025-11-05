@@ -318,6 +318,12 @@ export default function NoCreditsModal({ open, onClose }: NoCreditsModalProps) {
             <p className="text-sm text-[#8b6f47] mb-4">
               Créditos avulsos <strong>nunca expiram</strong> e podem ser usados em qualquer plano!
             </p>
+            {/* PIX Message */}
+            <div className="mb-4 bg-green-500 text-white px-4 py-2 rounded-lg text-center shadow-lg">
+              <p className="text-sm md:text-base font-bold">
+                💸 OPÇÃO DE COMPRA DE CRÉDITOS AVULSO POR PIX LIBERADO, MAIS RÁPIDO E PRÁTICO!
+              </p>
+            </div>
             <div className="grid md:grid-cols-4 gap-4">
               {BONUS_CREDITS.map((credit, index) => (
                 <div
