@@ -11,17 +11,19 @@ import { Share2 } from "lucide-react";
 import { toast } from "sonner";
 
 interface ShareButtonProps {
-  toolName: string;
-  toolId: string;
+  title: string;
+  url: string;
+  content?: string; // Conteúdo completo do estudo (opcional)
 }
 
-export default function ShareButton({ toolName, toolId }: ShareButtonProps) {
+export default function ShareButton({ title, url, content }: ShareButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const shareUrl = `${window.location.origin}/tools/${toolId}`;
-  const homeUrl = window.location.origin;
-  const signature = "\n\nDesenvolvido por GNOSIS AI - Estudos Bíblicos Profundos com IA";
-  const shareText = `Confira esta ferramenta incrível: ${toolName} - GNOSIS AI${signature}\n${homeUrl}`;
+  const signature = "\n\nGNOSIS AI, Inteligência Artificial para Estudos Profundos da Bíblia";
+  const shareText = content 
+    ? `${content}${signature}\n${url}`
+    : `Confira esta ferramenta incrível: ${title} - GNOSIS AI${signature}\n${url}`;
+  const shareUrl = url;
 
   const handleShare = (platform: string) => {
     let url = "";
@@ -77,7 +79,7 @@ export default function ShareButton({ toolName, toolId }: ShareButtonProps) {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Compartilhar {toolName}</DialogTitle>
+            <DialogTitle>Compartilhar {title}</DialogTitle>
             <DialogDescription>
               Compartilhe esta ferramenta com seus amigos e colegas
             </DialogDescription>

@@ -388,7 +388,10 @@ export default function ToolPage() {
                       <Download className="w-4 h-4 mr-2" />
                       Baixar PDF
                     </Button>
-                    <ShareButton toolName={toolInfo.name} toolId={toolId} />
+                    <ShareButton 
+                      title={toolInfo.name} 
+                      url={`${window.location.origin}/tools/${toolId}`}
+                    />
                   </div>
                 </div>
                 <div className="bg-[#FFFACD] border-2 border-[#d4af37] rounded-lg p-6 whitespace-pre-wrap text-[#1e3a5f]">

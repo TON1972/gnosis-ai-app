@@ -707,3 +707,30 @@
 - [x] Aplicar mesmo estilo dos outros botões (fundo azul escuro, texto branco, semibold, sombra)
 - [x] Testar visualmente no modal
 
+
+
+
+
+## CORREÇÃO - Compartilhar Conteúdo do Estudo ao Invés de Link (05/11/2025)
+
+- [ ] Localizar onde ShareButton é usado no SavedStudiesSection
+- [ ] Modificar ShareButton para aceitar conteúdo do estudo como parâmetro
+- [ ] Passar entrada + resultado do estudo para ShareButton
+- [ ] Adicionar assinatura discreta no final: "GNOSIS AI, Inteligência Artificial para Estudos Profundos da Bíblia"
+- [ ] Testar compartilhamento em WhatsApp, Facebook, etc
+- [ ] Verificar que Instagram e TikTok copiam o conteúdo completo
+
+
+
+
+
+## CORREÇÃO - Compartilhar Conteúdo Completo do Estudo (05/11/2025)
+
+- [x] Localizar onde ShareButton é usado no modal de estudos salvos
+- [x] Modificar ShareButton para aceitar parâmetro content
+- [x] Passar conteúdo completo (entrada + resultado) para ShareButton
+- [x] Adicionar assinatura discreta no final
+- [x] Corrigir uso de ShareButton em ToolPage.tsx
+- [x] Corrigir referência toolName para title no ShareButton
+- [x] Testar compartilhamento em redes sociais
+
