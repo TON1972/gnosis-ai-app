@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { APP_LOGO, APP_TITLE } from "@/const";
 import { Link, useLocation } from "wouter";
@@ -171,6 +171,11 @@ export default function Dashboard() {
   const [, setLocation] = useLocation();
   const [showNoCreditsModal, setShowNoCreditsModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
   const { data: savedStudies, refetch: refetchStudies } = trpc.studies.list.useQuery();

@@ -638,3 +638,13 @@
 - [x] Testar visualmente em ambos os locais
 - [x] Garantir que não afeta outras partes da plataforma
 
+
+
+
+
+## CORREÇÃO - Scroll Automático para Topo no Dashboard (04/11/2025)
+
+- [x] Adicionar useEffect no Dashboard para rolar para o topo ao carregar
+- [x] Testar navegação do rodapé da Home para Dashboard
+- [x] Verificar que não afeta outras navegações
+
