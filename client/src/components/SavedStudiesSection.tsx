@@ -130,8 +130,7 @@ export default function SavedStudiesSection() {
               <div className="flex flex-wrap gap-2">
                 <Button
                   onClick={handleCopy}
-                  variant="outline"
-                  className="flex-1 min-w-[120px] border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                  className="flex-1 min-w-[120px] bg-[#1e3a5f] text-white hover:bg-[#d4af37] font-semibold shadow-lg"
                 >
                   {copied ? (
                     <>
@@ -147,16 +146,14 @@ export default function SavedStudiesSection() {
                 </Button>
                 <Button
                   onClick={() => handleDownloadTxt(selectedStudy)}
-                  variant="outline"
-                  className="flex-1 min-w-[120px] border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                  className="flex-1 min-w-[120px] bg-[#1e3a5f] text-white hover:bg-[#d4af37] font-semibold shadow-lg"
                 >
                   <FileText className="w-4 h-4 mr-2" />
                   Baixar TXT
                 </Button>
                 <Button
                   onClick={() => handleDownloadPdf(selectedStudy)}
-                  variant="outline"
-                  className="flex-1 min-w-[120px] border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                  className="flex-1 min-w-[120px] bg-[#1e3a5f] text-white hover:bg-[#d4af37] font-semibold shadow-lg"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Baixar PDF

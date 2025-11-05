@@ -685,3 +685,15 @@
 - [x] Implementar cores progressivas (amarelo 48-72h, laranja 24-48h, laranja escuro 0-24h)
 - [x] Verificar que nenhuma funcionalidade foi afetada
 
+
+
+
+
+## CORREÇÃO - Tornar Botões do Modal de Estudos Mais Visíveis (05/11/2025)
+
+- [x] Localizar botões Copiar, Baixar TXT, PDF e Compartilhar no modal
+- [x] Remover transparência excessiva (variant outline)
+- [x] Aplicar fundos sólidos azul escuro com texto branco
+- [x] Adicionar font semibold e sombra para destaque
+- [x] Testar visualmente no Dashboard
+
