@@ -661,3 +661,13 @@
 - [x] Integrar no App.tsx para aparecer em todas as páginas
 - [x] Testar em Home, Dashboard e FAQ
 
+
+
+
+
+## CORREÇÃO - Reposicionar Botão Chatbot (05/11/2025)
+
+- [x] Ajustar posição do botão Chatbot para não sobrepor botão Voltar ao Topo
+- [x] Mover botão Chatbot mais acima (bottom-24 ou bottom-28)
+- [x] Testar visualmente ambos os botões
+
