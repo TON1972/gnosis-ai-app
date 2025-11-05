@@ -732,5 +732,6 @@
 - [x] Adicionar assinatura discreta no final
 - [x] Corrigir uso de ShareButton em ToolPage.tsx
 - [x] Corrigir referência toolName para title no ShareButton
-- [x] Testar compartilhamento em redes sociais
+- [x] BUG: Corrigir linha 164 de SavedStudiesSection.tsx - trocar 'result' por 'output'
+- [x] Testar compartilhamento em redes sociais - FUNCIONANDO PERFEITAMENTE
 

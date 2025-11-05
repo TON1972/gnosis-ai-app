@@ -161,7 +161,7 @@ export default function SavedStudiesSection() {
                 <ShareButton
                   title={selectedStudy.toolName}
                   url={window.location.origin}
-                  content={`Entrada:\n${selectedStudy.input}\n\nResultado:\n${selectedStudy.result}`}
+                  content={`Entrada:\n${selectedStudy.input}\n\nResultado:\n${selectedStudy.output}`}
                 />
               </div>
             </>
