@@ -27,8 +27,8 @@ const PLANS_DATA = [
   {
     name: "alianca",
     displayName: "Plano Aliança",
-    priceMonthly: 1898, // R$ 18,98
-    priceYearly: calculateYearlyPrice(1898), // R$ 189,88 com 16,6% desconto
+    priceMonthly: 1998, // R$ 19,98
+    priceYearly: calculateYearlyPrice(1998), // R$ 199,80 com 16,6% desconto
     creditsInitial: 1500, // cumulative, 30-day validity
     creditsDaily: 150, // non-cumulative
     toolsCount: 10,
@@ -37,8 +37,8 @@ const PLANS_DATA = [
   {
     name: "lumen",
     displayName: "Plano Lumen",
-    priceMonthly: 3398, // R$ 33,98
-    priceYearly: calculateYearlyPrice(3398), // R$ 339,88 com 16,6% desconto
+    priceMonthly: 3698, // R$ 36,98
+    priceYearly: calculateYearlyPrice(3698), // R$ 369,80 com 16,6% desconto
     creditsInitial: 3000, // cumulative, 30-day validity
     creditsDaily: 300, // non-cumulative
     toolsCount: 15,
@@ -47,8 +47,8 @@ const PLANS_DATA = [
   {
     name: "premium",
     displayName: "Plano GNOSIS Premium",
-    priceMonthly: 6298, // R$ 62,98
-    priceYearly: calculateYearlyPrice(6298), // R$ 629,88 com 16,6% desconto
+    priceMonthly: 6898, // R$ 68,98
+    priceYearly: calculateYearlyPrice(6898), // R$ 689,80 com 16,6% desconto
     creditsInitial: 8000, // cumulative, 30-day validity
     creditsDaily: 400, // non-cumulative (UPDATED from 800)
     toolsCount: 15,

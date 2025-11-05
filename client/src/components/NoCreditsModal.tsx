@@ -32,8 +32,8 @@ const allTools = [
 const PLAN_UPGRADES = [
   {
     name: "Aliança",
-    price: "R$ 18,98",
-    priceValue: 18.98,
+    price: "R$ 19,98",
+    priceValue: 19.98,
     period: "/mês",
     creditsInitial: "1.500 créditos iniciais",
     creditsDaily: "100 créditos/dia",
@@ -43,8 +43,8 @@ const PLAN_UPGRADES = [
   },
   {
     name: "Lumen",
-    price: "R$ 33,98",
-    priceValue: 33.98,
+    price: "R$ 36,98",
+    priceValue: 36.98,
     period: "/mês",
     creditsInitial: "3.000 créditos iniciais",
     creditsDaily: "200 créditos/dia",
@@ -54,8 +54,8 @@ const PLAN_UPGRADES = [
   },
   {
     name: "GNOSIS Premium",
-    price: "R$ 62,98",
-    priceValue: 62.98,
+    price: "R$ 68,98",
+    priceValue: 68.98,
     period: "/mês",
     creditsInitial: "6.000 créditos iniciais",
     creditsDaily: "300 créditos/dia",

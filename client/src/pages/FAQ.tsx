@@ -125,7 +125,7 @@ const faqData: FAQCategory[] = [
     items: [
       {
         question: "Quais são os planos disponíveis e seus preços?",
-        answer: "Oferecemos 4 planos: FREE (gratuito), Aliança (R$ 18,98/mês), Lumen (R$ 33,98/mês) e GNOSIS Premium (R$ 62,98/mês). Cada plano oferece diferentes quantidades de créditos e acesso a ferramentas específicas."
+        answer: "Oferecemos 4 planos: FREE (gratuito), Aliança (R$ 19,98/mês), Lumen (R$ 36,98/mês) e GNOSIS Premium (R$ 68,98/mês). Cada plano oferece diferentes quantidades de créditos e acesso a ferramentas específicas."
       },
       {
         question: "Qual a diferença entre os planos?",

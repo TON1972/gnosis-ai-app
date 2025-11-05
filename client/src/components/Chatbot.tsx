@@ -26,7 +26,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   planos: {
-    message: "Temos 4 planos disponíveis:\n\n**FREE** - Gratuito com 6 ferramentas básicas\n**ALIANÇA** - R$ 18,98/mês com 10 ferramentas\n**LUMEN** - R$ 33,98/mês com todas as 17 ferramentas\n**GNOSIS PREMIUM** - R$ 62,98/mês com todas as 17 ferramentas\n\nO que você gostaria de saber?",
+    message: "Temos 4 planos disponíveis:\n\n**FREE** - Gratuito com 6 ferramentas básicas\n**ALIANÇA** - R$ 19,98/mês com 10 ferramentas\n**LUMEN** - R$ 36,98/mês com todas as 17 ferramentas\n**GNOSIS PREMIUM** - R$ 68,98/mês com todas as 17 ferramentas\n\nO que você gostaria de saber?",
     options: [
       { label: "Diferenças entre planos", action: "diferencas_planos" },
       { label: "Como fazer upgrade", action: "upgrade" },

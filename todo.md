@@ -508,3 +508,18 @@
 - [ ] Garantir que funcione em mobile e desktop
 - [ ] Testar com todos os tipos de ferramentas
 
+
+
+
+
+## Atualização de Valores dos Planos (04/11/2025)
+
+- [x] Atualizar valores dos planos (Aliança R$ 19,98, Lumen R$ 36,98, Premium R$ 68,98)
+- [x] Atualizar valores no banco de dados (seed-plans.ts)
+- [x] Atualizar valores na Home
+- [x] Atualizar valores no NoCreditsModal
+- [x] Atualizar valores no Chatbot
+- [x] Atualizar valores no FAQ
+- [x] Atualizar valores anuais (calculados automaticamente com 16,6% desconto)
+- [x] Testar exibição dos novos valores
+
