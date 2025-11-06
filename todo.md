@@ -766,5 +766,16 @@
 - [x] Modificar getUserActivePlan para retornar Premium para admins
 - [x] Atualizar frontend para mostrar badge "ADMIN" no Dashboard e CreditsPanel
 - [x] Testar acesso completo com usuário admin - Sistema configurado
-- [ ] Salvar checkpoint final
+- [x] Salvar checkpoint final - f7a65dd0
+
+
+
+
+## Corrigir FAQ - Diferença entre Planos (06/11/2025 - 05:05)
+
+- [x] Verificar informações atuais no FAQ sobre diferença entre planos
+- [x] Corrigir valores de créditos para cada plano no FAQ
+- [x] Corrigir valores de créditos no Chatbot (Rebeca) também
+- [x] Verificar outras inconsistências - Tudo corrigido
+- [ ] Salvar checkpoint
 

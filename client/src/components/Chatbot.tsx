@@ -66,7 +66,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   diferencas_planos: {
-    message: "**Principais diferenças:**\n\n**FREE** - 6 ferramentas básicas, 500+50 créditos\n**ALIANÇA** - 10 ferramentas, 1500+150 créditos\n**LUMEN** - Todas as 18 ferramentas, 3000+300 créditos\n**PREMIUM** - Todas as 18 ferramentas, 8000+400 créditos\n\nPlanos pagos incluem ferramentas avançadas como Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada e muito mais.",
+    message: "**Principais diferenças:**\n\n**FREE** - 6 ferramentas básicas, 500+50 créditos\n**ALIANÇA** - 10 ferramentas, 1500+100 créditos\n**LUMEN** - Todas as 18 ferramentas, 3000+200 créditos\n**PREMIUM** - Todas as 18 ferramentas, 6000+300 créditos\n\nPlanos pagos incluem ferramentas avançadas como Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada e muito mais.",
     options: [
       { label: "Ver página de planos", action: "ver_planos" },
       { label: "Voltar ao menu", action: "menu" },

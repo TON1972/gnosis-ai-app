@@ -129,7 +129,7 @@ const faqData: FAQCategory[] = [
       },
       {
         question: "Qual a diferença entre os planos?",
-        answer: "FREE: 500 créditos iniciais (não-renováveis) + 50/dia, 6 ferramentas básicas. Aliança: 1.500 iniciais + 150/dia, 10 ferramentas. Lumen: 3.000 iniciais + 300/dia, todas as 18 ferramentas. Premium: 8.000 iniciais + 400/dia, todas as 18 ferramentas."
+        answer: "FREE: 500 créditos iniciais (não-renováveis) + 50/dia, 6 ferramentas básicas. Aliança: 1.500 iniciais + 100/dia, 10 ferramentas. Lumen: 3.000 iniciais + 200/dia, todas as 18 ferramentas. Premium: 6.000 iniciais + 300/dia, todas as 18 ferramentas."
       },
       {
         question: "Quais ferramentas NÃO estão disponíveis no plano Aliança?",
