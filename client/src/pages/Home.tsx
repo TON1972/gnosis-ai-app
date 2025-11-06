@@ -1,5 +1,6 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import VersePopup from "@/components/VersePopup";
 import { trpc } from "@/lib/trpc";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
@@ -744,6 +745,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Verse Pop-up */}
+      <VersePopup />
     </div>
   );
 }

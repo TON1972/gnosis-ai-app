@@ -787,5 +787,18 @@
 - [x] Localizar modal de upgrade no Dashboard - NoCreditsModal.tsx
 - [x] Adicionar Apologética Avançada à lista de ferramentas do modal
 - [x] Verificar se há outros modais com lista de ferramentas - Home.tsx já tinha
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Pop-up com Versículo Bíblico na Home (06/11/2025 - 05:20)
+
+- [x] Criar componente VersePopup.tsx com design elegante GNOSIS AI
+- [x] Implementar timer de 4 segundos
+- [x] Implementar hover para manter aberto
+- [x] Adicionar botão discreto para fechar
+- [x] Integrar na Home.tsx (canto direito, acima do chat)
+- [x] Testar funcionamento - Pop-up aparecendo perfeitamente!
 - [ ] Salvar checkpoint
 
