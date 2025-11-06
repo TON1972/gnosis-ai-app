@@ -2,12 +2,14 @@ import { Coins, Calendar, Zap, Gift, Info, TrendingUp, ShoppingCart } from "luci
 import { trpc } from "@/lib/trpc";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 interface CreditsPanelProps {
   onNeedCredits?: () => void;
 }
 
 export default function CreditsPanel({ onNeedCredits }: CreditsPanelProps) {
+  const { user } = useAuth();
   const { data: credits, isLoading } = trpc.credits.balance.useQuery();
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
 
@@ -37,6 +39,9 @@ export default function CreditsPanel({ onNeedCredits }: CreditsPanelProps) {
             <h3 className="text-lg md:text-xl font-bold text-[#1e3a5f]">Seus Créditos</h3>
             <p className="text-xs md:text-sm text-[#8b6f47]">
               {activePlan?.plan.displayName || "Plano FREE"}
+              {user?.role === 'admin' || user?.role === 'super_admin' ? (
+                <span className="ml-2 px-2 py-0.5 bg-[#d4af37] text-white text-xs font-bold rounded">ADMIN</span>
+              ) : null}
             </p>
           </div>
         </div>

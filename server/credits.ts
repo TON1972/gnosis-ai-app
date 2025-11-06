@@ -1,6 +1,6 @@
 import { eq, and } from "drizzle-orm";
 import { getDb } from "./db";
-import { userCredits, creditTransactions, subscriptions, plans } from "../drizzle/schema";
+import { userCredits, creditTransactions, subscriptions, plans, users } from "../drizzle/schema";
 
 /**
  * Credit system for GNOSIS AI
@@ -19,6 +19,25 @@ const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 export async function getUserCredits(userId: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
+
+  // Check if user is admin - admins get unlimited credits
+  const userResult = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  if (userResult.length > 0 && (userResult[0].role === 'admin' || userResult[0].role === 'super_admin')) {
+    console.log('[getUserCredits] Admin user detected, returning unlimited credits');
+    return {
+      creditsInitial: 999999,
+      creditsDaily: 999999,
+      creditsBonus: 999999,
+      total: 999999,
+      creditsInitialExpiry: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000), // 1 year from now
+      lastDailyReset: new Date(),
+    };
+  }
 
   let credits = await db.select().from(userCredits).where(eq(userCredits.userId, userId)).limit(1);
 
@@ -146,7 +165,42 @@ export async function getUserActivePlan(userId: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
-  // Get active subscription
+  // Check if user is admin - admins get automatic Premium access
+  const userResult = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  if (userResult.length > 0 && (userResult[0].role === 'admin' || userResult[0].role === 'super_admin')) {
+    console.log('[getUserActivePlan] Admin user detected, returning Premium plan');
+    
+    // Get Premium plan
+    const premiumPlan = await db
+      .select()
+      .from(plans)
+      .where(eq(plans.name, 'premium'))
+      .limit(1);
+
+    if (premiumPlan.length > 0) {
+      return {
+        subscription: {
+          id: 0,
+          userId: userId,
+          planId: premiumPlan[0].id,
+          status: 'active' as const,
+          startDate: new Date(),
+          endDate: null,
+          mercadopagoSubscriptionId: 'admin-access',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        plan: premiumPlan[0],
+      };
+    }
+  }
+
+  // Get active subscription for regular users
   const subs = await db
     .select()
     .from(subscriptions)

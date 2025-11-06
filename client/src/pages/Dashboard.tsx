@@ -307,8 +307,11 @@ export default function Dashboard() {
               <div className="mt-4 p-4 bg-[#FFFACD] rounded-lg border-2 border-[#d4af37]">
                 <p className="text-sm text-[#8b6f47]">
                   <strong>Plano Atual:</strong> {activePlan?.plan.displayName || "FREE"}
+                  {user?.role === 'admin' || user?.role === 'super_admin' ? (
+                    <span className="ml-2 px-2 py-0.5 bg-[#d4af37] text-white text-xs font-bold rounded">ADMIN</span>
+                  ) : null}
                   {" • "}
-                  <strong>Ferramentas Disponíveis:</strong> {availableToolIds.size} de 17
+                  <strong>Ferramentas Disponíveis:</strong> {availableToolIds.size} de 18
                 </p>
               </div>
             </div>
