@@ -115,6 +115,12 @@ const TOOLS_INFO: Record<string, { name: string; description: string; placeholde
     description: "Gera uma linha do tempo teológica interativa e cronológica sobre qualquer tema ou doutrina",
     placeholder: "Digite o tema ou doutrina para criar a linha do tempo...\n\nExemplo: Evolução da doutrina da Trindade ao longo da história\nou\nHistoria do pensamento sobre a salvação",
     creditCost: 75
+  },
+  apologetica_avancada: {
+    name: "Apologética Avançada",
+    description: "Ferramenta de defesa racional e sistemática da fé cristã, com base em filosofia, história, teologia bíblica e evidências empíricas",
+    placeholder: "Digite o tema, objeção ou questão apologética que deseja analisar...\n\nExemplo: Como responder à objeção do mal e sofrimento no mundo?\nou\nDefesa da ressurreição de Jesus Cristo\nou\nExistência de Deus - argumento cosmológico",
+    creditCost: 120
   }
 };
 

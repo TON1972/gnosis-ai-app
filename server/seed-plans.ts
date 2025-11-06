@@ -41,8 +41,8 @@ const PLANS_DATA = [
     priceYearly: calculateYearlyPrice(3698), // R$ 369,80 com 16,6% desconto
     creditsInitial: 3000, // cumulative, 30-day validity
     creditsDaily: 300, // non-cumulative
-    toolsCount: 15,
-    description: "Plano completo com todas as 15 ferramentas",
+    toolsCount: 18,
+    description: "Plano completo com todas as 18 ferramentas",
   },
   {
     name: "premium",
@@ -51,8 +51,8 @@ const PLANS_DATA = [
     priceYearly: calculateYearlyPrice(6898), // R$ 689,80 com 16,6% desconto
     creditsInitial: 8000, // cumulative, 30-day validity
     creditsDaily: 400, // non-cumulative (UPDATED from 800)
-    toolsCount: 15,
-    description: "Plano premium com todas as ferramentas e mais créditos",
+    toolsCount: 18,
+    description: "Plano premium com todas as 18 ferramentas e mais créditos",
   },
 ];
 
@@ -162,15 +162,39 @@ const TOOLS_DATA = [
     category: "midia",
     order: 15,
   },
+  {
+    name: "patristica",
+    displayName: "Patrística",
+    description: "Explora o pensamento dos Pais da Igreja sobre temas e textos com contexto histórico",
+    category: "teologia",
+    order: 16,
+  },
+  {
+    name: "linha_tempo_teologica",
+    displayName: "Linha do Tempo Teológica",
+    description: "Gera linha do tempo teológica interativa e cronológica sobre doutrinas e movimentos",
+    category: "teologia",
+    order: 17,
+  },
+  {
+    name: "apologetica_avancada",
+    displayName: "Apologética Avançada",
+    description: "Ferramenta de defesa racional e sistemática da fé cristã, com base em filosofia, história, teologia bíblica e evidências empíricas",
+    category: "teologia",
+    order: 18,
+  },
 ];
 
-// Tools excluded from Aliança plan (now only 5 excluded, 10 included)
+// Tools excluded from Aliança plan (8 excluded, 10 included)
 const ALIANCA_EXCLUDED_TOOLS = [
   "exegese",
   "referencias_abnt_apa",
   "redacao_academica",
   "dados_demograficos",
   "transcricao",
+  "patristica",
+  "linha_tempo_teologica",
+  "apologetica_avancada",
 ];
 
 // FREE plan now has 6 basic tools
@@ -236,7 +260,7 @@ async function seedPlansAndTools() {
       }
     }
 
-    // LUMEN and PREMIUM - all 15 tools
+    // LUMEN and PREMIUM - all 18 tools
     const lumenPlanId = planMap.get("lumen")!;
     const premiumPlanId = planMap.get("premium")!;
     for (const tool of allTools) {
@@ -251,8 +275,8 @@ async function seedPlansAndTools() {
     console.log("\n📊 Summary:");
     console.log(`  - FREE: 6 tools`);
     console.log(`  - ALIANÇA: 10 tools (excluding: ${ALIANCA_EXCLUDED_TOOLS.join(", ")})`);
-    console.log(`  - LUMEN: 15 tools (all)`);
-    console.log(`  - PREMIUM: 15 tools (all)`);
+    console.log(`  - LUMEN: 18 tools (all)`);
+    console.log(`  - PREMIUM: 18 tools (all)`);
 
   } catch (error) {
     console.error("❌ Error seeding database:", error);

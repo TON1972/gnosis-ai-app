@@ -30,7 +30,8 @@ import {
   Trash2,
   Eye,
   Clock,
-  BookText
+  BookText,
+  Shield
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
@@ -161,6 +162,14 @@ const TOOLS_CONFIG = [
     name: "Linha do Tempo Teológica",
     description: "Gera linha do tempo teológica interativa e cronológica sobre doutrinas e movimentos",
     icon: Clock,
+    category: "Teologia",
+    premium: true
+  },
+  {
+    id: "apologetica_avancada",
+    name: "Apologética Avançada",
+    description: "Ferramenta de defesa racional e sistemática da fé cristã, com base em filosofia, história, teologia bíblica e evidências empíricas",
+    icon: Shield,
     category: "Teologia",
     premium: true
   }

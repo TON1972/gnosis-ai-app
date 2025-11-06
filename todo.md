@@ -735,3 +735,24 @@
 - [x] BUG: Corrigir linha 164 de SavedStudiesSection.tsx - trocar 'result' por 'output'
 - [x] Testar compartilhamento em redes sociais - FUNCIONANDO PERFEITAMENTE
 
+
+
+
+## Nova Ferramenta - Apologética Avançada (05/11/2025 - 04:30)
+
+- [x] Analisar prompt técnico e sugerir melhorias
+- [x] Adicionar ferramenta "Apologética Avançada" no banco de dados (tools table)
+- [x] Atualizar seed-plans.ts com a nova ferramenta
+- [x] Adicionar prompt completo no routers.ts
+- [x] Adicionar ferramenta ao ToolPage.tsx com creditCost 120
+- [x] Configurar restrição de acesso (apenas LUMEN e PREMIUM)
+- [x] Atualizar contador de ferramentas: LUMEN e PREMIUM passam de 17 para 18
+- [x] Atualizar Home.tsx com descrição da nova ferramenta
+- [x] Atualizar Dashboard.tsx com a nova ferramenta (com ícone Shield)
+- [x] Atualizar FAQ.tsx com informações sobre Apologética Avançada
+- [x] Atualizar NoCreditsModal.tsx com a nova ferramenta
+- [x] Atualizar Chatbot.tsx (Rebeca) com informações da nova ferramenta
+- [x] Testar a ferramenta completa - Dashboard mostra Apologética Avançada corretamente
+- [x] Verificar que nenhuma outra parte foi desconfigurada - Todas as páginas funcionando
+- [ ] Criar checkpoint final
+
