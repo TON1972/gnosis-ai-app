@@ -27,6 +27,7 @@ const allTools = [
   { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true },
   { name: "Patrística", free: false, alianca: false, lumen: true, premium: true },
   { name: "Linha do Tempo Teológica", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Apologética Avançada", free: false, alianca: false, lumen: true, premium: true },
 ];
 
 const PLAN_UPGRADES = [

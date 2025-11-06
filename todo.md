@@ -777,5 +777,15 @@
 - [x] Corrigir valores de créditos para cada plano no FAQ
 - [x] Corrigir valores de créditos no Chatbot (Rebeca) também
 - [x] Verificar outras inconsistências - Tudo corrigido
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Adicionar Apologética Avançada no Modal de Upgrade (06/11/2025 - 05:12)
+
+- [x] Localizar modal de upgrade no Dashboard - NoCreditsModal.tsx
+- [x] Adicionar Apologética Avançada à lista de ferramentas do modal
+- [x] Verificar se há outros modais com lista de ferramentas - Home.tsx já tinha
 - [ ] Salvar checkpoint
 
