@@ -29,39 +29,42 @@ export default function VersePopup() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-24 right-6 z-40 flex flex-col items-end gap-2 animate-in fade-in slide-in-from-right duration-500">
-      {/* Pop-up Card */}
+    <div className="fixed bottom-32 left-6 z-40 flex flex-col items-start gap-2 animate-in fade-in slide-in-from-left duration-500">
+      {/* Speech Bubble Pop-up */}
       <div
-        className="bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] rounded-2xl p-6 shadow-2xl border-4 border-[#d4af37] max-w-md"
+        className="relative bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] rounded-3xl p-5 shadow-2xl border-3 border-[#d4af37] max-w-sm"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="space-y-3">
-          {/* Verse Text */}
-          <div className="text-[#1e3a5f] leading-relaxed space-y-2">
-            <p className="text-sm">
-              <sup className="text-xs font-bold">14</sup> Por causa disto me ponho de joelhos perante o Pai de nosso Senhor Jesus Cristo,
+        {/* Speech bubble tail */}
+        <div className="absolute -bottom-3 left-8 w-6 h-6 bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] border-r-3 border-b-3 border-[#d4af37] transform rotate-45"></div>
+        
+        <div className="space-y-2">
+          {/* Verse Text - Smaller font */}
+          <div className="text-[#1e3a5f] leading-relaxed space-y-1.5 text-xs">
+            <p>
+              <sup className="text-[10px] font-bold">14</sup> Por causa disto me ponho de joelhos perante o Pai de nosso Senhor Jesus Cristo,
             </p>
-            <p className="text-sm">
-              <sup className="text-xs font-bold">15</sup> Do qual toda a família nos céus e na terra toma o nome,
+            <p>
+              <sup className="text-[10px] font-bold">15</sup> Do qual toda a família nos céus e na terra toma o nome,
             </p>
-            <p className="text-sm">
-              <sup className="text-xs font-bold">16</sup> Para que, segundo as riquezas da sua glória, vos conceda que sejais fortalecidos com poder pelo seu Espírito no homem interior;
+            <p>
+              <sup className="text-[10px] font-bold">16</sup> Para que, segundo as riquezas da sua glória, vos conceda que sejais fortalecidos com poder pelo seu Espírito no homem interior;
             </p>
-            <p className="text-sm">
-              <sup className="text-xs font-bold">17</sup> Para que Cristo habite pela fé nos vossos corações; a fim de, estando enraizados e fundados em amor,
+            <p>
+              <sup className="text-[10px] font-bold">17</sup> Para que Cristo habite pela fé nos vossos corações; a fim de, estando enraizados e fundados em amor,
             </p>
-            <p className="text-sm">
-              <sup className="text-xs font-bold">18</sup> Poderdes perfeitamente compreender, com todos os santos, qual seja a largura, e o comprimento, e a altura, e a profundidade,
+            <p>
+              <sup className="text-[10px] font-bold">18</sup> Poderdes perfeitamente compreender, com todos os santos, qual seja a largura, e o comprimento, e a altura, e a profundidade,
             </p>
-            <p className="text-sm">
-              <sup className="text-xs font-bold">19</sup> E conhecer o amor de Cristo, que excede todo o entendimento, para que sejais cheios de toda a plenitude de Deus.
+            <p>
+              <sup className="text-[10px] font-bold">19</sup> E conhecer o amor de Cristo, que excede todo o entendimento, para que sejais cheios de toda a plenitude de Deus.
             </p>
           </div>
 
           {/* Reference */}
           <div className="text-right">
-            <p className="text-xs font-bold text-[#8b6f47] italic">
+            <p className="text-[10px] font-bold text-[#8b6f47] italic">
               (Efésios 3:14-19)
             </p>
           </div>
@@ -71,7 +74,7 @@ export default function VersePopup() {
       {/* Discrete Close Button */}
       <button
         onClick={() => setIsVisible(false)}
-        className="flex items-center gap-1 text-xs text-[#8b6f47] hover:text-[#1e3a5f] transition-colors opacity-60 hover:opacity-100"
+        className="flex items-center gap-1 text-xs text-[#8b6f47] hover:text-[#1e3a5f] transition-colors opacity-60 hover:opacity-100 ml-2"
         aria-label="Fechar versículo"
       >
         <X className="w-3 h-3" />

@@ -800,5 +800,17 @@
 - [x] Adicionar botão discreto para fechar
 - [x] Integrar na Home.tsx (canto direito, acima do chat)
 - [x] Testar funcionamento - Pop-up aparecendo perfeitamente!
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Ajustar Pop-up de Versículo (06/11/2025 - 05:28)
+
+- [x] Mover pop-up para lado esquerdo (bottom-32 left-6)
+- [x] Posicionar mais abaixo
+- [x] Diminuir tamanho do pop-up (max-w-sm, texto xs)
+- [x] Transformar em formato de balão de conversa (com pontinha)
+- [x] Testar novo visual - Ficou perfeito!
 - [ ] Salvar checkpoint
 
