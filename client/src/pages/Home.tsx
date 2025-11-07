@@ -1,6 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import VersePopup from "@/components/VersePopup";
+import TutorialCarousel from "@/components/TutorialCarousel";
 import { trpc } from "@/lib/trpc";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
@@ -253,6 +254,12 @@ export default function Home() {
             Explore as Escrituras com ferramentas avançadas de inteligência artificial, 
             desenvolvidas especialmente para pastores, teólogos e estudantes de seminário.
           </p>
+          
+          {/* Tutorial Carousel */}
+          <div className="mb-12">
+            <TutorialCarousel />
+          </div>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/faq">
               <Button

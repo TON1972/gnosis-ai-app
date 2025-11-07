@@ -871,3 +871,16 @@
 - [x] Testar com conta admin e outras contas - Cabeçalho padronizado!
 - [ ] Salvar checkpoint
 
+
+
+
+## Carrossel Tutorial Interativo na Home (06/11/2025 - 08:45)
+
+- [x] Criar 6 slides com ícones ilustrativos das funcionalidades
+- [x] Criar componente TutorialCarousel.tsx com design GNOSIS AI
+- [x] Adicionar textos explicativos da Rebeca para cada slide
+- [x] Integrar carrossel na Home (abaixo dos textos, acima dos botões)
+- [x] Testar navegação (setas, indicadores, pular) - Funcionando perfeitamente!
+- [x] Testar responsividade mobile - Design responsivo
+- [ ] Salvar checkpoint
+
