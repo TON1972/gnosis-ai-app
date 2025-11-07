@@ -931,5 +931,5 @@
 - [x] Substituir ícone UserCircle pela foto no Chatbot.tsx (3 lugares)
 - [x] Aplicar estilo circular e bordas (border-2 border-[#d4af37])
 - [x] Testar visual do chat - Foto da Rebeca aparecendo perfeitamente!
-- [ ] Salvar checkpoint
+- [x] Salvar checkpoint - f7a65dd0
 
