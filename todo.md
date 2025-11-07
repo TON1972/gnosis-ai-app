@@ -901,5 +901,13 @@
 - [x] Atualizar descrição de Créditos Avulsos com novo texto completo
 - [x] Listar TODAS as 18 ferramentas (sem "e muito mais")
 - [x] Trocar highlight de "Cada ferramenta consome créditos..." por "Você se surpreenderá com o resultado!"
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Correção de Texto - 18 Ferramentas (06/11/2025 - 10:10)
+
+- [x] Substituir texto completo do slide "18 Ferramentas Poderosas"
 - [ ] Salvar checkpoint
 

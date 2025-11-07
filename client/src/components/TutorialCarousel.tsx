@@ -19,7 +19,7 @@ const slides: Slide[] = [
   {
     icon: <Search className="w-16 h-16 text-[#d4af37]" />,
     title: "18 Ferramentas Poderosas 🔧",
-    description: "No Painel de Controle, você encontra: Hermenêutica, Traduções, Resumos, Estudos Doutrinários, Análise Teológica Comparada, Exegese, Teologia Sistemática, Legislação Ministerial, Típicos de Pregação, Contexto Histórico-Cultural, Patrística, Linha do Tempo Teológica, Apologética Avançada, Liturgia, Homiletria, Mapas Interativos, Comentários Versículo a Versículo e Planejamento de Aulas. Escolha a ferramenta, digite seu tema e clique em 'Gerar Estudo'.",
+    description: "No Painel de Controle, você encontra poderosas ferramentas como: Hermenêutica, Traduções dos Originais em Hebraico, Aramaico e Grego, Estudos Doutrinários, Exegese Detalhada, Teologia Sistemática, Patrística, Linha do Tempo Teológica, Apologética Avançada, entre muitas outras ferramentas que irão te impressionar! Escolha a ferramenta, digite seu tema e clique em \"Gerar Estudo.\"",
     highlight: "Você se surpreenderá com o resultado!"
   },
   {
