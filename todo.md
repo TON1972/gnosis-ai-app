@@ -812,5 +812,17 @@
 - [x] Diminuir tamanho do pop-up (max-w-sm, texto xs)
 - [x] Transformar em formato de balão de conversa (com pontinha)
 - [x] Testar novo visual - Ficou perfeito!
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Corrigir Pop-up - Posição e Visibilidade (06/11/2025 - 05:35)
+
+- [x] Investigar por que pop-up não aparece para admin - Sem condições de bloqueio
+- [x] Ajustar posição para não sobrepor cabeçalho (top-40 - CORRIGIDO)
+- [x] Aumentar z-index para 50 (garante visibilidade)
+- [x] Garantir que apareça para TODOS os usuários - Sem restrições
+- [x] Testar com diferentes contas - Pop-up aparece corretamente
 - [ ] Salvar checkpoint
 
