@@ -196,21 +196,21 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-4">
               <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
               <h1 className="text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
             </div>
             
-            <nav className="flex items-center gap-2 md:gap-4 flex-wrap">
+            <nav className="flex items-center gap-2 md:gap-4">
               <Link href="/faq">
-                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer">
+                <span className={`text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer ${isAuthenticated && (user?.role === 'admin' || user?.role === 'super_admin') ? 'text-sm' : ''}`}>
                   PERGUNTAS FREQUENTES
                 </span>
               </Link>
               {isAuthenticated && (user?.role === 'admin' || user?.role === 'super_admin') && (
                 <Link href="/admin">
-                  <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
+                  <span className="text-sm text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
                     ADMIN
                   </span>
                 </Link>
@@ -218,7 +218,7 @@ export default function Home() {
               {isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
-                    <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer">
+                    <span className={`px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer ${user?.role === 'admin' || user?.role === 'super_admin' ? 'text-sm' : ''}`}>
                       PAINEL DE CONTROLE
                     </span>
                   </Link>

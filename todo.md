@@ -859,5 +859,15 @@
 - [x] Padronizar ToolPage.tsx
 - [x] Padronizar AdminDashboard.tsx
 - [x] Testar todas as páginas - Cabeçalhos padronizados com sucesso!
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## BUG URGENTE - Cabeçalho Desconfigurado para Admin (06/11/2025 - 07:50)
+
+- [x] Investigar diferenças de renderização entre admin e outros usuários - Link ADMIN extra causa quebra
+- [x] Diminuir fonte dos botões de navegação APENAS para admins (text-sm condicional)
+- [x] Testar com conta admin e outras contas - Cabeçalho padronizado!
 - [ ] Salvar checkpoint
 
