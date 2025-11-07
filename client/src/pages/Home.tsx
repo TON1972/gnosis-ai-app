@@ -195,24 +195,11 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
-        <div className="container mx-auto px-4 py-1 md:py-2">
+        <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <div className="flex items-center gap-1 md:gap-2">
-              <img src={APP_LOGO} alt={APP_TITLE} className="h-12 w-12 md:h-16 md:w-16 object-contain" />
-              <h1 className="text-xl md:text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
-            </div>
-            
-            {/* Passagem Bíblica */}
-            <div className="hidden xl:block text-[#d4af37] text-xs italic max-w-md text-right">
-              <p className="leading-relaxed">
-                ¹⁴ Por causa disto me ponho de joelhos perante o Pai de nosso Senhor Jesus Cristo,
-                ¹⁵ Do qual toda a família nos céus e na terra toma o nome,
-                ¹⁶ Para que, segundo as riquezas da sua glória, vos conceda que sejais fortalecidos com poder pelo seu Espírito no homem interior;
-                ¹⁷ Para que Cristo habite pela fé nos vossos corações; a fim de, estando enraizados e fundados em amor,
-                ¹⁸ Poderdes perfeitamente compreender, com todos os santos, qual seja a largura, e o comprimento, e a altura, e a profundidade,
-                ¹⁹ E conhecer o amor de Cristo, que excede todo o entendimento, para que sejais cheios de toda a plenitude de Deus.
-              </p>
-              <p className="mt-2 font-semibold">(Efésios 3:14-19)</p>
+            <div className="flex items-center gap-4">
+              <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
+              <h1 className="text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
             </div>
             
             <nav className="flex items-center gap-2 md:gap-4 flex-wrap">

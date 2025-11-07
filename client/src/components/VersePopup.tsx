@@ -29,7 +29,7 @@ export default function VersePopup() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed top-40 left-6 z-50 flex flex-col items-start gap-2 animate-in fade-in slide-in-from-left duration-500">
+    <div className="fixed top-40 left-6 z-40 flex flex-col items-start gap-2 animate-in fade-in slide-in-from-left duration-500">
       {/* Speech Bubble Pop-up */}
       <div
         className="relative bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] rounded-3xl p-5 shadow-2xl border-3 border-[#d4af37] max-w-sm"

@@ -824,5 +824,40 @@
 - [x] Aumentar z-index para 50 (garante visibilidade)
 - [x] Garantir que apareça para TODOS os usuários - Sem restrições
 - [x] Testar com diferentes contas - Pop-up aparece corretamente
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Remover Passagem Bíblica do Cabeçalho (06/11/2025 - 07:20)
+
+- [x] Localizar passagem bíblica no cabeçalho (lado direito) - Linhas 205-216
+- [x] Remover passagem do código - Removido bloco completo
+- [ ] Testar cabeçalho sem a passagem
+- [ ] Salvar checkpoint
+
+
+
+
+## BUG URGENTE - Painel de Controle e Pop-up (06/11/2025 - 07:25)
+
+- [ ] Investigar por que botão "Painel de Controle" abre pop-up
+- [ ] Corrigir navegação do botão (deve ir para /dashboard)
+- [ ] Restaurar comportamento automático do pop-up
+- [ ] Testar navegação e pop-up
+- [ ] Salvar checkpoint
+
+
+
+
+## Padronizar Cabeçalho em Todas as Páginas (06/11/2025 - 07:35)
+
+- [x] Verificar medidas do cabeçalho em FAQ.tsx (referência) - py-6, h-16 w-16, text-3xl, gap-4
+- [x] Identificar todas as páginas com cabeçalho
+- [x] Padronizar Home.tsx
+- [x] Padronizar Dashboard.tsx
+- [x] Padronizar ToolPage.tsx
+- [x] Padronizar AdminDashboard.tsx
+- [x] Testar todas as páginas - Cabeçalhos padronizados com sucesso!
 - [ ] Salvar checkpoint
 

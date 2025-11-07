@@ -274,12 +274,12 @@ export default function ToolPage() {
     <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link href="/">
-              <span className="flex items-center gap-3 cursor-pointer">
-                <img src={APP_LOGO} alt={APP_TITLE} className="h-12 w-12 object-contain" />
-                <h1 className="text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+              <span className="flex items-center gap-4 cursor-pointer">
+                <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
+                <h1 className="text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
               </span>
             </Link>
             <Link href="/">
