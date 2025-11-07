@@ -920,5 +920,16 @@
 - [x] Ajustar bottom do botão Voltar ao Topo (bottom-8 → bottom-24)
 - [x] Ajustar bottom do ícone de Suporte (bottom-24 → bottom-8)
 - [x] Testar posicionamento visual - Posições trocadas com sucesso!
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Adicionar Foto da Rebeca no Chat (06/11/2025 - 10:30)
+
+- [x] Copiar imagem para client/public/rebeca-avatar.png
+- [x] Substituir ícone UserCircle pela foto no Chatbot.tsx (3 lugares)
+- [x] Aplicar estilo circular e bordas (border-2 border-[#d4af37])
+- [x] Testar visual do chat - Foto da Rebeca aparecendo perfeitamente!
 - [ ] Salvar checkpoint
 

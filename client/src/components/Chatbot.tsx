@@ -403,8 +403,8 @@ export default function Chatbot() {
           {/* Header */}
           <div className="bg-[#1e3a5f] text-white p-4 rounded-t-xl flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#d4af37] rounded-full flex items-center justify-center">
-                <UserCircle className="w-7 h-7 text-[#1e3a5f]" />
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#d4af37]">
+                <img src="/rebeca-avatar.png" alt="Rebeca" className="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 className="font-bold text-lg">Rebeca</h3>
@@ -426,7 +426,7 @@ export default function Chatbot() {
               <div key={message.id} className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`flex gap-2 max-w-[80%] ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === "user" ? "bg-[#1e3a5f]" : "bg-[#d4af37]"}`}>
-                    {message.type === "user" ? <User className="w-4 h-4 text-white" /> : <UserCircle className="w-5 h-5 text-[#1e3a5f]" />}
+                    {message.type === "user" ? <User className="w-4 h-4 text-white" /> : <img src="/rebeca-avatar.png" alt="Rebeca" className="w-full h-full object-cover rounded-full" />}
                   </div>
                   <div>
                     <div className={`p-3 rounded-2xl ${message.type === "user" ? "bg-[#1e3a5f] text-white" : "bg-white text-[#1e3a5f] border-2 border-[#d4af37]"}`}>
@@ -549,8 +549,8 @@ export default function Chatbot() {
             {isTyping && (
               <div className="flex justify-start">
                 <div className="flex gap-2">
-                  <div className="w-8 h-8 bg-[#d4af37] rounded-full flex items-center justify-center">
-                    <UserCircle className="w-5 h-5 text-[#1e3a5f]" />
+                  <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-[#d4af37]">
+                    <img src="/rebeca-avatar.png" alt="Rebeca" className="w-full h-full object-cover" />
                   </div>
                   <div className="bg-white border-2 border-[#d4af37] p-3 rounded-2xl">
                     <div className="flex gap-1">
