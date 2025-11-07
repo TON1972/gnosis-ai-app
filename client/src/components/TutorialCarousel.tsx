@@ -19,25 +19,25 @@ const slides: Slide[] = [
   {
     icon: <Search className="w-16 h-16 text-[#d4af37]" />,
     title: "18 Ferramentas Poderosas 🔧",
-    description: "No Dashboard, você encontra ferramentas como Hermenêutica, Traduções, Análise Teológica, Apologética Avançada e muito mais. Escolha a ferramenta, digite seu tema e clique em 'Gerar Estudo'.",
+    description: "No Painel de Controle, você encontra ferramentas como Hermenêutica, Traduções, Análise Teológica, Apologética Avançada e muito mais. Escolha a ferramenta, digite seu tema e clique em 'Gerar Estudo'.",
     highlight: "Cada ferramenta consome créditos - veja o custo antes de usar"
   },
   {
     icon: <Save className="w-16 h-16 text-[#d4af37]" />,
     title: "Seus Estudos Salvos 📚",
-    description: "Todos os estudos gerados ficam salvos automaticamente na seção 'Meus Estudos' do Dashboard. Você pode visualizar, editar e organizar tudo em um só lugar!",
+    description: "Todos os estudos gerados ficam salvos automaticamente na seção 'Meus Estudos' do Painel de Controle. Você pode visualizar, editar e organizar tudo em um só lugar!",
     highlight: "Nunca perca seus estudos - tudo fica guardado para você"
   },
   {
     icon: <Share2 className="w-16 h-16 text-[#d4af37]" />,
     title: "Compartilhe em Redes Sociais 📱",
-    description: "Clique em 'Compartilhar' em qualquer estudo e escolha: WhatsApp, Facebook, Twitter, LinkedIn, Instagram ou TikTok. Seu estudo será enviado completo com a assinatura GNOSIS AI!",
+    description: "Clique em 'Compartilhar' em qualquer estudo e escolha: WhatsApp, Facebook, Twitter, LinkedIn, Instagram ou TikTok, e seu estudo será imediatamente enviado.",
     highlight: "Espalhe conhecimento bíblico com facilidade"
   },
   {
     icon: <TrendingUp className="w-16 h-16 text-[#d4af37]" />,
     title: "Upgrade de Plano 🚀",
-    description: "Precisa de mais ferramentas? Clique em 'Upgrade de Plano' no Dashboard. Escolha entre Aliança (10 ferramentas), Lumen (18 ferramentas) ou Premium (18 ferramentas + mais créditos).",
+    description: "Precisa de mais ferramentas? Clique em 'Upgrade de Plano' no Painel de Controle. Escolha entre Aliança (10 ferramentas), Lumen (18 ferramentas) ou Premium (18 ferramentas + mais créditos).",
     highlight: "Planos anuais têm 16,5% de desconto!"
   },
   {

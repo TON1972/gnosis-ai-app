@@ -882,5 +882,14 @@
 - [x] Integrar carrossel na Home (abaixo dos textos, acima dos botões)
 - [x] Testar navegação (setas, indicadores, pular) - Funcionando perfeitamente!
 - [x] Testar responsividade mobile - Design responsivo
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Ajustes de Texto no Carrossel (06/11/2025 - 09:50)
+
+- [x] Trocar "Dashboard" por "Painel de Controle" em todos os slides (4 ocorrências)
+- [x] Modificar frase de compartilhamento - Ajustada conforme solicitado
 - [ ] Salvar checkpoint
 
