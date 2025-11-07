@@ -909,5 +909,16 @@
 ## Correção de Texto - 18 Ferramentas (06/11/2025 - 10:10)
 
 - [x] Substituir texto completo do slide "18 Ferramentas Poderosas"
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Trocar Posições - Voltar ao Topo e Suporte (06/11/2025 - 10:20)
+
+- [x] Localizar componentes dos botões flutuantes
+- [x] Ajustar bottom do botão Voltar ao Topo (bottom-8 → bottom-24)
+- [x] Ajustar bottom do ícone de Suporte (bottom-24 → bottom-8)
+- [x] Testar posicionamento visual - Posições trocadas com sucesso!
 - [ ] Salvar checkpoint
 
