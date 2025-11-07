@@ -891,5 +891,15 @@
 
 - [x] Trocar "Dashboard" por "Painel de Controle" em todos os slides (4 ocorrências)
 - [x] Modificar frase de compartilhamento - Ajustada conforme solicitado
+- [x] Salvar checkpoint - f7a65dd0
+
+
+
+
+## Novos Ajustes no Carrossel (06/11/2025 - 10:00)
+
+- [x] Atualizar descrição de Créditos Avulsos com novo texto completo
+- [x] Listar TODAS as 18 ferramentas (sem "e muito mais")
+- [x] Trocar highlight de "Cada ferramenta consome créditos..." por "Você se surpreenderá com o resultado!"
 - [ ] Salvar checkpoint
 

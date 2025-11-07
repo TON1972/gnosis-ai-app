@@ -19,8 +19,8 @@ const slides: Slide[] = [
   {
     icon: <Search className="w-16 h-16 text-[#d4af37]" />,
     title: "18 Ferramentas Poderosas 🔧",
-    description: "No Painel de Controle, você encontra ferramentas como Hermenêutica, Traduções, Análise Teológica, Apologética Avançada e muito mais. Escolha a ferramenta, digite seu tema e clique em 'Gerar Estudo'.",
-    highlight: "Cada ferramenta consome créditos - veja o custo antes de usar"
+    description: "No Painel de Controle, você encontra: Hermenêutica, Traduções, Resumos, Estudos Doutrinários, Análise Teológica Comparada, Exegese, Teologia Sistemática, Legislação Ministerial, Típicos de Pregação, Contexto Histórico-Cultural, Patrística, Linha do Tempo Teológica, Apologética Avançada, Liturgia, Homiletria, Mapas Interativos, Comentários Versículo a Versículo e Planejamento de Aulas. Escolha a ferramenta, digite seu tema e clique em 'Gerar Estudo'.",
+    highlight: "Você se surpreenderá com o resultado!"
   },
   {
     icon: <Save className="w-16 h-16 text-[#d4af37]" />,
@@ -43,7 +43,7 @@ const slides: Slide[] = [
   {
     icon: <CreditCard className="w-16 h-16 text-[#d4af37]" />,
     title: "Créditos Avulsos 💳",
-    description: "Acabaram os créditos? Sem problemas! Clique em 'Comprar Créditos' no painel superior. Escolha o pacote (500, 1.500, 2.500 ou 5.000 créditos) e pague via PIX ou Cartão.",
+    description: "Acabaram seus créditos? Sem problemas! Clique em 'Comprar Créditos' no botão que fica ao lado esquerdo no Painel de Controle, abaixo do botão 'Upgrade de Plano', ou na página principal, abaixo da parte que fala sobre os planos da GNOSIS AI. Lá você tem a opção de escolher pacotes com (500, 1.500, 2.500 ou 5.000 créditos) podendo pagar via PIX ou Cartão.",
     highlight: "Créditos avulsos nunca expiram!"
   }
 ];
