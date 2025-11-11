@@ -2,6 +2,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import VersePopup from "@/components/VersePopup";
 import TutorialCarousel from "@/components/TutorialCarousel";
+import MobileMenu from "@/components/MobileMenu";
 import { trpc } from "@/lib/trpc";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
@@ -205,14 +206,15 @@ export default function Home() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-4">
-              <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
+              <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" loading="lazy" />
               {/* Título completo para desktop */}
               <h1 className="hidden md:block text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
               {/* Título curto para mobile */}
               <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
             </div>
             
-            <nav className="flex items-center gap-2 md:gap-4">
+            {/* Navegação Desktop (escondida em mobile) */}
+            <nav className="hidden md:flex items-center gap-2 md:gap-4">
               <Link href="/faq">
                 <span className={`text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer ${isAuthenticated && (user?.role === 'admin' || user?.role === 'super_admin') ? 'text-sm' : ''}`}>
                   PERGUNTAS FREQUENTES
@@ -249,6 +251,13 @@ export default function Home() {
                 </Button>
               )}
             </nav>
+            
+            {/* Menu Hambúrguer Mobile */}
+            <MobileMenu 
+              isAuthenticated={isAuthenticated}
+              onLogout={logout}
+              loginUrl={getLoginUrl()}
+            />
           </div>
         </div>
       </header>

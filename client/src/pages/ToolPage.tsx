@@ -278,7 +278,7 @@ export default function ToolPage() {
           <div className="flex items-center justify-between">
             <Link href="/">
               <span className="flex items-center gap-4 cursor-pointer">
-                <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
+                <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" loading="lazy" />
                 {/* Título completo para desktop */}
                 <h1 className="hidden md:block text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
                 {/* Título curto para mobile */}
