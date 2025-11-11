@@ -224,7 +224,10 @@ export default function FAQ() {
             <Link href="/">
               <span className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
                 <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
-                <h1 className="text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+                {/* Título completo para desktop */}
+                <h1 className="hidden md:block text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+                {/* Título curto para mobile */}
+                <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
               </span>
             </Link>
             <Link href="/">

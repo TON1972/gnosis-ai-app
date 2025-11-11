@@ -84,7 +84,10 @@ export default function PublicTicket() {
             <div className="flex items-center gap-3">
               <img src={APP_LOGO} alt={APP_TITLE} className="h-12 w-12 object-contain" />
               <div>
-                <h1 className="text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+                {/* Título completo para desktop */}
+                <h1 className="hidden md:block text-2xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+                {/* Título curto para mobile */}
+                <h1 className="block md:hidden text-2xl font-bold text-[#d4af37]">GNOSIS AI</h1>
                 <p className="text-sm text-[#d4af37]/70">Ticket de Suporte #{ticketId}</p>
               </div>
             </div>

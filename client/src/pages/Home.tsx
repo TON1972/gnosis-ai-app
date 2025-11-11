@@ -71,6 +71,12 @@ const mainTools = [
     icon: <Mic className="w-8 h-8" />,
     name: "Linguagem Ministerial",
     description: "Análise retórica e teológica de discursos, sermões e mensagens ministeriais"
+  },
+  {
+    icon: <Scale className="w-8 h-8" />,
+    name: "Apologética Avançada",
+    description: "Defesa racional da fé cristã com argumentos filosóficos, históricos e científicos",
+    mobileOnly: true
   }
 ];
 
@@ -200,7 +206,10 @@ export default function Home() {
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-4">
               <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" />
-              <h1 className="text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+              {/* Título completo para desktop */}
+              <h1 className="hidden md:block text-3xl font-bold text-[#d4af37]">{APP_TITLE}</h1>
+              {/* Título curto para mobile */}
+              <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
             </div>
             
             <nav className="flex items-center gap-2 md:gap-4">
@@ -288,20 +297,26 @@ export default function Home() {
           Ferramentas Principais
         </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {mainTools.map((tool, index) => (
-            <div
-              key={index}
-              className="bg-white/90 rounded-2xl p-8 shadow-xl border-4 border-[#d4af37] hover:scale-105 transition-transform"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="p-3 bg-[#1e3a5f] rounded-lg text-[#d4af37]">
-                  {tool.icon}
+          {mainTools.map((tool, index) => {
+            // Esconder Apologética Avançada em desktop
+            const isMobileOnly = (tool as any).mobileOnly;
+            return (
+              <div
+                key={index}
+                className={`bg-white/90 rounded-2xl p-8 shadow-xl border-4 border-[#d4af37] hover:scale-105 transition-transform ${
+                  isMobileOnly ? 'block md:hidden' : ''
+                }`}
+              >
+                <div className="flex flex-col md:flex-row items-center gap-4 mb-4">
+                  <div className="p-3 bg-[#1e3a5f] rounded-lg text-[#d4af37]">
+                    {tool.icon}
+                  </div>
+                  <h4 className="text-xl font-bold text-[#1e3a5f] text-center md:text-left">{tool.name}</h4>
                 </div>
-                <h4 className="text-xl font-bold text-[#1e3a5f]">{tool.name}</h4>
+                <p className="text-[#8b6f47]">{tool.description}</p>
               </div>
-              <p className="text-[#8b6f47]">{tool.description}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
         
         {/* Link to FAQ for more tools */}
@@ -394,7 +409,7 @@ export default function Home() {
           </div>
         )}
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+        <div id="pricing-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <div
               key={index}
@@ -407,13 +422,13 @@ export default function Home() {
               } hover:scale-105 transition-transform relative`}
             >
               {plan.highlight && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#1e3a5f] text-[#d4af37] px-4 py-1 rounded-full text-sm font-bold">
+                <div className="absolute -top-3 md:-top-4 left-1/2 transform -translate-x-1/2 bg-[#1e3a5f] text-[#d4af37] px-3 md:px-4 py-1 rounded-full text-xs md:text-sm font-bold whitespace-nowrap">
                   MAIS POPULAR
                 </div>
               )}
               {plan.premium && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#1e3a5f] px-4 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                  <Crown className="w-4 h-4" />
+                <div className="absolute -top-3 md:-top-4 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#1e3a5f] px-3 md:px-4 py-1 rounded-full text-xs md:text-sm font-bold flex items-center gap-1 whitespace-nowrap">
+                  <Crown className="w-3 h-3 md:w-4 md:h-4" />
                   PREMIUM
                 </div>
               )}
@@ -554,7 +569,7 @@ export default function Home() {
           </div>
 
           {/* Credits Packages */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div id="credits-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {/* Package 1 - 500 credits */}
             <div className="bg-white/90 rounded-xl p-6 shadow-lg border-3 border-[#d4af37] relative">
               <div className="text-center mb-4">

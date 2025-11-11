@@ -42,29 +42,48 @@ export default function VersePopup() {
         <div className="space-y-2">
           {/* Verse Text - Smaller font */}
           <div className="text-[#1e3a5f] leading-relaxed space-y-1.5 text-xs">
-            <p>
-              <sup className="text-[10px] font-bold">14</sup> Por causa disto me ponho de joelhos perante o Pai de nosso Senhor Jesus Cristo,
-            </p>
-            <p>
-              <sup className="text-[10px] font-bold">15</sup> Do qual toda a família nos céus e na terra toma o nome,
-            </p>
-            <p>
-              <sup className="text-[10px] font-bold">16</sup> Para que, segundo as riquezas da sua glória, vos conceda que sejais fortalecidos com poder pelo seu Espírito no homem interior;
-            </p>
-            <p>
-              <sup className="text-[10px] font-bold">17</sup> Para que Cristo habite pela fé nos vossos corações; a fim de, estando enraizados e fundados em amor,
-            </p>
-            <p>
-              <sup className="text-[10px] font-bold">18</sup> Poderdes perfeitamente compreender, com todos os santos, qual seja a largura, e o comprimento, e a altura, e a profundidade,
-            </p>
-            <p>
-              <sup className="text-[10px] font-bold">19</sup> E conhecer o amor de Cristo, que excede todo o entendimento, para que sejais cheios de toda a plenitude de Deus.
-            </p>
+            {/* Versos completos para desktop */}
+            <div className="hidden md:block">
+              <p>
+                <sup className="text-[10px] font-bold">14</sup> Por causa disto me ponho de joelhos perante o Pai de nosso Senhor Jesus Cristo,
+              </p>
+              <p>
+                <sup className="text-[10px] font-bold">15</sup> Do qual toda a família nos céus e na terra toma o nome,
+              </p>
+              <p>
+                <sup className="text-[10px] font-bold">16</sup> Para que, segundo as riquezas da sua glória, vos conceda que sejais fortalecidos com poder pelo seu Espírito no homem interior;
+              </p>
+              <p>
+                <sup className="text-[10px] font-bold">17</sup> Para que Cristo habite pela fé nos vossos corações; a fim de, estando enraizados e fundados em amor,
+              </p>
+              <p>
+                <sup className="text-[10px] font-bold">18</sup> Poderdes perfeitamente compreender, com todos os santos, qual seja a largura, e o comprimento, e a altura, e a profundidade,
+              </p>
+              <p>
+                <sup className="text-[10px] font-bold">19</sup> E conhecer o amor de Cristo, que excede todo o entendimento, para que sejais cheios de toda a plenitude de Deus.
+              </p>
+            </div>
+            
+            {/* Versos 14-16 apenas para mobile */}
+            <div className="block md:hidden">
+              <p>
+                <sup className="text-[10px] font-bold">14</sup> Por causa disto me ponho de joelhos perante o Pai de nosso Senhor Jesus Cristo,
+              </p>
+              <p>
+                <sup className="text-[10px] font-bold">15</sup> Do qual toda a família nos céus e na terra toma o nome,
+              </p>
+              <p>
+                <sup className="text-[10px] font-bold">16</sup> Para que, segundo as riquezas da sua glória, vos conceda que sejais fortalecidos com poder pelo seu Espírito no homem interior;
+              </p>
+              <p className="text-center mt-1">
+                .......
+              </p>
+            </div>
           </div>
 
           {/* Reference */}
           <div className="text-right">
-            <p className="text-[10px] font-bold text-[#8b6f47] italic">
+            <p className="text-sm md:text-[10px] font-bold text-[#8b6f47] italic">
               (Efésios 3:14-19)
             </p>
           </div>

@@ -933,3 +933,41 @@
 - [x] Testar visual do chat - Foto da Rebeca aparecendo perfeitamente!
 - [x] Salvar checkpoint - f7a65dd0
 
+
+
+
+## Otimização Mobile Completa (07/11/2025 - 02:00)
+
+**Objetivo:** Versão mobile profissional, funcional e agradável SEM alterar desktop
+
+### Home.tsx
+- [ ] Reduzir tamanhos de fonte em mobile
+- [ ] Ajustar espaçamentos (padding/margin)
+- [ ] Otimizar hero section
+- [ ] Ajustar grid de ferramentas para 1 coluna
+- [ ] Otimizar cards de planos
+- [ ] Ajustar seção de créditos avulsos
+
+### Dashboard.tsx
+- [ ] Reduzir tamanhos em mobile
+- [ ] Ajustar grid de ferramentas
+- [ ] Otimizar cards de estudos salvos
+
+### ToolPage.tsx
+- [ ] Ajustar layout para mobile
+- [ ] Otimizar formulário de entrada
+
+### Componentes
+- [ ] TutorialCarousel - slides mais compactos
+- [ ] VersePopup - menor e melhor posicionado
+- [ ] Chatbot - ajustar tamanho da janela
+- [ ] ScrollToTopButton - tamanho proporcional
+- [ ] Botões flutuantes - espaçamento adequado
+
+### Testes
+- [ ] Testar Home em mobile
+- [ ] Testar Dashboard em mobile
+- [ ] Testar ToolPage em mobile
+- [ ] Testar todos os componentes
+- [ ] Salvar checkpoint
+
