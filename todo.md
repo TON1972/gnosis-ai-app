@@ -991,3 +991,14 @@
 - [x] Criar página /sobre com texto fornecido pelo usuário
 
 
+
+
+
+## Correções Páginas Planos e Sobre (11/01/2025 - 02:32)
+
+- [x] Modificar layout da página /planos para 1 coluna (um plano abaixo do outro)
+- [x] Garantir que informações e preços não saiam dos campos
+- [x] Adicionar menu hambúrguer na página /planos
+- [x] Adicionar menu hambúrguer na página /sobre
+
+

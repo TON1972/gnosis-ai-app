@@ -5,6 +5,7 @@ import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link } from "wouter";
 import { useState } from "react";
 import { CheckCircle2, Crown } from "lucide-react";
+import MobileMenu from "@/components/MobileMenu";
 
 export default function PlanosPage() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -112,7 +113,7 @@ export default function PlanosPage() {
               </div>
             </Link>
             
-            <nav className="flex items-center gap-4">
+            <nav className="hidden md:flex items-center gap-4">
               {isAuthenticated && (
                 <Link href="/dashboard">
                   <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer">
@@ -121,6 +122,13 @@ export default function PlanosPage() {
                 </Link>
               )}
             </nav>
+            
+            {/* Menu Hambúrguer Mobile */}
+            <MobileMenu 
+              isAuthenticated={isAuthenticated}
+              onLogout={logout}
+              loginUrl={getLoginUrl()}
+            />
           </div>
         </div>
       </header>
@@ -180,18 +188,18 @@ export default function PlanosPage() {
           </div>
         )}
         
-        {/* Plans Grid - Maior */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        {/* Plans Grid - 1 Coluna */}
+        <div className="flex flex-col gap-8 max-w-2xl mx-auto">
           {plans.map((plan, index) => (
             <div
               key={index}
               className={`rounded-2xl p-10 shadow-2xl border-4 ${
                 plan.highlight
-                  ? "bg-gradient-to-br from-[#d4af37] to-[#B8860B] border-[#1e3a5f] scale-105"
+                  ? "bg-gradient-to-br from-[#d4af37] to-[#B8860B] border-[#1e3a5f]"
                   : plan.premium
                   ? "bg-gradient-to-br from-[#1e3a5f] to-[#2a4a7f] border-[#d4af37]"
                   : "bg-white/90 border-[#d4af37]"
-              } hover:scale-105 transition-transform relative`}
+              } transition-shadow hover:shadow-3xl relative`}
             >
               {plan.highlight && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#1e3a5f] text-[#d4af37] px-4 py-1 rounded-full text-sm font-bold whitespace-nowrap">

@@ -1,8 +1,12 @@
-import { APP_LOGO, APP_TITLE } from "@/const";
+import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link } from "wouter";
 import { BookOpen, Heart, Sparkles } from "lucide-react";
+import MobileMenu from "@/components/MobileMenu";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function SobrePage() {
+  const { isAuthenticated, logout } = useAuth();
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFFACD] to-[#F0E68C]">
       {/* Header */}
@@ -16,6 +20,13 @@ export default function SobrePage() {
                 <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
               </div>
             </Link>
+            
+            {/* Menu Hambúrguer Mobile */}
+            <MobileMenu 
+              isAuthenticated={isAuthenticated}
+              onLogout={logout}
+              loginUrl={getLoginUrl()}
+            />
           </div>
         </div>
       </header>
