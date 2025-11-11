@@ -11,6 +11,8 @@ import PublicTicket from "./pages/PublicTicket";
 import FAQ from "./pages/FAQ";
 import Dashboard from "./pages/Dashboard";
 import ToolPage from "./pages/ToolPage";
+import PlanosPage from "./pages/PlanosPage";
+import SobrePage from "./pages/SobrePage";
 import Chatbot from "./components/Chatbot";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 
@@ -23,6 +25,8 @@ function Router() {
       <Route path="/admin/tickets" component={AdminTickets} />
       <Route path="/ticket/:ticketId" component={PublicTicket} />
       <Route path="/faq" component={FAQ} />
+      <Route path="/planos" component={PlanosPage} />
+      <Route path="/sobre" component={SobrePage} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/tool/:toolId" component={ToolPage} />
       <Route path={"/404"} component={NotFound} />

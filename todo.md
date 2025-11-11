@@ -981,3 +981,13 @@
 - [x] Criar menu hambúrguer mobile para economizar espaço vertical
 
 
+
+
+
+## Novas Páginas (11/01/2025 - 02:06)
+
+- [x] Adicionar links "Planos e Preços" e "Sobre Nós" no menu hambúrguer
+- [x] Criar página /planos com cards de planos em tamanho maior
+- [x] Criar página /sobre com texto fornecido pelo usuário
+
+
