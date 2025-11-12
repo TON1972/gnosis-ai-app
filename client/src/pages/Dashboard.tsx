@@ -7,6 +7,7 @@ import CreditsPanel from "@/components/CreditsPanel";
 import NoCreditsModal from "@/components/NoCreditsModal";
 import SavedStudiesSection from "@/components/SavedStudiesSection";
 import SubscriptionWarningBanner from "@/components/SubscriptionWarningBanner";
+import DashboardMobileMenu from "@/components/DashboardMobileMenu";
 import { trpc } from "@/lib/trpc";
 import {
   BookOpen,
@@ -229,6 +230,8 @@ export default function Dashboard() {
       setShowNoCreditsModal(true);
       return;
     }
+    // Scroll para o topo antes de navegar
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setLocation(`/tool/${toolId}`);
   };
 
@@ -237,7 +240,7 @@ export default function Dashboard() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center justify-between">
             <Link href="/">
               <span className="flex items-center gap-4 hover:opacity-80 transition-opacity cursor-pointer">
                 <img src={APP_LOGO} alt={APP_TITLE} className="h-16 w-16 object-contain" loading="lazy" />
@@ -247,19 +250,32 @@ export default function Dashboard() {
                 <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
               </span>
             </Link>
-            <div className="flex items-center gap-2 md:gap-4 flex-wrap">
-              <span className="text-[#d4af37] font-semibold text-sm md:text-base">
-                Olá, {user?.name || "Usuário"}!
-              </span>
-              <Link href="/">
-                <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
-                  <Home className="w-5 h-5" />
-                  Voltar ao Início
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-6">
+              <Link href="/faq">
+                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
+                  PERGUNTAS FREQUENTES
+                </span>
+              </Link>
+              <Link href="/sobre">
+                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
+                  SOBRE NÓS
+                </span>
+              </Link>
+              <Link href="/planos">
+                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
+                  PLANOS E PREÇOS
+                </span>
+              </Link>
+              <Link href="/dashboard">
+                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
+                  PAINEL DE CONTROLE
                 </span>
               </Link>
               {user && (user.role === 'admin' || user.role === 'super_admin') && (
                 <Link href="/admin">
-                  <span className="px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
+                  <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
                     ADMIN
                   </span>
                 </Link>
@@ -276,7 +292,16 @@ export default function Dashboard() {
                 <LogOut className="w-4 h-4 mr-2" />
                 Sair
               </Button>
-            </div>
+            </nav>
+            
+            {/* Mobile Menu */}
+            <DashboardMobileMenu 
+              user={user}
+              onLogout={() => {
+                logout();
+                setLocation("/");
+              }}
+            />
           </div>
         </div>
       </header>

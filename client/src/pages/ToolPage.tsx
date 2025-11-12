@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { APP_LOGO, APP_TITLE } from "@/const";
 import { Link, useRoute } from "wouter";
@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import jsPDF from "jspdf";
 import SubscriptionWarningBanner from "@/components/SubscriptionWarningBanner";
 import ShareButton from "@/components/ShareButton";
+import "../dashboard-mobile.css";
 
 const TOOLS_INFO: Record<string, { name: string; description: string; placeholder: string; creditCost: number }> = {
   hermeneutica: {
@@ -134,6 +135,11 @@ export default function ToolPage() {
   const [result, setResult] = useState("");
   const [showNoCreditsModal, setShowNoCreditsModal] = useState(false);
   const [copied, setCopied] = useState(false);
+  
+  // Scroll para o topo quando a página carregar
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [toolId]);
 
   const { data: credits } = trpc.credits.balance.useQuery();
   const { data: subscriptionStatus } = trpc.subscription.status.useQuery();
@@ -271,7 +277,7 @@ export default function ToolPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
+    <div className="tool-page-container min-h-screen bg-gradient-radial from-[#d4af37] via-[#DAA520] to-[#FFFACD]">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-6">
@@ -285,10 +291,10 @@ export default function ToolPage() {
                 <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
               </span>
             </Link>
-            <Link href="/">
+            <Link href="/dashboard">
               <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
                 <Home className="w-5 h-5" />
-                Voltar ao Início
+                Painel de Controle
               </span>
             </Link>
           </div>
@@ -300,7 +306,7 @@ export default function ToolPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-4 gap-8">
+        <div className="tool-page-grid grid lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <CreditsPanel onNeedCredits={() => setShowNoCreditsModal(true)} />

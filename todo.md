@@ -1063,3 +1063,25 @@
 - [x] Manter tamanhos de fontes inalterados
 - [x] Garantir que outras páginas não sejam afetadas
 
+
+
+
+## Ajustes Adicionais Dashboard Mobile (12/11/2025)
+
+- [x] Reduzir tamanho dos cards de ferramentas para que 2 cards apareçam completamente na tela mobile
+- [x] Reorganizar layout dos cards: ícone no topo, nome e descrição abaixo
+
+
+
+- [x] Remover campo "Seus Créditos" da página de ferramentas (ToolPage) no mobile
+- [x] Centralizar campos na ToolPage: nome/descrição acima, pesquisa abaixo
+
+
+
+- [x] Corrigir scroll ao clicar em ferramenta (deve ir para topo, não rodapé)
+- [x] Trocar botão "Voltar ao Início" por "Painel de Controle" no cabeçalho do ToolPage
+
+
+
+- [x] Substituir cabeçalho do Dashboard pelo menu sanduíche igual ao da Home (+ link ADMIN adicional)
+
