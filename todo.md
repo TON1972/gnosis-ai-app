@@ -1040,3 +1040,26 @@
 - [x] Reduzir espaçamentos ao mínimo necessário
 - [x] Tornar Dashboard mobile totalmente usável e navegável
 
+
+
+
+## Otimização Dashboard Mobile (12/01/2025 - 01:50)
+
+- [ ] Centralizar campo "Seus Créditos" abaixo do cabeçalho (largura total)
+- [ ] Transformar "Meus Estudos" em carrossel horizontal (scroll lateral)
+- [ ] Organizar ferramentas em grid 2x2 (duas por linha)
+- [ ] Manter tamanhos de fonte atuais
+- [ ] Garantir que alterações afetem APENAS Dashboard mobile
+
+
+
+
+
+## Otimização Dashboard Mobile (12/11/2025)
+
+- [x] Centralizar "Seus Créditos" abaixo do cabeçalho
+- [x] Transformar "Meus Estudos" em carrossel horizontal
+- [x] Organizar ferramentas em grid 2x2
+- [x] Manter tamanhos de fontes inalterados
+- [x] Garantir que outras páginas não sejam afetadas
+

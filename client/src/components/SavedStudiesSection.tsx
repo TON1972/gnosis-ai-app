@@ -177,7 +177,7 @@ export default function SavedStudiesSection() {
           </h3>
         </div>
 
-        <div className="space-y-3 max-h-[500px] overflow-y-auto">
+        <div className="saved-studies-list space-y-3 max-h-[500px] overflow-y-auto">
           {savedStudies.map((study) => (
             <div
               key={study.id}
