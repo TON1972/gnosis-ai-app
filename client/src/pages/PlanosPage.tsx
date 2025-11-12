@@ -9,7 +9,7 @@ import MobileMenu from "@/components/MobileMenu";
 
 export default function PlanosPage() {
   const { user, isAuthenticated, logout } = useAuth();
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
   
   const { data: activePlan } = trpc.plans.getActivePlan.useQuery(undefined, {
     enabled: isAuthenticated,
@@ -18,89 +18,96 @@ export default function PlanosPage() {
   const plans = [
     {
       name: "FREE",
+      price: "Gratuito",
       priceValue: 0,
       creditsInitial: "500 créditos iniciais",
-      creditsDaily: "50 créditos diários",
-      tools: "6 de 15 ferramentas",
+      creditsDaily: "50 créditos/dia",
+      tools: "6 ferramentas básicas",
       planKey: "free" as const,
-      highlight: false,
-      premium: false,
+      highlight: false
     },
     {
       name: "Aliança",
-      priceValue: billingPeriod === 'monthly' ? 16.88 : 168.80,
-      creditsInitial: "2.500 créditos iniciais",
-      creditsDaily: "100 créditos diários",
-      tools: "10 de 15 ferramentas",
+      price: "R$ 19,98",
+      priceValue: 19.98,
+      period: "/mês",
+      creditsInitial: "1.500 créditos iniciais*",
+      creditsDaily: "100 créditos/dia",
+      tools: "10 ferramentas",
       planKey: "alianca" as const,
-      highlight: false,
-      premium: false,
+      highlight: false
     },
     {
       name: "Lumen",
-      priceValue: billingPeriod === 'monthly' ? 30.88 : 308.80,
-      creditsInitial: "5.000 créditos iniciais",
-      creditsDaily: "200 créditos diários",
-      tools: "Todas as 15 ferramentas",
+      price: "R$ 36,98",
+      priceValue: 36.98,
+      period: "/mês",
+      creditsInitial: "3.000 créditos iniciais*",
+      creditsDaily: "200 créditos/dia",
+      tools: "Todas as 18 ferramentas",
       planKey: "lumen" as const,
-      highlight: true,
-      premium: false,
+      highlight: true
     },
     {
       name: "GNOSIS Premium",
-      priceValue: billingPeriod === 'monthly' ? 57.60 : 576.00,
-      creditsInitial: "10.000 créditos iniciais",
-      creditsDaily: "500 créditos diários",
-      tools: "Todas as 15 ferramentas",
-      planKey: "gnosis_premium" as const,
+      price: "R$ 68,98",
+      priceValue: 68.98,
+      period: "/mês",
+      creditsInitial: "6.000 créditos iniciais*",
+      creditsDaily: "300 créditos/dia",
+      tools: "Todas as 18 ferramentas",
+      planKey: "premium" as const,
       highlight: false,
-      premium: true,
-    },
+      premium: true
+    }
   ];
 
   const allTools = [
-    { name: "Hermenêutica", free: true, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Tradução", free: true, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Resumo", free: true, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Exegese", free: false, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Estudos Doutrinários", free: true, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Análise Teológica Comparada", free: true, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Religiões Comparadas", free: false, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Teologia Sistemática", free: false, alianca: false, lumen: true, gnosis_premium: true },
-    { name: "Análise Histórico-Cultural", free: true, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Apologética Avançada", free: false, alianca: false, lumen: true, gnosis_premium: true },
-    { name: "Análise de Gênero Literário", free: false, alianca: false, lumen: true, gnosis_premium: true },
-    { name: "Análise Retórica", free: false, alianca: false, lumen: true, gnosis_premium: true },
-    { name: "Linguagem Ministerial", free: false, alianca: true, lumen: true, gnosis_premium: true },
-    { name: "Teologia Prática", free: false, alianca: false, lumen: true, gnosis_premium: true },
-    { name: "Estudo Personalizado", free: false, alianca: false, lumen: true, gnosis_premium: true },
+    { name: "Hermenêutica", free: true, alianca: true, lumen: true, premium: true },
+    { name: "Traduções", free: true, alianca: true, lumen: true, premium: true },
+    { name: "Resumos", free: true, alianca: true, lumen: true, premium: true },
+    { name: "Esboços de Pregação", free: true, alianca: true, lumen: true, premium: true },
+    { name: "Estudos Doutrinários", free: true, alianca: true, lumen: true, premium: true },
+    { name: "Análise Teológica Comparada", free: true, alianca: true, lumen: true, premium: true },
+    { name: "Teologia Sistemática", free: false, alianca: true, lumen: true, premium: true },
+    { name: "Contextualização Brasileira", free: false, alianca: true, lumen: true, premium: true },
+    { name: "Exegese Avançada", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Religiões Comparadas", free: false, alianca: true, lumen: true, premium: true },
+    { name: "Referências ABNT/APA", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Linguagem Ministerial", free: false, alianca: true, lumen: true, premium: true },
+    { name: "Redação Acadêmica", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Dados Demográficos", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Patrística", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Linha do Tempo Teológica", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Apologética Avançada", free: false, alianca: false, lumen: true, premium: true },
   ];
 
-  const getDisplayPrice = (plan: typeof plans[0]) => {
-    if (plan.priceValue === 0) return { main: "Gratuito", multiplier: null };
-    
-    if (billingPeriod === 'yearly') {
-      return {
-        main: `R$ ${plan.priceValue.toFixed(2).replace('.', ',')}`,
-        multiplier: null
-      };
-    }
-    
-    return {
-      main: `R$ ${plan.priceValue.toFixed(2).replace('.', ',')}`,
-      multiplier: null
-    };
+  // Calcula preço anual com 16,5% desconto
+  const getYearlyPrice = (monthly: number) => {
+    const yearly = monthly * 12;
+    const discount = yearly * 0.165;
+    return (yearly - discount).toFixed(2);
   };
-
-  const getDisplayPeriod = (plan: typeof plans[0]) => {
+  
+  const getDisplayPrice = (plan: typeof plans[number]) => {
+    if (plan.priceValue === 0) return { main: plan.price, multiplier: null };
     if (billingPeriod === 'yearly') {
-      return '/ano';
+      // Calcula valor mensal COM desconto de 16,5%
+      const yearlyTotal = parseFloat(getYearlyPrice(plan.priceValue));
+      const monthlyWithDiscount = (yearlyTotal / 12).toFixed(2).replace('.', ',');
+      return { main: `R$ ${monthlyWithDiscount}`, multiplier: 'x 12' };
     }
-    return '/mês';
+    return { main: plan.price, multiplier: null };
+  };
+  
+  const getDisplayPeriod = (plan: typeof plans[number]) => {
+    if (plan.priceValue === 0) return '';
+    return billingPeriod === 'yearly' ? '/ano' : '/mês';
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFFACD] to-[#F0E68C]">
+    <div className="public-page min-h-screen bg-gradient-to-b from-[#FFFACD] to-[#F0E68C]">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-6">
@@ -223,6 +230,13 @@ export default function PlanosPage() {
                 }`}>
                   {getDisplayPrice(plan).main}
                 </span>
+                {getDisplayPrice(plan).multiplier && (
+                  <span className={`text-lg ml-1 ${
+                    plan.highlight || plan.premium ? "text-white/60" : "text-[#8b6f47]/60"
+                  }`}>
+                    {getDisplayPrice(plan).multiplier}
+                  </span>
+                )}
                 {plan.priceValue > 0 && (
                   <span className={`text-xl ${
                     plan.highlight || plan.premium ? "text-white/80" : "text-[#8b6f47]"

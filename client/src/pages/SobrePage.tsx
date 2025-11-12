@@ -8,7 +8,7 @@ export default function SobrePage() {
   const { isAuthenticated, logout } = useAuth();
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFFACD] to-[#F0E68C]">
+    <div className="public-page min-h-screen bg-gradient-to-b from-[#FFFACD] to-[#F0E68C]">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#1e3a5f] shadow-lg border-b-4 border-[#d4af37]">
         <div className="container mx-auto px-4 py-6">

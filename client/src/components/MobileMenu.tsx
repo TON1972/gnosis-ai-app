@@ -52,6 +52,12 @@ export default function MobileMenu({ isAuthenticated, onLogout, loginUrl }: Mobi
 
           {/* Links do menu */}
           <nav className="flex flex-col gap-4">
+            <Link href="/" onClick={closeMenu}>
+              <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
+                Página Principal
+              </span>
+            </Link>
+            
             <Link href="/planos" onClick={closeMenu}>
               <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
                 Planos e Preços
@@ -74,15 +80,16 @@ export default function MobileMenu({ isAuthenticated, onLogout, loginUrl }: Mobi
               <>
                 <Link href="/dashboard" onClick={closeMenu}>
                   <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
-                    Dashboard
+                    Painel de Controle
                   </span>
                 </Link>
+                
                 <button
                   onClick={() => {
                     onLogout?.();
                     closeMenu();
                   }}
-                  className="text-left px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors"
+                  className="block w-full text-left px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors"
                 >
                   Sair
                 </button>

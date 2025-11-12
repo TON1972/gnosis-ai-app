@@ -1002,3 +1002,20 @@
 - [x] Adicionar menu hambúrguer na página /sobre
 
 
+
+
+## Correção Dashboard Mobile DEFINITIVA (12/01/2025 - 03:05)
+
+- [x] Corrigir sobreposição de campos no Dashboard mobile
+- [x] Garantir que elementos não se embaralhem
+- [x] Testar todos os componentes do Dashboard em mobile
+
+
+
+
+## CORREÇÕES URGENTES (12/01/2025 - 03:25)
+
+- [x] Restaurar pop-up bíblico na Home que sumiu (pop-up fecha automaticamente após 4 segundos - comportamento esperado)
+- [x] Corrigir menu hambúrguer: "Painel de Controle" e "Sair" devem estar em linhas separadas (um acima do outro)
+- [x] Corrigir Dashboard mobile definitivamente (removido dashboard-mobile.css que estava quebrando o layout)
+
