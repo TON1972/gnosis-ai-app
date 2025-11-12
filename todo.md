@@ -1019,3 +1019,12 @@
 - [x] Corrigir menu hambúrguer: "Painel de Controle" e "Sair" devem estar em linhas separadas (um acima do outro)
 - [x] Corrigir Dashboard mobile definitivamente (removido dashboard-mobile.css que estava quebrando o layout)
 
+
+
+
+## Ajuste Proporcionalidade Dashboard Mobile (12/01/2025 - 03:40)
+
+- [x] Reduzir tamanho dos campos do Dashboard mobile
+- [x] Compactar padding, margins e fontes
+- [x] Melhorar usabilidade geral do Dashboard em mobile
+

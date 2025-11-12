@@ -589,3 +589,104 @@
   }
 }
 
+
+
+
+  /* ==================== DASHBOARD MOBILE - COMPACTAÇÃO ==================== */
+  /* Aplicar APENAS em páginas que NÃO são .public-page (ou seja, Dashboard) */
+  
+  /* Dashboard: Reduzir padding do header */
+  body:not(.public-page) header .container {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  /* Dashboard: Logo e título menores */
+  body:not(.public-page) header img {
+    height: 2.5rem !important;
+    width: 2.5rem !important;
+  }
+
+  body:not(.public-page) header h1 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Dashboard: Botões do header compactos */
+  body:not(.public-page) header button,
+  body:not(.public-page) header .cursor-pointer {
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Dashboard: Reduzir padding do container principal */
+  body:not(.public-page) .container.mx-auto.px-4 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  /* Dashboard: Credits Panel compacto */
+  body:not(.public-page) .lg\\:col-span-1 > div {
+    padding: 0.75rem !important;
+  }
+
+  /* Dashboard: Números de créditos menores */
+  body:not(.public-page) .text-5xl,
+  body:not(.public-page) .text-6xl {
+    font-size: 2rem !important;
+  }
+
+  /* Dashboard: Welcome Section compacta */
+  body:not(.public-page) .lg\\:col-span-3 > div:first-child {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Dashboard: Títulos menores */
+  body:not(.public-page) h2 {
+    font-size: 1.25rem !important;
+  }
+
+  body:not(.public-page) h3 {
+    font-size: 1rem !important;
+  }
+
+  /* Dashboard: Parágrafos menores */
+  body:not(.public-page) p {
+    font-size: 0.75rem !important;
+  }
+
+  /* Dashboard: Cards de ferramentas compactos */
+  body:not(.public-page) .grid.grid-cols-1 > div {
+    padding: 0.75rem !important;
+  }
+
+  /* Dashboard: Ícones de ferramentas menores */
+  body:not(.public-page) .grid.grid-cols-1 svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  /* Dashboard: Botões de categoria compactos */
+  body:not(.public-page) .flex.flex-wrap button {
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Dashboard: Gaps reduzidos */
+  body:not(.public-page) .gap-6,
+  body:not(.public-page) .gap-8 {
+    gap: 1rem !important;
+  }
+
+  /* Dashboard: Saved Studies compacto */
+  body:not(.public-page) .mt-6 {
+    margin-top: 1rem !important;
+  }
+
+  /* Dashboard: Badges menores */
+  body:not(.public-page) .text-xs {
+    font-size: 0.625rem !important;
+  }
+
