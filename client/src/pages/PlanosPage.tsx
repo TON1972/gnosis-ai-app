@@ -3,13 +3,25 @@ import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircle2, Crown } from "lucide-react";
 import MobileMenu from "@/components/MobileMenu";
 
 export default function PlanosPage() {
   const { user, isAuthenticated, logout } = useAuth();
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
+  
+  // Scroll para o topo quando a página carregar (método robusto)
+  useEffect(() => {
+    // Método 1: Scroll imediato
+    window.scrollTo(0, 0);
+    // Método 2: Forçar scroll após pequeno delay
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
+  }, []);
   
   const { data: activePlan } = trpc.plans.getActivePlan.useQuery(undefined, {
     enabled: isAuthenticated,

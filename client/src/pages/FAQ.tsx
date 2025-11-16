@@ -199,9 +199,16 @@ function FAQAccordion({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boole
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
 
-  // Scroll to top when page loads
+  // Scroll to top when page loads (método robusto)
   useEffect(() => {
+    // Método 1: Scroll imediato
     window.scrollTo(0, 0);
+    // Método 2: Forçar scroll após pequeno delay
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
   }, []);
 
   const toggleItem = (categoryIndex: number, itemIndex: number) => {
@@ -288,7 +295,7 @@ export default function FAQ() {
             Nossa equipe está pronta para ajudar você a aproveitar ao máximo a GNOSIS AI.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/">
+            <Link href="/planos">
               <span 
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="inline-block px-8 py-4 bg-[#1e3a5f] text-[#d4af37] rounded-lg font-bold text-lg hover:bg-[#2a4a7f] transition-colors shadow-lg cursor-pointer"

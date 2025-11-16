@@ -1085,3 +1085,28 @@
 
 - [x] Substituir cabeçalho do Dashboard pelo menu sanduíche igual ao da Home (+ link ADMIN adicional)
 
+
+
+- [x] Restaurar link "Página Principal" no menu hambúrguer do Dashboard
+- [x] Formatar link "ADMIN" no mesmo padrão dos outros links (sem negrito)
+
+
+
+- [x] Adicionar link "Admin" no menu hambúrguer da Home (somente para admins)
+
+
+
+- [x] Alterar todos os botões "Começar Agora" para redirecionar para /planos (mobile + desktop)
+
+
+
+- [x] Adicionar scroll para o topo ao clicar em "Começar Agora" (deve carregar no cabeçalho da página de planos)
+
+
+
+- [x] Adicionar useEffect com scroll ao topo em todas as páginas (Home, FAQ, Sobre, Planos, Dashboard)
+
+
+
+- [x] CRÍTICO: Verificar e corrigir TODOS os botões que não levam ao topo da página (verificação rigorosa completa)
+

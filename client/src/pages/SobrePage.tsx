@@ -3,9 +3,22 @@ import { Link } from "wouter";
 import { BookOpen, Heart, Sparkles } from "lucide-react";
 import MobileMenu from "@/components/MobileMenu";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useEffect } from "react";
 
 export default function SobrePage() {
   const { isAuthenticated, logout } = useAuth();
+  
+  // Scroll para o topo quando a página carregar (método robusto)
+  useEffect(() => {
+    // Método 1: Scroll imediato
+    window.scrollTo(0, 0);
+    // Método 2: Forçar scroll após pequeno delay
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
+  }, []);
   
   return (
     <div className="public-page min-h-screen bg-gradient-to-b from-[#FFFACD] to-[#F0E68C]">

@@ -136,9 +136,16 @@ export default function ToolPage() {
   const [showNoCreditsModal, setShowNoCreditsModal] = useState(false);
   const [copied, setCopied] = useState(false);
   
-  // Scroll para o topo quando a página carregar
+  // Scroll para o topo quando a página carregar (método robusto)
   React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Método 1: Scroll imediato
+    window.scrollTo(0, 0);
+    // Método 2: Forçar scroll após pequeno delay
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
   }, [toolId]);
 
   const { data: credits } = trpc.credits.balance.useQuery();

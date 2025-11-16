@@ -52,6 +52,12 @@ export default function DashboardMobileMenu({ user, onLogout }: DashboardMobileM
 
           {/* Links do menu */}
           <nav className="flex flex-col gap-4">
+            <Link href="/" onClick={closeMenu}>
+              <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
+                Página Principal
+              </span>
+            </Link>
+            
             <Link href="/faq" onClick={closeMenu}>
               <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
                 Perguntas Frequentes
@@ -76,11 +82,11 @@ export default function DashboardMobileMenu({ user, onLogout }: DashboardMobileM
               </span>
             </Link>
 
-            {/* Link ADMIN (exclusivo do Dashboard) */}
+            {/* Link ADMIN (exclusivo do Dashboard, somente para admins) */}
             {isAdmin && (
               <Link href="/admin" onClick={closeMenu}>
-                <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer font-bold">
-                  ADMIN
+                <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
+                  Admin
                 </span>
               </Link>
             )}

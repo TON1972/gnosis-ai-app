@@ -6,7 +6,7 @@ import MobileMenu from "@/components/MobileMenu";
 import { trpc } from "@/lib/trpc";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   BookOpen, 
   Languages, 
@@ -168,6 +168,18 @@ export default function Home() {
   const [, setLocation] = useLocation();
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
   
+  // Scroll para o topo quando a página carregar (método robusto)
+  useEffect(() => {
+    // Método 1: Scroll imediato
+    window.scrollTo(0, 0);
+    // Método 2: Forçar scroll após pequeno delay (garante que DOM está pronto)
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 0);
+  }, []);
+  
   // Calcula preço anual com 16,5% desconto
   const getYearlyPrice = (monthly: number) => {
     const yearly = monthly * 12;
@@ -257,6 +269,7 @@ export default function Home() {
               isAuthenticated={isAuthenticated}
               onLogout={logout}
               loginUrl={getLoginUrl()}
+              user={user}
             />
           </div>
         </div>
@@ -288,14 +301,16 @@ export default function Home() {
                 Perguntas Frequentes
               </Button>
             </Link>
-            <Button
-              onClick={() => window.location.href = getLoginUrl()}
-              size="lg"
-              className="bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f] text-xl px-12 py-6 rounded-xl shadow-2xl"
-            >
-              Começar Agora
-              <ArrowRight className="ml-2 w-6 h-6" />
-            </Button>
+            <Link href="/planos">
+              <Button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                size="lg"
+                className="bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f] text-xl px-12 py-6 rounded-xl shadow-2xl"
+              >
+                Começar Agora
+                <ArrowRight className="ml-2 w-6 h-6" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

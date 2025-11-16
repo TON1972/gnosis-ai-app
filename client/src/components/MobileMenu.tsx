@@ -7,9 +7,10 @@ interface MobileMenuProps {
   isAuthenticated: boolean;
   onLogout?: () => void;
   loginUrl: string;
+  user?: any;
 }
 
-export default function MobileMenu({ isAuthenticated, onLogout, loginUrl }: MobileMenuProps) {
+export default function MobileMenu({ isAuthenticated, onLogout, loginUrl, user }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -83,6 +84,15 @@ export default function MobileMenu({ isAuthenticated, onLogout, loginUrl }: Mobi
                     Painel de Controle
                   </span>
                 </Link>
+                
+                {/* Link Admin (somente para admins) */}
+                {user && (user.role === 'admin' || user.role === 'super_admin') && (
+                  <Link href="/admin" onClick={closeMenu}>
+                    <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
+                      Admin
+                    </span>
+                  </Link>
+                )}
                 
                 <button
                   onClick={() => {
