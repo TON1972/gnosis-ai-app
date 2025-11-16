@@ -26,7 +26,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   planos: {
-    message: "Temos 4 planos disponíveis:\n\n**FREE** - Gratuito com 6 ferramentas básicas\n**ALIANÇA** - R$ 19,98/mês com 10 ferramentas\n**LUMEN** - R$ 36,98/mês com todas as 18 ferramentas\n**GNOSIS PREMIUM** - R$ 68,98/mês com todas as 18 ferramentas\n\nO que você gostaria de saber?",
+    message: "Temos 4 planos disponíveis:\n\n**FREE** - Gratuito com 6 de 18 ferramentas disponíveis\n**ALIANÇA** - R$ 19,98/mês com 10 de 18 ferramentas disponíveis\n**LUMEN** - R$ 36,98/mês com todas as 18 ferramentas\n**GNOSIS PREMIUM** - R$ 68,98/mês com todas as 18 ferramentas\n\nO que você gostaria de saber?",
     options: [
       { label: "Diferenças entre planos", action: "diferencas_planos" },
       { label: "Como fazer upgrade", action: "upgrade" },
@@ -66,7 +66,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   diferencas_planos: {
-    message: "**Principais diferenças:**\n\n**FREE** - 6 ferramentas básicas, 500+50 créditos\n**ALIANÇA** - 10 ferramentas, 1500+100 créditos\n**LUMEN** - Todas as 18 ferramentas, 3000+200 créditos\n**PREMIUM** - Todas as 18 ferramentas, 6000+300 créditos\n\nPlanos pagos incluem ferramentas avançadas como Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada e muito mais.",
+    message: "**Principais diferenças:**\n\n**FREE** - 6 de 18 ferramentas disponíveis, 500+50 créditos\n**ALIANÇA** - 10 de 18 ferramentas disponíveis, 1500+100 créditos\n**LUMEN** - Todas as 18 ferramentas, 3000+200 créditos\n**PREMIUM** - Todas as 18 ferramentas, 6000+300 créditos\n\nPlanos pagos incluem ferramentas avançadas como Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada e muito mais.",
     options: [
       { label: "Ver página de planos", action: "ver_planos" },
       { label: "Voltar ao menu", action: "menu" },
@@ -129,7 +129,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   testar_gratis: {
-    message: "Sim! Você pode testar gratuitamente:\n\n✅ Crie uma conta FREE (sem cartão)\n✅ Acesse 6 ferramentas básicas\n✅ Receba 500 créditos iniciais + 50/dia\n✅ Experimente todas as funcionalidades\n\nSem compromisso, sem cobrança automática!",
+    message: "Sim! Você pode testar gratuitamente:\n\n✅ Crie uma conta FREE (sem cartão)\n✅ Acesse 6 de 18 ferramentas disponíveis\n✅ Receba 500 créditos iniciais + 50/dia\n✅ Experimente todas as funcionalidades\n\nSem compromisso, sem cobrança automática!",
     options: [
       { label: "Criar conta grátis", action: "login" },
       { label: "Voltar ao menu", action: "menu" },

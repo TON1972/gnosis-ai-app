@@ -122,7 +122,7 @@ const plans = [
     priceValue: 0,
     creditsInitial: "500 créditos iniciais",
     creditsDaily: "50 créditos/dia",
-    tools: "6 ferramentas básicas",
+    tools: "6 de 18 ferramentas disponíveis",
     planKey: "free" as const,
     highlight: false
   },
@@ -133,7 +133,7 @@ const plans = [
     period: "/mês",
     creditsInitial: "1.500 créditos iniciais*",
     creditsDaily: "100 créditos/dia",
-    tools: "10 ferramentas",
+    tools: "10 de 18 ferramentas disponíveis",
     planKey: "alianca" as const,
     highlight: false
   },

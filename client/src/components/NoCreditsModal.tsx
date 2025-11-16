@@ -38,7 +38,7 @@ const PLAN_UPGRADES = [
     period: "/mês",
     creditsInitial: "1.500 créditos iniciais",
     creditsDaily: "100 créditos/dia",
-    tools: "10 ferramentas",
+    tools: "10 de 18 ferramentas disponíveis",
     planKey: "alianca" as const,
     highlight: false
   },

@@ -198,7 +198,7 @@ export default function Dashboard() {
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
   const { data: savedStudies, refetch: refetchStudies } = trpc.studies.list.useQuery();
   const deleteStudyMutation = trpc.studies.delete.useMutation();
-  const planId = activePlan?.plan.id || 150001;
+  const planId = activePlan?.plan.id || 180001; // FREE plan ID
   const { data: planTools } = trpc.plans.getTools.useQuery(
     { planId },
     { enabled: true } // Sempre buscar, usar planId 1 (FREE) como fallback

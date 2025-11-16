@@ -139,8 +139,15 @@ export async function getUserCredits(userId: number) {
         .where(eq(userCredits.userId, userId));
       console.log('[Credits Debug] Daily credits renewed:', dailyCredits);
     } else {
-      console.log('[Credits Debug] No active subscription found, setting daily credits to 0');
-      dailyCredits = 0;
+      // No active subscription = FREE plan (50 daily credits)
+      console.log('[Credits Debug] No active subscription found, setting FREE plan daily credits (50)');
+      dailyCredits = 50;
+      await db.update(userCredits)
+        .set({
+          creditsDaily: dailyCredits,
+          lastDailyReset: now,
+        })
+        .where(eq(userCredits.userId, userId));
     }
   }
 

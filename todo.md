@@ -1110,3 +1110,12 @@
 
 - [x] CRÍTICO: Verificar e corrigir TODOS os botões que não levam ao topo da página (verificação rigorosa completa)
 
+
+
+- [x] Alterar descrição de ferramentas nos planos: FREE "6 de 18 ferramentas disponíveis", ALIANÇA "10 de 18 ferramentas disponíveis"
+
+
+
+- [x] 🚨 CRÍTICO: Corrigir créditos diários do FREE (50/dia não estão sendo creditados)
+- [x] 🚨 CRÍTICO: Desbloquear 6 ferramentas básicas para usuários FREE (todas estão trancadas)
+
