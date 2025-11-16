@@ -261,7 +261,10 @@ export const appRouter = router({
         if (ctx.user.role !== 'admin' && ctx.user.role !== 'super_admin') {
           throw new Error('Acesso negado');
         }
-        return await getDelinquentUsers(input.days);
+        // Convert days to Date range
+        const endDate = new Date();
+        const startDate = input.days ? new Date(Date.now() - input.days * 24 * 60 * 60 * 1000) : undefined;
+        return await getDelinquentUsers(startDate, endDate);
       }),
 
     /**

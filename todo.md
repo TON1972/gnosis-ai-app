@@ -1123,3 +1123,11 @@
 
 - [x] 🚨 CRÍTICO: Remover bloqueio de conta ADMIN (admins não podem ser bloqueados)
 
+
+
+- [x] 🐛 Corrigir erro "Erro ao gerar conteúdo" na ferramenta Gerador de Referências ABNT/APA
+
+
+
+- [x] 🚨 CRÍTICO: Corrigir erro TypeScript que está impedindo TODAS as 18 ferramentas de funcionar
+
