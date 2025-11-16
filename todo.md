@@ -1131,3 +1131,7 @@
 
 - [x] 🚨 CRÍTICO: Corrigir erro TypeScript que está impedindo TODAS as 18 ferramentas de funcionar
 
+
+
+- [x] 🚨 CRÍTICO: Ferramentas não funcionam para conta ADMIN (mas funcionam para FREE) - corrigir lógica de verificação
+

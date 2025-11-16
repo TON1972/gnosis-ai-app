@@ -155,8 +155,13 @@ export default function ToolPage() {
   const saveStudyMutation = trpc.studies.save.useMutation();
 
   const handleGenerate = async () => {
+    console.log('[ToolPage Debug] Starting handleGenerate');
+    console.log('[ToolPage Debug] subscriptionStatus:', subscriptionStatus);
+    console.log('[ToolPage Debug] credits:', credits);
+    
     // Check if subscription is blocked
     if (subscriptionStatus?.isBlocked) {
+      console.log('[ToolPage Debug] BLOCKED - subscriptionStatus.isBlocked is true');
       toast.error("Sua conta está bloqueada. Renove sua assinatura para continuar usando as ferramentas.");
       return;
     }
@@ -167,9 +172,12 @@ export default function ToolPage() {
     }
 
     if (!credits || credits.total < toolInfo.creditCost) {
+      console.log('[ToolPage Debug] INSUFFICIENT CREDITS - credits.total:', credits?.total, 'required:', toolInfo.creditCost);
       setShowNoCreditsModal(true);
       return;
     }
+    
+    console.log('[ToolPage Debug] Checks passed, calling generateMutation');
 
     try {
       // Use credits first

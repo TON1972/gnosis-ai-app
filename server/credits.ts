@@ -256,6 +256,22 @@ export async function useCredits(userId: number, amount: number, toolName: strin
   const db = await getDb();
   if (!db) throw new Error("Database not available");
 
+  // Check if user is admin - admins have unlimited credits and don't need to spend them
+  const userResult = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  if (userResult.length > 0 && (userResult[0].role === 'admin' || userResult[0].role === 'super_admin')) {
+    console.log('[useCredits] Admin user detected, skipping credit deduction');
+    return {
+      success: true,
+      remaining: 999999,
+      used: 0,
+    };
+  }
+
   const credits = await getUserCredits(userId);
 
   if (credits.total < amount) {
