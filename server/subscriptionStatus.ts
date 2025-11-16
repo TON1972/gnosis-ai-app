@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { getDb } from "./db";
-import { subscriptions } from "../drizzle/schema";
+import { subscriptions, users } from "../drizzle/schema";
 
 /**
  * Subscription status management
@@ -27,6 +27,24 @@ export type SubscriptionStatus = {
 export async function checkSubscriptionStatus(userId: number): Promise<SubscriptionStatus> {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
+
+  // Check if user is admin - admins are NEVER blocked
+  const userResult = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  if (userResult.length > 0 && (userResult[0].role === 'admin' || userResult[0].role === 'super_admin')) {
+    console.log('[checkSubscriptionStatus] Admin user detected, returning active status');
+    return {
+      status: "active",
+      isBlocked: false,
+      gracePeriodEndsAt: null,
+      nextBillingDate: null,
+      daysUntilBlock: null,
+    };
+  }
 
   // Get active subscription
   const subs = await db

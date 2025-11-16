@@ -1119,3 +1119,7 @@
 - [x] 🚨 CRÍTICO: Corrigir créditos diários do FREE (50/dia não estão sendo creditados)
 - [x] 🚨 CRÍTICO: Desbloquear 6 ferramentas básicas para usuários FREE (todas estão trancadas)
 
+
+
+- [x] 🚨 CRÍTICO: Remover bloqueio de conta ADMIN (admins não podem ser bloqueados)
+
