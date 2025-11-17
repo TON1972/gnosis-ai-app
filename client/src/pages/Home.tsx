@@ -585,25 +585,6 @@ export default function Home() {
                 COMPRAR CRÉDITOS AVULSO
               </Button>
             </div>
-            
-            {/* Frase explicativa - Mobile only */}
-            <div className="md:hidden mt-4 text-center">
-              <p className="text-sm text-[#8b6f47] font-semibold">
-                CRÉDITOS AVULSOS NUNCA EXPIRAM E PODEM SER USADOS EM QUALQUER PLANO!
-              </p>
-            </div>
-            
-            {/* Botão FAQ - Mobile only */}
-            <div className="md:hidden mt-4 flex justify-center">
-              <Link href="/faq">
-                <Button
-                  size="lg"
-                  className="bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f] text-sm px-8 py-4 rounded-lg shadow-xl font-bold"
-                >
-                  PERGUNTAS FREQUENTES
-                </Button>
-              </Link>
-            </div>
           </div>
 
           {/* Credits Packages */}
