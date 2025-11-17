@@ -568,7 +568,7 @@ export default function Home() {
           </div>
 
           {/* Credits Packages */}
-          <div id="credits-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div id="credits-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {/* Package 1 - 500 credits */}
             <div className="bg-white/90 rounded-xl p-6 shadow-lg border-3 border-[#d4af37] relative">
               <div className="text-center mb-4">
