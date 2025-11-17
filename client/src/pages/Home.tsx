@@ -533,8 +533,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ Button Section */}
-      <section className="container mx-auto px-4 py-8">
+      {/* FAQ Button Section - Desktop only */}
+      <section className="hidden md:block container mx-auto px-4 py-8">
         <div className="text-center">
           <Link href="/faq">
             <Button
@@ -689,6 +689,18 @@ export default function Home() {
             <p className="text-sm md:text-base text-[#8b6f47]">
               <strong>Créditos avulsos nunca expiram</strong> e podem ser usados em qualquer plano!
             </p>
+          </div>
+          
+          {/* FAQ Button - Mobile only (repositioned) */}
+          <div className="md:hidden text-center mt-8">
+            <Link href="/faq">
+              <Button
+                size="lg"
+                className="bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B] text-xl px-12 py-6 rounded-xl shadow-2xl"
+              >
+                Perguntas Frequentes
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
