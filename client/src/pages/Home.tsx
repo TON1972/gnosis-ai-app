@@ -578,8 +578,8 @@ export default function Home() {
             <div className="md:hidden mt-6 flex justify-center">
               <Button
                 onClick={() => setShowBuyCreditsModal(true)}
-                size="default"
-                className="bg-gradient-to-r from-[#d4af37] to-[#B8860B] text-[#1e3a5f] hover:from-[#B8860B] hover:to-[#d4af37] text-sm px-6 py-3 rounded-lg shadow-lg font-bold flex items-center gap-2"
+                size="lg"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-700 hover:to-red-800 text-sm px-8 py-4 rounded-lg shadow-xl font-bold flex items-center gap-2"
               >
                 <ShoppingCart className="w-4 h-4" />
                 COMPRAR CRÉDITOS AVULSO
