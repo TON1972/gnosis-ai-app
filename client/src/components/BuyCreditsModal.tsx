@@ -289,6 +289,17 @@ export default function BuyCreditsModal({ open, onClose }: BuyCreditsModalProps)
               </div>
             </div>
           )}
+          
+          {/* Botão Sair discreto */}
+          <div className="mt-6 flex justify-center">
+            <Button
+              onClick={onClose}
+              variant="ghost"
+              className="text-gray-500 hover:text-gray-700 text-sm"
+            >
+              SAIR
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
