@@ -7,7 +7,8 @@ import { Card } from "@/components/ui/card";
 import { APP_LOGO, APP_TITLE } from "@/const";
 import DashboardMobileMenu from "@/components/DashboardMobileMenu";
 import NoCreditsModal from "@/components/NoCreditsModal";
-import { User, CreditCard, Package, Zap, Calendar, Gift, Info } from "lucide-react";
+import { User, CreditCard, Package, Zap, Calendar, Gift, Info, TrendingUp } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function PerfilPage() {
   const { user, logout, loading } = useAuth();
@@ -15,6 +16,7 @@ export default function PerfilPage() {
 
   const { data: credits } = trpc.credits.balance.useQuery();
   const { data: activePlan } = trpc.credits.activePlan.useQuery();
+  const { data: usageHistory, isLoading: isLoadingHistory } = trpc.credits.usageHistory.useQuery();
 
   // Scroll ao topo ao carregar
   React.useEffect(() => {
@@ -189,6 +191,72 @@ export default function PerfilPage() {
                 <p className="text-sm text-red-700 font-semibold text-center">
                   ⚠️ Créditos baixos! Considere fazer upgrade ou comprar créditos avulsos.
                 </p>
+              </div>
+            )}
+          </Card>
+
+          {/* Gráfico de Consumo dos Últimos 30 Dias */}
+          <Card className="bg-[#2a4a7f] border-[#d4af37]/20 p-6 mb-6">
+            <div className="flex items-center gap-3 mb-4">
+              <TrendingUp className="w-6 h-6 text-[#d4af37]" />
+              <h2 className="text-2xl font-bold text-[#d4af37]">Consumo dos Últimos 30 Dias</h2>
+            </div>
+            
+            {isLoadingHistory ? (
+              <div className="h-64 flex items-center justify-center">
+                <div className="text-[#d4af37]">Carregando histórico...</div>
+              </div>
+            ) : usageHistory && usageHistory.length > 0 ? (
+              <div className="bg-white/90 rounded-xl p-4">
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={usageHistory}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#d4af37" opacity={0.3} />
+                    <XAxis 
+                      dataKey="date" 
+                      stroke="#1e3a5f"
+                      tick={{ fill: '#1e3a5f', fontSize: 12 }}
+                      tickFormatter={(value) => {
+                        const date = new Date(value);
+                        return `${date.getDate()}/${date.getMonth() + 1}`;
+                      }}
+                    />
+                    <YAxis 
+                      stroke="#1e3a5f"
+                      tick={{ fill: '#1e3a5f', fontSize: 12 }}
+                      label={{ value: 'Créditos Usados', angle: -90, position: 'insideLeft', fill: '#1e3a5f' }}
+                    />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: '#FFFACD', 
+                        border: '2px solid #d4af37',
+                        borderRadius: '8px'
+                      }}
+                      labelFormatter={(value) => {
+                        const date = new Date(value as string);
+                        return date.toLocaleDateString('pt-BR');
+                      }}
+                      formatter={(value: number) => [`${value} créditos`, 'Uso']}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="usage" 
+                      stroke="#1e3a5f" 
+                      strokeWidth={3}
+                      dot={{ fill: '#d4af37', r: 4 }}
+                      activeDot={{ r: 6, fill: '#d4af37' }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+                
+                <div className="mt-4 p-3 bg-[#FFFACD] rounded-lg border-2 border-[#d4af37]">
+                  <p className="text-sm text-[#1e3a5f] text-center">
+                    <strong>Total consumido nos últimos 30 dias:</strong> {usageHistory.reduce((sum, day) => sum + day.usage, 0).toLocaleString('pt-BR')} créditos
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="h-64 flex items-center justify-center bg-white/90 rounded-xl">
+                <p className="text-[#8b6f47]">Nenhum consumo registrado nos últimos 30 dias</p>
               </div>
             )}
           </Card>

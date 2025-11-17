@@ -3,9 +3,9 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getAllPlans, getToolsForPlan, getAllTools } from "./db";
-import { savedStudies, users } from "../drizzle/schema";
+import { savedStudies, users, creditTransactions } from "../drizzle/schema";
 import { getDb } from "./db";
-import { eq, desc, sql, and } from "drizzle-orm";
+import { eq, desc, sql, and, gte } from "drizzle-orm";
 import { getUserCredits, useCredits, getUserActivePlan } from "./credits";
 import { checkSubscriptionStatus, markSubscriptionPaid } from "./subscriptionStatus";
 import { getUserStats, getFinancialCalendar, getDelinquentUsers } from "./admin";
@@ -227,6 +227,52 @@ export const appRouter = router({
       .mutation(async ({ ctx, input }) => {
         return await useCredits(ctx.user.id, input.amount, input.toolName);
       }),
+
+    /**
+     * Get credit usage history for the last 30 days
+     */
+    usageHistory: protectedProcedure.query(async ({ ctx }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+      const transactions = await db
+        .select()
+        .from(creditTransactions)
+        .where(
+          and(
+            eq(creditTransactions.userId, ctx.user.id),
+            eq(creditTransactions.type, 'usage'),
+            gte(creditTransactions.createdAt, thirtyDaysAgo)
+          )
+        )
+        .orderBy(creditTransactions.createdAt);
+
+      // Group by date and sum usage
+      const dailyUsage = new Map<string, number>();
+      
+      transactions.forEach(tx => {
+        const date = tx.createdAt.toISOString().split('T')[0];
+        const current = dailyUsage.get(date) || 0;
+        dailyUsage.set(date, current + Math.abs(tx.amount));
+      });
+
+      // Fill in missing dates with 0
+      const result = [];
+      for (let i = 29; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().split('T')[0];
+        result.push({
+          date: dateStr,
+          usage: dailyUsage.get(dateStr) || 0,
+        });
+      }
+
+      return result;
+    }),
   }),
 
   admin: router({
