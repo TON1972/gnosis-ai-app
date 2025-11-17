@@ -32,7 +32,8 @@ import {
   Eye,
   Clock,
   BookText,
-  Shield
+  Shield,
+  User
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
@@ -263,7 +264,7 @@ export default function Dashboard() {
               {/* Ícone de Perfil (Bonequinho) */}
               <Link href="/perfil">
                 <button className="p-2 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors" aria-label="Meu Perfil">
-                  <Shield className="w-6 h-6" />
+                  <User className="w-6 h-6" />
                 </button>
               </Link>
               

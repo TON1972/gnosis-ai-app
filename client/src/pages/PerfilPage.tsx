@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { APP_LOGO, APP_TITLE } from "@/const";
 import DashboardMobileMenu from "@/components/DashboardMobileMenu";
 import NoCreditsModal from "@/components/NoCreditsModal";
-import { User, CreditCard, Package, Shield } from "lucide-react";
+import { User, CreditCard, Package } from "lucide-react";
 
 export default function PerfilPage() {
   const { user, logout, loading } = useAuth();
@@ -60,7 +60,7 @@ export default function PerfilPage() {
             <div className="flex items-center gap-3">
               <Link href="/perfil">
                 <button className="p-2 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors" aria-label="Meu Perfil">
-                  <Shield className="w-6 h-6" />
+                  <User className="w-6 h-6" />
                 </button>
               </Link>
               
