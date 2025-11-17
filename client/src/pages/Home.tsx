@@ -396,6 +396,15 @@ export default function Home() {
             <p className="blink-animation hidden md:inline-block text-2xl font-bold text-red-600 bg-yellow-100 border-4 border-red-500 rounded-lg py-4 px-6 shadow-lg">
               🎉 ESSES SÃO VALORES PROMOCIONAIS DE FINAL DE ANO, APROVEITE A OPORTUNIDADE! 🎉
             </p>
+            
+            {/* Botão Planos e Preços */}
+            <div className="mt-6">
+              <Link href="/planos">
+                <span className="inline-flex items-center gap-2 px-8 py-4 bg-[#d4af37] text-[#1e3a5f] rounded-xl font-bold text-lg hover:bg-[#B8860B] transition-colors shadow-lg cursor-pointer">
+                  PLANOS E PREÇOS
+                </span>
+              </Link>
+            </div>
           </div>
         )}
         
