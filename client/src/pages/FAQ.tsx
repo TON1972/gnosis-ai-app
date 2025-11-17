@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ChevronDown, ChevronUp, BookOpen, GraduationCap, Coins, CreditCard, HelpCircle, Home } from "lucide-react";
 import { Link } from "wouter";
 import { APP_LOGO, APP_TITLE } from "@/const";
+import MobileMenu from "@/components/MobileMenu";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { getLoginUrl } from "@/const";
 
 interface FAQItem {
   question: string;
@@ -237,12 +240,23 @@ export default function FAQ() {
                 <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
               </span>
             </Link>
-            <Link href="/">
+            {/* Desktop: Botão Voltar ao Início */}
+            <Link href="/" className="hidden md:block">
               <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
                 <Home className="w-5 h-5" />
                 Voltar ao Início
               </span>
             </Link>
+            
+            {/* Mobile: Menu Hambúrguer */}
+            <div className="block md:hidden">
+              <MobileMenu 
+                isAuthenticated={!!useAuth().user} 
+                onLogout={() => window.location.href = '/'}
+                loginUrl={getLoginUrl()}
+                user={useAuth().user}
+              />
+            </div>
           </div>
         </div>
       </header>

@@ -1135,3 +1135,7 @@
 
 - [x] 🚨 CRÍTICO: Ferramentas não funcionam para conta ADMIN (mas funcionam para FREE) - corrigir lógica de verificação
 
+
+
+- [x] Substituir cabeçalho FAQ mobile: remover "Voltar ao Início", adicionar menu hambúrguer igual à Home
+
