@@ -7,14 +7,14 @@ import { Card } from "@/components/ui/card";
 import { APP_LOGO, APP_TITLE } from "@/const";
 import DashboardMobileMenu from "@/components/DashboardMobileMenu";
 import NoCreditsModal from "@/components/NoCreditsModal";
-import { User, CreditCard, Package } from "lucide-react";
+import { User, CreditCard, Package, Zap, Calendar, Gift, Info } from "lucide-react";
 
 export default function PerfilPage() {
   const { user, logout, loading } = useAuth();
   const [showModal, setShowModal] = useState(false);
 
-  const { data: credits } = trpc.credits.get.useQuery();
-  const { data: activePlan } = trpc.subscriptions.getActivePlan.useQuery();
+  const { data: credits } = trpc.credits.balance.useQuery();
+  const { data: activePlan } = trpc.credits.activePlan.useQuery();
 
   // Scroll ao topo ao carregar
   React.useEffect(() => {
@@ -41,6 +41,9 @@ export default function PerfilPage() {
       </div>
     );
   }
+
+  const totalCredits = credits?.total || 0;
+  const isLowCredits = totalCredits < 100;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1e3a5f] to-[#0f1f3a]">
@@ -95,15 +98,10 @@ export default function PerfilPage() {
               <div className="bg-[#1e3a5f] rounded-lg p-4">
                 <h3 className="text-sm font-semibold text-gray-400 mb-2">Plano Atual</h3>
                 <p className="text-xl font-bold text-[#d4af37]">
-                  {activePlan?.plan?.name || "FREE"}
-                </p>
-              </div>
-
-              {/* Créditos Disponíveis */}
-              <div className="bg-[#1e3a5f] rounded-lg p-4">
-                <h3 className="text-sm font-semibold text-gray-400 mb-2">Créditos Disponíveis</h3>
-                <p className="text-xl font-bold text-[#d4af37]">
-                  {credits?.total?.toLocaleString() || "0"}
+                  {activePlan?.plan?.displayName || "Plano FREE"}
+                  {user?.role === 'admin' || user?.role === 'super_admin' ? (
+                    <span className="ml-2 px-2 py-0.5 bg-[#d4af37] text-white text-xs font-bold rounded">ADMIN</span>
+                  ) : null}
                 </p>
               </div>
 
@@ -114,15 +112,85 @@ export default function PerfilPage() {
                   {user.loginMethod || "Email"}
                 </p>
               </div>
+            </div>
+          </Card>
 
-              {/* Função */}
-              <div className="bg-[#1e3a5f] rounded-lg p-4">
-                <h3 className="text-sm font-semibold text-gray-400 mb-2">Função</h3>
-                <p className="text-lg text-gray-300">
-                  {user.role === 'admin' || user.role === 'super_admin' ? 'Administrador' : 'Usuário'}
+          {/* Painel de Créditos - Igual ao Dashboard */}
+          <Card className="bg-gradient-to-br from-[#FFFACD] to-[#F0E68C] border-4 border-[#d4af37] p-6 mb-6">
+            <h2 className="text-2xl font-bold text-[#1e3a5f] mb-4">Seus Créditos</h2>
+            
+            {/* Total Credits Display */}
+            <div className="bg-white/80 rounded-xl p-6 mb-4 border-2 border-[#d4af37]">
+              <div className="text-center">
+                <p className="text-sm text-[#8b6f47] mb-2">Saldo Total</p>
+                <p className={`text-5xl font-bold ${isLowCredits ? 'text-red-600' : 'text-[#1e3a5f]'}`}>
+                  {totalCredits.toLocaleString('pt-BR')}
+                </p>
+                <p className="text-sm text-[#8b6f47] mt-2">créditos disponíveis</p>
+              </div>
+            </div>
+
+            {/* Credit Breakdown */}
+            <div className="space-y-3 mb-4">
+              {/* Daily Credits */}
+              <div className="flex items-center justify-between p-3 bg-white/60 rounded-lg border border-[#d4af37]">
+                <div className="flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-[#d4af37]" />
+                  <span className="text-sm font-semibold text-[#1e3a5f]">Créditos Diários</span>
+                </div>
+                <span className="text-lg font-bold text-[#1e3a5f]">
+                  {credits?.daily || 0}
+                </span>
+              </div>
+
+              {/* Initial Credits */}
+              <div className="flex items-center justify-between p-3 bg-white/60 rounded-lg border border-[#d4af37]">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-[#d4af37]" />
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold text-[#1e3a5f]">Créditos Iniciais</span>
+                    {credits?.initialExpiry && (
+                      <span className="text-xs text-[#8b6f47]">
+                        Expira: {new Date(credits.initialExpiry).toLocaleDateString('pt-BR')}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <span className="text-lg font-bold text-[#1e3a5f]">
+                  {credits?.initial || 0}
+                </span>
+              </div>
+
+              {/* Bonus Credits */}
+              <div className="flex items-center justify-between p-3 bg-white/60 rounded-lg border border-[#d4af37]">
+                <div className="flex items-center gap-2">
+                  <Gift className="w-5 h-5 text-[#d4af37]" />
+                  <span className="text-sm font-semibold text-[#1e3a5f]">Créditos Avulsos</span>
+                </div>
+                <span className="text-lg font-bold text-[#1e3a5f]">
+                  {credits?.bonus || 0}
+                </span>
+              </div>
+            </div>
+
+            {/* Info Box */}
+            <div className="bg-[#1e3a5f]/10 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <Info className="w-4 h-4 text-[#1e3a5f] mt-0.5 flex-shrink-0" />
+                <p className="text-xs text-[#8b6f47]">
+                  <strong>Ordem de uso:</strong> Diários → Iniciais → Avulsos. 
+                  Créditos diários renovam todo dia, iniciais expiram em 30 dias, avulsos são permanentes.
                 </p>
               </div>
             </div>
+
+            {isLowCredits && (
+              <div className="bg-red-100 border-2 border-red-400 rounded-lg p-3 mt-4">
+                <p className="text-sm text-red-700 font-semibold text-center">
+                  ⚠️ Créditos baixos! Considere fazer upgrade ou comprar créditos avulsos.
+                </p>
+              </div>
+            )}
           </Card>
 
           {/* Botões de Ação */}
