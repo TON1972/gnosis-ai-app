@@ -575,13 +575,13 @@ export default function Home() {
             </div>
             
             {/* Botão Comprar Créditos - Mobile only */}
-            <div className="md:hidden mt-6">
+            <div className="md:hidden mt-6 flex justify-center">
               <Button
                 onClick={() => setShowBuyCreditsModal(true)}
-                size="lg"
-                className="bg-gradient-to-r from-[#d4af37] to-[#B8860B] text-[#1e3a5f] hover:from-[#B8860B] hover:to-[#d4af37] text-xl px-8 py-6 rounded-xl shadow-2xl font-bold flex items-center gap-3 mx-auto"
+                size="default"
+                className="bg-gradient-to-r from-[#d4af37] to-[#B8860B] text-[#1e3a5f] hover:from-[#B8860B] hover:to-[#d4af37] text-sm px-6 py-3 rounded-lg shadow-lg font-bold flex items-center gap-2"
               >
-                <ShoppingCart className="w-6 h-6" />
+                <ShoppingCart className="w-4 h-4" />
                 COMPRAR CRÉDITOS AVULSO
               </Button>
             </div>
