@@ -18,10 +18,10 @@ export default function MobileMenu({ isAuthenticated, onLogout, loginUrl, user }
 
   return (
     <>
-      {/* Botão Hambúrguer (visível apenas em mobile) */}
+      {/* Botão Hambúrguer (Desktop e Mobile) */}
       <button
         onClick={toggleMenu}
-        className="md:hidden p-2 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors"
+        className="p-2 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors"
         aria-label="Menu"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -30,14 +30,14 @@ export default function MobileMenu({ isAuthenticated, onLogout, loginUrl, user }
       {/* Overlay escuro */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 z-40"
           onClick={closeMenu}
         />
       )}
 
       {/* Menu lateral */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-[#1e3a5f] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 h-full w-64 bg-[#1e3a5f] shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

@@ -1147,3 +1147,7 @@
 
 - [x] Padronizar cabeçalho desktop com menu hambúrguer em todas as páginas (Home, FAQ, Sobre, Planos, Dashboard, ToolPage)
 
+
+
+- [x] 🚨 CRÍTICO: Menu hambúrguer desapareceu completamente do cabeçalho - restaurar imediatamente
+
