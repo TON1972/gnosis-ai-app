@@ -1151,3 +1151,13 @@
 
 - [x] 🚨 CRÍTICO: Menu hambúrguer desapareceu completamente do cabeçalho - restaurar imediatamente
 
+
+
+## Página Meu Perfil (16/11/2025)
+
+- [x] Adicionar ícone de perfil (bonequinho) no cabeçalho do Dashboard ao lado do menu hambúrguer
+- [x] Criar página "Meu Perfil" com dados do usuário
+- [x] Adicionar botão "Planos e Preços" que abre modal de planos
+- [x] Adicionar botão "Compra de Créditos Avulso" que abre modal de pacotes de créditos
+- [x] Registrar rota /perfil no App.tsx
+

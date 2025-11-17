@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import ToolPage from "./pages/ToolPage";
 import PlanosPage from "./pages/PlanosPage";
 import SobrePage from "./pages/SobrePage";
+import PerfilPage from "./pages/PerfilPage";
 import Chatbot from "./components/Chatbot";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/faq" component={FAQ} />
       <Route path="/planos" component={PlanosPage} />
       <Route path="/sobre" component={SobrePage} />
+      <Route path="/perfil" component={PerfilPage} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/tool/:toolId" component={ToolPage} />
       <Route path={"/404"} component={NotFound} />

@@ -258,14 +258,24 @@ export default function Dashboard() {
               </span>
             </Link>
             
-            {/* Menu Hambúrguer (Desktop e Mobile) */}
-            <DashboardMobileMenu 
-              user={user}
-              onLogout={() => {
-                logout();
-                setLocation("/");
-              }}
-            />
+            {/* Ícone de Perfil e Menu Hambúrguer */}
+            <div className="flex items-center gap-3">
+              {/* Ícone de Perfil (Bonequinho) */}
+              <Link href="/perfil">
+                <button className="p-2 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors" aria-label="Meu Perfil">
+                  <Shield className="w-6 h-6" />
+                </button>
+              </Link>
+              
+              {/* Menu Hambúrguer */}
+              <DashboardMobileMenu 
+                user={user}
+                onLogout={() => {
+                  logout();
+                  setLocation("/");
+                }}
+              />
+            </div>
           </div>
         </div>
       </header>
