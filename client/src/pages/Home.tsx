@@ -712,7 +712,7 @@ export default function Home() {
           </div>
           
           {/* FAQ Button - Mobile only (repositioned) */}
-          <div className="md:hidden text-center mt-8">
+          <div className="md:hidden mt-8 flex justify-center">
             <Link href="/faq">
               <Button
                 size="lg"
