@@ -341,12 +341,12 @@ export default function Home() {
 
       {/* Plans Section */}
       <section id="planos" className="container mx-auto px-4 py-8 md:py-16">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] text-center mb-4">
+        <h3 className="hidden md:block text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] text-center mb-4">
           Escolha Seu Plano
         </h3>
         
         {/* Billing Period Toggle */}
-        <div className="flex justify-center items-center gap-4 mb-6">
+        <div className="hidden md:flex justify-center items-center gap-4 mb-6">
           <button
             onClick={() => setBillingPeriod('monthly')}
             className={`px-6 py-3 rounded-lg font-semibold transition-all ${
@@ -372,7 +372,7 @@ export default function Home() {
           </button>
         </div>
         
-        <p className="text-base md:text-lg lg:text-xl text-[#8b6f47] text-center mb-8 md:mb-12">
+        <p className="hidden md:block text-base md:text-lg lg:text-xl text-[#8b6f47] text-center mb-8 md:mb-12">
           * Créditos iniciais dos planos pagos são renovados a cada 30 dias
         </p>
         
