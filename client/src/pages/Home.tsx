@@ -388,7 +388,12 @@ export default function Home() {
                 animation: blink 1.5s ease-in-out infinite;
               }
             `}</style>
-            <p className="blink-animation text-xl md:text-2xl font-bold text-red-600 bg-yellow-100 border-4 border-red-500 rounded-lg py-4 px-6 inline-block shadow-lg">
+            {/* Texto para Mobile */}
+            <p className="blink-animation md:hidden text-xl font-bold text-red-600 bg-yellow-100 border-4 border-red-500 rounded-lg py-4 px-6 inline-block shadow-lg">
+              🎉 CLIQUE ABAIXO E APROVEITE OS VALORES PROMOCIONAIS DE FINAL DE ANO, OU PARA USAR FREE SE PREFERIR! 🎉
+            </p>
+            {/* Texto para Desktop */}
+            <p className="blink-animation hidden md:inline-block text-2xl font-bold text-red-600 bg-yellow-100 border-4 border-red-500 rounded-lg py-4 px-6 shadow-lg">
               🎉 ESSES SÃO VALORES PROMOCIONAIS DE FINAL DE ANO, APROVEITE A OPORTUNIDADE! 🎉
             </p>
           </div>
