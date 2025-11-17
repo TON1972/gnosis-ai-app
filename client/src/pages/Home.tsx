@@ -296,7 +296,7 @@ export default function Home() {
                   <div className="p-3 bg-[#1e3a5f] rounded-lg text-[#d4af37]">
                     {tool.icon}
                   </div>
-                  <h4 className="text-xl font-bold text-[#1e3a5f] text-center md:text-left">{tool.name}</h4>
+                  <h4 className="text-sm md:text-xl font-bold text-[#1e3a5f] text-center md:text-left">{tool.name}</h4>
                 </div>
                 <p className="text-[#8b6f47]">{tool.description}</p>
               </div>
