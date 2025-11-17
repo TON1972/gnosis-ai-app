@@ -132,17 +132,7 @@ export default function PlanosPage() {
               </div>
             </Link>
             
-            <nav className="hidden md:flex items-center gap-4">
-              {isAuthenticated && (
-                <Link href="/dashboard">
-                  <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer">
-                    Dashboard
-                  </span>
-                </Link>
-              )}
-            </nav>
-            
-            {/* Menu Hambúrguer Mobile */}
+            {/* Menu Hambúrguer (Desktop e Mobile) */}
             <MobileMenu 
               isAuthenticated={isAuthenticated}
               onLogout={logout}

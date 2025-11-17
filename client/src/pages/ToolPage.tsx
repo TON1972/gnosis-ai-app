@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import jsPDF from "jspdf";
 import SubscriptionWarningBanner from "@/components/SubscriptionWarningBanner";
 import ShareButton from "@/components/ShareButton";
+import DashboardMobileMenu from "@/components/DashboardMobileMenu";
 import "../dashboard-mobile.css";
 
 const TOOLS_INFO: Record<string, { name: string; description: string; placeholder: string; creditCost: number }> = {
@@ -306,12 +307,14 @@ export default function ToolPage() {
                 <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
               </span>
             </Link>
-            <Link href="/dashboard">
-              <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
-                <Home className="w-5 h-5" />
-                Painel de Controle
-              </span>
-            </Link>
+            {/* Menu Hambúrguer (Desktop e Mobile) */}
+            <DashboardMobileMenu 
+              user={user}
+              onLogout={() => {
+                logout();
+                window.location.href = '/';
+              }}
+            />
           </div>
         </div>
       </header>

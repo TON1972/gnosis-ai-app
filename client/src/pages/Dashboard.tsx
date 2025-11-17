@@ -258,50 +258,7 @@ export default function Dashboard() {
               </span>
             </Link>
             
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-6">
-              <Link href="/faq">
-                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
-                  PERGUNTAS FREQUENTES
-                </span>
-              </Link>
-              <Link href="/sobre">
-                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
-                  SOBRE NÓS
-                </span>
-              </Link>
-              <Link href="/planos">
-                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
-                  PLANOS E PREÇOS
-                </span>
-              </Link>
-              <Link href="/dashboard">
-                <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-semibold">
-                  PAINEL DE CONTROLE
-                </span>
-              </Link>
-              {user && (user.role === 'admin' || user.role === 'super_admin') && (
-                <Link href="/admin">
-                  <span className="text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
-                    ADMIN
-                  </span>
-                </Link>
-              )}
-              <Button
-                onClick={() => {
-                  logout();
-                  setLocation("/");
-                }}
-                variant="outline"
-                className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#1e3a5f]"
-                size="sm"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Sair
-              </Button>
-            </nav>
-            
-            {/* Mobile Menu */}
+            {/* Menu Hambúrguer (Desktop e Mobile) */}
             <DashboardMobileMenu 
               user={user}
               onLogout={() => {

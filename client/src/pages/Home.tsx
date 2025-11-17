@@ -225,46 +225,7 @@ export default function Home() {
               <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
             </div>
             
-            {/* Navegação Desktop (escondida em mobile) */}
-            <nav className="hidden md:flex items-center gap-2 md:gap-4">
-              <Link href="/faq">
-                <span className={`text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer ${isAuthenticated && (user?.role === 'admin' || user?.role === 'super_admin') ? 'text-sm' : ''}`}>
-                  PERGUNTAS FREQUENTES
-                </span>
-              </Link>
-              {isAuthenticated && (user?.role === 'admin' || user?.role === 'super_admin') && (
-                <Link href="/admin">
-                  <span className="text-sm text-[#d4af37] hover:text-[#B8860B] transition-colors cursor-pointer font-bold">
-                    ADMIN
-                  </span>
-                </Link>
-              )}
-              {isAuthenticated ? (
-                <>
-                  <Link href="/dashboard">
-                    <span className={`px-4 py-2 text-[#d4af37] hover:text-[#B8860B] transition-colors font-semibold cursor-pointer ${user?.role === 'admin' || user?.role === 'super_admin' ? 'text-sm' : ''}`}>
-                      PAINEL DE CONTROLE
-                    </span>
-                  </Link>
-                  <Button
-                    onClick={() => logout()}
-                    variant="outline"
-                    className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-[#1e3a5f]"
-                  >
-                    Sair
-                  </Button>
-                </>
-              ) : (
-                <Button
-                  onClick={() => window.location.href = getLoginUrl()}
-                  className="bg-[#d4af37] text-[#1e3a5f] hover:bg-[#B8860B]"
-                >
-                  Entrar
-                </Button>
-              )}
-            </nav>
-            
-            {/* Menu Hambúrguer Mobile */}
+            {/* Menu Hambúrguer (Desktop e Mobile) */}
             <MobileMenu 
               isAuthenticated={isAuthenticated}
               onLogout={logout}

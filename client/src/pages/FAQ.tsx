@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp, BookOpen, GraduationCap, Coins, CreditCard, HelpCircle, Home } from "lucide-react";
 import { Link } from "wouter";
 import { APP_LOGO, APP_TITLE } from "@/const";
@@ -240,16 +240,8 @@ export default function FAQ() {
                 <h1 className="block md:hidden text-3xl font-bold text-[#d4af37]">GNOSIS AI</h1>
               </span>
             </Link>
-            {/* Desktop: Botão Voltar ao Início */}
-            <Link href="/" className="hidden md:block">
-              <span className="flex items-center gap-2 px-6 py-3 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-semibold hover:bg-[#B8860B] transition-colors cursor-pointer">
-                <Home className="w-5 h-5" />
-                Voltar ao Início
-              </span>
-            </Link>
-            
-            {/* Mobile: Menu Hambúrguer */}
-            <div className="block md:hidden">
+            {/* Menu Hambúrguer (Desktop e Mobile) */}
+            <div>
               <MobileMenu 
                 isAuthenticated={!!useAuth().user} 
                 onLogout={() => window.location.href = '/'}

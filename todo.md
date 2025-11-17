@@ -1139,3 +1139,11 @@
 
 - [x] Substituir cabeçalho FAQ mobile: remover "Voltar ao Início", adicionar menu hambúrguer igual à Home
 
+
+
+- [x] 🚨 CRÍTICO: Página FAQ mostrando código ao invés do conteúdo - corrigir erro de renderização
+
+
+
+- [x] Padronizar cabeçalho desktop com menu hambúrguer em todas as páginas (Home, FAQ, Sobre, Planos, Dashboard, ToolPage)
+
