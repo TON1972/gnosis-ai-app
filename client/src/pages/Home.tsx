@@ -556,7 +556,12 @@ export default function Home() {
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1e3a5f] mb-4">
               Acabaram Seus Créditos?
             </h3>
-            <p className="text-lg md:text-xl text-[#8b6f47] font-semibold">
+            {/* Mobile version */}
+            <p className="md:hidden text-lg text-[#8b6f47] font-semibold">
+              Compre Créditos Avulso!
+            </p>
+            {/* Desktop version */}
+            <p className="hidden md:block text-xl text-[#8b6f47] font-semibold">
               Faça um Upgrade de Plano ou Compre Créditos Avulso!
             </p>
             {/* PIX Message */}
