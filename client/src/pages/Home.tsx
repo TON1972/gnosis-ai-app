@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import VersePopup from "@/components/VersePopup";
 import TutorialCarousel from "@/components/TutorialCarousel";
 import MobileMenu from "@/components/MobileMenu";
+import BuyCreditsModal from "@/components/BuyCreditsModal";
 import { trpc } from "@/lib/trpc";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
 import { Link, useLocation } from "wouter";
@@ -24,7 +25,8 @@ import {
   ArrowRight,
   CheckCircle2,
   Crown,
-  Gift
+  Gift,
+  ShoppingCart
 } from "lucide-react";
 
 const mainTools = [
@@ -167,6 +169,7 @@ export default function Home() {
   const { data: activePlan } = trpc.credits.activePlan.useQuery(undefined, { enabled: isAuthenticated });
   const [, setLocation] = useLocation();
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
+  const [showBuyCreditsModal, setShowBuyCreditsModal] = useState(false);
   
   // Scroll para o topo quando a página carregar (método robusto)
   useEffect(() => {
@@ -570,6 +573,18 @@ export default function Home() {
                 💸 OPÇÃO DE COMPRA DE CRÉDITOS AVULSO POR PIX LIBERADO, MAIS RÁPIDO E PRÁTICO!
               </p>
             </div>
+            
+            {/* Botão Comprar Créditos - Mobile only */}
+            <div className="md:hidden mt-6">
+              <Button
+                onClick={() => setShowBuyCreditsModal(true)}
+                size="lg"
+                className="bg-gradient-to-r from-[#d4af37] to-[#B8860B] text-[#1e3a5f] hover:from-[#B8860B] hover:to-[#d4af37] text-xl px-8 py-6 rounded-xl shadow-2xl font-bold flex items-center gap-3 mx-auto"
+              >
+                <ShoppingCart className="w-6 h-6" />
+                COMPRAR CRÉDITOS AVULSO
+              </Button>
+            </div>
           </div>
 
           {/* Credits Packages */}
@@ -773,6 +788,12 @@ export default function Home() {
 
       {/* Verse Pop-up */}
       <VersePopup />
+      
+      {/* Buy Credits Modal - Mobile only */}
+      <BuyCreditsModal
+        open={showBuyCreditsModal}
+        onClose={() => setShowBuyCreditsModal(false)}
+      />
     </div>
   );
 }
