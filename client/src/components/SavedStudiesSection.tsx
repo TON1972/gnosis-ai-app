@@ -199,39 +199,39 @@ export default function SavedStudiesSection() {
                 </div>
               </div>
 
-              <div className="flex gap-1">
+              <div className="flex gap-1 md:gap-1 gap-0.5">
                 <Button
                   onClick={() => setSelectedStudy(study)}
                   variant="outline"
                   size="sm"
-                  className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                  className="flex-1 h-8 md:h-8 h-7 text-xs md:text-xs text-[10px] px-1 md:px-3 border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
                 >
-                  <Eye className="w-3 h-3 mr-1" />
+                  <Eye className="w-3 h-3 md:mr-1 mr-0.5" />
                   Ver
                 </Button>
                 <Button
                   onClick={() => handleDownloadTxt(study)}
                   variant="outline"
                   size="sm"
-                  className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                  className="flex-1 h-8 md:h-8 h-7 text-xs md:text-xs text-[10px] px-1 md:px-3 border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
                 >
-                  <FileText className="w-3 h-3 mr-1" />
+                  <FileText className="w-3 h-3 md:mr-1 mr-0.5" />
                   TXT
                 </Button>
                 <Button
                   onClick={() => handleDownloadPdf(study)}
                   variant="outline"
                   size="sm"
-                  className="flex-1 h-8 text-xs border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
+                  className="flex-1 h-8 md:h-8 h-7 text-xs md:text-xs text-[10px] px-1 md:px-3 border-[#d4af37] text-[#1e3a5f] hover:bg-[#d4af37] hover:text-white"
                 >
-                  <Download className="w-3 h-3 mr-1" />
+                  <Download className="w-3 h-3 md:mr-1 mr-0.5" />
                   PDF
                 </Button>
                 <Button
                   onClick={() => handleDelete(study.id)}
                   variant="outline"
                   size="sm"
-                  className="h-8 px-2 border-red-500 text-red-600 hover:bg-red-500 hover:text-white"
+                  className="h-8 md:h-8 h-7 px-2 md:px-2 px-1.5 border-red-500 text-red-600 hover:bg-red-500 hover:text-white flex-shrink-0"
                 >
                   <Trash2 className="w-3 h-3" />
                 </Button>
