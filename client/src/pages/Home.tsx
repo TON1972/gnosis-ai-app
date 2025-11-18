@@ -403,7 +403,7 @@ export default function Home() {
             {/* Botão Planos e Preços */}
             <div className="mt-6">
               <Link href="/planos">
-                <span className="inline-flex items-center gap-2 px-8 py-4 bg-[#d4af37] md:bg-[#d4af37] bg-gradient-to-r from-red-500 to-red-600 md:from-[#d4af37] md:to-[#d4af37] text-white md:text-[#1e3a5f] rounded-xl font-bold text-lg hover:bg-[#B8860B] transition-colors shadow-lg cursor-pointer blink-animation md:animate-none">
+                <span className="inline-flex items-center gap-2 px-8 py-4 bg-[#d4af37] md:bg-[#d4af37] bg-gradient-to-r from-red-500 to-red-600 md:from-[#d4af37] md:to-[#d4af37] text-white md:text-[#1e3a5f] rounded-xl font-bold text-lg hover:bg-[#B8860B] transition-colors shadow-lg cursor-pointer">
                   PLANOS E PREÇOS
                 </span>
               </Link>
