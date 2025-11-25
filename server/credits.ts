@@ -286,7 +286,7 @@ export async function useCredits(userId: number, amount: number, toolName: strin
   const updates: Partial<typeof userCredits.$inferInsert> = {};
 
   // Use daily credits first
-  if (credits.daily > 0 && remaining > 0) {
+  if (credits.daily && credits.daily > 0 && remaining > 0) {
     const dailyUsed = Math.min(credits.daily, remaining);
     updates.creditsDaily = credits.daily - dailyUsed;
     remaining -= dailyUsed;
@@ -301,7 +301,7 @@ export async function useCredits(userId: number, amount: number, toolName: strin
   }
 
   // Then use initial credits
-  if (credits.initial > 0 && remaining > 0) {
+  if (credits.initial && credits.initial > 0 && remaining > 0) {
     const initialUsed = Math.min(credits.initial, remaining);
     updates.creditsInitial = credits.initial - initialUsed;
     remaining -= initialUsed;
@@ -316,7 +316,7 @@ export async function useCredits(userId: number, amount: number, toolName: strin
   }
 
   // Finally use bonus credits
-  if (credits.bonus > 0 && remaining > 0) {
+  if (credits.bonus && credits.bonus > 0 && remaining > 0) {
     const bonusUsed = Math.min(credits.bonus, remaining);
     updates.creditsBonus = credits.bonus - bonusUsed;
     remaining -= bonusUsed;
