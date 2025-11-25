@@ -1184,3 +1184,13 @@
 - [ ] Criar checkpoint final
 - [ ] Fornecer link funcional ao usuário
 
+
+
+
+## PROBLEMA CRÍTICO - Regressão na Publicação (25/11/2025)
+- [ ] Checkpoint antigo foi publicado ao invés do mais recente
+- [ ] Ferramenta Escatologia Bíblica não está na versão publicada
+- [ ] Outras atualizações recentes foram perdidas
+- [ ] Criar novo checkpoint com TODAS as alterações
+- [ ] Garantir que novo checkpoint seja publicável corretamente
+
