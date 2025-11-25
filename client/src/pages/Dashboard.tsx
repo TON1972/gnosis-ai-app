@@ -175,6 +175,14 @@ const TOOLS_CONFIG = [
     icon: Shield,
     category: "Teologia",
     premium: true
+  },
+  {
+    id: "escatologia-biblica",
+    name: "Escatologia Bíblica",
+    description: "Análise escatológica profunda com rigor acadêmico em nível de doutorado. Abrange história da interpretação, exegese avançada, sistematização teológica e modelagem hermenêutica.",
+    icon: Calendar,
+    category: "Teologia",
+    premium: true
   }
 ];
 

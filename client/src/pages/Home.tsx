@@ -80,6 +80,12 @@ const mainTools = [
     name: "Apologética Avançada",
     description: "Defesa racional da fé cristã com argumentos filosóficos, históricos e científicos",
     mobileOnly: true
+  },
+  {
+    icon: <Calendar className="w-8 h-8" />,
+    name: "Escatologia Bíblica",
+    description: "Análise escatológica profunda com rigor acadêmico em nível de doutorado",
+    mobileOnly: true
   }
 ];
 
@@ -114,7 +120,8 @@ const allTools = [
   { name: "Transcrição de Mídia", free: false, alianca: false, lumen: true, premium: true },
   { name: "Patrística", free: false, alianca: false, lumen: true, premium: true },
   { name: "Linha do Tempo Teológica", free: false, alianca: false, lumen: true, premium: true },
-  { name: "Apologética Avançada", free: false, alianca: false, lumen: true, premium: true }
+  { name: "Apologética Avançada", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Escatologia Bíblica", free: false, alianca: false, lumen: true, premium: true }
 ];
 
 const plans = [

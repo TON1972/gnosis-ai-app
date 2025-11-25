@@ -123,6 +123,12 @@ const TOOLS_INFO: Record<string, { name: string; description: string; placeholde
     description: "Ferramenta de defesa racional e sistemática da fé cristã, com base em filosofia, história, teologia bíblica e evidências empíricas",
     placeholder: "Digite o tema, objeção ou questão apologética que deseja analisar...\n\nExemplo: Como responder à objeção do mal e sofrimento no mundo?\nou\nDefesa da ressurreição de Jesus Cristo\nou\nExistência de Deus - argumento cosmológico",
     creditCost: 120
+  },
+  "escatologia-biblica": {
+    name: "Escatologia Bíblica",
+    description: "Análise escatológica profunda com rigor acadêmico em nível de doutorado. Abrange história da interpretação, exegese avançada, sistematização teológica e modelagem hermenêutica.",
+    placeholder: "Digite o tema escatológico que deseja analisar...\n\nExemplo: A Parousia de Cristo\nou\nO Milênio em Apocalipse 20\nou\nA Ressurreição dos Mortos\nou\nO Julgamento Final",
+    creditCost: 100
   }
 };
 

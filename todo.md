@@ -1161,3 +1161,17 @@
 - [x] Adicionar botão "Compra de Créditos Avulso" que abre modal de pacotes de créditos
 - [x] Registrar rota /perfil no App.tsx
 
+
+
+
+## Nova Ferramenta - Escatologia Bíblica (19/11/2025 - 22:00)
+
+- [x] Criar schema no banco de dados para ferramenta Escatologia Bíblica
+- [x] Adicionar ferramenta na tabela tools (ID 19) com restrição para planos Lumen e Gnosis Premium
+- [x] Criar página EscatologiaBiblica.tsx com formulário completo
+- [x] Implementar prompt otimizado para análise escatológica em nível de doutorado
+- [x] Adicionar ícone e card na seção Ferramentas Principais (Home)
+- [x] Adicionar rota /escatologia-biblica no App.tsx
+- [x] Adicionar ferramenta no Dashboard com bloqueio para plano FREE e Aliança
+- [ ] Testar geração de conteúdo e validar qualidade acadêmica
+
