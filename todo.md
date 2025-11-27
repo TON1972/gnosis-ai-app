@@ -1203,3 +1203,15 @@
 - [ ] Criar checkpoint publicável
 - [ ] Usuário publicar com sucesso
 
+
+
+
+## Deploy no Vercel - SUCESSO! (26/11/2025)
+
+- [x] Remover Clerk e restaurar Manus OAuth
+- [x] Corrigir erros de TypeScript no servidor
+- [x] Corrigir tipos Express vs Vercel (11 erros)
+- [x] Fazer push para GitHub
+- [x] Deploy bem-sucedido no Vercel (commit ee6f76d)
+- [x] Site no ar: https://gnosis-ai-platform.vercel.app
+
