@@ -1215,3 +1215,12 @@
 - [x] Deploy bem-sucedido no Vercel (commit ee6f76d)
 - [x] Site no ar: https://gnosis-ai-platform.vercel.app
 
+
+
+
+## BUG: Página em branco no Vercel
+
+- [ ] Corrigir erro "Calendar is not defined" no JavaScript
+- [ ] Corrigir variável VITE_APP_LOGO não definida
+- [ ] Testar site em produção
+
