@@ -15,24 +15,24 @@ export async function createContext(
   let user: User | null = null;
 
   try {
-    const authHeader = opts.req.headers.authorization;
+    const authHeader = (opts.req as any).headers?.authorization;
     if (authHeader && authHeader.startsWith("Bearer ")) {
       const token = authHeader.substring(7);
       const payload = await verifyToken(token);
       
       if (payload?.openId) {
-        user = await getUserByOpenId(payload.openId);
+        user = (await getUserByOpenId(payload.openId)) ?? null;
         
         if (!user) {
           // Criar usuário se não existir
           await upsertUser({
             openId: payload.openId,
             name: payload.name || null,
-            email: payload.email || null,
-            loginMethod: payload.loginMethod || null,
+            email: (payload as any).email || null,
+            loginMethod: (payload as any).loginMethod || null,
             lastSignedIn: new Date(),
           });
-          user = await getUserByOpenId(payload.openId);
+          user = (await getUserByOpenId(payload.openId)) ?? null;
         }
       }
     }

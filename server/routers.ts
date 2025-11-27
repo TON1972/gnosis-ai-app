@@ -22,7 +22,7 @@ export const appRouter = router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
-      ctx.res.cookie(COOKIE_NAME, '', { ...cookieOptions, maxAge: 0 });
+      (ctx.res as any).cookie(COOKIE_NAME, '', { ...cookieOptions, maxAge: 0 });
       return {
         success: true,
       } as const;

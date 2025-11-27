@@ -90,3 +90,32 @@ O sistema agora usa **Manus OAuth** (sistema nativo do template):
 - Todos os dados de usuários continuam no banco de dados
 - O sistema de planos, créditos e ferramentas não foi afetado
 
+
+
+
+---
+
+## 🕐 **TIMELINE DO DEPLOY:**
+
+- **19:45** - Push enviado para GitHub (commit d5f3b35)
+- **19:50** - Vercel detectou o novo commit
+- **19:50** - Build iniciado (status: Preparar)
+- **19:51** - Aguardando conclusão do build...
+
+---
+
+## 📸 **EVIDÊNCIAS:**
+
+- Screenshot do Vercel mostrando deployment 3UqmMw3aK em progresso
+- Commit d5f3b35 visível na lista de deployments
+- Status "Preparar" indica que o build está rodando
+
+---
+
+## 🎯 **PRÓXIMOS PASSOS:**
+
+1. Aguardar conclusão do build (1-3 minutos)
+2. Verificar se status mudou para "Pronto" (Ready)
+3. Testar site em produção
+4. Confirmar que login funciona com Manus OAuth
+
