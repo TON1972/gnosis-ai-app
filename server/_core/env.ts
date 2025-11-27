@@ -1,15 +1,12 @@
 export const ENV = {
-  // Clerk Authentication
-  clerkPublishableKey: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ?? "",
-  clerkSecretKey: process.env.CLERK_SECRET_KEY ?? "",
-  
-  // Database
-  databaseUrl: process.env.DATABASE_URL ?? "",
-  
-  // Legacy (manter por enquanto para compatibilidade)
+  // Manus OAuth
+  oAuthServerUrl: process.env.OAUTH_SERVER_URL ?? "",
   appId: process.env.VITE_APP_ID ?? "",
   cookieSecret: process.env.JWT_SECRET ?? "",
   ownerOpenId: process.env.OWNER_OPEN_ID ?? "",
+  
+  // Database
+  databaseUrl: process.env.DATABASE_URL ?? "",
   
   // Environment
   isProduction: process.env.NODE_ENV === "production",
@@ -20,7 +17,7 @@ export const ENV = {
   // Mercado Pago
   mercadoPagoAccessToken: process.env.MERCADOPAGO_ACCESS_TOKEN ?? "",
   
-  // Forge API (manter para compatibilidade)
+  // Forge API
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
 };

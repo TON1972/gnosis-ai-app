@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, plans, tools, planTools, subscriptions } from "../drizzle/schema";
+import { InsertUser, User, users, plans, tools, planTools, subscriptions } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -169,50 +169,5 @@ export async function getAllTools() {
 
 
 
-// Clerk user management functions
-export async function getUserByClerkId(clerkId: string) {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot get user: database not available");
-    return undefined;
-  }
-
-  const result = await db.select().from(users).where(eq(users.clerkId, clerkId)).limit(1);
-  return result.length > 0 ? result[0] : undefined;
-}
-
-export async function upsertUserFromClerk(clerkUser: any): Promise<User> {
-  const db = await getDb();
-  if (!db) {
-    throw new Error("[Database] Cannot upsert user: database not available");
-  }
-
-  const email = clerkUser.emailAddresses?.[0]?.emailAddress || null;
-  const name = `${clerkUser.firstName || ""} ${clerkUser.lastName || ""}`.trim() || null;
-  
-  // Usar clerkId como openId para compatibilidade
-  const values: InsertUser = {
-    openId: clerkUser.id,
-    clerkId: clerkUser.id,
-    name,
-    email,
-    loginMethod: "clerk",
-    lastSignedIn: new Date(),
-  };
-
-  await db.insert(users).values(values).onDuplicateKeyUpdate({
-    set: {
-      name,
-      email,
-      lastSignedIn: new Date(),
-    },
-  });
-
-  const user = await getUserByClerkId(clerkUser.id);
-  if (!user) {
-    throw new Error("Failed to create user");
-  }
-
-  return user;
-}
+// User management functions are now in the main upsertUser and getUserByOpenId above
 
