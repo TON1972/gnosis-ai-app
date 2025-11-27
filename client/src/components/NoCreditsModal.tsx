@@ -28,6 +28,7 @@ const allTools = [
   { name: "Patrística", free: false, alianca: false, lumen: true, premium: true },
   { name: "Linha do Tempo Teológica", free: false, alianca: false, lumen: true, premium: true },
   { name: "Apologética Avançada", free: false, alianca: false, lumen: true, premium: true },
+  { name: "Escatologia Bíblica", free: false, alianca: false, lumen: true, premium: true },
 ];
 
 const PLAN_UPGRADES = [

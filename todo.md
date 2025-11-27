@@ -1233,3 +1233,6 @@
 - [x] Corrigir número de ferramentas nos cards dos planos: "18 ferramentas" → "19 ferramentas"
 
 
+
+- [x] Adicionar "Escatologia Bíblica" na lista de ferramentas dos cards de planos
+

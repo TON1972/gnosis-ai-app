@@ -93,6 +93,7 @@ export default function PlanosPage() {
     { name: "Patrística", free: false, alianca: false, lumen: true, premium: true },
     { name: "Linha do Tempo Teológica", free: false, alianca: false, lumen: true, premium: true },
     { name: "Apologética Avançada", free: false, alianca: false, lumen: true, premium: true },
+    { name: "Escatologia Bíblica", free: false, alianca: false, lumen: true, premium: true },
   ];
 
   // Calcula preço anual com 16,5% desconto
