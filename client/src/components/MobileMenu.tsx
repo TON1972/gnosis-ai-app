@@ -59,6 +59,7 @@ export default function MobileMenu({ isAuthenticated, onLogout, loginUrl, user }
               </span>
             </Link>
             
+            {/* Menu: Planos e Preços */}
             <Link href="/planos" onClick={closeMenu}>
               <span className="block px-4 py-3 text-[#d4af37] hover:bg-[#2a4a7f] rounded-lg transition-colors cursor-pointer">
                 Planos e Preços

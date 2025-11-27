@@ -1224,3 +1224,11 @@
 - [ ] Corrigir variável VITE_APP_LOGO não definida
 - [ ] Testar site em produção
 
+
+
+
+## Correções de Erros Bobos (26/11/2025 - 23:00)
+
+- [ ] Corrigir texto no menu hamburguer da Home: "por e Preços" → "Planos e Preços"
+
+
