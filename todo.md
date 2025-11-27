@@ -1229,6 +1229,7 @@
 
 ## Correções de Erros Bobos (26/11/2025 - 23:00)
 
-- [ ] Corrigir texto no menu hamburguer da Home: "por e Preços" → "Planos e Preços"
+- [x] Corrigir texto no menu hamburguer da Home: "por e Preços" → "Planos e Preços" (RESOLVIDO - era cache do navegador)
+- [x] Corrigir número de ferramentas nos cards dos planos: "18 ferramentas" → "19 ferramentas"
 
 

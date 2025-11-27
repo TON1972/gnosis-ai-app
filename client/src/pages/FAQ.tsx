@@ -132,11 +132,11 @@ const faqData: FAQCategory[] = [
       },
       {
         question: "Qual a diferença entre os planos?",
-        answer: "FREE: 500 créditos iniciais (não-renováveis) + 50/dia, 6 ferramentas básicas. Aliança: 1.500 iniciais + 100/dia, 10 ferramentas. Lumen: 3.000 iniciais + 200/dia, todas as 18 ferramentas. Premium: 6.000 iniciais + 300/dia, todas as 18 ferramentas."
+        answer: "FREE: 500 créditos iniciais (não-renováveis) + 50/dia, 6 ferramentas básicas. Aliança: 1.500 iniciais + 100/dia, 10 ferramentas. Lumen: 3.000 iniciais + 200/dia, todas as 19 ferramentas. Premium: 6.000 iniciais + 300/dia, todas as 19 ferramentas."
       },
       {
         question: "Quais ferramentas NÃO estão disponíveis no plano Aliança?",
-        answer: "O plano Aliança não inclui 8 ferramentas avançadas: Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada, Gerador de Referências ABNT/APA, Redação Acadêmica, Dados Demográficos e Transcrição de Mídia. Ele oferece 10 das 18 ferramentas disponíveis."
+        answer: "O plano Aliança não inclui 9 ferramentas avançadas: Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada, Gerador de Referências ABNT/APA, Redação Acadêmica, Dados Demográficos, Transcrição de Mídia e Escatologia Bíblica. Ele oferece 10 das 19 ferramentas disponíveis."
       },
       {
         question: "Posso testar antes de assinar?",

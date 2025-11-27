@@ -17,7 +17,7 @@ const PLAN_UPGRADES = [
     period: "/mês",
     creditsInitial: "1.500 créditos iniciais",
     creditsDaily: "100 créditos/dia",
-    tools: "10 de 18 ferramentas disponíveis",
+    tools: "10 de 19 ferramentas disponíveis",
     planKey: "alianca" as const,
     highlight: false
   },
@@ -28,7 +28,7 @@ const PLAN_UPGRADES = [
     period: "/mês",
     creditsInitial: "3.000 créditos iniciais",
     creditsDaily: "200 créditos/dia",
-    tools: "Todas as 18 ferramentas",
+    tools: "Todas as 19 ferramentas",
     planKey: "lumen" as const,
     highlight: true
   },
@@ -39,7 +39,7 @@ const PLAN_UPGRADES = [
     period: "/mês",
     creditsInitial: "6.000 créditos iniciais",
     creditsDaily: "300 créditos/dia",
-    tools: "Todas as 18 ferramentas",
+    tools: "Todas as 19 ferramentas",
     planKey: "premium" as const,
     highlight: false,
     premium: true

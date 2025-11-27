@@ -34,7 +34,7 @@ export default function PlanosPage() {
       priceValue: 0,
       creditsInitial: "500 créditos iniciais",
       creditsDaily: "50 créditos/dia",
-      tools: "6 de 18 ferramentas disponíveis",
+      tools: "6 de 19 ferramentas disponíveis",
       planKey: "free" as const,
       highlight: false
     },
@@ -45,7 +45,7 @@ export default function PlanosPage() {
       period: "/mês",
       creditsInitial: "1.500 créditos iniciais*",
       creditsDaily: "100 créditos/dia",
-      tools: "10 de 18 ferramentas disponíveis",
+      tools: "10 de 19 ferramentas disponíveis",
       planKey: "alianca" as const,
       highlight: false
     },
@@ -56,7 +56,7 @@ export default function PlanosPage() {
       period: "/mês",
       creditsInitial: "3.000 créditos iniciais*",
       creditsDaily: "200 créditos/dia",
-      tools: "Todas as 18 ferramentas",
+      tools: "Todas as 19 ferramentas",
       planKey: "lumen" as const,
       highlight: true
     },
@@ -67,7 +67,7 @@ export default function PlanosPage() {
       period: "/mês",
       creditsInitial: "6.000 créditos iniciais*",
       creditsDaily: "300 créditos/dia",
-      tools: "Todas as 18 ferramentas",
+      tools: "Todas as 19 ferramentas",
       planKey: "premium" as const,
       highlight: false,
       premium: true

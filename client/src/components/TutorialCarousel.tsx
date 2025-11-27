@@ -37,7 +37,7 @@ const slides: Slide[] = [
   {
     icon: <TrendingUp className="w-16 h-16 text-[#d4af37]" />,
     title: "Upgrade de Plano 🚀",
-    description: "Precisa de mais ferramentas? Clique em 'Upgrade de Plano' no Painel de Controle. Escolha entre Aliança (10 de 18 ferramentas disponíveis), Lumen (todas as 18 ferramentas) ou Premium (todas as 18 ferramentas + mais créditos).",
+    description: "Precisa de mais ferramentas? Clique em 'Upgrade de Plano' no Painel de Controle. Escolha entre Aliança (10 de 19 ferramentas disponíveis), Lumen (todas as 19 ferramentas) ou Premium (todas as 19 ferramentas + mais créditos).",
     highlight: "Planos anuais têm 16,5% de desconto!"
   },
   {

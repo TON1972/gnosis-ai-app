@@ -26,7 +26,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   planos: {
-    message: "Temos 4 planos disponíveis:\n\n**FREE** - Gratuito com 6 de 18 ferramentas disponíveis\n**ALIANÇA** - R$ 19,98/mês com 10 de 18 ferramentas disponíveis\n**LUMEN** - R$ 36,98/mês com todas as 18 ferramentas\n**GNOSIS PREMIUM** - R$ 68,98/mês com todas as 18 ferramentas\n\nO que você gostaria de saber?",
+    message: "Temos 4 planos disponíveis:\n\n**FREE** - Gratuito com 6 de 19 ferramentas disponíveis\n**ALIANÇA** - R$ 19,98/mês com 10 de 19 ferramentas disponíveis\n**LUMEN** - R$ 36,98/mês com todas as 19 ferramentas\n**GNOSIS PREMIUM** - R$ 68,98/mês com todas as 19 ferramentas\n\nO que você gostaria de saber?",
     options: [
       { label: "Diferenças entre planos", action: "diferencas_planos" },
       { label: "Como fazer upgrade", action: "upgrade" },
@@ -46,7 +46,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   ferramentas: {
-    message: "A GNOSIS AI oferece 18 ferramentas poderosas:\n\n**Básicas (FREE):**\n• Hermenêutica\n• Traduções\n• Resumos\n• Enfoques de Pregação\n• Estudos Doutrinários\n• Análise Teológica Comparada\n\n**Avançadas (planos pagos):**\n• Exegese\n• Teologia Sistemática\n• Patrística\n• Linha do Tempo Teológica\n• Apologética Avançada\n• E mais 7 ferramentas!\n\nSobre qual ferramenta você tem dúvida?",
+    message: "A GNOSIS AI oferece 19 ferramentas poderosas:\n\n**Básicas (FREE):**\n• Hermenêutica\n• Traduções\n• Resumos\n• Enfoques de Pregação\n• Estudos Doutrinários\n• Análise Teológica Comparada\n\n**Avançadas (planos pagos):**\n• Exegese\n• Teologia Sistemática\n• Patrística\n• Linha do Tempo Teológica\n• Apologética Avançada\n• E mais 7 ferramentas!\n\nSobre qual ferramenta você tem dúvida?",
     options: [
       { label: "Como usar uma ferramenta", action: "usar_ferramenta" },
       { label: "Custo em créditos", action: "custo_ferramentas" },
@@ -66,7 +66,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   diferencas_planos: {
-    message: "**Principais diferenças:**\n\n**FREE** - 6 de 18 ferramentas disponíveis, 500+50 créditos\n**ALIANÇA** - 10 de 18 ferramentas disponíveis, 1500+100 créditos\n**LUMEN** - Todas as 18 ferramentas, 3000+200 créditos\n**PREMIUM** - Todas as 18 ferramentas, 6000+300 créditos\n\nPlanos pagos incluem ferramentas avançadas como Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada e muito mais.",
+    message: "**Principais diferenças:**\n\n**FREE** - 6 de 19 ferramentas disponíveis, 500+50 créditos\n**ALIANÇA** - 10 de 19 ferramentas disponíveis, 1500+100 créditos\n**LUMEN** - Todas as 19 ferramentas, 3000+200 créditos\n**PREMIUM** - Todas as 19 ferramentas, 6000+300 créditos\n\nPlanos pagos incluem ferramentas avançadas como Exegese, Patrística, Linha do Tempo Teológica, Apologética Avançada e muito mais.",
     options: [
       { label: "Ver página de planos", action: "ver_planos" },
       { label: "Voltar ao menu", action: "menu" },
@@ -129,7 +129,7 @@ const KNOWLEDGE_BASE = {
     ],
   },
   testar_gratis: {
-    message: "Sim! Você pode testar gratuitamente:\n\n✅ Crie uma conta FREE (sem cartão)\n✅ Acesse 6 de 18 ferramentas disponíveis\n✅ Receba 500 créditos iniciais + 50/dia\n✅ Experimente todas as funcionalidades\n\nSem compromisso, sem cobrança automática!",
+    message: "Sim! Você pode testar gratuitamente:\n\n✅ Crie uma conta FREE (sem cartão)\n✅ Acesse 6 de 19 ferramentas disponíveis\n✅ Receba 500 créditos iniciais + 50/dia\n✅ Experimente todas as funcionalidades\n\nSem compromisso, sem cobrança automática!",
     options: [
       { label: "Criar conta grátis", action: "login" },
       { label: "Voltar ao menu", action: "menu" },
