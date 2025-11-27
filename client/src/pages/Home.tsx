@@ -26,7 +26,8 @@ import {
   CheckCircle2,
   Crown,
   Gift,
-  ShoppingCart
+  ShoppingCart,
+  Calendar
 } from "lucide-react";
 
 const mainTools = [
