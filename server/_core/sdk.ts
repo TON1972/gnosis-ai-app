@@ -302,3 +302,8 @@ class SDKServer {
 }
 
 export const sdk = new SDKServer();
+
+// Export helper function for verifyToken
+export async function verifyToken(token: string) {
+  return await sdk.verifySession(token);
+}
