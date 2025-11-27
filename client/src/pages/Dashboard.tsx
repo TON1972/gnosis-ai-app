@@ -33,7 +33,8 @@ import {
   Clock,
   BookText,
   Shield,
-  User
+  User,
+  Calendar
 } from "lucide-react";
 import jsPDF from "jspdf";
 import { toast } from "sonner";
