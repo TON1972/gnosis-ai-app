@@ -1236,3 +1236,6 @@
 
 - [x] Adicionar "Escatologia Bíblica" na lista de ferramentas dos cards de planos
 
+
+- [x] Corrigir erro 404 ao atualizar página no Vercel (criar vercel.json para SPA routing)
+
