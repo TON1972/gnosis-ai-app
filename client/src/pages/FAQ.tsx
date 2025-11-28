@@ -67,6 +67,22 @@ const faqData: FAQCategory[] = [
       {
         question: "O que é Teologia Sistemática?",
         answer: "A Teologia Sistemática organiza os ensinamentos bíblicos em temas coerentes e inter-relacionados, oferecendo uma visão abrangente da fé cristã. A ferramenta ajuda a estudar temas como bibliologia, cristologia, pneumatologia, soteriologia e escatologia de forma estruturada."
+      },
+      {
+        question: "O que é a ferramenta de Patrística?",
+        answer: "A ferramenta de Patrística oferece acesso ao pensamento dos Pais da Igreja (séculos I-VIII), incluindo escritos de Agostinho, Orígenes, Tertuliano, Irineu e outros. Ela permite estudar como a teologia cristã foi desenvolvida nos primeiros séculos, analisando debates doutrinários, interpretações bíblicas e práticas eclesiásticas da igreja primitiva."
+      },
+      {
+        question: "Como funciona a Linha do Tempo Teológica?",
+        answer: "A Linha do Tempo Teológica apresenta uma visualização cronológica dos principais eventos, concílios, movimentos e teólogos da história da igreja. Ela permite compreender o desenvolvimento histórico das doutrinas cristãs, desde o período apostólico até os dias atuais, contextualizando reformas, cismas e transformações teológicas."
+      },
+      {
+        question: "Para que serve a Apologética Avançada?",
+        answer: "A Apologética Avançada fornece argumentos filosóficos, históricos e científicos em defesa da fé cristã. A ferramenta aborda questões complexas como a existência de Deus, a confiabilidade dos manuscritos bíblicos, a historicidade de Jesus, o problema do mal, e responde a objeções comuns ao cristianismo com rigor acadêmico e fundamentação sólida."
+      },
+      {
+        question: "O que é a ferramenta de Escatologia Bíblica?",
+        answer: "A Escatologia Bíblica oferece análise profunda dos eventos finais descritos nas Escrituras, incluindo estudo de profecias, interpretação do Apocalipse, diferentes visões escatológicas (pré-milenismo, pós-milenismo, amilenismo), sinais dos tempos e o plano divino para o futuro da humanidade. A ferramenta apresenta as principais correntes interpretativas com fundamentação bíblica e teológica."
       }
     ]
   },
