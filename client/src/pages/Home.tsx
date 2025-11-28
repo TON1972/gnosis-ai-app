@@ -48,23 +48,23 @@ const mainTools = [
   },
   {
     icon: <Presentation className="w-8 h-8" />,
-    name: "Esboços de Pregação",
+    name: "Esboço de Pregações",
     description: "Estruturas completas para sermões e mensagens com pontos-chave e aplicações práticas"
   },
   {
-    icon: <BookMarked className="w-8 h-8" />,
-    name: "Estudos Doutrinários",
-    description: "Análises teológicas profundas sobre doutrinas específicas com fundamentação bíblica"
+    icon: <Sparkles className="w-8 h-8" />,
+    name: "Exegese Avançada",
+    description: "Interpretação crítica e detalhada verso por verso com análise exegética completa"
+  },
+  {
+    icon: <FileCheck className="w-8 h-8" />,
+    name: "Escatologia Bíblica",
+    description: "Análise escatológica profunda das profecias e eventos futuros"
   },
   {
     icon: <Scale className="w-8 h-8" />,
-    name: "Análise Teológica Comparada",
-    description: "Comparação detalhada entre diferentes correntes teológicas e tradições cristãs"
-  },
-  {
-    icon: <Sparkles className="w-8 h-8" />,
-    name: "Exegese",
-    description: "Interpretação crítica e detalhada verso por verso com análise exegética completa"
+    name: "Apologética Avançada",
+    description: "Defesa racional da fé cristã com argumentação teológica e filosófica"
   },
   {
     icon: <GraduationCap className="w-8 h-8" />,
@@ -72,9 +72,15 @@ const mainTools = [
     description: "Estudo organizado e estruturado de temas teológicos sistemáticos"
   },
   {
-    icon: <Mic className="w-8 h-8" />,
-    name: "Linguagem Ministerial",
-    description: "Análise retórica e teológica de discursos, sermões e mensagens ministeriais"
+    icon: <Scale className="w-8 h-8" />,
+    name: "Análise Teológica Comparada",
+    description: "Comparação detalhada entre diferentes correntes teológicas e tradições cristãs"
+  },
+  {
+    icon: <BookMarked className="w-8 h-8" />,
+    name: "Patrística",
+    description: "Estudo dos Pais da Igreja e teologia patrística",
+    mobileOnly: true
   },
   {
     icon: <Scale className="w-8 h-8" />,
