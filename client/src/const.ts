@@ -5,8 +5,11 @@ export const APP_TITLE = "GNOSIS AI";
 // Logo da GNOSIS AI
 export const APP_LOGO = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663169314957/eRLFubileexzOKHZ.png";
 
-// Clerk handles authentication, no need for custom login URL
+// Manus OAuth login URL
 export const getLoginUrl = () => {
-  return "/sign-in";
+  const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL;
+  const appId = import.meta.env.VITE_APP_ID;
+  const redirectUri = encodeURIComponent(window.location.origin + "/api/oauth/callback");
+  return `${oauthPortalUrl}/authorize?client_id=${appId}&redirect_uri=${redirectUri}&response_type=code`;
 };
 
