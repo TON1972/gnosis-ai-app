@@ -198,37 +198,37 @@ export default function PlanosPage() {
           </div>
         )}
         
-        {/* Plans Grid - 1 Coluna */}
-        <div className="flex flex-col gap-8 max-w-2xl mx-auto">
+        {/* Plans Grid - Mobile: 1 coluna / Desktop: 4 colunas */}
+        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-2xl md:max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`rounded-2xl p-10 shadow-2xl border-4 ${
+              className={`rounded-2xl p-10 md:p-8 shadow-2xl border-4 ${
                 plan.highlight
                   ? "bg-gradient-to-br from-[#d4af37] to-[#B8860B] border-[#1e3a5f]"
                   : plan.premium
                   ? "bg-gradient-to-br from-[#1e3a5f] to-[#2a4a7f] border-[#d4af37]"
                   : "bg-white/90 border-[#d4af37]"
-              } transition-shadow hover:shadow-3xl relative`}
+              } hover:scale-105 transition-transform relative`}
             >
               {plan.highlight && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#1e3a5f] text-[#d4af37] px-4 py-1 rounded-full text-sm font-bold whitespace-nowrap">
+                <div className="absolute -top-3 md:-top-4 left-1/2 transform -translate-x-1/2 bg-[#1e3a5f] text-[#d4af37] px-3 md:px-4 py-1 rounded-full text-xs md:text-sm font-bold whitespace-nowrap">
                   MAIS POPULAR
                 </div>
               )}
               {plan.premium && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#1e3a5f] px-4 py-1 rounded-full text-sm font-bold flex items-center gap-1 whitespace-nowrap">
-                  <Crown className="w-4 h-4" />
+                <div className="absolute -top-3 md:-top-4 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#1e3a5f] px-3 md:px-4 py-1 rounded-full text-xs md:text-sm font-bold flex items-center gap-1 whitespace-nowrap">
+                  <Crown className="w-3 h-3 md:w-4 md:h-4" />
                   PREMIUM
                 </div>
               )}
-              <h4 className={`text-3xl font-bold mb-6 ${
+              <h4 className={`text-3xl md:text-2xl font-bold mb-6 md:mb-4 ${
                 plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
               }`}>
                 {plan.name}
               </h4>
               <div className="mb-8">
-                <span className={`text-5xl font-bold ${
+                <span className={`text-5xl md:text-4xl font-bold ${
                   plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                 }`}>
                   {getDisplayPrice(plan).main}
@@ -248,48 +248,48 @@ export default function PlanosPage() {
                   </span>
                 )}
               </div>
-              <div className="space-y-4 mb-8">
-                <div className={`p-4 rounded-lg ${
+              <div className="space-y-4 md:space-y-3 mb-8 md:mb-6">
+                <div className={`p-4 md:p-3 rounded-lg ${
                   plan.highlight || plan.premium ? "bg-white/20" : "bg-[#FFFACD]"
                 }`}>
-                  <p className={`font-semibold text-lg ${
+                  <p className={`font-semibold text-lg md:text-base ${
                     plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                   }`}>
                     {plan.creditsInitial}
                   </p>
                 </div>
-                <div className={`p-4 rounded-lg ${
+                <div className={`p-4 md:p-3 rounded-lg ${
                   plan.highlight || plan.premium ? "bg-white/20" : "bg-[#FFFACD]"
                 }`}>
-                  <p className={`font-semibold text-lg ${
+                  <p className={`font-semibold text-lg md:text-base ${
                     plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                   }`}>
                     {plan.creditsDaily}
                   </p>
                 </div>
-                <div className={`p-4 rounded-lg ${
+                <div className={`p-4 md:p-3 rounded-lg ${
                   plan.highlight || plan.premium ? "bg-white/20" : "bg-[#FFFACD]"
                 }`}>
-                  <p className={`font-semibold text-lg ${
+                  <p className={`font-semibold text-lg md:text-base ${
                     plan.highlight || plan.premium ? "text-white" : "text-[#1e3a5f]"
                   }`}>
                     {plan.tools}
                   </p>
                 </div>
               </div>
-              <ul className="space-y-3 mb-8 max-h-80 overflow-y-auto">
+              <ul className="space-y-3 md:space-y-2 mb-8 md:mb-6 max-h-80 md:max-h-64 overflow-y-auto">
                 {allTools.map((tool, i) => {
                   const isAvailable = tool[plan.planKey];
                   return (
                     <li key={i} className="flex items-start gap-2">
                       {isAvailable ? (
-                        <CheckCircle2 className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                        <CheckCircle2 className={`w-5 h-5 md:w-4 md:h-4 flex-shrink-0 mt-0.5 ${
                           plan.highlight || plan.premium ? "text-green-400" : "text-green-600"
                         }`} />
                       ) : (
-                        <span className={`w-5 h-5 flex-shrink-0 mt-0.5 text-red-500 font-bold text-lg`}>×</span>
+                        <span className={`w-5 h-5 md:w-4 md:h-4 flex-shrink-0 mt-0.5 text-red-500 font-bold text-lg md:text-base`}>×</span>
                       )}
-                      <span className={`text-sm ${
+                      <span className={`text-sm md:text-xs ${
                         plan.highlight || plan.premium 
                           ? isAvailable ? "text-white" : "text-white/50"
                           : isAvailable ? "text-[#1e3a5f]" : "text-gray-400"
@@ -308,7 +308,7 @@ export default function PlanosPage() {
                     window.location.href = getLoginUrl();
                   }
                 }}
-                className={`w-full text-lg py-6 ${
+                className={`w-full text-lg md:text-base py-6 md:py-3 ${
                   plan.highlight
                     ? "bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
                     : plan.premium
