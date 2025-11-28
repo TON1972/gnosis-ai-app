@@ -39,23 +39,23 @@ const mainTools = [
   },
   {
     icon: <Presentation className="w-8 h-8" />,
-    name: "Esboços de Pregação",
+    name: "Esboço de Pregações",
     description: "Estruturas completas para sermões"
   },
   {
-    icon: <BookMarked className="w-8 h-8" />,
-    name: "Estudos Doutrinários",
-    description: "Análises teológicas profundas"
+    icon: <Sparkles className="w-8 h-8" />,
+    name: "Exegese Avançada",
+    description: "Interpretação crítica e detalhada das Escrituras"
+  },
+  {
+    icon: <FileCheck className="w-8 h-8" />,
+    name: "Escatologia Bíblica",
+    description: "Análise escatológica profunda"
   },
   {
     icon: <Scale className="w-8 h-8" />,
-    name: "Análise Teológica Comparada",
-    description: "Comparação entre correntes teológicas"
-  },
-  {
-    icon: <Sparkles className="w-8 h-8" />,
-    name: "Exegese",
-    description: "Interpretação crítica e detalhada das Escrituras"
+    name: "Apologética Avançada",
+    description: "Defesa racional da fé cristã"
   },
   {
     icon: <GraduationCap className="w-8 h-8" />,
@@ -63,9 +63,15 @@ const mainTools = [
     description: "Estudo organizado de temas teológicos"
   },
   {
-    icon: <Mic className="w-8 h-8" />,
-    name: "Linguagem Ministerial",
-    description: "Análise de discursos e retórica ministerial"
+    icon: <Scale className="w-8 h-8" />,
+    name: "Análise Teológica Comparada",
+    description: "Comparação entre correntes teológicas"
+  },
+  {
+    icon: <BookMarked className="w-8 h-8" />,
+    name: "Patrística",
+    description: "Estudo dos Pais da Igreja",
+    mobileOnly: true
   }
 ];
 
