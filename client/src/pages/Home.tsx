@@ -1,3 +1,4 @@
+// Updated: 2025-11-28 - Ferramentas principais alteradas (9 PC + 10 Mobile)
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
