@@ -178,6 +178,13 @@ export default function Chatbot() {
   const [contactMessage, setContactMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Listen for custom event to open chat
+  useEffect(() => {
+    const handleOpenChat = () => setIsOpen(true);
+    window.addEventListener('openRebecaChat', handleOpenChat);
+    return () => window.removeEventListener('openRebecaChat', handleOpenChat);
+  }, []);
+
   const saveContactMutation = trpc.chatbot.saveContact.useMutation({
     onSuccess: () => {
       toast.success("Dados enviados com sucesso! Nossa equipe entrará em contato em breve.");

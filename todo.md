@@ -1239,3 +1239,6 @@
 
 - [x] Corrigir erro 404 ao atualizar página no Vercel (criar vercel.json para SPA routing)
 
+
+- [x] REIMPLEMENTAR: Alterar botão "Fale com o Suporte" na página FAQ para abrir chat com Rebeca (usando evento customizado)
+

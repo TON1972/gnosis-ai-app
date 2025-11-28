@@ -309,11 +309,11 @@ export default function FAQ() {
                 Começar Agora
               </span>
             </Link>
-            <a href="https://help.manus.im" target="_blank" rel="noopener noreferrer">
+            <button onClick={() => window.dispatchEvent(new Event('openRebecaChat'))}>
               <span className="inline-block px-8 py-4 bg-[#d4af37] text-[#1e3a5f] rounded-lg font-bold text-lg hover:bg-[#B8860B] transition-colors shadow-lg cursor-pointer">
                 Falar com Suporte
               </span>
-            </a>
+            </button>
           </div>
         </div>
       </main>
