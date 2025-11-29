@@ -273,7 +273,7 @@ export default function Chatbot() {
       } else if (action === "login") {
         addMessage("bot", response.message);
         setTimeout(() => {
-          const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL || "https://api.manus.im";
+          const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL || "https://oauth.manus.im";
           const appId = import.meta.env.VITE_APP_ID || "Ab5C8Nq9pGbzQm4EwPJGu4";
           const loginUrl = `${oauthPortalUrl}/authorize?client_id=${appId}&redirect_uri=${encodeURIComponent(window.location.origin + "/api/oauth/callback")}&response_type=code`;
           window.location.href = loginUrl;

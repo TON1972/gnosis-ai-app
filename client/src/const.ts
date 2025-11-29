@@ -7,7 +7,7 @@ export const APP_LOGO = "https://files.manuscdn.com/user_upload_by_module/sessio
 
 // Manus OAuth login URL - Updated 2025-11-28
 export const getLoginUrl = () => {
-  const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL || "https://api.manus.im";
+  const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL || "https://oauth.manus.im";
   const appId = import.meta.env.VITE_APP_ID || "Ab5C8Nq9pGbzQm4EwPJGu4";
   const redirectUri = encodeURIComponent(window.location.origin + "/api/oauth/callback");
   return `${oauthPortalUrl}/authorize?client_id=${appId}&redirect_uri=${redirectUri}&response_type=code`;
