@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
-import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
+import { APP_LOGO, APP_TITLE } from "@/const";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { CheckCircle2, Crown } from "lucide-react";
@@ -137,7 +137,7 @@ export default function PlanosPage() {
             <MobileMenu 
               isAuthenticated={isAuthenticated}
               onLogout={logout}
-              loginUrl={getLoginUrl()}
+              loginUrl="/auth"
             />
           </div>
         </div>
@@ -303,9 +303,9 @@ export default function PlanosPage() {
               <Button
                 onClick={() => {
                   if (plan.priceValue === 0) {
-                    window.location.href = getLoginUrl();
+                    window.location.href = "/auth";
                   } else {
-                    window.location.href = getLoginUrl();
+                    window.location.href = "/auth";
                   }
                 }}
                 className={`w-full text-lg md:text-base py-6 md:py-3 ${

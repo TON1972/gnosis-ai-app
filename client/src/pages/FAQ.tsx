@@ -4,7 +4,6 @@ import { Link } from "wouter";
 import { APP_LOGO, APP_TITLE } from "@/const";
 import MobileMenu from "@/components/MobileMenu";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
 
 interface FAQItem {
   question: string;
@@ -261,7 +260,7 @@ export default function FAQ() {
               <MobileMenu 
                 isAuthenticated={!!useAuth().user} 
                 onLogout={() => window.location.href = '/'}
-                loginUrl={getLoginUrl()}
+                loginUrl="/auth"
                 user={useAuth().user}
               />
             </div>

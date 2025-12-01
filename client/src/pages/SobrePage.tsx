@@ -1,4 +1,4 @@
-import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
+import { APP_LOGO, APP_TITLE } from "@/const";
 import { Link } from "wouter";
 import { BookOpen, Heart, Sparkles } from "lucide-react";
 import MobileMenu from "@/components/MobileMenu";
@@ -38,7 +38,7 @@ export default function SobrePage() {
             <MobileMenu 
               isAuthenticated={isAuthenticated}
               onLogout={logout}
-              loginUrl={getLoginUrl()}
+              loginUrl="/auth"
             />
           </div>
         </div>

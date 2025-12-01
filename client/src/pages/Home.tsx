@@ -5,7 +5,7 @@ import TutorialCarousel from "@/components/TutorialCarousel";
 import MobileMenu from "@/components/MobileMenu";
 import BuyCreditsModal from "@/components/BuyCreditsModal";
 import { trpc } from "@/lib/trpc";
-import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
+import { APP_LOGO, APP_TITLE } from "@/const";
 import { Link, useLocation } from "wouter";
 import React, { useState, useEffect } from "react";
 import { 
@@ -212,7 +212,7 @@ export default function Home() {
     if (isAuthenticated) {
       setLocation("/dashboard");
     } else {
-      window.location.href = getLoginUrl();
+      window.location.href = "/auth";
     }
   };
 
@@ -234,7 +234,7 @@ export default function Home() {
             <MobileMenu 
               isAuthenticated={isAuthenticated}
               onLogout={logout}
-              loginUrl={getLoginUrl()}
+              loginUrl="/auth"
               user={user}
             />
           </div>
@@ -517,10 +517,10 @@ export default function Home() {
               <Button
                 onClick={() => {
                   if (plan.priceValue === 0) {
-                    window.location.href = getLoginUrl();
+                    window.location.href = "/auth";
                   } else {
                     // Redirecionar para checkout (será implementado)
-                    window.location.href = getLoginUrl();
+                    window.location.href = "/auth";
                   }
                 }}
                 className={`w-full ${
@@ -611,7 +611,7 @@ export default function Home() {
                 </p>
               </div>
               <Button
-                onClick={() => window.location.href = getLoginUrl()}
+                onClick={() => window.location.href = "/auth"}
                 className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
               >
                 Comprar
@@ -641,7 +641,7 @@ export default function Home() {
                 </p>
               </div>
               <Button
-                onClick={() => window.location.href = getLoginUrl()}
+                onClick={() => window.location.href = "/auth"}
                 className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
               >
                 Comprar
@@ -668,7 +668,7 @@ export default function Home() {
                 </p>
               </div>
               <Button
-                onClick={() => window.location.href = getLoginUrl()}
+                onClick={() => window.location.href = "/auth"}
                 className="w-full bg-[#1e3a5f] text-[#d4af37] hover:bg-[#2a4a7f]"
               >
                 Comprar
@@ -698,7 +698,7 @@ export default function Home() {
                 </p>
               </div>
               <Button
-                onClick={() => window.location.href = getLoginUrl()}
+                onClick={() => window.location.href = "/auth"}
                 className="w-full bg-white text-[#1e3a5f] hover:bg-gray-100"
               >
                 Comprar
