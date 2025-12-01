@@ -53,3 +53,26 @@
 
 - [x] Botão "Upgrade de Plano" deve abrir o NoCreditsModal (mesmo comportamento do botão "Comprar Créditos Avulsos")
 
+
+
+
+## 🐛 BUG CRÍTICO - Rota /auth retorna 404 (29/11/2025)
+
+- [ ] Investigar por que a rota /auth não está funcionando
+- [ ] Verificar se a rota está registrada no App.tsx
+- [ ] Verificar se o componente Auth.tsx existe
+- [ ] Testar rota localmente
+- [ ] Corrigir erro 404
+
+- [x] Investigar por que a rota /auth não está funcionando
+- [x] Verificar se a rota está registrada no App.tsx
+- [x] Verificar se o componente Auth.tsx existe
+- [x] Testar rota localmente
+- [x] Corrigir erro 404
+- [x] Recriar arquivo Auth.tsx
+- [x] Recriar arquivo gnosislog.ts
+- [x] Adicionar rotas de login/register no routers.ts
+- [x] Adicionar campo password no schema
+- [x] Adicionar jwtSecret no ENV
+- [x] Adicionar rota /auth no App.tsx
+- [x] Testar página de login/cadastro

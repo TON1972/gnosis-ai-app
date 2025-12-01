@@ -8,12 +8,14 @@ import Home from "./pages/Home";
 import FAQ from "./pages/FAQ";
 import Dashboard from "./pages/Dashboard";
 import ToolPage from "./pages/ToolPage";
+import Auth from "./pages/Auth";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path="/auth" component={Auth} />
       <Route path="/faq" component={FAQ} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/tool/:toolId" component={ToolPage} />
