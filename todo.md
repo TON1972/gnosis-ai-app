@@ -1,78 +1,39 @@
-# Project TODO
+# GNOSIS AI - TODO
 
-## Correções Identificadas na Checagem
+## 🚨 PROBLEMA ATUAL
 
-- [x] Adicionar 2 perguntas ao FAQ para completar 30 perguntas (JÁ TINHA 30)
-- [x] Corrigir lógica de desbloqueio de ferramentas no Dashboard (FREE deve ter 4 ferramentas disponíveis)
-- [x] Adicionar créditos iniciais para usuários novos do plano FREE (500 créditos)
+- [ ] Chat Rebeca voltou a redirecionar para api.manus.im (erro 404)
+- [ ] ONTEM funcionava! Redirecionava para /auth (Gnosis.log)
+- [ ] Código correto foi perdido no push errado de hoje
+- [ ] Precisa recuperar a correção que funcionou ontem
 
-## Bug Crítico em Investigação
+## 🔄 PLANO DE AÇÃO
 
-- [x] Dashboard mostra 0 ferramentas e 0 créditos mesmo com dados no banco (RESOLVIDO)
-- [x] Query tRPC plans.getTools não retorna dados (RESOLVIDO - problema era IDs inconsistentes)
-- [x] Query tRPC credits.balance não retorna créditos (RESOLVIDO)
+1. [ ] Inspecionar código do deploy 2uaxqQbYs em produção
+2. [ ] Encontrar qual era a correção aplicada ontem
+3. [ ] Aplicar a mesma correção no código local
+4. [ ] Testar localmente
+5. [ ] Fazer commit e push correto
+6. [ ] Testar em produção
 
+## 📝 INFORMAÇÕES TÉCNICAS
 
+- Deploy correto: 2uaxqQbYs (commit 18144dc)
+- Erro atual: GET https://api.manus.im/oauth/authorize?client_id=Ab5C8Nq9pGbzQm4EwPJGu4 404 (Not Found)
+- Chat Rebeca aparece em todas as páginas
+- Botão "Fazer login" do Chat Rebeca deve redirecionar para /auth
 
-## Correções Solicitadas pelo Usuário
+## ✅ CONCLUÍDO
 
-- [x] 1. Corrigir logo em todas as páginas (Logo da GNOSIS AI agora aparece corretamente)
-- [x] 2. Substituir "Gnose" por "GNOSIS AI" em todas as páginas (Não havia ocorrências)
-- [x] 3. Substituir "Livre" por "FREE" no plano gratuito (Já está correto como FREE)
-- [x] 4. Substituir "peças" por "ferramentas" nos planos Aliança, Lumen e GNOSIS Premium (Já está correto como ferramentas)
-- [x] 5. Adicionar 3 ferramentas na seção "Ferramentas Principais" (total 9): Exegese, Teologia Sistemática, Linguagem Ministerial
-
-
-
-## Novas Alterações de Planos
-
-- [x] FREE: Adicionar 2 ferramentas (Estudos Doutrinários + Análise Teológica Comparada) - Total: 6 ferramentas
-- [x] Aliança: Adicionar 2 ferramentas (Religiões Comparadas + Linguagem Ministerial) - Total: 10 ferramentas
-
-
-
-## Bug Crítico
-
-- [x] Novos usuários não recebem plano FREE automaticamente ao se cadastrar (Dashboard mostra 0 ferramentas) - CORRIGIDO
+- [x] Deploy 2uaxqQbYs promovido para produção
+- [x] Site voltou ao normal (header, planos, FAQ)
+- [x] Botão "Entrar" do header já redireciona para /auth
 
 
+## 🎯 SOLUÇÃO ENCONTRADA
 
-## Alteração de Interface
-
-- [x] Remover informação "Custo: X créditos" da página de ferramentas (manter apenas "Saldo disponível")
-
-
-
-## Nova Funcionalidade
-
-- [x] Adicionar botões "Upgrade de Plano" e "Comprar Créditos Avulsos" no CreditsPanel (abaixo da ordem de uso)
-
-
-
-## Correção
-
-- [x] Botão "Upgrade de Plano" deve abrir o NoCreditsModal (mesmo comportamento do botão "Comprar Créditos Avulsos")
-
-
-
-
-## 🐛 BUG CRÍTICO - Rota /auth retorna 404 (29/11/2025)
-
-- [ ] Investigar por que a rota /auth não está funcionando
-- [ ] Verificar se a rota está registrada no App.tsx
-- [ ] Verificar se o componente Auth.tsx existe
-- [ ] Testar rota localmente
-- [ ] Corrigir erro 404
-
-- [x] Investigar por que a rota /auth não está funcionando
-- [x] Verificar se a rota está registrada no App.tsx
-- [x] Verificar se o componente Auth.tsx existe
-- [x] Testar rota localmente
-- [x] Corrigir erro 404
-- [x] Recriar arquivo Auth.tsx
-- [x] Recriar arquivo gnosislog.ts
-- [x] Adicionar rotas de login/register no routers.ts
-- [x] Adicionar campo password no schema
-- [x] Adicionar jwtSecret no ENV
-- [x] Adicionar rota /auth no App.tsx
-- [x] Testar página de login/cadastro
+- [x] Criar componente ChatRebeca.tsx personalizado
+- [x] Substituir chat injetado pelo sistema Manus
+- [x] Botão "Fazer login" deve redirecionar para /auth (Gnosis.log)
+- [x] Manter mesmas funcionalidades e visual
+- [x] Adicionar componente em App.tsx ou main.tsx

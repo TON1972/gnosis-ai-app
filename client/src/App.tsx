@@ -9,6 +9,7 @@ import FAQ from "./pages/FAQ";
 import Dashboard from "./pages/Dashboard";
 import ToolPage from "./pages/ToolPage";
 import Auth from "./pages/Auth";
+import { ChatRebeca } from "./components/ChatRebeca";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -41,6 +42,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <ChatRebeca />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
