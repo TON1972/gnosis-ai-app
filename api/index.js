@@ -35115,7 +35115,7 @@ var require_lib5 = __commonJS({
   }
 });
 
-// api/index.ts
+// server/api-handler.ts
 var import_express = __toESM(require_express2(), 1);
 
 // node_modules/.pnpm/@trpc+server@11.6.0_typescript@5.9.3/node_modules/@trpc/server/dist/utils-CLZnJdb_.mjs
@@ -65233,7 +65233,7 @@ async function createContext(opts) {
   };
 }
 
-// api/index.ts
+// server/api-handler.ts
 var import_cors = __toESM(require_lib5(), 1);
 var app = (0, import_express.default)();
 app.use((0, import_cors.default)({
