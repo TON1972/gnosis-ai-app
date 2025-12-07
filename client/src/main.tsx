@@ -18,8 +18,9 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   if (!isUnauthorized) return;
 
-  // Redirect to login page
-  window.location.href = "/auth";
+  // Redirect to login page (DISABLED - causing issues on Home page)
+  // window.location.href = "/auth";
+  console.warn("Unauthorized access detected, but auto-redirect is disabled");
 };
 
 queryClient.getQueryCache().subscribe(event => {
