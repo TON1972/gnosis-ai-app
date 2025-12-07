@@ -19,7 +19,7 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (!isUnauthorized) return;
 
   // Redirect to login page
-  window.location.href = "/login";
+  window.location.href = "/auth";
 };
 
 queryClient.getQueryCache().subscribe(event => {
