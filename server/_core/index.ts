@@ -1,4 +1,5 @@
 import "dotenv/config";
+import cors from "cors";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
@@ -31,6 +32,13 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  
+  // Configure CORS to allow credentials (cookies)
+  app.use(cors({
+    origin: true, // Allow all origins in development, configure for production
+    credentials: true, // CRITICAL: Allow cookies to be sent
+  }));
+  
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
