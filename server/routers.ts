@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { getAllPlans, getToolsForPlan, getAllTools } from "./db";
-import { register, login } from "./gnosislog";
+// Gnosis.log removido - usando OAuth apenas
 import { savedStudies, users, creditTransactions } from "../drizzle/schema";
 import { getDb } from "./db";
 import { eq, desc, sql, and, gte } from "drizzle-orm";
@@ -22,46 +22,7 @@ export const appRouter = router({
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     
-    register: publicProcedure
-      .input(z.object({
-        email: z.string().email(),
-        password: z.string().min(6),
-        name: z.string(),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        const result = await register(input);
-        
-        // Se sucesso, setar cookie
-        if (result.success && result.token) {
-          const cookieOptions = getSessionCookieOptions(ctx.req);
-          (ctx.res as any).cookie(COOKIE_NAME, result.token, {
-            ...cookieOptions,
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias
-          });
-        }
-        
-        return result;
-      }),
-    
-    login: publicProcedure
-      .input(z.object({
-        email: z.string().email(),
-        password: z.string(),
-      }))
-      .mutation(async ({ input, ctx }) => {
-        const result = await login(input);
-        
-        // Se sucesso, setar cookie
-        if (result.success && result.token) {
-          const cookieOptions = getSessionCookieOptions(ctx.req);
-          (ctx.res as any).cookie(COOKIE_NAME, result.token, {
-            ...cookieOptions,
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 dias
-          });
-        }
-        
-        return result;
-      }),
+    // Rotas de autenticação removidas - usando OAuth apenas
     
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
