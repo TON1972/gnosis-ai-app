@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminTickets from "./pages/AdminTickets";
+import AdminMigrations from "./pages/AdminMigrations";
 import PublicTicket from "./pages/PublicTicket";
 import FAQ from "./pages/FAQ";
 import Dashboard from "./pages/Dashboard";
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/auth" component={Auth} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/tickets" component={AdminTickets} />
+      <Route path="/admin/migrations" component={AdminMigrations} />
       <Route path="/ticket/:ticketId" component={PublicTicket} />
       <Route path="/faq" component={FAQ} />
       <Route path="/planos" component={PlanosPage} />
