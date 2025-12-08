@@ -222,7 +222,22 @@ export async function getUserActivePlan(userId: number) {
   console.log('[getUserActivePlan] Active subscription:', subs);
 
   if (subs.length === 0) {
-    console.log('[getUserActivePlan] No active subscription found');
+    console.log('[getUserActivePlan] No active subscription found, returning FREE plan');
+    
+    // Get FREE plan for users without subscription
+    const freePlan = await db
+      .select()
+      .from(plans)
+      .where(eq(plans.name, 'free'))
+      .limit(1);
+
+    if (freePlan.length > 0) {
+      return {
+        subscription: null,
+        plan: freePlan[0],
+      };
+    }
+    
     return null;
   }
 
