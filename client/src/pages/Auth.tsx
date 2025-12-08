@@ -358,4 +358,14 @@ export default function Auth() {
           {/* Footer */}
           <div className="mt-6 text-center">
             <button
-              onClick={() => setLocation
+              onClick={() => setLocation("/")}
+              className="text-sm text-[#1e3a5f]/70 hover:text-[#1e3a5f] font-crimson transition-colors"
+            >
+              Voltar para a página inicial
+            </button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
