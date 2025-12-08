@@ -210,8 +210,22 @@ class SDKServer {
       const { payload } = await jwtVerify(cookieValue, secretKey, {
         algorithms: ["HS256"],
       });
-      const { openId, appId, name } = payload as Record<string, unknown>;
+      
+      // Support both OAuth tokens (openId, appId, name) and Gnosis.log tokens (userId, email, role)
+      const { openId, appId, name, userId, email } = payload as Record<string, unknown>;
 
+      // Check if it's a Gnosis.log token (has userId)
+      if (typeof userId === "number" && isNonEmptyString(email)) {
+        console.log("[Auth] Gnosis.log token detected");
+        // Convert Gnosis.log token to OAuth format
+        return {
+          openId: `gnosis_${userId}`, // Use userId as openId with prefix
+          appId: ENV.appId,
+          name: email.split("@")[0], // Use email prefix as name
+        };
+      }
+
+      // Check if it's an OAuth token (has openId)
       if (
         !isNonEmptyString(openId) ||
         !isNonEmptyString(appId) ||
