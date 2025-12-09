@@ -25,9 +25,9 @@ import { getSessionCookieOptions } from "./_core/cookies";
 const router = Router();
 
 // Configurações OAuth
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
+const GOOGLE_CLIENT_ID = process.env.ID_DO_CLIENTE_DO_GOOGLE || process.env.GOOGLE_CLIENT_ID || "";
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || "";
-const FACEBOOK_CLIENT_ID = process.env.FACEBOOK_CLIENT_ID || "";
+const FACEBOOK_CLIENT_ID = process.env.ID_DO_CLIENTE_DO_FACEBOOK || process.env.FACEBOOK_CLIENT_ID || "";
 const FACEBOOK_CLIENT_SECRET = process.env.FACEBOOK_CLIENT_SECRET || "";
 const CALLBACK_URL_BASE = process.env.NEXTAUTH_URL || "https://gnosis-ai-platform.vercel.app";
 const SALT_ROUNDS = 10;
