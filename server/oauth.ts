@@ -445,7 +445,10 @@ router.post("/auth/login", (req: Request, res: Response, next: NextFunction) => 
  * GET /api/auth/google
  * Iniciar login com Google
  */
-router.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"], session: false }));
+router.get("/auth/google", (req: Request, res: Response, next: NextFunction) => {
+  console.log("[OAuth] Google login initiated");
+  passport.authenticate("google", { scope: ["profile", "email"], session: false })(req, res, next);
+});
 
 /**
  * GET /api/auth/google/callback
@@ -477,7 +480,10 @@ router.get(
  * GET /api/auth/facebook
  * Iniciar login com Facebook
  */
-router.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email"], session: false }));
+router.get("/auth/facebook", (req: Request, res: Response, next: NextFunction) => {
+  console.log("[OAuth] Facebook login initiated");
+  passport.authenticate("facebook", { scope: ["email"], session: false })(req, res, next);
+});
 
 /**
  * GET /api/auth/facebook/callback

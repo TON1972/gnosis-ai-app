@@ -10,11 +10,17 @@ export async function getDb() {
   const dbUrl = process.env.URL_DO_BANCO_DE_DADOS || process.env.DATABASE_URL;
   if (!_db && dbUrl) {
     try {
+      console.log("[Database] Attempting to connect...");
       _db = drizzle(dbUrl);
+      console.log("[Database] Connected successfully");
     } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
+      console.error("[Database] Failed to connect:", error);
       _db = null;
+      throw new Error("Database connection failed");
     }
+  } else if (!dbUrl) {
+    console.error("[Database] No database URL configured");
+    throw new Error("Database URL not configured");
   }
   return _db;
 }
