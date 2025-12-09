@@ -7,7 +7,6 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { oauthRouter } from "../oauth";
 import { appRouter } from "../routers";
-import passport from "passport";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { handleMercadoPagoWebhook } from "./webhookHandler";
@@ -45,8 +44,6 @@ async function startServer() {
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   
-  // Initialize Passport for OAuth
-  app.use(passport.initialize());
   // OAuth callback under /api/oauth/callback (Manus OAuth)
   registerOAuthRoutes(app);
   
