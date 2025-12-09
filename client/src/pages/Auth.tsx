@@ -160,7 +160,7 @@ export default function Auth() {
               size="lg"
               className="w-full border-[#d4af37]/30 hover:bg-[#d4af37]/10 font-crimson h-12 text-base"
               onClick={() => {
-                window.location.href = "/api/auth/google";
+                window.location.href = "/api/oauth/google";
               }}
             >
               <svg className="mr-3 h-5 w-5" viewBox="0 0 24 24">
@@ -191,7 +191,7 @@ export default function Auth() {
               size="lg"
               className="w-full border-[#d4af37]/30 hover:bg-[#d4af37]/10 font-crimson h-12 text-base"
               onClick={() => {
-                window.location.href = "/api/auth/facebook";
+                window.location.href = "/api/oauth/facebook";
               }}
             >
               <svg className="mr-3 h-5 w-5" fill="#1877F2" viewBox="0 0 24 24">
