@@ -68,10 +68,10 @@ function setSessionCookie(res: Response, req: Request, token: string) {
  * GET /api/auth/google
  * Redirecionar para página de login do Google
  */
-router.get("/auth/google", (req: Request, res: Response) => {
+router.get("/oauth/google", (req: Request, res: Response) => {
   console.log("[OAuth] Google login initiated");
   
-  const redirectUri = `${CALLBACK_URL_BASE}/api/auth/google/callback`;
+  const redirectUri = `${CALLBACK_URL_BASE}/api/oauth/google/callback`;
   const scope = "openid profile email";
   
   const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
@@ -89,7 +89,7 @@ router.get("/auth/google", (req: Request, res: Response) => {
  * GET /api/auth/google/callback
  * Callback do Google OAuth
  */
-router.get("/auth/google/callback", async (req: Request, res: Response) => {
+router.get("/oauth/google/callback", async (req: Request, res: Response) => {
   console.log("[OAuth] Google callback received");
   
   try {
@@ -108,7 +108,7 @@ router.get("/auth/google/callback", async (req: Request, res: Response) => {
         code,
         client_id: GOOGLE_CLIENT_ID,
         client_secret: GOOGLE_CLIENT_SECRET,
-        redirect_uri: `${CALLBACK_URL_BASE}/api/auth/google/callback`,
+        redirect_uri: `${CALLBACK_URL_BASE}/api/oauth/google/callback`,
         grant_type: "authorization_code",
       }),
     });
@@ -218,10 +218,10 @@ router.get("/auth/google/callback", async (req: Request, res: Response) => {
  * GET /api/auth/facebook
  * Redirecionar para página de login do Facebook
  */
-router.get("/auth/facebook", (req: Request, res: Response) => {
+router.get("/oauth/facebook", (req: Request, res: Response) => {
   console.log("[OAuth] Facebook login initiated");
   
-  const redirectUri = `${CALLBACK_URL_BASE}/api/auth/facebook/callback`;
+  const redirectUri = `${CALLBACK_URL_BASE}/api/oauth/facebook/callback`;
   const scope = "email";
   
   const facebookAuthUrl = `https://www.facebook.com/v18.0/dialog/oauth?` +
@@ -236,7 +236,7 @@ router.get("/auth/facebook", (req: Request, res: Response) => {
  * GET /api/auth/facebook/callback
  * Callback do Facebook OAuth
  */
-router.get("/auth/facebook/callback", async (req: Request, res: Response) => {
+router.get("/oauth/facebook/callback", async (req: Request, res: Response) => {
   console.log("[OAuth] Facebook callback received");
   
   try {
@@ -252,7 +252,7 @@ router.get("/auth/facebook/callback", async (req: Request, res: Response) => {
       `https://graph.facebook.com/v18.0/oauth/access_token?` +
       `client_id=${encodeURIComponent(FACEBOOK_CLIENT_ID)}&` +
       `client_secret=${encodeURIComponent(FACEBOOK_CLIENT_SECRET)}&` +
-      `redirect_uri=${encodeURIComponent(`${CALLBACK_URL_BASE}/api/auth/facebook/callback`)}&` +
+      `redirect_uri=${encodeURIComponent(`${CALLBACK_URL_BASE}/api/oauth/facebook/callback`)}&` +
       `code=${encodeURIComponent(code)}`
     );
     
