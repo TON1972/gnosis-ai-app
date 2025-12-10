@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "6e075170-7dbd-492d-9bb9-0d1cc69f2a90",
-  "prevId": "9ec527ad-b2d9-4d4f-bd61-21d78404f6f2",
+  "id": "365dc866-2576-40c0-9457-ac70db498c3d",
+  "prevId": "77b73622-b8c7-4c96-8950-609cabfbbc90",
   "tables": {
     "chatbotContacts": {
       "name": "chatbotContacts",
@@ -44,11 +44,11 @@
         },
         "status": {
           "name": "status",
-          "type": "enum('aberto','em_andamento','resolvido')",
+          "type": "enum('pending','contacted','resolved')",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "'aberto'"
+          "default": "'pending'"
         },
         "assignedTo": {
           "name": "assignedTo",
@@ -56,6 +56,14 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "archived": {
+          "name": "archived",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
         },
         "createdAt": {
           "name": "createdAt",
@@ -744,7 +752,7 @@
           "name": "openId",
           "type": "varchar(64)",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "name": {
@@ -757,6 +765,13 @@
         "email": {
           "name": "email",
           "type": "varchar(320)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -817,6 +832,12 @@
           "name": "users_openId_unique",
           "columns": [
             "openId"
+          ]
+        },
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "columns": [
+            "email"
           ]
         }
       },
