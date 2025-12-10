@@ -183,11 +183,24 @@ router.get("/oauth/google/callback", async (req: Request, res: Response) => {
         password: null, // OAuth não usa senha
       });
       
+      // Buscar usuário recém-criado
+      const newUser = await db
+        .select()
+        .from(users)
+        .where(eq(users.openId, `google:${email}`))
+        .limit(1)
+        .then((rows) => rows[0]);
+      
+      if (!newUser) {
+        console.error("[OAuth] Failed to fetch newly created user");
+        return res.redirect("/auth?error=database");
+      }
+      
       authUser = {
-        id: Number(result.insertId),
-        email,
-        name: name || null,
-        role: "user",
+        id: newUser.id,
+        email: newUser.email!,
+        name: newUser.name,
+        role: newUser.role,
         loginMethod: "google",
       };
     }
@@ -326,11 +339,24 @@ router.get("/oauth/facebook/callback", async (req: Request, res: Response) => {
         password: null, // OAuth não usa senha
       });
       
+      // Buscar usuário recém-criado
+      const newUser = await db
+        .select()
+        .from(users)
+        .where(eq(users.openId, `facebook:${email}`))
+        .limit(1)
+        .then((rows) => rows[0]);
+      
+      if (!newUser) {
+        console.error("[OAuth] Failed to fetch newly created user");
+        return res.redirect("/auth?error=database");
+      }
+      
       authUser = {
-        id: Number(result.insertId),
-        email,
-        name: name || null,
-        role: "user",
+        id: newUser.id,
+        email: newUser.email!,
+        name: newUser.name,
+        role: newUser.role,
         loginMethod: "facebook",
       };
     }
