@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "936f5415-5fc3-4f82-bc69-c6a98d2afe30",
-  "prevId": "6e075170-7dbd-492d-9bb9-0d1cc69f2a90",
+  "id": "ac3629ce-16b7-4489-a554-7613f88f9f7a",
+  "prevId": "77b73622-b8c7-4c96-8950-609cabfbbc90",
   "tables": {
     "chatbotContacts": {
       "name": "chatbotContacts",
@@ -56,6 +56,14 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "archived": {
+          "name": "archived",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
         },
         "createdAt": {
           "name": "createdAt",
@@ -744,7 +752,7 @@
           "name": "openId",
           "type": "varchar(64)",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "name": {
@@ -757,6 +765,13 @@
         "email": {
           "name": "email",
           "type": "varchar(320)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "password": {
+          "name": "password",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -817,6 +832,12 @@
           "name": "users_openId_unique",
           "columns": [
             "openId"
+          ]
+        },
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "columns": [
+            "email"
           ]
         }
       },
