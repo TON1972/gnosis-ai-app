@@ -21,5 +21,11 @@ export const ENV = {
   // Forge API
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
+  
+  // OAuth Google & Facebook
+  googleClientId: process.env.ID_DO_CLIENTE_DO_GOOGLE ?? "",
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+  facebookClientId: process.env.ID_DO_CLIENTE_DO_FACEBOOK ?? "",
+  facebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? "",
 };
 

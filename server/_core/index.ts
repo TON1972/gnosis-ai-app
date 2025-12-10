@@ -5,7 +5,7 @@ import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
-import { oauthRouter } from "../oauth";
+import { handleNextAuth } from "../nextauth-handler";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -47,8 +47,8 @@ async function startServer() {
   // OAuth callback under /api/oauth/callback (Manus OAuth)
   registerOAuthRoutes(app);
   
-  // Google & Facebook OAuth routes
-  app.use("/api", oauthRouter);
+  // NextAuth.js routes (Google & Facebook OAuth)
+  app.all("/api/auth/*", handleNextAuth);
   
   // Mercado Pago webhook
   app.post("/api/webhooks/mercadopago", handleMercadoPagoWebhook);
