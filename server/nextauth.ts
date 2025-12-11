@@ -1,15 +1,13 @@
 /**
- * 🔐 NextAuth.js Configuration
+ * 🔐 NextAuth.js Configuration (SIMPLIFIED - NO DATABASE)
  * OAuth Google e Facebook otimizado para Vercel Serverless
+ * Temporariamente sem operações de banco para diagnosticar timeout
  */
 
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { ENV } from "./_core/env";
-import { getDb } from "./db";
-import { users } from "../drizzle/schema";
-import { eq } from "drizzle-orm";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -24,70 +22,17 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async signIn({ user, account }) {
-      try {
-        const db = await getDb();
-        if (!db) {
-          console.error("[NextAuth] Database not available");
-          return false;
-        }
-
-        const provider = account?.provider || "unknown";
-        const openId = `${provider}:${user.email}`;
-
-        // Verificar se usuário já existe
-        const existingUser = await db
-          .select()
-          .from(users)
-          .where(eq(users.openId, openId))
-          .limit(1)
-          .then((rows) => rows[0]);
-
-        if (!existingUser) {
-          // Criar novo usuário
-          await db.insert(users).values({
-            openId,
-            email: user.email || null,
-            name: user.name || null,
-            role: "user",
-            loginMethod: provider,
-          });
-        } else {
-          // Atualizar lastSignedIn
-          await db
-            .update(users)
-            .set({ lastSignedIn: new Date() })
-            .where(eq(users.openId, openId));
-        }
-
-        return true;
-      } catch (error) {
-        console.error("[NextAuth] Sign in error:", error);
-        return false;
-      }
+    async signIn({ user }) {
+      // Temporariamente desabilitado para diagnóstico
+      console.log("[NextAuth] Sign in:", user.email);
+      return true;
     },
 
     async session({ session, token }) {
+      // Apenas retorna a sessão sem acessar banco
       if (session.user && token.sub) {
-        try {
-          const db = await getDb();
-          if (!db) return session;
-
-          // Buscar usuário no banco
-          const dbUser = await db
-            .select()
-            .from(users)
-            .where(eq(users.email, session.user.email!))
-            .limit(1)
-            .then((rows) => rows[0]);
-
-          if (dbUser) {
-            session.user.id = dbUser.id;
-            session.user.role = dbUser.role;
-          }
-        } catch (error) {
-          console.error("[NextAuth] Session error:", error);
-        }
+        session.user.id = parseInt(token.sub) || 0;
+        session.user.role = "user";
       }
       return session;
     },
