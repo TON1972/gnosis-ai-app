@@ -1,4 +1,6 @@
 export const ENV = {
+  appUrl: process.env.APP_URL ?? "http://localhost:3000",
+
   // Manus OAuth
   oAuthServerUrl: process.env.OAUTH_SERVER_URL ?? "",
   appId: process.env.VITE_APP_ID ?? "",
@@ -27,4 +29,7 @@ export const ENV = {
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
   facebookClientId: process.env.FACEBOOK_CLIENT_ID ?? "",
   facebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET ?? "",
+  sessionSecret: process.env.SESSION_SECRET ?? "",
+  cookieSecure: process.env.NODE_ENV === "production",
+  cookieMaxAge: 1000 * 60 * 60 * 24,
 };
