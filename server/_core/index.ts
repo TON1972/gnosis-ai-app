@@ -48,7 +48,7 @@ configurePassport(app);
 
 // Rota de teste da Vercel
 app.get('/api/dev', (req, res) => {
-  return res.json({ success: true });
+  return 'Funciona!';
 });
 
 // Register route.
