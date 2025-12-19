@@ -68,6 +68,11 @@ async function startServer() {
   // Passport.js routes.
   configurePassport(app);
 
+  // Rota de teste da Vercel
+  app.get('/api/dev', (req, res) => {
+    return res.json({ success: true });
+  });
+
   // Register route.
   app.post('/api/register', async (req, res, next) => {
     const db = await getDb();
