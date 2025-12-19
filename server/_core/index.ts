@@ -46,10 +46,10 @@ app.use(session({
 }));
 
 // OAuth callback under /api/oauth/callback (Manus OAuth)
-registerOAuthRoutes(app);
+// registerOAuthRoutes(app);
 
 // Passport.js routes.
-configurePassport(app);
+// configurePassport(app);
 
 // Register route.
 app.post('/api/register', async (req, res, next) => {
