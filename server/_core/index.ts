@@ -18,6 +18,22 @@ import session from "express-session";
 
 const app = express();
 
+app.use((req, res, next) => {
+  console.log(`[DEBUG] Recebendo: ${req.method} ${req.url}`);
+
+  res.on('finish', () => {
+    console.log(`[DEBUG] Finalizado: ${req.method} ${req.url} com status ${res.statusCode}`);
+  });
+
+  next();
+});
+
+// Rota de teste da Vercel
+app.get('/api/dev', (req, res) => {
+  console.log('A request chega no manipulador de rota?');
+  res.send('Funciona!');
+});
+
 // Configure CORS to allow credentials (cookies)
 app.use(cors({
   origin: true, // Allow all origins in development, configure for production
@@ -27,11 +43,6 @@ app.use(cors({
 // Configure body parser with larger size limit for file uploads
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-
-// Rota de teste da Vercel
-app.get('/api/dev', (req, res) => {
-  res.send('Funciona!');
-});
 
 // Configure session.
 app.use(session({
