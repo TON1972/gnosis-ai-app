@@ -30,7 +30,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // Rota de teste da Vercel
 app.get('/api/dev', (req, res) => {
-  return 'Funciona!';
+  res.send('Funciona!');
 });
 
 // Configure session.
