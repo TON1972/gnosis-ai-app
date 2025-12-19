@@ -17,7 +17,6 @@ import { handleMercadoPagoWebhook } from "./webhookHandler";
 import session from "express-session";
 
 const app = express();
-const server = createServer(app);
 
 // Configure CORS to allow credentials (cookies)
 app.use(cors({
@@ -90,6 +89,7 @@ app.use(
 );
 // development mode uses Vite, production mode uses static files
 if (process.env.NODE_ENV === "development") {
+  const server = createServer(app);
   setupVite(app, server);
 } else {
   serveStatic(app);
