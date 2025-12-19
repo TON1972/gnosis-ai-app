@@ -28,6 +28,11 @@ app.use(cors({
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+// Rota de teste da Vercel
+app.get('/api/dev', (req, res) => {
+  return 'Funciona!';
+});
+
 // Configure session.
 app.use(session({
   secret: ENV.sessionSecret,
@@ -45,11 +50,6 @@ registerOAuthRoutes(app);
 
 // Passport.js routes.
 configurePassport(app);
-
-// Rota de teste da Vercel
-app.get('/api/dev', (req, res) => {
-  return 'Funciona!';
-});
 
 // Register route.
 app.post('/api/register', async (req, res, next) => {
