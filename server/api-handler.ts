@@ -30,6 +30,10 @@ app.get("/api/health", (req: any, res: any) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+app.get('/api/dev', (req, res) => {
+  return res.json({ msg: 'OK' });
+});
+
 // Export for Vercel
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   return new Promise((resolve, reject) => {
