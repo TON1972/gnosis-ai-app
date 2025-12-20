@@ -19,10 +19,10 @@ import session from "express-session";
 const app = express();
 
 app.use((req, res, next) => {
-  console.log(`[DEBUG] Recebendo: ${req.method} ${req.url}`);
+  console.error(`[DEBUG] Recebendo: ${req.method} ${req.url}`);
 
   res.on('finish', () => {
-    console.log(`[DEBUG] Finalizado: ${req.method} ${req.url} com status ${res.statusCode}`);
+    console.error(`[DEBUG] Finalizado: ${req.method} ${req.url} com status ${res.statusCode}`);
   });
 
   next();
@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 // Rota de teste da Vercel
 app.get('/api/dev', (req, res) => {
-  console.log('A request chega no manipulador de rota?');
+  console.error('A request chega no manipulador de rota?');
   res.send('Funciona!');
 });
 
