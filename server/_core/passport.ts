@@ -12,7 +12,7 @@ import { ENV } from "./env";
 /*
  * Configure LocalStrategy for login using e-mail and password.
  */
-passport.use(new LocalStrategy(async (email, password, done) => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
   const db = await getDb();
   if (!db) throw new Error("Database not available.");
 
