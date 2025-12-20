@@ -6,7 +6,7 @@ import { appRouter } from "./routers.ts";
 import { createContext } from "./_core/context.ts";
 import cors from "cors";
 import { configurePassport } from "./_core/passport";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { users } from "../drizzle/schema.ts";
 import { getDb } from "./db.ts";
