@@ -1,38 +1,16 @@
 import "dotenv/config";
-import bcrypt from "bcrypt";
 import cors from "cors";
-import { eq } from "drizzle-orm";
 import express from "express";
 import { createServer } from "http";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { users } from "../../drizzle/schema.ts";
-import { getDb } from "../db.ts";
 import { ENV } from "./env";
-import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
-import { configurePassport } from "./passport";
 import { serveStatic, setupVite } from "./vite";
 import { handleMercadoPagoWebhook } from "./webhookHandler";
 import session from "express-session";
 
 const app = express();
-
-app.use((req, res, next) => {
-  console.error(`[DEBUG] Recebendo: ${req.method} ${req.url}`);
-
-  res.on('finish', () => {
-    console.error(`[DEBUG] Finalizado: ${req.method} ${req.url} com status ${res.statusCode}`);
-  });
-
-  next();
-});
-
-// Rota de teste da Vercel
-app.get('/api/dev', (req, res) => {
-  console.error('A request chega no manipulador de rota?');
-  res.send('Funciona!');
-});
 
 // Configure CORS to allow credentials (cookies)
 app.use(cors({
@@ -58,35 +36,6 @@ app.use(session({
 
 // OAuth callback under /api/oauth/callback (Manus OAuth)
 // registerOAuthRoutes(app);
-
-// Passport.js routes.
-// configurePassport(app);
-
-// Register route.
-app.post('/api/register', async (req, res, next) => {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available.");
-
-  const [result] = await db
-    .insert(users)
-    .values({
-      name: req.body.name,
-      email: req.body.email,
-      password: await bcrypt.hash(req.body.password, 10),
-    })
-    .$returningId();
-
-  const [newUser] = await db
-    .select()
-    .from(users)
-    .where(eq(users.id, result.id))
-    .limit(1);
-
-  req.login(newUser, (err) => {
-    if (err) return next(err);
-    return res.json({ success: true });
-  });
-});
 
 // Mercado Pago webhook
 app.post("/api/webhooks/mercadopago", handleMercadoPagoWebhook);
