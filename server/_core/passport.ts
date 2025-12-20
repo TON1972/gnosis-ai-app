@@ -82,7 +82,6 @@ passport.use(new FacebookStrategy({
   clientID: ENV.facebookClientId,
   clientSecret: ENV.facebookClientSecret,
   callbackURL: "/api/auth/callback/facebook",
-  scope: ["profile", "email"],
   profileFields: ["displayName", "emails"],
   state: true,
 }, async (accessToken, refreshToken, profile, done) => {
