@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
+import { ENV } from "./_core/env.ts";
 import { appRouter } from "./routers.ts";
 import { createContext } from "./_core/context.ts";
 import cors from "cors";
@@ -9,6 +10,16 @@ import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { users } from "../drizzle/schema.ts";
 import { getDb } from "./db.ts";
+import { createClient } from "redis";
+import session from "express-session";
+import { RedisStore } from "connect-redis";
+
+const redisClient = createClient({
+  url: process.env.REDIS_URL,
+});
+
+redisClient.connect().catch(console.error);
+const redisStore = new RedisStore({ client: redisClient });
 
 const app = express();
 
@@ -20,6 +31,19 @@ app.use(cors({
 
 // Parse JSON bodies
 app.use(express.json());
+
+// Configure session.
+app.use(session({
+  store: redisStore,
+  secret: ENV.sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: ENV.cookieSecure,
+    httpOnly: true,
+    maxAge: ENV.cookieMaxAge,
+  },
+}));
 
 // tRPC middleware
 app.use(

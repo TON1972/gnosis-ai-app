@@ -3,12 +3,10 @@ import cors from "cors";
 import express from "express";
 import { createServer } from "http";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { ENV } from "./env";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { handleMercadoPagoWebhook } from "./webhookHandler";
-import session from "express-session";
 
 const app = express();
 
@@ -21,18 +19,6 @@ app.use(cors({
 // Configure body parser with larger size limit for file uploads
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-
-// Configure session.
-app.use(session({
-  secret: ENV.sessionSecret,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: ENV.cookieSecure,
-    httpOnly: true,
-    maxAge: ENV.cookieMaxAge,
-  },
-}));
 
 // OAuth callback under /api/oauth/callback (Manus OAuth)
 // registerOAuthRoutes(app);
