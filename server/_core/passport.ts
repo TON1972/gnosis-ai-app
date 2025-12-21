@@ -38,7 +38,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, passwor
 passport.use(new GoogleStrategy({
   clientID: ENV.googleClientId,
   clientSecret: ENV.googleClientSecret,
-  callbackURL: "/api/auth/callback/google",
+  callbackURL: ENV.appUrl + "/api/auth/callback/google",
   scope: ["profile", "email"],
 }, async (issuer: any, profile: any, done: any) => {
   const email = profile.emails?.[0]?.value;
@@ -81,7 +81,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
   clientID: ENV.facebookClientId,
   clientSecret: ENV.facebookClientSecret,
-  callbackURL: "/api/auth/callback/facebook",
+  callbackURL: ENV.appUrl + "/api/auth/callback/facebook",
   profileFields: ["displayName", "emails"],
   state: true,
 }, async (accessToken, refreshToken, profile, done) => {
