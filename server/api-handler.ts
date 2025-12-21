@@ -91,6 +91,7 @@ app.post('/api/register', async (req, res, next) => {
 });
 
 app.get('/api/test', async (req, res, next) => {
+  console.error('Isso é exibido?');
   next(new Error('Test error'));
 });
 
