@@ -90,8 +90,8 @@ app.post('/api/register', async (req, res, next) => {
   });
 });
 
-app.use((err: any, req: any, res: any, next: any) => {
-  console.error(err.stack);
+app.get('/api/test', async (req, res) => {
+  throw new Error('Test error');
 });
 
 // Export for Vercel
