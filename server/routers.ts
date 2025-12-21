@@ -59,6 +59,7 @@ export const appRouter = router({
      * Get all available plans
      */
     list: publicProcedure.query(async () => {
+      console.error('Você consegue chegar aqui?');
       return await getAllPlans();
     }),
 
