@@ -133,13 +133,13 @@ export const configurePassport = (app: Express) => {
   app.get("/api/auth/login/google", passport.authenticate("google"));
   app.get("/api/auth/callback/google", passport.authenticate("google", {
     successRedirect: ENV.appUrl + "/dashboard",
-    failureRedirect: ENV.appUrl + "/auth",
+    failureRedirect: ENV.appUrl + "/auth?error=google",
   }));
 
   app.get("/api/auth/login/facebook", passport.authenticate("facebook"));
   app.get("/api/auth/callback/facebook", passport.authenticate("facebook", {
     successRedirect: ENV.appUrl + "/dashboard",
-    failureRedirect: ENV.appUrl + "/auth",
+    failureRedirect: ENV.appUrl + "/auth?error=facebook",
   }));
 
   app.post("/api/auth/logout", async (req, res, next) => {
