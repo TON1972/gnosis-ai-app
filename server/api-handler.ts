@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { ENV } from "./_core/env.ts";
 import { appRouter } from "./routers.ts";
@@ -113,8 +113,12 @@ const getApp = async () => {
   });
 
   app.get('/api/test', async (req, res, next) => {
-    console.error('Isso é exibido?');
     next(new Error('Test error'));
+  });
+
+  app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
+    console.log(err);
+    res.status(500).json({ error: 'Internal server error' });
   });
 
   return app;
