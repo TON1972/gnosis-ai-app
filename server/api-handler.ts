@@ -69,6 +69,9 @@ const getApp = async () => {
     },
   }));
 
+  // Passport.js routes.
+  configurePassport(app);
+
   // tRPC middleware
   app.use(
     "/api/trpc",
@@ -82,9 +85,6 @@ const getApp = async () => {
   app.get("/api/health", (req: any, res: any) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
-
-  // Passport.js routes.
-  configurePassport(app);
 
   // Register route.
   app.post('/api/register', async (req, res, next) => {
