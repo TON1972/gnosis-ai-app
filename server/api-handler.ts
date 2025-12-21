@@ -117,7 +117,7 @@ const getApp = async () => {
   });
 
   app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
-    // console.log(err);
+    console.log(err);
     res.status(500).json({ error: 'Internal server error' });
   });
 
