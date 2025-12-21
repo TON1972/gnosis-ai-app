@@ -23,6 +23,8 @@ const redisStore = new RedisStore({ client: redisClient });
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // Enable CORS
 app.use(cors({
   origin: true,
