@@ -24,9 +24,17 @@ export const appRouter = router({
     
     // Rotas de autenticação removidas - usando OAuth apenas
     
-    logout: publicProcedure.mutation(({ ctx }) => {
-      const cookieOptions = getSessionCookieOptions(ctx.req);
-      (ctx.res as any).cookie(COOKIE_NAME, '', { ...cookieOptions, maxAge: 0 });
+    logout: publicProcedure.mutation(async ({ ctx }) => {
+      await new Promise<void>((resolve, reject) => {
+        ctx.req.logout((err) => {
+          if (err) {
+            reject(err)
+          } else {
+            resolve();
+          }
+        });
+      });
+
       return {
         success: true,
       } as const;
@@ -59,7 +67,6 @@ export const appRouter = router({
      * Get all available plans
      */
     list: publicProcedure.query(async () => {
-      console.log('Você consegue chegar aqui??');
       return await getAllPlans();
     }),
 
